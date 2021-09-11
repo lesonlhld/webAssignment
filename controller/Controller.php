@@ -2,8 +2,6 @@
 
 namespace Controller;
 
-use System\Constants;
-
 /**
  * Controller
  * Root Controller (Base Controller)
@@ -55,7 +53,7 @@ class Controller
         if (!file_exists($model_file)) return exit('Invalid Model!');
 
         $model_name = end(explode('/', $model_path_name));
-        // // Call model
+        // Call model
         $model = '\\Model\\' . $model_name;
 
         // Initialize Model
@@ -71,7 +69,7 @@ class Controller
             echo json_encode($param, JSON_PRETTY_PRINT);
         } else {
             header('Cache-Control: max-age=86400');
-            include "view/" . ucwords($view_path) . '.' . $ext;
+            include BASE_PATH . "/view/" . $view_path . '.' . $ext;
         }
         exit;
     }
@@ -95,6 +93,6 @@ class Controller
     // Get base URL with subpath
     protected function site_url($url = "")
     {
-        return Constants::BASE_URL . $url;
+        return BASE_URL . $url;
     }
 }

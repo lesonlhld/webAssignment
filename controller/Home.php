@@ -2,7 +2,6 @@
 
 namespace Controller;
 
-use System\Constants;
 
 /**
  * Home
@@ -14,8 +13,8 @@ class Home extends \Controller\Controller
     public function index()
     {
         // $this->redirect($this->site_url('admin/dashboard'));
-        $this->View("Index");
-        // echo Constants::BASE_URL;
+        $this->View("index");
+        // echo BASE_URL;
         // $this->notFound();
         // $this->redirect("http://localhost/webAssignment/admin/dashboard");
     }
