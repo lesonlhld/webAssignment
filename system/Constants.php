@@ -10,7 +10,7 @@
 const BASE_URL = "http://localhost/webAssignment/";
 
 // For localhost
-define("BASE_PATH", $_SERVER["DOCUMENT_ROOT"].'/webAssignment');
+// define("BASE_PATH", $_SERVER["DOCUMENT_ROOT"].'/webAssignment');
 
 // For domain
-// define("BASE_PATH", $_SERVER["DOCUMENT_ROOT"]);
+define("BASE_PATH", $_SERVER["DOCUMENT_ROOT"]);
