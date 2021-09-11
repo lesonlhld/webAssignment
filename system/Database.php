@@ -2,6 +2,8 @@
 
 namespace System;
 
+use PDO;
+
 /**
  * Database
  * Use PDO (PHP Data Object) to interact with MySQL Database
@@ -24,17 +26,17 @@ class Database
     {
         try {
             $dsn = 'mysql:host=' . $this->server . ';dbname=' . $this->dbname . ';charset=' . $this->charset;
-            $this->pdo = new \PDO(
+            $this->pdo = new PDO(
                 $dsn,
                 $this->username,
                 $this->password,
                 [
-                    \PDO::ATTR_PERSISTENT            => true,
-                    \PDO::ATTR_ERRMODE               => \PDO::ERRMODE_EXCEPTION
+                    PDO::ATTR_PERSISTENT            => true,
+                    PDO::ATTR_ERRMODE               => PDO::ERRMODE_EXCEPTION
                 ]
             );
-            $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
-            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (\Exception $e) {
             exit('Could not connect to any database servers with error: ' . $e->getMessage());
         } catch (\PDOException $e) {

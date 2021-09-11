@@ -1,0 +1,21 @@
+{
+    "name": "leson/web-assignment",
+    "description": "Assignment of Website Development Course",
+    "authors": [
+        {
+            "name": "lesonlhld",
+            "email": "lesonlhld@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {},
+
+    
+    "autoload": {
+        "psr-4": {
+            "Controller\\": "controller/",
+            "Model\\": "model/",
+            "System\\": "system/"
+        }
+    }
+}

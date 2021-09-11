@@ -1,16 +1,16 @@
 <?php
 
-namespace Controller\admin;
+namespace Controller;
 
 /**
  * Dashboard
- * Dashboard for admin
+ * Dashboard for client
  * @author    Le Trung Son    lesonlhld@gmail.com
  */
 class Dashboard extends \Controller\Controller
 {
     public function index()
     {
-        echo 'Đây là trang Admin Dashboard';
+        echo 'Đây là trang Client Dashboard';
     }
 }

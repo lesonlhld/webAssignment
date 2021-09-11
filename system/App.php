@@ -2,10 +2,6 @@
 
 namespace System;
 
-use Constant;
-
-// Load base controller
-require_once "./controller/Controller.php";
 
 /**
  * App
@@ -30,9 +26,9 @@ class App
 
     private function parseUri()
     {
-        $uri = getenv('REQUEST_URI');
+        $uri = $_SERVER['REQUEST_URI'];
 
-        // Remove webAssignment path if existing in uri
+        // Remove webAssignment path if existing in uri (http://localhost/webAssignment/)
         $uri = str_replace('/webAssignment', '', $uri);
 
         // ??: Null Coalescing Operator
@@ -56,6 +52,7 @@ class App
         $function = "";
         $param = [];
         $controller_file = 'controller';
+        $path = "";
         for ($i = 0; $i < count($this->uri); $i++) {
             // Check exist Controller
             if (empty($function) && file_exists($controller_file . '.php')) {
@@ -66,6 +63,7 @@ class App
                 $param[] = $this->uri[$i];
             } else {
                 $controller_file = $controller_file . '/' . $this->uri[$i];
+                $path = $path . $this->uri[$i] . '\\';
                 // Get controller
                 $controller = $this->uri[$i];
             }
@@ -74,20 +72,23 @@ class App
         // If no function, set default index
         if (empty($function)) $function = "index";
 
-        // Call controller file
-        $controller_file = $controller_file . '.php';
-        if (file_exists($controller_file)) {
-            require_once $controller_file;
-        } else {
-            require_once 'controller/Error.php';
-        }
+        $path = str_replace($controller . '\\', '', $path);
+
+        $controller = $this->parseCtrl($controller);
 
         // Initialize controller
-        $class = '\\Controller\\' . $controller;
+        $class = '\\Controller\\' . $path . $controller;
         if (class_exists($class)) {
             return new $class($function, $param);
         } else {
             return new \Controller\Error($function, $param);
         }
+    }
+
+    private function parseCtrl($str)
+    {
+        if (!$str) return 'Home';
+
+        return str_replace(' ', '', ucwords(str_replace('-', ' ', $str)));
     }
 }

@@ -53,5 +53,4 @@ $RECYCLE.BIN/
 .idea
 application/logs
 vendor/*
-!vendor/load.php
 composer.lock

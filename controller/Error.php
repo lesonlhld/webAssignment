@@ -6,7 +6,7 @@ namespace Controller;
  * Error
  * @author    Le Trung Son    lesonlhld@gmail.com
  */
-class Error extends Controller
+class Error extends \Controller\Controller
 {
     /**
      * index

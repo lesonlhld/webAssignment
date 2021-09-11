@@ -2,11 +2,14 @@
 
 namespace Controller;
 
+use System\Constants;
+
 /**
  * Controller
  * Root Controller (Base Controller)
  * All reused function will be coded in here
  * To using this function, call $this->function_name()
+ * Parse to valid Controller and Function, if not valid, redirect to 404 not found page
  * @author    Le Trung Son    lesonlhld@gmail.com
  */
 class Controller
@@ -15,6 +18,10 @@ class Controller
     public $param;
     public $method;
     public $data;
+
+    protected $statusCode = 200;
+    protected $jsonResponse = false;
+    protected $enable404 = false;
 
     public function __construct($function, $param)
     {
@@ -25,6 +32,7 @@ class Controller
         $this->init();
     }
 
+    // Initialize to parse function, if not found, redirect to 404 page 
     protected function init()
     {
         session_start();
@@ -46,12 +54,8 @@ class Controller
         $model_file = "model/" . $model_path_name . ".php";
         if (!file_exists($model_file)) return exit('Invalid Model!');
 
-        // Call base model
-        require_once "model/Model.php";
-
         $model_name = end(explode('/', $model_path_name));
-        // Call model
-        require_once $model_file;
+        // // Call model
         $model = '\\Model\\' . $model_name;
 
         // Initialize Model
@@ -61,13 +65,36 @@ class Controller
     // Call View
     protected function View($view_path, $param = null, $ext = 'html')
     {
-        http_response_code(200);
-        include "view/" . ucwords($view_path) . '.' . $ext;
+        http_response_code($this->statusCode);
+        if ($this->jsonResponse) {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($param, JSON_PRETTY_PRINT);
+        } else {
+            header('Cache-Control: max-age=86400');
+            include "view/" . ucwords($view_path) . '.' . $ext;
+        }
         exit;
     }
 
+    // Show 404 page or response 404 code
     protected function notFound()
     {
-        exit('Page not found...');
+        if (!$this->enable404) exit('Page not found...');
+        $this->statusCode = 404;
+        http_response_code($this->statusCode);
+    }
+
+    // Redirect to absolute URL
+    protected function redirect($url, $code = 302)
+    {
+        // header("Refresh:0; url=" . $url;
+        header("Location: " . $url, true, $code);
+        exit;
+    }
+
+    // Get base URL with subpath
+    protected function site_url($url = "")
+    {
+        return Constants::BASE_URL . $url;
     }
 }
