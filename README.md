@@ -46,5 +46,5 @@
 
 ## Web demo
 * https://letrungson.000webhostapp.com/
-* https://web-assignment-211.herokuapp.com/
-* letrungson.cf ()
+* http://letrungson.cf/
+* https://web-assignment-211.herokuapp.com/ (Stopped working because it needed to upgrade to use MySQL Database)
