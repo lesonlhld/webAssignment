@@ -25,18 +25,18 @@
 ## Một số đường dẫn
 Đường dẫn|Chức năng
 ---|---
-**./system/**|
+**System**|
 ./system/Database.php|Config database
 ./system/App.php|Config route
 ./system/Constant.php|File chứa những biến, hàm global
-**./controller**|
+**Controller**|
 ./controller/admin|Controllers của admin
 ./controller/*.php|Controllers của client
-**./model**|
+**Model**|
 ./model/*.php|Model tương tác với database
-**./view/**|
-./view|Front end home gốc của project
-./assets|Thư mục chứa file css/js/image frontend
+**View**|
+./view/*|Front end home gốc của project
+./assets/*|Thư mục chứa file css/js/image frontend
 
 ## Hyperlinks FE
 * http://localhost/webAssignment/
