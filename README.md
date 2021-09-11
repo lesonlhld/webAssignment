@@ -20,3 +20,25 @@
 1. Không commit những file, thư mục config/logs/media (như .vs, application/log, Source...).
 2. Chỉ commit những file đã **thực sự** chỉnh sửa (file đã code).
 3. Commit ghi mô tả về những chỉnh sửa đã làm.
+
+## Một số đường dẫn
+Đường dẫn|Chức năng
+---|---
+**./system/**|
+./system/Database.php|Config database
+./system/App.php|Config route
+./system/Constant.php|File chứa những biến, hàm global
+**./controller**|
+./controller/admin|Controllers của admin
+./controller/*.php|Controllers của client
+**./model**|
+./model/*.php|Model tương tác với database
+**./view/**|
+./view|Front end home gốc của project
+./assets|Thư mục chứa file css/js/image frontend
+
+## Hyperlinks FE
+* http://localhost/webAssignment/
+* http://localhost/webAssignment/home/get_city
+* http://localhost/webAssignment/home/get_district
+* http://localhost/webAssignment/admin/dashboard
