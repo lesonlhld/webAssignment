@@ -4,7 +4,7 @@
 2. Trong phpmyadmin, tạo user `web_database`, password `web_database_password`.
 3. Đăng nhập phpmyadmin bằng tài khoản `web_database` vừa tạo. Tạo db `web_assignment` và import file `web_assignment.sql` tương ứng lên.
 4. Mở terminal hoặc command line, chạy lệnh `composer install` để tạo file autoload.php
-5. Thay đổi môi trường deploy bằng hằng ENVIRONMENT trong file ./index.php với 2 giá trị: `development` hoặc `production`
+5. Thay đổi môi trường deploy bằng biến hằng ENVIRONMENT trong file ./index.php với 2 giá trị: `development` hoặc `production`
 
 **Lưu ý**: 
 - Nếu import thấy lỗi `Unknown collation: 'utf8mb4_0900_ai_ci'` thì mở file db bằng text editor, replace `utf8mb4_0900_ai_ci` thành `utf8mb4_general_ci`.
@@ -18,6 +18,21 @@
 - Password: 123456
 
 ## Rules
+### Quy tắc đặt tên
+- Đặt tên file, tên class của Controller bằng cách viết hoa chữ cái đầu. Ví dụ `Example.php`.
+```php
+// Example.php
+namespace Controller;
+Example extends \Controller\Controller {...}
+```
+- Đặt tên file, tên class của Model bằng cách viết in hoa kết hợp `_Model`. Ví dụ `EXAMPLE_Model.php`.
+```php
+// EXAMPLE_Model.php
+namespace Model;
+EXAMPLE_Model extends \Model\Model {...}
+``` 
+- Đặt tên file của view bằng cách viết thường toàn bộ. Ví dụ `example.html`
+
 ### Commit git
 1. Không commit những file, thư mục config/logs/media (như .vs, application/log, Source...).
 2. Chỉ commit những file đã **thực sự** chỉnh sửa (file đã code).

@@ -35,7 +35,7 @@ switch (ENVIRONMENT) {
 
 
 // All requests will run into index.php file
-// First, run command "composer install" && "composer dump-autoload to load library and PSR-4 autoload
+// First, run command "composer install" to load library and PSR-4 autoload
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/system/Constants.php';
 

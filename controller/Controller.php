@@ -19,7 +19,6 @@ class Controller
 
     protected $statusCode = 200;
     protected $jsonResponse = false;
-    protected $enable404 = false;
 
     public function __construct($function, $param)
     {
@@ -35,7 +34,7 @@ class Controller
     {
         session_start();
 
-        if (empty($this->function)) return $this->notFound();
+        if (empty($this->function)) return notFound();
 
         $f = lcfirst($this->function);
         $mf = '__' . $this->method . $this->function;
@@ -43,7 +42,7 @@ class Controller
         if (is_callable([$this, $mf])) return $this->$mf(); // call POST method
         if (is_callable([$this, $f])) return $this->$f(); // call GET method
 
-        return $this->notFound();
+        return notFound();
     }
 
     // Call Model
@@ -72,27 +71,5 @@ class Controller
             include BASE_PATH . "/view/" . $view_path . '.' . $ext;
         }
         exit;
-    }
-
-    // Show 404 page or response 404 code
-    protected function notFound()
-    {
-        if (!$this->enable404) exit('Page not found...');
-        $this->statusCode = 404;
-        http_response_code($this->statusCode);
-    }
-
-    // Redirect to absolute URL
-    protected function redirect($url, $code = 302)
-    {
-        // header("Refresh:0; url=" . $url;
-        header("Location: " . $url, true, $code);
-        exit;
-    }
-
-    // Get base URL with subpath
-    protected function site_url($url = "")
-    {
-        return BASE_URL . $url;
     }
 }

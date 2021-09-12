@@ -15,7 +15,7 @@ class Error extends \Controller\Controller
      */
     public function index()
     {
-        // Call notFound function via root controller
-        $this->notFound();
+        // Call notFound function via constants file
+        notFound();
     }
 }

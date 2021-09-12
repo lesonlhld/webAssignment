@@ -12,11 +12,12 @@ class Home extends \Controller\Controller
 {
     public function index()
     {
-        // $this->redirect($this->site_url('admin/dashboard'));
+        // echo(site_url('admin/dashboard'));
+        // redirect(site_url('admin/dashboard'));
         $this->View("index");
         // echo BASE_URL;
-        // $this->notFound();
-        // $this->redirect("http://localhost/webAssignment/admin/dashboard");
+        // notFound();
+        // redirect("http://localhost/webAssignment/admin/dashboard");
     }
 
     public function get_city()
