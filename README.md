@@ -46,6 +46,5 @@
 * http://localhost/webAssignment/admin/dashboard
 
 ## Web demo
-* https://letrungson.000webhostapp.com/
-* http://letrungson.cf/
+* https://letrungson.000webhostapp.com/ or http://letrungson.cf/ (Located in the same hosting)
 * https://web-assignment-211.herokuapp.com/
