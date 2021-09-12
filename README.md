@@ -3,7 +3,8 @@
 1. Thay đổi thư mục web root của XAMPP (hoặc clone git project vào thư mục htdocs của XAMPP).
 2. Trong phpmyadmin, tạo user `web_database`, password `web_database_password`.
 3. Đăng nhập phpmyadmin bằng tài khoản `web_database` vừa tạo. Tạo db `web_assignment` và import file `web_assignment.sql` tương ứng lên.
-4. Mở terminal hoặc command line, chạy lệnh ```composer install``` để tạo file autoload.php
+4. Mở terminal hoặc command line, chạy lệnh `composer install` để tạo file autoload.php
+5. Thay đổi môi trường deploy bằng hằng ENVIRONMENT trong file ./index.php với 2 giá trị: `development` hoặc `production`
 
 **Lưu ý**: 
 - Nếu import thấy lỗi `Unknown collation: 'utf8mb4_0900_ai_ci'` thì mở file db bằng text editor, replace `utf8mb4_0900_ai_ci` thành `utf8mb4_general_ci`.
@@ -25,16 +26,16 @@
 ## Một số đường dẫn
 Đường dẫn|Chức năng
 ---|---
-**System**|
+**System**
 ./system/Database.php|Config database
 ./system/App.php|Config route
 ./system/Constant.php|File chứa những biến, hàm global
-**Controller**|
+**Controller**
 ./controller/admin|Controllers của admin
 ./controller/*.php|Controllers của client
-**Model**|
+**Model**
 ./model/*.php|Model tương tác với database
-**View**|
+**View**
 ./view/*|Front end home gốc của project
 ./assets/*|Thư mục chứa file css/js/image frontend
 
@@ -47,4 +48,4 @@
 ## Web demo
 * https://letrungson.000webhostapp.com/
 * http://letrungson.cf/
-* https://web-assignment-211.herokuapp.com/ (Stopped working because it needed to upgrade to use MySQL Database)
+* https://web-assignment-211.herokuapp.com/

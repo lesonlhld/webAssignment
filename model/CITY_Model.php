@@ -6,7 +6,7 @@ namespace Model;
  * CITY_Model
  * @author    Le Trung Son    lesonlhld@gmail.com
  */
-class CITY_Model extends Model
+class CITY_Model extends \Model\Model
 {
     public function get_city($id = null)
     {

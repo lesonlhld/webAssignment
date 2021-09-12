@@ -7,7 +7,11 @@
  */
 
 // Show error to debug, set environment to hide error
-define('ENVIRONMENT', 'development');
+// For localhost
+// define('ENVIRONMENT', 'development');
+
+// For domain
+define('ENVIRONMENT', 'production');
 
 switch (ENVIRONMENT) {
     case 'development':
@@ -32,8 +36,9 @@ switch (ENVIRONMENT) {
 
 // All requests will run into index.php file
 // First, run command "composer install" && "composer dump-autoload to load library and PSR-4 autoload
-require_once __DIR__. '/vendor/autoload.php';
-require_once __DIR__. '/system/Constants.php';
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/system/Constants.php';
 
 use System\App;
+
 new App;
