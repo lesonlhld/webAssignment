@@ -11,6 +11,7 @@ class Dashboard extends \Controller\Controller
 {
     public function index()
     {
-        echo 'Đây là trang Admin Dashboard';
+        $this->data["subview"] = "admin/dashboard/home";
+        View("admin/main", $this->data);
     }
 }

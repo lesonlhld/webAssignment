@@ -12,18 +12,13 @@ class Home extends \Controller\Controller
 {
     public function index()
     {
-        // echo(site_url('admin/dashboard'));
-        // redirect(site_url('admin/dashboard'));
-        $this->View("index");
-        // echo BASE_URL;
-        // notFound();
-        // redirect("http://localhost/webAssignment/admin/dashboard");
+        $this->data["subview"] = "client/home/home";
+        View("client/main", $this->data);
     }
 
     public function get_city()
     {
-        $USER_Model = $this->Model('CITY_Model');
-        $this->jsonResponse = true;
-        $this->View('', $USER_Model->get_city());
+        $USER_Model = Model('CITY_Model');
+        View('', $USER_Model->get_city());
     }
 }

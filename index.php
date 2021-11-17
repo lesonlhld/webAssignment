@@ -7,11 +7,13 @@
  */
 
 // Show error to debug, set environment to hide error
-// For localhost
-// define('ENVIRONMENT', 'development');
-
-// For domain
-define('ENVIRONMENT', 'production');
+if ($_SERVER['SERVER_NAME'] == "localhost") {
+    // For localhost
+    define('ENVIRONMENT', 'development');
+} else {
+    // For domain
+    define('ENVIRONMENT', 'production');
+}
 
 switch (ENVIRONMENT) {
     case 'development':
@@ -38,6 +40,7 @@ switch (ENVIRONMENT) {
 // First, run command "composer install" to load library and PSR-4 autoload
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/system/Constants.php';
+require_once __DIR__ . '/system/Helper.php';
 
 use System\App;
 

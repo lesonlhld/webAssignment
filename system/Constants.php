@@ -2,8 +2,8 @@
 
 /**
  * Constant
- * Define global constant, function
- * Get constant by VARIABLE_name or function_name
+ * Define global constant
+ * Get constant by VARIABLE_name
  * @author    Le Trung Son    lesonlhld@gmail.com
  */
 
@@ -17,7 +17,7 @@ switch (ENVIRONMENT) {
     case 'production':
         // For domain
         define("BASE_PATH", $_SERVER["DOCUMENT_ROOT"]);
-        define("BASE_URL", $_SERVER['SERVER_NAME']);
+        define("BASE_URL", (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/');
         break;
 
     default:
@@ -26,34 +26,3 @@ switch (ENVIRONMENT) {
 
 // Other constants here
 // ...
-
-// Get base URL with subpath
-function site_url($url = "")
-{
-    return BASE_URL . $url;
-}
-
-// Show 404 page or response 404 code
-function notFound($enable404 = false)
-{
-    if (!$enable404) exit('Page not found...');
-    $statusCode = 404;
-    http_response_code($statusCode);
-}
-
-// Redirect to absolute URL
-function redirect($url, $code = 302)
-{
-    // header("Refresh:0; url=" . $url;
-    header("Location: " . $url, true, $code);
-    exit;
-}
-
-function throwError($message = null)
-{
-    if (is_string($message)) {
-        throw new Exception($message);
-    } else {
-        throw new Exception("An unknown error!");
-    }
-}

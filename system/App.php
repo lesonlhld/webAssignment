@@ -26,7 +26,7 @@ class App
 
     private function parseUri()
     {
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri = rtrim(trim($_SERVER['REQUEST_URI']), '/');
 
         // Remove webAssignment path if existing in uri (http://localhost/webAssignment/)
         $uri = str_replace('/webAssignment', '', $uri);
@@ -62,7 +62,8 @@ class App
                 $controller = $temp;
             } else {
                 if (empty($controller)) {
-                    $path = $path . $this->uri[$i] . '\\';
+                    $path .= $this->uri[$i] . '\\';
+                    $controller_file .= '/' . $this->uri[$i];
                 } else {
                     // Check exist Controller
                     if (empty($function)) {
