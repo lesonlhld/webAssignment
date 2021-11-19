@@ -1,4 +1,4 @@
 <?php
 View('admin/header');
-View($subview);
+View($subview, ['data' => $data ?? null]);
 View('admin/footer');

@@ -73,9 +73,14 @@ function base_url($url = "")
 // Show 404 page or response 404 code
 function notFound($enable404 = false)
 {
-    if (!$enable404) exit('Page not found...');
-    $statusCode = 404;
-    http_response_code($statusCode);
+    if (!$enable404) {
+        $data["subview"] = "client/not_found";
+        View("client/main", $data);
+        exit();
+    } else {
+        $statusCode = 404;
+        http_response_code($statusCode);
+    }
 }
 
 // Redirect to absolute URL
