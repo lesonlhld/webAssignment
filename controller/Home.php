@@ -15,10 +15,4 @@ class Home extends \Controller\Controller
         $this->data["subview"] = "client/home/home";
         View("client/main", $this->data);
     }
-
-    public function get_city()
-    {
-        $USER_Model = Model('CITY_Model');
-        View('', $USER_Model->get_city());
-    }
 }
