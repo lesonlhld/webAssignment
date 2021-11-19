@@ -8,7 +8,7 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Register ===-->
-<div class="log-reg-v3 content-md margin-bottom-30">
+<div class="log-reg content-md margin-bottom-30">
     <div class="container">
         <div class="row">
             <div class="col-md-7 md-margin-bottom-50">

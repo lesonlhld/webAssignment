@@ -1,0 +1,259 @@
+/*Login & Registration
+------------------------------------*/
+/**General Styles**/
+/*Welcome Title*/
+.log-reg h2.welcome-title {
+	font-size: 34px;
+	font-weight: 200;
+	line-height: 50px;
+	margin-top: -10px;
+	margin-bottom: 20px;
+}
+
+/*Login Block*/
+.log-reg .log-reg-block {
+	padding: 20px;
+	margin-bottom: 20px;
+	box-shadow: 0 0 2px #ccc;
+}
+
+.log-reg .log-reg-block h2 {
+	font-size: 22px;
+	font-weight: 200;
+	text-align: center;
+	margin-bottom: 30px;
+	text-transform: capitalize;
+}
+
+.log-reg .log-reg-block a {
+	color: #687074;
+	text-decoration: underline;
+}
+
+.log-reg .log-reg-block a:hover {
+	color: #d10000;
+}
+
+/*Login Input*/
+.log-reg .login-input i {
+	font-size: 20px;
+	min-width: 25px;
+}
+
+.log-reg .login-input span,
+.log-reg .login-input input {
+	color: #ccc;
+	border-color: #ccc;
+}
+
+.log-reg .login-input .form-control {
+	color: #555;
+	font-weight: 600;
+}
+
+.log-reg .login-input .form-control:focus {
+	box-shadow: none;
+}
+
+.log-reg .login-input .no-border-top{
+	margin-top: -1px;
+}
+
+.log-reg .input input::-moz-placeholder {
+	color: #ccc;
+}
+.log-reg .input input:-ms-input-placeholder {
+	color: #ccc;
+}
+.log-reg .input input::-webkit-input-placeholder {
+	color: #ccc;
+}
+
+/*Register Input*/
+.log-reg .log-reg-block label {
+	font-weight: normal;
+}
+
+.log-reg .log-reg-block section {
+	margin-bottom: 5px;
+}
+
+.log-reg .reg-input section {
+	margin-bottom: 15px;
+}
+
+.log-reg .reg-input .input,
+.log-reg .reg-input .select {
+	display: block;
+}
+
+.log-reg .reg-input .input input {
+	width: 100%;
+}
+
+.log-reg .reg-input select {
+	font-weight: 200;
+	min-height: 40px;
+	color: #888 !important;
+}
+
+/*Error State*/
+.log-reg .state-error input,
+.log-reg .state-error select,
+.log-reg .state-error textarea,
+.log-reg .radio.state-error i,
+.log-reg .toggle.state-error i {
+	background: #fff0f0;
+}
+
+.log-reg .state-error select + i {
+	background: #fff0f0;
+	box-shadow: 0 0 0 12px #fff0f0;
+}
+
+.log-reg .toggle.state-error input:checked + i {
+	background: #fff0f0;
+}
+
+.log-reg .state-error + em {
+	display: block;
+	color: #ee9393;
+	padding: 0 1px;
+	font-size: 11px;
+	margin-top: 6px;
+	line-height: 15px;
+	font-style: normal;
+}
+
+.log-reg .rating.state-error + em {
+	margin-top: -4px;
+	margin-bottom: 4px;
+}
+
+/*Success State*/
+.log-reg .state-success input,
+.log-reg .state-success select,
+.log-reg .state-success textarea,
+.log-reg .radio.state-success i,
+.log-reg .toggle.state-success i {
+	background: #f0fff0;
+}
+
+.log-reg .state-success select + i {
+	background: #f0fff0;
+	box-shadow: 0 0 0 12px #f0fff0;
+}
+
+.log-reg .toggle.state-success input:checked + i {
+	background: #f0fff0;
+}
+
+.log-reg .state-success + em {
+	display: block;
+	color: #ee9393;
+	padding: 0 1px;
+	margin-top: 6px;
+	font-size: 11px;
+	line-height: 15px;
+	font-style: normal;
+}
+
+.log-reg .note-success {
+	color: #6fb679;
+}
+
+/*Row Columns Space Removes*/
+.log-reg .columns-space-removes .col-sm-6:nth-child(odd) {
+	padding-right: 5px;
+}
+.log-reg .columns-space-removes .col-sm-6:nth-child(even) {
+	padding-left: 5px;
+}
+
+@media (max-width: 1200px) {
+	.log-reg .columns-space-removes .col-sm-6:nth-child(odd) {
+		padding-right: 15px;
+	}
+	.log-reg .columns-space-removes .col-sm-6:nth-child(even) {
+		padding-left: 15px;
+	}
+}
+
+/*Border Wings*/
+.log-reg .border-wings {
+	text-align: center;
+}
+
+.log-reg .border-wings span {
+	color: #687074;
+	font-size: 14px;
+  	padding: 0 10px;
+	position: relative;
+  	margin-bottom: 15px;
+  	display: inline-block;
+	text-transform: uppercase;
+}
+
+.log-reg .border-wings span:before,
+.log-reg .border-wings span:after {
+	top: 10px;
+	height: 1px;
+	width: 100%;
+	content: " ";
+	background: #ccc;
+	position: absolute;
+}
+
+.log-reg .border-wings span:before {
+  	left: 100%;
+}
+
+.log-reg .border-wings span:after {
+  	right: 100%;
+}
+
+/*Site Statistics*/
+.log-reg .site-statistics {
+	padding: 10px;
+	text-align: center;
+	background: #f8f8f8;
+}
+
+.log-reg .site-statistics span {
+	color: #888;
+	display: block;
+	font-size: 26px;
+	font-weight: 200;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.log-reg .site-statistics span:after {
+	left: 50%;
+	height: 1px;
+	width: 10px;
+	bottom: -5px;
+	content: " ";
+	background: #888;
+	margin-left: -5px;
+	position: absolute;
+}
+
+.log-reg .site-statistics small {
+	color: #888;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+/*Members Number*/
+.log-reg .members-number {
+	text-align: center;
+}
+
+.log-reg .members-number h3 {
+	margin-bottom: 25px;
+}
+
+.log-reg .members-number img {
+	margin: 0 auto;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="<?= site_url() ?>assets/css/custom.css">
 
     <!-- CSS Page Styles -->
-    <link rel="stylesheet" href="<?= site_url() ?>assets/css/pages/log-reg-v3.css">
+    <link rel="stylesheet" href="<?= site_url() ?>assets/css/pages/log-reg.css">
 </head>
 
 <body class="header-fixed">

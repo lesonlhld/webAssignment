@@ -13,7 +13,8 @@ function Model($model_path_name)
     $model_file = "model/" . $model_path_name . ".php";
     if (!file_exists($model_file)) return exit('Invalid Model!');
 
-    $model_name = end(explode('/', $model_path_name));
+    $tmp = explode('/', $model_path_name);
+    $model_name = end($tmp);
     // Call model
     $model = '\\Model\\' . $model_name;
 
@@ -98,4 +99,10 @@ function throwError($message = null)
     } else {
         throw new Exception("An unknown error!");
     }
+}
+
+
+function hashpass($str)
+{
+    return hash('sha1', $str);
 }

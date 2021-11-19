@@ -8,13 +8,13 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Login ===-->
-<div class="log-reg-v3 content-md">
+<div class="log-reg content-md">
     <div class="container">
         <div class="row_new">
             <div>
-                <form id="" class="log-reg-block" action="login" method="post">
+                <form id="" class="log-reg-block" action="javascript:void(0)" method="post">
                     <h2>ĐĂNG NHẬP</h2>
-                    <h3 style="color: red;"> ${alertMsg}</h3>
+                    <h3 id="msg" style="color: red;" class="hidden"></h3>
 
                     <section>
                         <label class="input login-input">
@@ -46,3 +46,25 @@
     <!--end container-->
 </div>
 <!--=== End Login ===-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        $("form").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('auth/check_login') ?>",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function() {
+                    location.reload();
+                },
+                error: function(data) {
+                    const obj = JSON.parse(JSON.stringify(data));
+
+                    $("#msg").removeClass('hidden');
+                    $("#msg").html(obj.responseJSON.msg);
+                }
+            });
+        });
+    });
+</script>
