@@ -17,7 +17,13 @@ switch (ENVIRONMENT) {
     case 'production':
         // For domain
         define("BASE_PATH", $_SERVER["DOCUMENT_ROOT"]);
-        define("BASE_URL", (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/');
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+            $protocol = "https://" . $_SERVER['HTTP_HOST'];
+        } else {
+            $protocol = 'http://' . $_SERVER['HTTP_HOST'];
+        }
+
+        define("BASE_URL", $protocol . '/');
         break;
 
     default:
