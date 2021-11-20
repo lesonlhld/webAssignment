@@ -106,3 +106,17 @@ function hashpass($str)
 {
     return hash('sha1', $str);
 }
+
+function is_login()
+{
+    if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] == false) {
+        redirect(site_url("auth/login"));
+    }
+}
+
+function is_admin_login()
+{
+    if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] == false || !isset($_SESSION['role']) || $_SESSION['role'] != 2) {
+        redirect(site_url("admin/auth"));
+    }
+}
