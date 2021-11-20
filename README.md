@@ -66,4 +66,4 @@ EXAMPLE_Model extends \Model\Model {...}
 
 ## Web demo
 * https://letrungson.000webhostapp.com/ or http://letrungson.cf/ (Located in the same hosting)
-* https://web-assignment-211.herokuapp.com/
+* http://web-assignment-211.herokuapp.com/
