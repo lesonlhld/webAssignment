@@ -48,6 +48,7 @@ class Auth extends \Controller\Controller
             View("", ['msg' => 'Sai username hoặc password'], 401);
         } else {
             $_SESSION['is_logged_in'] = true;
+            $_SESSION['lastname'] = $user_login->last_name;
         }
     }
 
@@ -82,6 +83,7 @@ class Auth extends \Controller\Controller
                 } else {
                     if ($USER_Model->register($data) > 0) {
                         $_SESSION['is_logged_in'] = true;
+                        $_SESSION['lastname'] = $data["lastname"];
                     } else {
                         View("", ['msg' => 'Có lỗi xảy ra'], 401);
                     }

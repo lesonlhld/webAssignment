@@ -58,7 +58,7 @@
                         <?php
                         if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']) { ?>
                             <ul class="list-inline shop-badge badge-lists badge-icons pull-right">
-                                <li><a href="<?= site_url() ?>member/myaccount"><i class="fa fa-user"></i></a>
+                                <li><a href="<?= site_url() ?>member/myaccount"><i class="fa fa-user"></i>Hi, <?= $_SESSION['lastname'] ?></a>
                                     <ul class="list-unstyled badge-open2 mCustomScrollbar2" data-mcs-theme="minimal-dark">
                                         <li><a href="<?= site_url() ?>member/myaccount">Tài khoản của tôi</a></li>
                                         <li><a href="<?= site_url() ?>member/invoice">Lich sử mua hàng</a></li>
@@ -72,7 +72,7 @@
                                     alert("Vui lòng chọn món ăn trước khi thanh toán!");
                                 }
                             </script>
-                            
+
                             <ul class="list-inline shop-badge badge-lists badge-icons pull-right">
                                 <li><a href="<?= site_url() ?>member/cart"><i class="fa fa-shopping-cart"></i></a>
                                     <span class="badge badge-sea rounded-x">0</span>

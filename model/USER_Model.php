@@ -26,9 +26,10 @@ class USER_Model extends \Model\Model
 
     public function login($username, $password)
     {
+        $password = hashpass($password);
         $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username=:username AND password=:password');
         $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', hashpass($password));
+        $stmt->bindParam(':password', $password);
         $stmt->execute();
 
         return $stmt->fetch();
@@ -36,11 +37,12 @@ class USER_Model extends \Model\Model
 
     public function register($data)
     {
+        $password = hashpass($data['password']);
         $stmt = $this->pdo->prepare('INSERT INTO users(first_name, last_name, username, password, email, birth_date, phone, address, gender, avatar, role_id) VALUES (:first_name, :last_name, :username, :password, :email, :birth_date, :phone, :address, :gender, :avatar, :role_id)');
         $stmt->bindParam(':first_name', $data['firstname']);
         $stmt->bindParam(':last_name', $data['lastname']);
         $stmt->bindParam(':username', $data['username']);
-        $stmt->bindParam(':password', hashpass($data['password']));
+        $stmt->bindParam(':password', $password);
         $stmt->bindParam(':email', $data['email']);
         $stmt->bindParam(':birth_date', $data['birthday']);
         $stmt->bindParam(':phone', $data['phone']);
