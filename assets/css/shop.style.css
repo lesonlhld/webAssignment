@@ -3,9 +3,6 @@
 @import url(shop.plugins.css);
 @import url(shop.blocks.css);
 
-/*Import CSS Plugins*/
-@import url(plugins/style-switcher.css);
-
 * {
     font-family: 'Open Sans', sans-serif;
 }

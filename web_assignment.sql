@@ -317,8 +317,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `username`, `password`, `avatar`, `role_id`, `balance`) VALUES
 (1, 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, 'admin', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 2, 0),
 (2, 'Nguyễn Văn ', 'A', '2020-12-22', 'M', '0923909321', 'nguyenvana@gmail.com', 'HCM', 'usertest', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608791208811.jpg', 1, 0),
-(3, 'lê văn', 'tám', '2020-12-24', 'M', '0923909320', '', 'hcm', 'aaa', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793423805.jpg', 1, 0),
-(4, 'Lê Trung', 'Sơn', '2020-12-24', 'M', '0912131415', 'leson0310@gmail.com', 'KTX khu A, Linh Trung, Thủ Đức', 'Son.le.lhld', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793747434.jpg', 2, 0);
+(5, 'lê văn', 'tám', '2020-12-24', 'M', '0923909320', '', 'hcm', 'aaa', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793423805.jpg', 1, 0),
+(6, 'Lê Trung', 'Sơn', '2020-12-24', 'M', '0912131415', 'leson0310@gmail.com', 'KTX khu A, Linh Trung, Thủ Đức', 'Son.le.lhld', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793747434.jpg', 2, 0);
 
 -- --------------------------------------------------------
 
