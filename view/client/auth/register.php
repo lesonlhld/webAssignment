@@ -42,51 +42,64 @@
             </div>
 
             <div class="col-md-5">
-                <form id="" class="form-input-block" action="register" method="post">
+                <form id="" class="form-input-block" action="javascript:void(0)" method="post">
                     <h2>Đăng ký tài khoản</h2>
-                    <h3 style="color: red;"> ${alertMsg}</h3>
+                    <h3 id="msg" style="color: red;" class="hidden"></h3>
 
                     <div class="login-input reg-input">
                         <div class="row">
                             <div class="col-md-6 md-margin-bottom-50">
                                 <section>
-                                    <label class="input"> <input type="text" name="firstname" placeholder="Họ" class="form-control">
-                                    </label>
+                                    <label class="input">Họ</label>
+                                    <input type="text" name="firstname" placeholder="Họ" class="form-control" required>
                                 </section>
                             </div>
                             <div class="col-md-6 md-margin-bottom-50">
                                 <section>
-                                    <label class="input"> <input type="text" name="lastname" placeholder="Tên" class="form-control">
-                                    </label>
+                                    <label class="input">Tên</label>
+                                    <input type="text" name="lastname" placeholder="Tên" class="form-control" required>
                                 </section>
                             </div>
                         </div>
                         <section>
-                            <label class="input"> <input type="text" name="username" placeholder="Tên đăng nhập" class="form-control">
-                            </label>
+                            <label class="input">Tên đăng nhập</label>
+                            <input type="text" name="username" placeholder="Tên đăng nhập" class="form-control" required>
                         </section>
                         <section>
-                            <label class="input"> <input type="email" name="email" placeholder="Địa chỉ Email" class="form-control">
-                            </label>
+                            <label class="input">Địa chỉ email</label>
+                            <input type="email" name="email" placeholder="Địa chỉ email" class="form-control" required>
                         </section>
-                        <section>
-                            <label class="input"> <input type="password" name="password" placeholder="Mật khẩu" id="password" class="form-control">
-                            </label>
-                        </section>
-                        <section>
-                            <label class="input"> <input type="password" name="passwordConfirm" placeholder="Nhập lại mật khẩu" class="form-control">
-                            </label>
-                        </section>
-                        <section>
-                            <label class="input">Giới tính</label>
-                            <input type="radio" value="M" name="gender" /> Nam
-                            <input type="radio" value="F" name="gender" /> Nữ
-                        </section>
-                        <section>
-                            <label>Ngày tháng năm sinh</label><br>
-                            <label class="input"> <input type="date" name="birthday" class="form-control">
-                            </label>
-                        </section>
+                        <div class="row">
+                            <div class="col-md-6 md-margin-bottom-50">
+                                <section>
+                                    <label class="input">Mật khẩu</label>
+                                    <input type="password" name="password" placeholder="Mật khẩu" id="password" class="form-control" required>
+                                </section>
+                            </div>
+                            <div class="col-md-6 md-margin-bottom-50">
+                                <section>
+                                    <label class="input">Nhập lại mật khẩu</label>
+                                    <input type="password" name="passwordConfirm" placeholder="Nhập lại mật khẩu" class="form-control" required>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 md-margin-bottom-50">
+                                <section>
+                                    <label class="input">Giới tính</label>
+                                    <select name="gender" id="" class="form-control">
+                                        <option value="M">Nam</option>
+                                        <option value="F">Nữ</option>
+                                    </select>
+                                </section>
+                            </div>
+                            <div class="col-md-6 md-margin-bottom-50">
+                                <section>
+                                    <label class="input">Ngày tháng năm sinh</label>
+                                    <input type="date" name="birthday" max=<?= date('Y-m-d'); ?> class="form-control" required>
+                                </section>
+                            </div>
+                        </div>
                     </div>
                     <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Tạo tài khoản</button>
                 </form>
@@ -102,3 +115,25 @@
     <!--end container-->
 </div>
 <!--=== End Register ===-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        $("form").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('auth/check_register') ?>",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function() {
+                    location.reload();
+                },
+                error: function(data) {
+                    const obj = JSON.parse(JSON.stringify(data));
+
+                    $("#msg").removeClass('hidden');
+                    $("#msg").html(obj.responseJSON.msg);
+                }
+            });
+        });
+    });
+</script>

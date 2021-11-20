@@ -50,4 +50,43 @@ class Auth extends \Controller\Controller
             $_SESSION['is_logged_in'] = true;
         }
     }
+
+    public function check_register()
+    {
+        $data = $_POST;
+
+        if ($data["firstname"] == "") {
+            View("", ['msg' => 'Họ không được để trống'], 401);
+        } else if ($data["lastname"] == "") {
+            View("", ['msg' => 'Tên không được để trống'], 401);
+        } else if ($data["username"] == "") {
+            View("", ['msg' => 'Tên đăng nhập không được để trống'], 401);
+        } else if ($data["email"] == "") {
+            View("", ['msg' => 'Email không được để trống'], 401);
+        } else if ($data["password"] == "") {
+            View("", ['msg' => 'Mật khẩu không được để trống'], 401);
+        } else if ($data["passwordConfirm"] == "") {
+            View("", ['msg' => 'Mật khẩu xác nhận không được để trống'], 401);
+        } else if ($data["birthday"] == "") {
+            View("", ['msg' => 'Ngày sinh không được để trống'], 401);
+        } else if ($data["password"] != $data["passwordConfirm"]) {
+            View("", ['msg' => 'Mật khẩu xác nhận không trùng khớp'], 401);
+        } else {
+            $USER_Model = Model('USER_Model');
+            if ($USER_Model->check_exist_username($data['username'])) {
+                View("", ['msg' => 'Tên đăng nhập đã tồn tại'], 401);
+            } else {
+                $data['role_id'] = 1;
+                if ($USER_Model->check_exist_email($data['email'])) {
+                    View("", ['msg' => 'Email đã tồn tại'], 401);
+                } else {
+                    if ($USER_Model->register($data) > 0) {
+                        $_SESSION['is_logged_in'] = true;
+                    } else {
+                        View("", ['msg' => 'Có lỗi xảy ra'], 401);
+                    }
+                }
+            }
+        }
+    }
 }
