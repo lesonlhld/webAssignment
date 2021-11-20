@@ -37,4 +37,16 @@ class Customer extends \Controller\Controller
             redirect(site_url("admin/customer"));
         }
     }
+
+    public function change_status()
+    {
+        is_admin_login();
+        $id = $_GET['id'];
+
+        $USER_Model = Model('USER_Model');
+        $USER_Model->update_published($id);
+        if (isset($_GET['id'])) {
+            redirect(site_url("admin/customer"));
+        }
+    }
 }

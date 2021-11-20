@@ -33,6 +33,7 @@
                                         <th>Phone</th>
                                         <th>Email</th>
                                         <th>Address</th>
+                                        <th>Status</th>
                                         <th width="80px">Action</th>
                                     </tr>
                                 </thead>
@@ -54,13 +55,14 @@
                                             <td><?= $user->phone ?> </td>
                                             <td><?= $user->email ?> </td>
                                             <td><?= $user->address ?> </td>
+                                            <td><?= $user->publish ?> </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Actions
                                                         <span class="fa fa-caret-down"></span></button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li><a href="#"><i class="fa fa-eye"></i>View</a></li>
-                                                        <li><a href="#"><i class="fa fa-refresh"></i>Lock</a></li>
+                                                        <li><a href="<?= site_url('admin/customer/change_status?id=' . $user->id); ?>"><i class="fa fa-refresh"></i>Lock</a></li>
                                                         <li><a href="#"><i class="fa fa-pencil"></i>Edit</a></li>
                                                         <li>
                                                             <a href="<?= site_url('admin/customer/remove?id=' . $user->id); ?>" onclick="return confirm('Are you sure you want to remove?');">
