@@ -8,11 +8,11 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Login ===-->
-<div class="log-reg content-md">
+<div class="form-input content-md">
     <div class="container">
         <div class="row_new">
             <div>
-                <form id="" class="log-reg-block" action="javascript:void(0)" method="post">
+                <form id="" class="form-input-block" action="javascript:void(0)" method="post">
                     <h2>ĐĂNG NHẬP</h2>
                     <h3 id="msg" style="color: red;" class="hidden"></h3>
 
@@ -20,7 +20,7 @@
                         <label class="input login-input">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" placeholder="Tên đăng nhập" name="username" class="form-control">
+                                <input type="text" placeholder="Tên đăng nhập" name="username" class="form-control" required>
                             </div>
                         </label>
                     </section>
@@ -28,7 +28,7 @@
                         <label class="input login-input no-border-top">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="password" placeholder="Mật khẩu" name="password" class="form-control">
+                                <input type="password" placeholder="Mật khẩu" name="password" class="form-control" required>
                             </div>
                         </label>
                     </section>

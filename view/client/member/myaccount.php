@@ -8,7 +8,7 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Information ===-->
-<div class="log-reg-v4 content-md margin-bottom-30">
+<div class="form-input content-md margin-bottom-30">
     <div class="container bootstrap snippet">
         <form class="form" action="${myaccount}" method="post" id="registrationForm" enctype="multipart/form-data">
             <!--left col-->
