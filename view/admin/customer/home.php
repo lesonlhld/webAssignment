@@ -16,8 +16,8 @@
                     <div class="box">
                         <div class="box-header">
                             <div class="box-tools pull-left">
-                                <button type="button" class="btn btn-default btn-sm" onclick="window.location.href='<?php echo site_url('Customers/add'); ?>'"><i class="fa fa-plus"></i> Add item</button>
-                                <a href="<?php echo site_url('Customers/delAll'); ?>"><button type="button" class="btn btn-default btn-sm" onclick="return confirm('Are you sure you want to delete DATA ?');"><i class="fa fa-trash"></i> Delete</button></a>
+                                <button type="button" class="btn btn-default btn-sm" onclick="window.location.href='#'"><i class="fa fa-plus"></i> Add customer</button>
+                                <a href="#"><button type="button" class="btn btn-default btn-sm" onclick="return confirm('Are you sure you want to delete customer ?');"><i class="fa fa-trash"></i> Delete</button></a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -77,8 +77,45 @@
                             </table>
                         </div>
                         <!-- /.box-body -->
-                    </div>
 
+                        <div class="box-footer clearfix">
+                            <?php
+                            if (isset($data['page'])) {
+                                $page = $data['page'];
+                                echo (count($data['user_list']) > 0) ? "<i>Showing " . (($data['page'] - 1) * 10 + 1) . " to " . (($data['page'] - 1) * 10 + count($data['user_list'])) . "</i>" : "";
+                                echo '<ul class="pagination no-margin pull-right">';
+
+                                if ($page > 1) {
+                                    echo '
+                      <li><a href="' . site_url("admin/customer/index?page=") . '">&laquo;</a></li>
+                      <li><a href="' . site_url("admin/customer/index?page=" . ($page - 1)) . '">&lsaquo;</a></li>';
+                                }
+                                if ($page == 1) {
+                                    echo '<li class="active"><a href="' . site_url("admin/customer/index?page=$page") . '">' . $page . '</a></li>';
+                                } else {
+                                    echo '<li><a href="' . site_url("admin/customer/index?page=" . ($page - 1)) . '">' . ($page - 1) . '</a></li>
+                      <li class="active"><a href="' . site_url("admin/customer/index?page=" . $page) . '">' . $page . '</a></li>';
+                                }
+                                if (count($data['user_list']) == LIMIT) {
+                                    echo '<li><a href="' . site_url("admin/customer/index?page=" . ($page + 1)) . '">' . ($page + 1) . '</a></li>';
+                                    echo '
+                      <li><a href="' . site_url("admin/customer/index?page=" . ($page + 1)) . '">&rsaquo;</a></li>
+                      <li><a href="' . site_url("admin/customer/index?page=" . $data['end_page']) . '">&raquo;</a></li>
+                      </ul>';
+                                }
+                            }
+                            ?>
+                        </div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function(event) {
+                                $('li').click(function() {
+                                    $(this).addClass('active').siblings().removeClass('active');
+                                });
+                            });
+                        </script>
+                    </div>
+                    <!-- /.box -->
                 </div>
                 <!-- /.col -->
             </div>
