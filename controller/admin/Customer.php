@@ -25,4 +25,16 @@ class Customer extends \Controller\Controller
         $this->data["subview"] = "admin/customer/home";
         View("admin/main", $this->data);
     }
+
+    public function remove()
+    {
+        is_admin_login();
+        $ids = $_POST['ids'] ?? [$_GET['id']] ?? [];
+
+        $USER_Model = Model('USER_Model');
+        $USER_Model->update_trash($ids, 1);
+        if (isset($_GET['id'])) {
+            redirect(site_url("admin/customer"));
+        }
+    }
 }

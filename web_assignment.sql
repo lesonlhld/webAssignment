@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 20, 2021 lúc 05:49 PM
+-- Thời gian đã tạo: Th10 20, 2021 lúc 06:33 PM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -204,18 +204,20 @@ CREATE TABLE `users` (
   `password` varchar(50) NOT NULL,
   `avatar` varchar(30) DEFAULT NULL,
   `role_id` int(11) NOT NULL DEFAULT 1,
-  `balance` int(11) DEFAULT 0
+  `balance` int(11) DEFAULT 0,
+  `publish` int(11) NOT NULL DEFAULT 0,
+  `trash` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `username`, `password`, `avatar`, `role_id`, `balance`) VALUES
-(1, 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, 'admin', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 2, 0),
-(2, 'Nguyễn Văn ', 'A', '2020-12-22', '', '0923909321', 'nguyenvana@gmail.com', 'HCM', 'usertest', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608791208811.jpg', 1, 0),
-(4, 'lê văn', 'tám', '2020-12-24', '', '0923909320', '', 'hcm', 'aaa', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793423805.jpg', 1, 0),
-(5, 'Lê Trung', 'Sơn', '2020-12-24', '', '0912131415', 'leson0310@gmail.com', 'KTX khu A, Linh Trung, Thủ Đức', 'Son.le.lhld', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793747434.jpg', 2, 0);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `username`, `password`, `avatar`, `role_id`, `balance`, `publish`, `trash`) VALUES
+(1, 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, 'admin', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 2, 0, 1, 0),
+(2, 'Nguyễn Văn ', 'A', '2020-12-22', '', '0923909321', 'nguyenvana@gmail.com', 'HCM', 'usertest', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', '1608791208811.jpg', 1, 0, 1, 0),
+(3, 'lê văn', 'tám', '2020-12-24', '', '0923909320', '', 'hcm', 'aaa', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793423805.jpg', 1, 0, 0, 0),
+(4, 'Lê Trung', 'Sơn', '2020-12-24', '', '0912131415', 'leson0310@gmail.com', 'KTX khu A, Linh Trung, Thủ Đức', 'Son.le.lhld', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793747434.jpg', 2, 0, 0, 0);
 
 -- --------------------------------------------------------
 

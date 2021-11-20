@@ -12,20 +12,20 @@ class USER_Model extends \Model\Model
     {
         if ($start == null && $limit == null) {
 
-            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id');
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id AND trash=0');
             $stmt->bindParam(':role_id', $role);
             $stmt->execute();
 
             return $stmt->fetchAll();
         } elseif ($limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id LIMIT :start');
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id AND trash=0 LIMIT :start');
             $stmt->bindParam(':role_id', $role);
             $stmt->bindParam(':start', $start);
             $stmt->execute();
 
             return $stmt->fetch();
         } else {
-            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id LIMIT :start,:limit');
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id AND trash=0 LIMIT :start,:limit');
             $stmt->bindParam(':role_id', $role);
             $stmt->bindParam(':start', $start);
             $stmt->bindParam(':limit', $limit);
@@ -37,7 +37,7 @@ class USER_Model extends \Model\Model
 
     public function count($role = 1)
     {
-        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE role_id=:role_id');
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE role_id=:role_id AND trash=0');
         $stmt->bindParam(':role_id', $role);
         $stmt->execute();
 
@@ -92,5 +92,44 @@ class USER_Model extends \Model\Model
         $stmt->execute();
 
         return count($stmt->fetchAll()) > 0;
+    }
+
+
+    public function update_published($id)
+    {
+        $stmt = $this->pdo->prepare('SELECT publish FROM users WHERE id=:id');
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $publish = $stmt->fetchColumn();
+        $publish = ($publish + 1) % 2;
+
+        $stmt = $this->pdo->prepare('UPDATE users SET publish=:publish WHERE id =:id');
+        $stmt->bindParam(':publish', $publish);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $publish;
+    }
+
+    public function update_trash($id, $trash)
+    {
+        $id_list = implode(",", $id);
+        $stmt = $this->pdo->prepare("UPDATE users SET trash=:trash WHERE id IN ($id_list)");
+        $stmt->bindParam(':trash', $trash);
+        $stmt->execute();
+
+        return true;
+    }
+
+    public function update_password($id, $new_password)
+    {
+        $password = hashpass($new_password);
+        $stmt = $this->pdo->prepare('UPDATE users SET password=:password WHERE id =:id');
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return true;
     }
 }

@@ -17,7 +17,7 @@
                         <div class="box-header">
                             <div class="box-tools pull-left">
                                 <button type="button" class="btn btn-default btn-sm" onclick="window.location.href='#'"><i class="fa fa-plus"></i> Add customer</button>
-                                <a href="#"><button type="button" class="btn btn-default btn-sm" onclick="return confirm('Are you sure you want to delete customer ?');"><i class="fa fa-trash"></i> Delete</button></a>
+                                <button type="button" class="btn btn-default btn-sm" id="remove"><i class="fa fa-trash"></i> Remove</button>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -63,7 +63,7 @@
                                                         <li><a href="#"><i class="fa fa-refresh"></i>Lock</a></li>
                                                         <li><a href="#"><i class="fa fa-pencil"></i>Edit</a></li>
                                                         <li>
-                                                            <a href="#" onclick="return confirm('Are you sure you want to remove?');">
+                                                            <a href="<?= site_url('admin/customer/remove?id=' . $user->id); ?>" onclick="return confirm('Are you sure you want to remove?');">
                                                                 <i class="fa fa-trash"></i>Remove</a>
                                                         </li>
                                                     </ul>
@@ -122,3 +122,39 @@
             <!-- /.row -->
         </section>
     </div>
+
+    <script>
+        function get_checked() {
+            var rows = $('#details tr');
+            var a = [];
+            rows.each(function() {
+                if ($(this).find('#check_item').is(':checked')) {
+                    var id = $(this).find('#check_item').val();
+                    a.push(id);
+                }
+            });
+            return a;
+        }
+        document.addEventListener("DOMContentLoaded", function(event) {
+            $('#remove').click(function() {
+                $data = get_checked();
+                if ($data.length == 0) {
+                    alert('Please tick the items you want to remove');
+                } else {
+                    var del = confirm('Are you sure you want to remove?');
+                    if (del == true) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?= site_url('admin/customer/remove'); ?>',
+                            data: {
+                                ids: $data
+                            },
+                            success: function(response) {
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
