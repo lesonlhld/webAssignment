@@ -24,30 +24,33 @@ class USER_Model extends \Model\Model
         }
     }
 
-    public function login($username, $password)
+    public function login($username, $password, $role = 1)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username=:username AND password=:password');
+        $password = hashpass($password);
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username=:username AND password=:password AND role_id=:role_id');
         $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', hashpass($password));
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':role_id', $role);
         $stmt->execute();
 
         return $stmt->fetch();
     }
 
-    public function register($data)
+    public function register($data, $role = 1)
     {
+        $password = hashpass($data['password']);
         $stmt = $this->pdo->prepare('INSERT INTO users(first_name, last_name, username, password, email, birth_date, phone, address, gender, avatar, role_id) VALUES (:first_name, :last_name, :username, :password, :email, :birth_date, :phone, :address, :gender, :avatar, :role_id)');
         $stmt->bindParam(':first_name', $data['firstname']);
         $stmt->bindParam(':last_name', $data['lastname']);
         $stmt->bindParam(':username', $data['username']);
-        $stmt->bindParam(':password', hashpass($data['password']));
+        $stmt->bindParam(':password', $password);
         $stmt->bindParam(':email', $data['email']);
         $stmt->bindParam(':birth_date', $data['birthday']);
         $stmt->bindParam(':phone', $data['phone']);
         $stmt->bindParam(':address', $data['address']);
         $stmt->bindParam(':gender', $data['gender']);
         $stmt->bindParam(':avatar', $data['avatar']);
-        $stmt->bindParam(':role_id', $data['role_id']);
+        $stmt->bindParam(':role_id', $role);
         $stmt->execute();
 
         return $this->pdo->lastInsertId();
