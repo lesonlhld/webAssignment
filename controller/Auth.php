@@ -77,7 +77,6 @@ class Auth extends \Controller\Controller
             if ($USER_Model->check_exist_username($data['username'])) {
                 View("", ['msg' => 'Tên đăng nhập đã tồn tại'], 401);
             } else {
-                $data['role_id'] = 1;
                 if ($USER_Model->check_exist_email($data['email'])) {
                     View("", ['msg' => 'Email đã tồn tại'], 401);
                 } else {
