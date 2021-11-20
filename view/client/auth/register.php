@@ -8,7 +8,7 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Register ===-->
-<div class="log-reg content-md margin-bottom-30">
+<div class="form-input content-md margin-bottom-30">
     <div class="container">
         <div class="row">
             <div class="col-md-7 md-margin-bottom-50">
@@ -42,7 +42,7 @@
             </div>
 
             <div class="col-md-5">
-                <form id="" class="log-reg-block" action="register" method="post">
+                <form id="" class="form-input-block" action="register" method="post">
                     <h2>Đăng ký tài khoản</h2>
                     <h3 style="color: red;"> ${alertMsg}</h3>
 

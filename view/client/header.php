@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="<?= site_url() ?>assets/css/custom.css">
 
     <!-- CSS Page Styles -->
-    <link rel="stylesheet" href="<?= site_url() ?>assets/css/pages/log-reg.css">
+    <link rel="stylesheet" href="<?= site_url() ?>assets/css/pages/form-input.css">
 </head>
 
 <body class="header-fixed">

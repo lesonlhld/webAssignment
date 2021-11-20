@@ -8,11 +8,11 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Login ===-->
-<div class="log-reg content-md">
+<div class="form-input content-md">
     <div class="container">
         <div class="row_new">
             <div>
-                <form id="" class="log-reg-block" action="javascript:void(0)" method="post">
+                <form id="" class="form-input-block" action="javascript:void(0)" method="post">
                     <h2>ĐĂNG NHẬP</h2>
                     <h3 id="msg" style="color: red;" class="hidden"></h3>
 

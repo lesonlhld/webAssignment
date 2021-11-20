@@ -2,7 +2,7 @@
 ------------------------------------*/
 /**General Styles**/
 /*Welcome Title*/
-.log-reg h2.welcome-title {
+.form-input h2.welcome-title {
 	font-size: 34px;
 	font-weight: 200;
 	line-height: 50px;
@@ -11,13 +11,13 @@
 }
 
 /*Login Block*/
-.log-reg .log-reg-block {
+.form-input .form-input-block {
 	padding: 20px;
 	margin-bottom: 20px;
-	box-shadow: 0 0 2px #ccc;
+	box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
 }
 
-.log-reg .log-reg-block h2 {
+.form-input .form-input-block h2 {
 	font-size: 22px;
 	font-weight: 200;
 	text-align: center;
@@ -25,97 +25,97 @@
 	text-transform: capitalize;
 }
 
-.log-reg .log-reg-block a {
+.form-input .form-input-block a {
 	color: #687074;
 	text-decoration: underline;
 }
 
-.log-reg .log-reg-block a:hover {
+.form-input .form-input-block a:hover {
 	color: #d10000;
 }
 
 /*Login Input*/
-.log-reg .login-input i {
+.form-input .login-input i {
 	font-size: 20px;
 	min-width: 25px;
 }
 
-.log-reg .login-input span,
-.log-reg .login-input input {
+.form-input .login-input span,
+.form-input .login-input input {
 	color: #ccc;
 	border-color: #ccc;
 }
 
-.log-reg .login-input .form-control {
+.form-input .login-input .form-control {
 	color: #555;
 	font-weight: 600;
 }
 
-.log-reg .login-input .form-control:focus {
+.form-input .login-input .form-control:focus {
 	box-shadow: none;
 }
 
-.log-reg .login-input .no-border-top{
+.form-input .login-input .no-border-top{
 	margin-top: -1px;
 }
 
-.log-reg .input input::-moz-placeholder {
+.form-input .input input::-moz-placeholder {
 	color: #ccc;
 }
-.log-reg .input input:-ms-input-placeholder {
+.form-input .input input:-ms-input-placeholder {
 	color: #ccc;
 }
-.log-reg .input input::-webkit-input-placeholder {
+.form-input .input input::-webkit-input-placeholder {
 	color: #ccc;
 }
 
 /*Register Input*/
-.log-reg .log-reg-block label {
+.form-input .form-input-block label {
 	font-weight: normal;
 }
 
-.log-reg .log-reg-block section {
+.form-input .form-input-block section {
 	margin-bottom: 5px;
 }
 
-.log-reg .reg-input section {
+.form-input .reg-input section {
 	margin-bottom: 15px;
 }
 
-.log-reg .reg-input .input,
-.log-reg .reg-input .select {
+.form-input .reg-input .input,
+.form-input .reg-input .select {
 	display: block;
 }
 
-.log-reg .reg-input .input input {
+.form-input .reg-input .input input {
 	width: 100%;
 }
 
-.log-reg .reg-input select {
+.form-input .reg-input select {
 	font-weight: 200;
 	min-height: 40px;
 	color: #888 !important;
 }
 
 /*Error State*/
-.log-reg .state-error input,
-.log-reg .state-error select,
-.log-reg .state-error textarea,
-.log-reg .radio.state-error i,
-.log-reg .toggle.state-error i {
+.form-input .state-error input,
+.form-input .state-error select,
+.form-input .state-error textarea,
+.form-input .radio.state-error i,
+.form-input .toggle.state-error i {
 	background: #fff0f0;
 }
 
-.log-reg .state-error select + i {
+.form-input .state-error select + i {
 	background: #fff0f0;
 	box-shadow: 0 0 0 12px #fff0f0;
 }
 
-.log-reg .toggle.state-error input:checked + i {
+.form-input .toggle.state-error input:checked + i {
 	background: #fff0f0;
 }
 
-.log-reg .state-error + em {
+.form-input .state-error + em {
 	display: block;
 	color: #ee9393;
 	padding: 0 1px;
@@ -125,30 +125,30 @@
 	font-style: normal;
 }
 
-.log-reg .rating.state-error + em {
+.form-input .rating.state-error + em {
 	margin-top: -4px;
 	margin-bottom: 4px;
 }
 
 /*Success State*/
-.log-reg .state-success input,
-.log-reg .state-success select,
-.log-reg .state-success textarea,
-.log-reg .radio.state-success i,
-.log-reg .toggle.state-success i {
+.form-input .state-success input,
+.form-input .state-success select,
+.form-input .state-success textarea,
+.form-input .radio.state-success i,
+.form-input .toggle.state-success i {
 	background: #f0fff0;
 }
 
-.log-reg .state-success select + i {
+.form-input .state-success select + i {
 	background: #f0fff0;
 	box-shadow: 0 0 0 12px #f0fff0;
 }
 
-.log-reg .toggle.state-success input:checked + i {
+.form-input .toggle.state-success input:checked + i {
 	background: #f0fff0;
 }
 
-.log-reg .state-success + em {
+.form-input .state-success + em {
 	display: block;
 	color: #ee9393;
 	padding: 0 1px;
@@ -158,33 +158,33 @@
 	font-style: normal;
 }
 
-.log-reg .note-success {
+.form-input .note-success {
 	color: #6fb679;
 }
 
 /*Row Columns Space Removes*/
-.log-reg .columns-space-removes .col-sm-6:nth-child(odd) {
+.form-input .columns-space-removes .col-sm-6:nth-child(odd) {
 	padding-right: 5px;
 }
-.log-reg .columns-space-removes .col-sm-6:nth-child(even) {
+.form-input .columns-space-removes .col-sm-6:nth-child(even) {
 	padding-left: 5px;
 }
 
 @media (max-width: 1200px) {
-	.log-reg .columns-space-removes .col-sm-6:nth-child(odd) {
+	.form-input .columns-space-removes .col-sm-6:nth-child(odd) {
 		padding-right: 15px;
 	}
-	.log-reg .columns-space-removes .col-sm-6:nth-child(even) {
+	.form-input .columns-space-removes .col-sm-6:nth-child(even) {
 		padding-left: 15px;
 	}
 }
 
 /*Border Wings*/
-.log-reg .border-wings {
+.form-input .border-wings {
 	text-align: center;
 }
 
-.log-reg .border-wings span {
+.form-input .border-wings span {
 	color: #687074;
 	font-size: 14px;
   	padding: 0 10px;
@@ -194,8 +194,8 @@
 	text-transform: uppercase;
 }
 
-.log-reg .border-wings span:before,
-.log-reg .border-wings span:after {
+.form-input .border-wings span:before,
+.form-input .border-wings span:after {
 	top: 10px;
 	height: 1px;
 	width: 100%;
@@ -204,22 +204,22 @@
 	position: absolute;
 }
 
-.log-reg .border-wings span:before {
+.form-input .border-wings span:before {
   	left: 100%;
 }
 
-.log-reg .border-wings span:after {
+.form-input .border-wings span:after {
   	right: 100%;
 }
 
 /*Site Statistics*/
-.log-reg .site-statistics {
+.form-input .site-statistics {
 	padding: 10px;
 	text-align: center;
 	background: #f8f8f8;
 }
 
-.log-reg .site-statistics span {
+.form-input .site-statistics span {
 	color: #888;
 	display: block;
 	font-size: 26px;
@@ -228,7 +228,7 @@
 	margin-bottom: 10px;
 }
 
-.log-reg .site-statistics span:after {
+.form-input .site-statistics span:after {
 	left: 50%;
 	height: 1px;
 	width: 10px;
@@ -239,21 +239,21 @@
 	position: absolute;
 }
 
-.log-reg .site-statistics small {
+.form-input .site-statistics small {
 	color: #888;
 	font-size: 12px;
 	text-transform: uppercase;
 }
 
 /*Members Number*/
-.log-reg .members-number {
+.form-input .members-number {
 	text-align: center;
 }
 
-.log-reg .members-number h3 {
+.form-input .members-number h3 {
 	margin-bottom: 25px;
 }
 
-.log-reg .members-number img {
+.form-input .members-number img {
 	margin: 0 auto;
 }
