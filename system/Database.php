@@ -25,6 +25,12 @@ class Database
     private $password_pro = 'CzsrXyxFwE';
     private $dbname_pro = 'sql6436525';
 
+    // // For domain
+    // private $server_pro = 'localhost';
+    // private $username_pro = 'id17166582_web_database';
+    // private $password_pro = '3*u{x(9gJihI%/tx';
+    // private $dbname_pro = 'id17166582_web_assignment';
+
     private $charset = 'utf8mb4';
 
     protected $pdo;

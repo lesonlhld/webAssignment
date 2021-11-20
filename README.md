@@ -10,12 +10,16 @@
 - Nếu import thấy lỗi `Unknown collation: 'utf8mb4_0900_ai_ci'` thì mở file db bằng text editor, replace `utf8mb4_0900_ai_ci` thành `utf8mb4_general_ci`.
 
 ## Tài khoản admin
-- Username: admin@letrungsgon.tk
-- Password: 123456
+```
+username: admin
+password: 123456
+```
 
 ## Tài khoản member
-- Username: nguyenvana@letrungsgon.tk
-- Password: 123456
+```
+username: usertest
+password: 123456
+```
 
 ## Rules
 ### Quy tắc đặt tên
@@ -62,4 +66,4 @@ EXAMPLE_Model extends \Model\Model {...}
 
 ## Web demo
 * https://letrungson.000webhostapp.com/ or http://letrungson.cf/ (Located in the same hosting)
-* https://web-assignment-211.herokuapp.com/
+* http://web-assignment-211.herokuapp.com/
