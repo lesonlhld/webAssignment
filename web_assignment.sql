@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 19, 2021 lúc 07:15 PM
+-- Thời gian đã tạo: Th10 20, 2021 lúc 03:53 PM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -47,58 +47,18 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `invoices`
---
-
-CREATE TABLE `invoices` (
-  `invoice_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `invoice_total` int(11) NOT NULL DEFAULT 0,
-  `invoice_date` date NOT NULL,
-  `invoice_time` time NOT NULL,
-  `code` varchar(20) DEFAULT NULL,
-  `payment_id` int(11) NOT NULL DEFAULT 1
-) ;
-
---
--- Đang đổ dữ liệu cho bảng `invoices`
---
-
-INSERT INTO `invoices` (`invoice_id`, `order_id`, `invoice_total`, `invoice_date`, `invoice_time`, `code`, `payment_id`) VALUES
-(1, 1, 138000, '2020-12-24', '11:02:31', NULL, 2),
-(2, 2, 551850, '2020-12-24', '11:02:31', NULL, 2),
-(3, 3, 22500, '2020-12-24', '12:09:32', NULL, 2),
-(4, 4, 140700, '2020-12-24', '14:05:07', NULL, 2),
-(5, 5, 209800, '2020-12-24', '14:05:07', NULL, 2),
-(6, 6, 1200000, '2020-12-24', '14:43:34', NULL, 2),
-(7, 7, 290700, '2021-04-26', '22:08:13', NULL, 2);
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `orders`
 --
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `order_time` time NOT NULL,
-  `order_date` date NOT NULL,
-  `order_status_id` int(11) NOT NULL DEFAULT 1
+  `order_time` datetime NOT NULL,
+  `order_status` enum('Initialized','Comfirmed','Processing','Ready','Transporting','Canceled','Refused','Completed') DEFAULT 'Initialized',
+  `total` int(11) NOT NULL DEFAULT 0,
+  `payment_id` int(11) NOT NULL DEFAULT 1,
+  `voucher` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Đang đổ dữ liệu cho bảng `orders`
---
-
-INSERT INTO `orders` (`order_id`, `user_id`, `order_time`, `order_date`, `order_status_id`) VALUES
-(1, 2, '11:02:31', '2020-12-24', 1),
-(2, 2, '11:02:31', '2020-12-24', 1),
-(3, 1, '12:09:32', '2020-12-24', 1),
-(4, 5, '14:05:07', '2020-12-24', 1),
-(5, 5, '14:05:07', '2020-12-24', 1),
-(6, 1, '14:43:34', '2020-12-24', 1),
-(7, 5, '22:08:13', '2021-04-26', 1);
 
 -- --------------------------------------------------------
 
@@ -111,49 +71,7 @@ CREATE TABLE `order_items` (
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT 0,
   `unit_price` int(11) NOT NULL DEFAULT 0
-) ;
-
---
--- Đang đổ dữ liệu cho bảng `order_items`
---
-
-INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`, `unit_price`) VALUES
-(1, 1, 1, 48000),
-(1, 10, 2, 45000),
-(2, 1, 1, 24000),
-(2, 4, 4, 65700),
-(2, 5, 1, 74250),
-(2, 6, 2, 72900),
-(2, 11, 1, 45000),
-(3, 13, 1, 22500),
-(4, 2, 3, 25000),
-(4, 4, 1, 65700),
-(5, 2, 1, 25000),
-(5, 6, 2, 72900),
-(5, 9, 1, 39000),
-(6, 1, 50, 24000),
-(7, 6, 3, 72900);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `order_statuses`
---
-
-CREATE TABLE `order_statuses` (
-  `order_status_id` int(11) NOT NULL,
-  `order_status_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Đang đổ dữ liệu cho bảng `order_statuses`
---
-
-INSERT INTO `order_statuses` (`order_status_id`, `order_status_name`) VALUES
-(1, 'Đang Xử Lý'),
-(2, 'Đã Sẵn Sàng'),
-(3, 'Hết Hàng'),
-(4, 'Đã Nhận Hàng');
 
 -- --------------------------------------------------------
 
@@ -189,51 +107,30 @@ CREATE TABLE `products` (
   `discount` float DEFAULT 0,
   `category_id` int(11) NOT NULL,
   `stall_id` int(11) NOT NULL,
-  `product_status_id` int(11) NOT NULL DEFAULT 1,
+  `product_status` enum('Active','Stop','Pause') DEFAULT 'Active',
   `description` varchar(2000) DEFAULT NULL,
   `image` varchar(50) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status_id`, `description`, `image`) VALUES
-(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 2, 2, '', '1608782964521.jpg'),
-(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 1, 1, '', '1608791315663.jpg'),
-(3, 'Kimbap', 35000, 40, 0, 6, 8, 1, '', '1608792165625.jpg'),
-(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 3, 1, '', '1608792180363.jpg'),
-(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 7, 1, '', '1608792205332.jpg'),
-(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 4, 1, '', '1608792222820.png'),
-(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 5, 1, '', '1608792268122.jpg'),
-(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 6, 1, '', '1608792290140.jpg'),
-(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 9, 1, '', '1608792313466.jpg'),
-(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 10, 1, '', '1608792334761.png'),
-(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 11, 1, '', '1608792847544.jpg'),
-(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 10, 1, '', '1608792567395.jpg'),
-(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 3, 1, '', '1608792551817.webp'),
-(14, 'Mì bò', 20000, 25, 10, 6, 4, 1, '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', '1608793914044.jpg');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `product_statuses`
---
-
-CREATE TABLE `product_statuses` (
-  `product_status_id` int(11) NOT NULL,
-  `product_status_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Đang đổ dữ liệu cho bảng `product_statuses`
---
-
-INSERT INTO `product_statuses` (`product_status_id`, `product_status_name`) VALUES
-(1, 'Còn hàng'),
-(2, 'Hết hàng'),
-(3, 'Ngừng kinh doanh'),
-(4, 'Tạm ngừng bán');
+INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status`, `description`, `image`) VALUES
+(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 2, 'Active', '', '1608782964521.jpg'),
+(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 1, 'Active', '', '1608791315663.jpg'),
+(3, 'Kimbap', 35000, 40, 0, 6, 8, 'Active', '', '1608792165625.jpg'),
+(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 3, 'Active', '', '1608792180363.jpg'),
+(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 7, 'Active', '', '1608792205332.jpg'),
+(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 4, 'Active', '', '1608792222820.png'),
+(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 5, 'Active', '', '1608792268122.jpg'),
+(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 6, 'Active', '', '1608792290140.jpg'),
+(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 9, 'Active', '', '1608792313466.jpg'),
+(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 10, 'Active', '', '1608792334761.png'),
+(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 11, 'Active', '', '1608792847544.jpg'),
+(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 10, 'Active', '', '1608792567395.jpg'),
+(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 3, 'Active', '', '1608792551817.webp'),
+(14, 'Mì bò', 20000, 25, 10, 6, 4, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', '1608793914044.jpg');
 
 -- --------------------------------------------------------
 
@@ -308,7 +205,7 @@ CREATE TABLE `users` (
   `avatar` varchar(30) DEFAULT NULL,
   `role_id` int(11) NOT NULL DEFAULT 1,
   `balance` int(11) DEFAULT 0
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
@@ -317,8 +214,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `username`, `password`, `avatar`, `role_id`, `balance`) VALUES
 (1, 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, 'admin', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 2, 0),
 (2, 'Nguyễn Văn ', 'A', '2020-12-22', 'M', '0923909321', 'nguyenvana@gmail.com', 'HCM', 'usertest', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608791208811.jpg', 1, 0),
-(5, 'lê văn', 'tám', '2020-12-24', 'M', '0923909320', '', 'hcm', 'aaa', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793423805.jpg', 1, 0),
-(6, 'Lê Trung', 'Sơn', '2020-12-24', 'M', '0912131415', 'leson0310@gmail.com', 'KTX khu A, Linh Trung, Thủ Đức', 'Son.le.lhld', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793747434.jpg', 2, 0);
+(4, 'lê văn', 'tám', '2020-12-24', 'M', '0923909320', '', 'hcm', 'aaa', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793423805.jpg', 1, 0),
+(5, 'Lê Trung', 'Sơn', '2020-12-24', 'M', '0912131415', 'leson0310@gmail.com', 'KTX khu A, Linh Trung, Thủ Đức', 'Son.le.lhld', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793747434.jpg', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -333,7 +230,7 @@ CREATE TABLE `vouchers` (
   `discount` float NOT NULL DEFAULT 0,
   `quantity` int(11) NOT NULL DEFAULT 0,
   `max_value` int(11) NOT NULL DEFAULT 0
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `vouchers`
@@ -353,22 +250,13 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Chỉ mục cho bảng `invoices`
---
-ALTER TABLE `invoices`
-  ADD PRIMARY KEY (`invoice_id`),
-  ADD UNIQUE KEY `order_id` (`order_id`),
-  ADD KEY `fk_invoices_orders_idx` (`order_id`),
-  ADD KEY `fk_invoices_payments_idx` (`payment_id`),
-  ADD KEY `fk_invoices_vouchers_codex` (`code`);
-
---
 -- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `fk_orders_users_idx` (`user_id`),
-  ADD KEY `fk_orders_order_statuses_idx` (`order_status_id`);
+  ADD KEY `fk_orders_payments_idx` (`payment_id`),
+  ADD KEY `fk_orders_vouchers_codex` (`voucher`);
 
 --
 -- Chỉ mục cho bảng `order_items`
@@ -377,12 +265,6 @@ ALTER TABLE `order_items`
   ADD PRIMARY KEY (`order_id`,`product_id`),
   ADD KEY `fk_order_items_orders_idx` (`order_id`),
   ADD KEY `fk_order_items_products_idx` (`product_id`);
-
---
--- Chỉ mục cho bảng `order_statuses`
---
-ALTER TABLE `order_statuses`
-  ADD PRIMARY KEY (`order_status_id`);
 
 --
 -- Chỉ mục cho bảng `payments`
@@ -396,14 +278,7 @@ ALTER TABLE `payments`
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `fk_products_categories_idx` (`category_id`),
-  ADD KEY `fk_products_stalls_idx` (`stall_id`),
-  ADD KEY `fk_products_product_statuses_idx` (`product_status_id`);
-
---
--- Chỉ mục cho bảng `product_statuses`
---
-ALTER TABLE `product_statuses`
-  ADD PRIMARY KEY (`product_status_id`);
+  ADD KEY `fk_products_stalls_idx` (`stall_id`);
 
 --
 -- Chỉ mục cho bảng `roles`
@@ -444,22 +319,10 @@ ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `invoices`
---
-ALTER TABLE `invoices`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT cho bảng `order_statuses`
---
-ALTER TABLE `order_statuses`
-  MODIFY `order_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `payments`
@@ -471,13 +334,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `product_statuses`
---
-ALTER TABLE `product_statuses`
-  MODIFY `product_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -495,26 +352,19 @@ ALTER TABLE `stalls`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Các ràng buộc cho bảng `invoices`
---
-ALTER TABLE `invoices`
-  ADD CONSTRAINT `fk_invoices_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_invoices_payments` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_invoices_vouchers` FOREIGN KEY (`code`) REFERENCES `vouchers` (`code`) ON UPDATE CASCADE;
-
---
 -- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `fk_orders_order_statuses` FOREIGN KEY (`order_status_id`) REFERENCES `order_statuses` (`order_status_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_orders_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_orders_payments` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_orders_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_orders_vouchers` FOREIGN KEY (`voucher`) REFERENCES `vouchers` (`code`) ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `order_items`
@@ -528,7 +378,6 @@ ALTER TABLE `order_items`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `fk_products_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_products_product_statuses` FOREIGN KEY (`product_status_id`) REFERENCES `product_statuses` (`product_status_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_products_stalls` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`) ON UPDATE CASCADE;
 
 --

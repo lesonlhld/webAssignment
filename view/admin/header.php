@@ -134,7 +134,7 @@
                             <li><a href="<?= site_url('branches/trash'); ?>"><i class="fa fa-trash-o"></i>Branches Trash</a></li>
                         </ul>
                     </li>
-                    <li class="">
+                    <li class="treeview">
                         <a href="<?= site_url("employees") ?>">
                             <i class="fa fa-users"></i> <span>Employees</span>
                             <span class="pull-right-container">
@@ -159,7 +159,7 @@
                             <li><a href="<?= site_url('menu/trash'); ?>"><i class="fa fa-trash-o"></i>Menu Trash</a></li>
                         </ul>
                     </li>
-                    <li class=" treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-file-text-o"></i> <span>Orders</span>
                             <span class="pull-right-container">
@@ -171,17 +171,16 @@
                             <li><a href="<?= site_url('Orders/trash'); ?>"><i class="fa fa-trash-o"></i>Orders Trash</a></li>
                         </ul>
                     </li>
-                    <li class="' : 'treeview' ?>">
+                    <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-id-card-o"></i> <span>Customers</span>
+                            <i class="fa fa-id-card-o"></i> <span>Customer</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
-                                <small class="label pull-right bg-green">new</small>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('Customers/home'); ?>"><i class="fa fa-circle-o"></i> Customer List</a></li>
-                            <li><a href="<?= site_url('Customers/trash'); ?>"><i class="fa fa-circle-o"></i> Customer Trash</a></li>
+                            <li><a href="<?= site_url('admin/customer'); ?>"><i class="fa fa-list"></i> Customer List</a></li>
+                            <li><a href="<?= site_url('admin/customer/trash'); ?>"><i class="fa fa-trash-o"></i> Customer Trash</a></li>
                         </ul>
                     </li>
                     <li>
