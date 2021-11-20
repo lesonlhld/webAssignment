@@ -32,3 +32,4 @@ switch (ENVIRONMENT) {
 
 // Other constants here
 // ...
+define("LIMIT", 20);

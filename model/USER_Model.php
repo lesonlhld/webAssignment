@@ -8,20 +8,40 @@ namespace Model;
  */
 class USER_Model extends \Model\Model
 {
-    public function get_user($id = null)
+    public function get_user($role = 1, $start = null, $limit = null)
     {
-        if ($id == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM users');
+        if ($start == null && $limit == null) {
+
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id');
+            $stmt->bindParam(':role_id', $role);
             $stmt->execute();
 
             return $stmt->fetchAll();
-        } else {
-            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE id=:id');
-            $stmt->bindParam(':id', $id);
+        } elseif ($limit == null) {
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id LIMIT :start');
+            $stmt->bindParam(':role_id', $role);
+            $stmt->bindParam(':start', $start);
             $stmt->execute();
 
             return $stmt->fetch();
+        } else {
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id LIMIT :start,:limit');
+            $stmt->bindParam(':role_id', $role);
+            $stmt->bindParam(':start', $start);
+            $stmt->bindParam(':limit', $limit);
+            $stmt->execute();
+
+            return $stmt->fetchAll();
         }
+    }
+
+    public function count($role = 1)
+    {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE role_id=:role_id');
+        $stmt->bindParam(':role_id', $role);
+        $stmt->execute();
+
+        return $stmt->fetchColumn();
     }
 
     public function login($username, $password, $role = 1)
@@ -58,7 +78,7 @@ class USER_Model extends \Model\Model
 
     public function check_exist_email($email)
     {
-        $stmt = $this->pdo->prepare('SELECT user_id FROM users WHERE email=:email');
+        $stmt = $this->pdo->prepare('SELECT id FROM users WHERE email=:email');
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
@@ -67,7 +87,7 @@ class USER_Model extends \Model\Model
 
     public function check_exist_username($username)
     {
-        $stmt = $this->pdo->prepare('SELECT user_id FROM users WHERE username=:username');
+        $stmt = $this->pdo->prepare('SELECT id FROM users WHERE username=:username');
         $stmt->bindParam(':username', $username);
         $stmt->execute();
 

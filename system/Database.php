@@ -67,6 +67,7 @@ class Database
             );
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, FALSE);
         } catch (\Exception $e) {
             exit('Could not connect to any database servers with error: ' . $e->getMessage());
         } catch (\PDOException $e) {

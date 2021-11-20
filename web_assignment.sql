@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 20, 2021 lúc 03:53 PM
+-- Thời gian đã tạo: Th10 20, 2021 lúc 05:49 PM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -52,7 +52,7 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `order_time` datetime NOT NULL,
   `order_status` enum('Initialized','Comfirmed','Processing','Ready','Transporting','Canceled','Refused','Completed') DEFAULT 'Initialized',
   `total` int(11) NOT NULL DEFAULT 0,
@@ -192,11 +192,11 @@ INSERT INTO `stalls` (`stall_id`, `stall_name`, `item_quantity`, `description`, 
 --
 
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `birth_date` date DEFAULT NULL,
-  `gender` enum('M','F') DEFAULT NULL,
+  `gender` enum('MALE','FEMALE') DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `address` varchar(2000) DEFAULT NULL,
@@ -211,11 +211,11 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `username`, `password`, `avatar`, `role_id`, `balance`) VALUES
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `username`, `password`, `avatar`, `role_id`, `balance`) VALUES
 (1, 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, 'admin', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 2, 0),
-(2, 'Nguyễn Văn ', 'A', '2020-12-22', 'M', '0923909321', 'nguyenvana@gmail.com', 'HCM', 'usertest', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608791208811.jpg', 1, 0),
-(4, 'lê văn', 'tám', '2020-12-24', 'M', '0923909320', '', 'hcm', 'aaa', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793423805.jpg', 1, 0),
-(5, 'Lê Trung', 'Sơn', '2020-12-24', 'M', '0912131415', 'leson0310@gmail.com', 'KTX khu A, Linh Trung, Thủ Đức', 'Son.le.lhld', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793747434.jpg', 2, 0);
+(2, 'Nguyễn Văn ', 'A', '2020-12-22', '', '0923909321', 'nguyenvana@gmail.com', 'HCM', 'usertest', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608791208811.jpg', 1, 0),
+(4, 'lê văn', 'tám', '2020-12-24', '', '0923909320', '', 'hcm', 'aaa', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793423805.jpg', 1, 0),
+(5, 'Lê Trung', 'Sơn', '2020-12-24', '', '0912131415', 'leson0310@gmail.com', 'KTX khu A, Linh Trung, Thủ Đức', 'Son.le.lhld', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793747434.jpg', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -254,7 +254,7 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `fk_orders_users_idx` (`user_id`),
+  ADD KEY `fk_orders_users_idx` (`id`),
   ADD KEY `fk_orders_payments_idx` (`payment_id`),
   ADD KEY `fk_orders_vouchers_codex` (`voucher`);
 
@@ -296,7 +296,7 @@ ALTER TABLE `stalls`
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UQ_username` (`username`),
   ADD UNIQUE KEY `phone` (`phone`),
   ADD UNIQUE KEY `email` (`email`),
@@ -352,7 +352,7 @@ ALTER TABLE `stalls`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -363,7 +363,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `fk_orders_payments` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_orders_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_orders_users` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_orders_vouchers` FOREIGN KEY (`voucher`) REFERENCES `vouchers` (`code`) ON UPDATE CASCADE;
 
 --

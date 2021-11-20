@@ -88,8 +88,8 @@
                                 <section>
                                     <label class="input">Giới tính</label>
                                     <select name="gender" id="" class="form-control">
-                                        <option value="M">Nam</option>
-                                        <option value="F">Nữ</option>
+                                        <option value="MALE">Nam</option>
+                                        <option value="FEMALE">Nữ</option>
                                     </select>
                                 </section>
                             </div>
