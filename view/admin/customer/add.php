@@ -9,7 +9,7 @@
             <ol class="breadcrumb">
                 <li><a href="<?= site_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li>Customer</li>
-                <li class="active">Add</li>
+                <li class="active"><?= isset($customer) ? 'Edit' : 'Add' ?></li>
             </ol>
         </section>
 

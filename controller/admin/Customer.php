@@ -41,11 +41,25 @@ class Customer extends \Controller\Controller
         if (!isset($_GET['id'])) {
             adminNotFound();
         } else {
-
             $USER_Model = Model('USER_Model');
             $customer = $USER_Model->get($_GET['id']);
             $this->data['data']['customer'] = $customer;
             $this->data["subview"] = "admin/customer/add";
+            View("admin/main", $this->data);
+        }
+    }
+
+    public function view()
+    {
+        is_admin_login();
+
+        if (!isset($_GET['id'])) {
+            adminNotFound();
+        } else {
+            $USER_Model = Model('USER_Model');
+            $customer = $USER_Model->get($_GET['id']);
+            $this->data['data']['customer'] = $customer;
+            $this->data["subview"] = "admin/customer/view";
             View("admin/main", $this->data);
         }
     }

@@ -48,20 +48,29 @@
                                             <td>
                                                 <input type="checkbox" id="check_item" class="check-list" value="<?= $user->id ?>">
                                             </td>
-                                            <td><?= $user->first_name . " " . $user->last_name ?> </td>
+                                            <td><a href="<?= site_url('admin/customer/view?id=' . $user->id); ?>"><?= $user->first_name . " " . $user->last_name ?></a> </td>
                                             <td><?= $user->gender ?> </td>
                                             <td><?= $user->phone ?> </td>
                                             <td><?= $user->email ?> </td>
                                             <td><?= $user->address ?> </td>
-                                            <td><label class="label label-success"><?= $user->publish ?> </label></td>
+                                            <td>
+                                                <?= $user->publish == 1 ?
+                                                    '<label class="label label-success">Active </label>' : '<label class="label label-warning">Locked </label>'
+                                                ?>
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Actions
                                                         <span class="fa fa-caret-down"></span></button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="#"><i class="fa fa-eye"></i>View</a></li>
-                                                        <li><a href="<?= site_url('admin/customer/change_status?id=' . $user->id); ?>"><i class="fa fa-refresh"></i>Lock</a></li>
-                                                        <li><a href="#"><i class="fa fa-pencil"></i>Edit</a></li>
+                                                        <li><a href="<?= site_url('admin/customer/view?id=' . $user->id); ?>"><i class="fa fa-eye"></i>View</a></li>
+                                                        <li>
+                                                            <a href="<?= site_url('admin/customer/change_status?id=' . $user->id); ?>"><i class="fa fa-refresh"></i>
+                                                                <?= $user->publish == 1 ?
+                                                                    'Lock' : 'Unlock'
+                                                                ?></a>
+                                                        </li>
+                                                        <li><a href="<?= site_url('admin/customer/edit?id=' . $user->id); ?>"><i class="fa fa-pencil"></i>Edit</a></li>
                                                         <li>
                                                             <a href="<?= site_url('admin/customer/remove?id=' . $user->id); ?>" onclick="return confirm('Are you sure you want to remove?');">
                                                                 <i class="fa fa-trash"></i>Remove</a>
