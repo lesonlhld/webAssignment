@@ -270,7 +270,7 @@ $configs = $CONFIGS_Model->get();
                             <!-- End Menu -->
 
                             <!-- Khuyến mãi -->
-                            <li><a href="<?= site_url() ?>">Tin tức</a></li>
+                            <li><a href="<?= site_url() ?>news">Tin tức</a></li>
                             <!-- End Khuyến mãi -->
 
                             <!-- Về chúng tôi -->
