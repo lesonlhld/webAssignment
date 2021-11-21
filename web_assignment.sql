@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 21, 2021 lúc 08:59 AM
+-- Thời gian đã tạo: Th10 21, 2021 lúc 12:13 PM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -43,6 +43,28 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (4, 'Món tráng miệng'),
 (5, 'Thức uống'),
 (6, 'Món Khác');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `configs`
+--
+
+CREATE TABLE `configs` (
+  `id` int(11) NOT NULL,
+  `company_name` text DEFAULT NULL,
+  `site_name` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `address` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `configs`
+--
+
+INSERT INTO `configs` (`id`, `company_name`, `site_name`, `email`, `phone`, `address`) VALUES
+(1, 'Smart Food Court System', 'BK Food Court', 'bkfoodcourt@gmail.com', '0123.456.789', 'Đại học Bách Khoa Tp. Hồ Chí Minh, Quận Thủ Đức, Thành phố Hồ Chí Minh');
 
 -- --------------------------------------------------------
 
@@ -252,6 +274,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Chỉ mục cho bảng `configs`
+--
+ALTER TABLE `configs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
@@ -320,6 +348,12 @@ ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT cho bảng `configs`
+--
+ALTER TABLE `configs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
@@ -335,7 +369,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`

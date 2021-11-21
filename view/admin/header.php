@@ -116,12 +116,18 @@
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">CONTENT MODULES</li>
                     <li class="active">
                         <a href="<?= site_url('/'); ?>">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         </a>
                     </li>
+                    <li class="header">SYSTEM SETTINGS</li>
+                    <li>
+                        <a href="<?= site_url('admin/configs'); ?>">
+                            <i class="fa fa-cog"></i> <span>Configs</span>
+                        </a>
+                    </li>
+                    <li class="header">CONTENT MODULES</li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-sitemap"></i> <span>Branches</span>
@@ -136,15 +142,14 @@
                     </li>
                     <li class="treeview">
                         <a href="<?= site_url("employees") ?>">
-                            <i class="fa fa-users"></i> <span>Employees</span>
+                            <i class="fa fa-users"></i> <span>User</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
-                                <small class="label pull-right bg-green">new</small>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('employees/staffs') ?>"><i class="fa fa-circle-o"></i>Staffs</a></li>
-                            <li><a href="<?= site_url('employees/managers') ?>"><i class="fa fa-circle-o"></i>Managers</a></li>
+                            <li><a href="<?= site_url('admin/user'); ?>"><i class="fa fa-list"></i> User List</a></li>
+                            <li><a href="<?= site_url('admin/user/trash'); ?>"><i class="fa fa-trash-o"></i> User Trash</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
