@@ -27,11 +27,11 @@
                                 <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                                 <div class="form-group">
                                     <label for="firstname">First Name</label>
-                                    <input type="text" class="form-control" id="firstname" name="firstname" value="<?= isset($customer) ?  $customer->name : '' ?>" placeholder="Enter first name">
+                                    <input type="text" class="form-control" id="firstname" name="firstname" value="<?= isset($customer) ?  $customer->first_name : '' ?>" placeholder="Enter first name">
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname">Last Name</label>
-                                    <input type="text" class="form-control" id="lastname" name="lastname" value="<?= isset($customer) ?  $customer->name : '' ?>" placeholder="Enter last name">
+                                    <input type="text" class="form-control" id="lastname" name="lastname" value="<?= isset($customer) ?  $customer->last_name : '' ?>" placeholder="Enter last name">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -45,16 +45,16 @@
                                     <label for="gender">Gender</label>
                                     <select class="form-control" id="gender" name="gender">
                                         <option hidden>Enter Gender</option>
-                                        <option value="MALE" <?= (isset($customer) && $customer->gender == 1) ? 'selected' : '' ?>>Male</option>
-                                        <option value="FEMALE" <?= (isset($customer) && $customer->gender == 0) ? 'selected' : '' ?>>Female</option>
+                                        <option value="MALE" <?= (isset($customer) && $customer->gender == "MALE") ? 'selected' : '' ?>>Male</option>
+                                        <option value="FEMALE" <?= (isset($customer) && $customer->gender == "FEMALE") ? 'selected' : '' ?>>Female</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select class="form-control" id="status" name="status">
                                         <option hidden>Enter Status</option>
-                                        <option value="1" <?= (isset($customer) && $customer->status == 1) ? 'selected' : '' ?>>Active</option>
-                                        <option value="0" <?= (!isset($customer) || $customer->status == 0) ? 'selected' : '' ?>>Lock</option>
+                                        <option value="1" <?= (isset($customer) && $customer->publish == 1) ? 'selected' : '' ?>>Active</option>
+                                        <option value="0" <?= (!isset($customer) || $customer->publish == 0) ? 'selected' : '' ?>>Lock</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="birthday">Birthday</label>
-                                    <input type="date" id="birthday" name="birthday" class="form-control" value="<?= isset($customer) ?  $customer->birthday : '' ?>" max=<?= date('Y-m-d'); ?>>
+                                    <input type="date" id="birthday" name="birthday" class="form-control" value="<?= isset($customer) ?  $customer->birth_date : '' ?>" max=<?= date('Y-m-d'); ?>>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Avatar</label>

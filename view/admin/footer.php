@@ -57,22 +57,6 @@
 
 <!-- page script -->
 <script>
-    //Initialize Select2 Elements
-    $('.select2').select2()
-    $(document).ready(function() {
-        $('#example1').DataTable()
-        $('#example2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false
-        })
-    })
-</script>
-
-<script>
     document.addEventListener("DOMContentLoaded", function(event) {
         $("#check-all").click(function() {
             $(".check-list").prop('checked', $(this).prop('checked'));

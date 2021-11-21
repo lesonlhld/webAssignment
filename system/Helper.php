@@ -84,6 +84,19 @@ function notFound($enable404 = false)
     }
 }
 
+// Show 404 page or response 404 code
+function adminNotFound($enable404 = false)
+{
+    if (!$enable404) {
+        $data["subview"] = "admin/not_found";
+        View("admin/main", $data);
+        exit();
+    } else {
+        $statusCode = 404;
+        http_response_code($statusCode);
+    }
+}
+
 // Redirect to absolute URL
 function redirect($url, $code = 302)
 {

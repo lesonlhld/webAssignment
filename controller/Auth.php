@@ -73,10 +73,10 @@ class Auth extends \Controller\Controller
             View("", ['msg' => 'Mật khẩu xác nhận không trùng khớp'], 401);
         } else {
             $USER_Model = Model('USER_Model');
-            if ($USER_Model->check_exist_email($data['email'])) {
+            if ($USER_Model->check_exist_email($data['email']) > 0) {
                 View("", ['msg' => 'Email đã tồn tại'], 401);
             } else {
-                if ($USER_Model->register($data) > 0) {
+                if ($USER_Model->create($data) > 0) {
                     $_SESSION['is_logged_in'] = true;
                     $_SESSION['lastname'] = $data["lastname"];
                     $_SESSION['role'] = 1;

@@ -8,7 +8,7 @@ namespace Model;
  */
 class USER_Model extends \Model\Model
 {
-    public function get_user($role = 1, $start = null, $limit = null)
+    public function get_list($role = 1, $start = null, $limit = null)
     {
         if ($start == null && $limit == null) {
 
@@ -44,6 +44,15 @@ class USER_Model extends \Model\Model
         return $stmt->fetchColumn();
     }
 
+    public function get($id)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE id=:id');
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
     public function login($email, $password, $role = 1)
     {
         $password = hashpass($password);
@@ -56,7 +65,7 @@ class USER_Model extends \Model\Model
         return $stmt->fetch();
     }
 
-    public function register($data, $role = 1)
+    public function create($data, $role = 1)
     {
         $password = hashpass($data['password']);
         $stmt = $this->pdo->prepare('INSERT INTO users(first_name, last_name, password, email, birth_date, phone, address, gender, avatar, role_id) VALUES (:first_name, :last_name, :password, :email, :birth_date, :phone, :address, :gender, :avatar, :role_id)');
@@ -75,22 +84,39 @@ class USER_Model extends \Model\Model
         return $this->pdo->lastInsertId();
     }
 
+    public function update($id, $data)
+    {
+        $stmt = $this->pdo->prepare('UPDATE users SET first_name=:first_name, last_name=:last_name, email=:email, birth_date=:birth_date, phone= :phone, address= :address, gender= :gender, avatar=:avatar WHERE id=:id');
+        $stmt->bindParam(':first_name', $data['firstname']);
+        $stmt->bindParam(':last_name', $data['lastname']);
+        $stmt->bindParam(':email', $data['email']);
+        $stmt->bindParam(':birth_date', $data['birthday']);
+        $stmt->bindParam(':phone', $data['phone']);
+        $stmt->bindParam(':address', $data['address']);
+        $stmt->bindParam(':gender', $data['gender']);
+        $stmt->bindParam(':avatar', $data['avatar']);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return true;
+    }
+
     public function check_exist_email($email)
     {
-        $stmt = $this->pdo->prepare('SELECT id FROM users WHERE email=:email');
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE email=:email');
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
-        return count($stmt->fetchAll()) > 0;
+        return $stmt->fetchColumn();
     }
 
     public function check_exist_phone($phone)
     {
-        $stmt = $this->pdo->prepare('SELECT id FROM users WHERE phone=:phone');
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE phone=:phone');
         $stmt->bindParam(':phone', $phone);
         $stmt->execute();
 
-        return count($stmt->fetchAll()) > 0;
+        return $stmt->fetchColumn();
     }
 
     public function update_published($id)
