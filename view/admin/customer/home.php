@@ -27,7 +27,6 @@
                                 <thead>
                                     <tr>
                                         <th width="30px"><input type="checkbox" id="check-all"></th>
-                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Gender</th>
                                         <th>Phone</th>
@@ -49,13 +48,12 @@
                                             <td>
                                                 <input type="checkbox" id="check_item" class="check-list" value="<?= $user->id ?>">
                                             </td>
-                                            <td><?= $user->id ?> </td>
                                             <td><?= $user->first_name . " " . $user->last_name ?> </td>
                                             <td><?= $user->gender ?> </td>
                                             <td><?= $user->phone ?> </td>
                                             <td><?= $user->email ?> </td>
                                             <td><?= $user->address ?> </td>
-                                            <td><?= $user->publish ?> </td>
+                                            <td><label class="label label-success"><?= $user->publish ?> </label></td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Actions

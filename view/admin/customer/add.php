@@ -8,7 +8,8 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?= site_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">customer</li>
+                <li>Customer</li>
+                <li class="active">Add</li>
             </ol>
         </section>
 
@@ -21,8 +22,9 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" method="POST" action="<?= isset($customer) ? site_url() . "admin/customer/edit/" . $customer->id : site_url() . "admin/customer/add" ?>" enctype="multipart/form-data">
+                        <form method="POST" action="javascript:void(0)" enctype="multipart/form-data">
                             <div class="box-body">
+                                <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                                 <div class="form-group">
                                     <label for="firstname">First Name</label>
                                     <input type="text" class="form-control" id="firstname" name="firstname" value="<?= isset($customer) ?  $customer->name : '' ?>" placeholder="Enter first name">
@@ -43,16 +45,16 @@
                                     <label for="gender">Gender</label>
                                     <select class="form-control" id="gender" name="gender">
                                         <option hidden>Enter Gender</option>
-                                        <option value="1" <?= (isset($customer) && $customer->gender == 1) ? 'selected' : '' ?>>Male</option>
-                                        <option value="0" <?= (!isset($customer) || $customer->gender == 0) ? 'selected' : '' ?>>Female</option>
+                                        <option value="MALE" <?= (isset($customer) && $customer->gender == 1) ? 'selected' : '' ?>>Male</option>
+                                        <option value="FEMALE" <?= (isset($customer) && $customer->gender == 0) ? 'selected' : '' ?>>Female</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select class="form-control" id="status" name="status">
                                         <option hidden>Enter Status</option>
-                                        <option value="1" <?= (isset($customer) && $customer->status == 1) ? 'selected' : '' ?>>Status 1</option>
-                                        <option value="0" <?= (!isset($customer) || $customer->status == 0) ? 'selected' : '' ?>>Status 0</option>
+                                        <option value="1" <?= (isset($customer) && $customer->status == 1) ? 'selected' : '' ?>>Active</option>
+                                        <option value="0" <?= (!isset($customer) || $customer->status == 0) ? 'selected' : '' ?>>Lock</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -85,3 +87,31 @@
             <!-- /.row -->
         </section>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            $("form").submit(function(e) {
+                $("#msg").addClass('hidden');
+                e.preventDefault();
+                $.ajax({
+                    url: "<?= site_url("admin/customer/save") . (isset($customer) ? "?id=" . $customer->id : "") ?>",
+                    type: 'post',
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        $("#msg").removeClass('alert-danger');
+                        $("#msg").addClass('alert-success');
+                        $("#msg").removeClass('hidden');
+                        $("#msg").html(data.msg);
+                    },
+                    error: function(data) {
+                        const obj = JSON.parse(JSON.stringify(data));
+
+                        $("#msg").removeClass('alert-success');
+                        $("#msg").addClass('alert-danger');
+                        $("#msg").removeClass('hidden');
+                        $("#msg").html(obj.responseJSON.msg);
+                    }
+                });
+            });
+        });
+    </script>

@@ -84,6 +84,15 @@ class USER_Model extends \Model\Model
         return count($stmt->fetchAll()) > 0;
     }
 
+    public function check_exist_phone($phone)
+    {
+        $stmt = $this->pdo->prepare('SELECT id FROM users WHERE phone=:phone');
+        $stmt->bindParam(':phone', $phone);
+        $stmt->execute();
+
+        return count($stmt->fetchAll()) > 0;
+    }
+
     public function update_published($id)
     {
         $stmt = $this->pdo->prepare('SELECT publish FROM users WHERE id=:id');

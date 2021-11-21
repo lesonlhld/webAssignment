@@ -57,4 +57,42 @@ class Customer extends \Controller\Controller
             redirect(site_url("admin/customer"));
         }
     }
+
+    public function save()
+    {
+        is_admin_login();
+        $id = $_GET['id'] ?? "-1";
+
+        $data = $_POST;
+
+        if ($id == -1) {
+            if ($data["firstname"] == "") {
+                View("", ['msg' => 'Họ không được để trống'], 401);
+            } else if ($data["lastname"] == "") {
+                View("", ['msg' => 'Tên không được để trống'], 401);
+            } else if ($data["email"] == "") {
+                View("", ['msg' => 'Email không được để trống'], 401);
+            } else if ($data["birthday"] == "") {
+                View("", ['msg' => 'Ngày sinh không được để trống'], 401);
+            } else if ($data["address"] == "") {
+                View("", ['msg' => 'Địa chỉ không được để trống'], 401);
+            } else {
+                $USER_Model = Model('USER_Model');
+                if ($USER_Model->check_exist_email($data['email'])) {
+                    View("", ['msg' => 'Email đã tồn tại'], 401);
+                } else {
+                    if ($USER_Model->check_exist_phone($data['phone'])) {
+                        View("", ['msg' => 'Số điện thoại đã tồn tại'], 401);
+                    } else {
+                        $data['password'] = '123456';
+                        if ($USER_Model->register($data) > 0) {
+                            View("", ['msg' => 'Tạo thành công'], 201);
+                        } else {
+                            View("", ['msg' => 'Có lỗi xảy ra'], 401);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
