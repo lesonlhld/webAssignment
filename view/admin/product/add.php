@@ -1,15 +1,15 @@
-    <?php $customer = $data['customer'] ?? null ?>
+    <?php $product = $data['product'] ?? null ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <?= isset($customer) ? 'Edit customer details' : 'Add new customer' ?>
+                <?= isset($product) ? 'Edit product details' : 'Add new product' ?>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?= site_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li>Customer</li>
-                <li class="active"><?= isset($customer) ? 'Edit' : 'Add' ?></li>
+                <li>Product</li>
+                <li class="active"><?= isset($product) ? 'Edit' : 'Add' ?></li>
             </ol>
         </section>
 
@@ -26,55 +26,54 @@
                             <div class="box-body">
                                 <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                                 <div class="form-group">
-                                    <label for="firstname">First Name</label>
-                                    <input type="text" class="form-control" id="firstname" name="firstname" value="<?= isset($customer) ?  $customer->first_name : '' ?>" placeholder="Enter first name">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="<?= isset($product) ?  $product->product_name : '' ?>" placeholder="Enter name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname">Last Name</label>
-                                    <input type="text" class="form-control" id="lastname" name="lastname" value="<?= isset($customer) ?  $customer->last_name : '' ?>" placeholder="Enter last name">
+                                    <label for="price">Price</label>
+                                    <input type="number" class="form-control" id="price" name="price" min="0" value="<?= isset($product) ?  $product->price : '' ?>" placeholder="Enter price">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="<?= isset($customer) ?  $customer->email : '' ?>" placeholder="Enter email">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="number" class="form-control" id="quantity" name="quantity" min="0" value="<?= isset($product) ?  $product->quantity : '' ?>" placeholder="Enter quantity">
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" value="<?= isset($customer) ?  $customer->phone : '' ?>" placeholder="Enter phone number">
+                                    <label for="discount">Discount</label>
+                                    <input type="number" class="form-control" id="discount" name="discount" min="0" value="<?= isset($product) ?  $product->discount : '' ?>" placeholder="Enter discount">
                                 </div>
                                 <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control" id="gender" name="gender">
-                                        <option value="-1" hidden>Select gender</option>
-                                        <option value="MALE" <?= (isset($customer) && $customer->gender == "MALE") ? 'selected' : '' ?>>Male</option>
-                                        <option value="FEMALE" <?= (isset($customer) && $customer->gender == "FEMALE") ? 'selected' : '' ?>>Female</option>
+                                    <label for="category_id">Category</label>
+                                    <select class="form-control" id="category_id" name="category_id">
+                                        <option value="-1" hidden>Select category</option>
+                                        <?php foreach ($data['category_list'] as $category) { ?>
+                                            <option value="<?= $category->category_id ?>" <?= $category->category_id == $product->category_id ? "selected" : '' ?>><?= $category->category_name ?></option>
+                                        <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select class="form-control" id="status" name="status">
                                         <option value="-1" hidden>Select status</option>
-                                        <option value="1" <?= (isset($customer) && $customer->publish == 1) ? 'selected' : '' ?>>Active</option>
-                                        <option value="0" <?= (!isset($customer) || $customer->publish == 0) ? 'selected' : '' ?>>Lock</option>
+                                        <option value="1" <?= (isset($news) && $news->publish == 1) ? 'selected' : '' ?>>Active</option>
+                                        <option value="0" <?= (!isset($news) || $news->publish == 0) ? 'selected' : '' ?>>Lock</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" value="<?= isset($customer) ?  $customer->address : '' ?>">
+                                    <label for="description">Description</label>
+                                    <input type="text" class="form-control" id="description" name="description" placeholder="Enter description" value="<?= isset($product) ?  $product->description : '' ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="birthday">Birthday</label>
-                                    <input type="date" id="birthday" name="birthday" class="form-control" value="<?= isset($customer) ?  $customer->birth_date : '' ?>" max=<?= date('Y-m-d'); ?>>
-                                </div>
-                                <div class="form-group">
-                                    <label for="image">Avatar</label>
-                                    <input type="file" id="image" name="avatar" placeholder="Choose image">
+                                    <label for="image">Image</label>
+                                    <input type="file" id="image" name="image" placeholder="Choose image">
                                 </div>
                             </div>
                             <!-- /.box-body -->
 
                             <div class="box-footer">
                                 <button type="submit" value="submit" class="btn btn-primary">Submit</button>
-                                <a href="<?= site_url('admin/customer'); ?>"><button type="button" class="btn btn-info">Cancel</button></a>
+                                <a href="<?= site_url('admin/product'); ?>"><button type="button" class="btn btn-info">Cancel</button></a>
 
                             </div>
                         </form>
@@ -94,7 +93,7 @@
                 $("#msg").addClass('hidden');
                 e.preventDefault();
                 $.ajax({
-                    url: "<?= site_url("admin/customer/save") . (isset($customer) ? "?id=" . $customer->id : "") ?>",
+                    url: "<?= site_url("admin/product/save") . (isset($product) ? "?id=" . $product->product_id : "") ?>",
                     type: 'post',
                     data: $(this).serialize(),
                     success: function(data) {

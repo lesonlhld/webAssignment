@@ -104,36 +104,36 @@ class Customer extends \Controller\Controller
             View("", ['msg' => 'Ngày sinh không được để trống'], 401);
         } else if ($data["address"] == "") {
             View("", ['msg' => 'Địa chỉ không được để trống'], 401);
-        }
-
-        if ($id == -1) {
-            $USER_Model = Model('USER_Model');
-            if ($USER_Model->check_exist_email($data['email']) > 0) {
-                View("", ['msg' => 'Email đã tồn tại'], 401);
-            } else {
-                if ($USER_Model->check_exist_phone($data['phone']) > 0) {
-                    View("", ['msg' => 'Số điện thoại đã tồn tại'], 401);
+        } else {
+            if ($id == -1) {
+                $USER_Model = Model('USER_Model');
+                if ($USER_Model->check_exist_email($data['email']) > 0) {
+                    View("", ['msg' => 'Email đã tồn tại'], 401);
                 } else {
-                    $data['password'] = '123456';
-                    if ($USER_Model->create($data) > 0) {
-                        View("", ['msg' => 'Tạo thành công'], 201);
+                    if ($USER_Model->check_exist_phone($data['phone']) > 0) {
+                        View("", ['msg' => 'Số điện thoại đã tồn tại'], 401);
                     } else {
-                        View("", ['msg' => 'Có lỗi xảy ra'], 401);
+                        $data['password'] = '123456';
+                        if ($USER_Model->create($data) > 0) {
+                            View("", ['msg' => 'Tạo thành công'], 201);
+                        } else {
+                            View("", ['msg' => 'Có lỗi xảy ra'], 401);
+                        }
                     }
                 }
-            }
-        } else {
-            $USER_Model = Model('USER_Model');
-            if ($USER_Model->check_exist_email($data['email']) > 1) {
-                View("", ['msg' => 'Email đã tồn tại'], 401);
             } else {
-                if ($USER_Model->check_exist_phone($data['phone']) > 1) {
-                    View("", ['msg' => 'Số điện thoại đã tồn tại'], 401);
+                $USER_Model = Model('USER_Model');
+                if ($USER_Model->check_exist_email($data['email']) > 1) {
+                    View("", ['msg' => 'Email đã tồn tại'], 401);
                 } else {
-                    if ($USER_Model->update($id, $data) == true) {
-                        View("", ['msg' => 'Cập nhật thành công'], 201);
+                    if ($USER_Model->check_exist_phone($data['phone']) > 1) {
+                        View("", ['msg' => 'Số điện thoại đã tồn tại'], 401);
                     } else {
-                        View("", ['msg' => 'Có lỗi xảy ra'], 401);
+                        if ($USER_Model->update($id, $data) == true) {
+                            View("", ['msg' => 'Cập nhật thành công'], 201);
+                        } else {
+                            View("", ['msg' => 'Có lỗi xảy ra'], 401);
+                        }
                     }
                 }
             }

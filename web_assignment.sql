@@ -106,7 +106,7 @@ CREATE TABLE `products` (
   `quantity` int(11) NOT NULL DEFAULT 0,
   `discount` float DEFAULT 0,
   `category_id` int(11) NOT NULL,
-  `stall_id` int(11) NOT NULL,
+  `stall_id` int(11) NOT NULL DEFAULT 1,
   `product_status` enum('Active','Stop','Pause') DEFAULT 'Active',
   `description` varchar(2000) DEFAULT NULL,
   `image` varchar(50) DEFAULT NULL,
@@ -119,20 +119,20 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status`, `description`, `image`, `publish`, `trash`) VALUES
-(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 2, 'Active', '', '1608782964521.jpg', 1, 0),
-(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 1, 'Active', '', '1608791315663.jpg', 1, 0),
-(3, 'Kimbap', 35000, 40, 0, 6, 8, 'Active', '', '1608792165625.jpg', 1, 0),
-(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 3, 'Active', '', '1608792180363.jpg', 1, 0),
-(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 7, 'Active', '', '1608792205332.jpg', 0, 0),
-(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 4, 'Active', '', '1608792222820.png', 0, 0),
-(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 5, 'Active', '', '1608792268122.jpg', 0, 0),
-(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 6, 'Active', '', '1608792290140.jpg', 0, 0),
-(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 9, 'Active', '', '1608792313466.jpg', 0, 0),
-(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 10, 'Active', '', '1608792334761.png', 0, 0),
-(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 11, 'Active', '', '1608792847544.jpg', 0, 0),
-(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 10, 'Active', '', '1608792567395.jpg', 0, 0),
-(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 3, 'Active', '', '1608792551817.webp', 0, 0),
-(14, 'Mì bò', 20000, 25, 10, 6, 4, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', '1608793914044.jpg', 0, 0);
+(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 3, 'Active', '', '1608782964521.jpg', 1, 0),
+(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 2, 'Active', '', '1608791315663.jpg', 1, 0),
+(3, 'Kimbap', 35000, 40, 0, 6, 9, 'Active', '', '1608792165625.jpg', 1, 0),
+(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 4, 'Active', '', '1608792180363.jpg', 1, 0),
+(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 8, 'Active', '', '1608792205332.jpg', 0, 0),
+(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 9, 'Active', '', '1608792222820.png', 0, 0),
+(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 6, 'Active', '', '1608792268122.jpg', 0, 0),
+(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 7, 'Active', '', '1608792290140.jpg', 0, 0),
+(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 10, 'Active', '', '1608792313466.jpg', 0, 0),
+(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 11, 'Active', '', '1608792334761.png', 0, 0),
+(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 12, 'Active', '', '1608792847544.jpg', 0, 0),
+(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 11, 'Active', '', '1608792567395.jpg', 0, 0),
+(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 4, 'Active', '', '1608792551817.webp', 0, 0),
+(14, 'Mì bò', 20000, 25, 10, 6, 5, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', '1608793914044.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -175,17 +175,18 @@ CREATE TABLE `stalls` (
 --
 
 INSERT INTO `stalls` (`stall_id`, `stall_name`, `item_quantity`, `description`, `image`) VALUES
-(1, 'Cơm Nguyên Ký', 0, '', '1608793031367.jpg'),
-(2, 'Phở 10 Lý Quốc Sư', 11, '', '1608793043609.jpg'),
-(3, 'Hoàng Yến Cuisine', 0, '', '1608793053215.jpg'),
-(4, 'KFC', 0, '', '1608792981678.png'),
-(5, 'Pizza Hut', 0, '', '1608792940085.png'),
-(6, 'McDonald\'s', 14, '<p>ngon ngon</p>\r\n', '1608786363399.png'),
-(7, 'Hotto', 0, '', '1608793106400.jpg'),
-(8, 'Hanuri', 0, '', '1608793092809.jpg'),
-(9, 'Tous Les Jours', 0, '', '1608793083134.jpg'),
-(10, 'The Royal Tea', 0, '', '1608792953501.png'),
-(11, 'Phúc Long', 1, '', '1608792969901.png');
+(1, 'SFCS', 0, '', ''),
+(2, 'Cơm Nguyên Ký', 0, '', '1608793031367.jpg'),
+(3, 'Phở 10 Lý Quốc Sư', 11, '', '1608793043609.jpg'),
+(4, 'Hoàng Yến Cuisine', 0, '', '1608793053215.jpg'),
+(5, 'KFC', 0, '', '1608792981678.png'),
+(6, 'Pizza Hut', 0, '', '1608792940085.png'),
+(7, 'McDonald\'s', 14, '<p>ngon ngon</p>\r\n', '1608786363399.png'),
+(8, 'Hotto', 0, '', '1608793106400.jpg'),
+(9, 'Hanuri', 0, '', '1608793092809.jpg'),
+(10, 'Tous Les Jours', 0, '', '1608793083134.jpg'),
+(11, 'The Royal Tea', 0, '', '1608792953501.png'),
+(12, 'Phúc Long', 1, '', '1608792969901.png');
 
 -- --------------------------------------------------------
 
