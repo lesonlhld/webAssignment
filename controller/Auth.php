@@ -40,12 +40,12 @@ class Auth extends \Controller\Controller
 
     public function check_login()
     {
-        $username = $_POST['username'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
         $USER_Model = Model('USER_Model');
-        $user_login = $USER_Model->login($username, $password);
+        $user_login = $USER_Model->login($email, $password);
         if ($user_login == null) {
-            View("", ['msg' => 'Sai username hoặc password'], 401);
+            View("", ['msg' => 'Sai email hoặc password'], 401);
         } else {
             $_SESSION['is_logged_in'] = true;
             $_SESSION['lastname'] = $user_login->last_name;
@@ -61,8 +61,6 @@ class Auth extends \Controller\Controller
             View("", ['msg' => 'Họ không được để trống'], 401);
         } else if ($data["lastname"] == "") {
             View("", ['msg' => 'Tên không được để trống'], 401);
-        } else if ($data["username"] == "") {
-            View("", ['msg' => 'Tên đăng nhập không được để trống'], 401);
         } else if ($data["email"] == "") {
             View("", ['msg' => 'Email không được để trống'], 401);
         } else if ($data["password"] == "") {
@@ -75,19 +73,15 @@ class Auth extends \Controller\Controller
             View("", ['msg' => 'Mật khẩu xác nhận không trùng khớp'], 401);
         } else {
             $USER_Model = Model('USER_Model');
-            if ($USER_Model->check_exist_username($data['username'])) {
-                View("", ['msg' => 'Tên đăng nhập đã tồn tại'], 401);
+            if ($USER_Model->check_exist_email($data['email'])) {
+                View("", ['msg' => 'Email đã tồn tại'], 401);
             } else {
-                if ($USER_Model->check_exist_email($data['email'])) {
-                    View("", ['msg' => 'Email đã tồn tại'], 401);
+                if ($USER_Model->register($data) > 0) {
+                    $_SESSION['is_logged_in'] = true;
+                    $_SESSION['lastname'] = $data["lastname"];
+                    $_SESSION['role'] = 1;
                 } else {
-                    if ($USER_Model->register($data) > 0) {
-                        $_SESSION['is_logged_in'] = true;
-                        $_SESSION['lastname'] = $data["lastname"];
-                        $_SESSION['role'] = 1;
-                    } else {
-                        View("", ['msg' => 'Có lỗi xảy ra'], 401);
-                    }
+                    View("", ['msg' => 'Có lỗi xảy ra'], 401);
                 }
             }
         }

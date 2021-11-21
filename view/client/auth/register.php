@@ -62,10 +62,6 @@
                             </div>
                         </div>
                         <section>
-                            <label class="input">Tên đăng nhập</label>
-                            <input type="text" name="username" placeholder="Tên đăng nhập" class="form-control" required>
-                        </section>
-                        <section>
                             <label class="input">Địa chỉ email</label>
                             <input type="email" name="email" placeholder="Địa chỉ email" class="form-control" required>
                         </section>

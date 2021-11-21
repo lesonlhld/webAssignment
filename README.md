@@ -11,13 +11,13 @@
 
 ## Tài khoản admin
 ```
-username: admin
+email: admin@gmail.com
 password: 123456
 ```
 
 ## Tài khoản member
 ```
-username: usertest
+email: nguyenvana@gmail.com
 password: 123456
 ```
 

@@ -198,9 +198,8 @@ CREATE TABLE `users` (
   `birth_date` date DEFAULT NULL,
   `gender` enum('MALE','FEMALE') DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
+  `email` varchar(50) NOT NULL,
   `address` varchar(2000) DEFAULT NULL,
-  `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `avatar` varchar(30) DEFAULT NULL,
   `role_id` int(11) NOT NULL DEFAULT 1,
@@ -213,11 +212,9 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `username`, `password`, `avatar`, `role_id`, `balance`, `publish`, `trash`) VALUES
-(1, 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, 'admin', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 2, 0, 1, 0),
-(2, 'Nguyễn Văn ', 'A', '2020-12-22', '', '0923909321', 'nguyenvana@gmail.com', 'HCM', 'usertest', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', '1608791208811.jpg', 1, 0, 1, 0),
-(3, 'lê văn', 'tám', '2020-12-24', '', '0923909320', '', 'hcm', 'aaa', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793423805.jpg', 1, 0, 0, 0),
-(4, 'Lê Trung', 'Sơn', '2020-12-24', '', '0912131415', 'leson0310@gmail.com', 'KTX khu A, Linh Trung, Thủ Đức', 'Son.le.lhld', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608793747434.jpg', 2, 0, 0, 0);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `password`, `avatar`, `role_id`, `balance`, `publish`, `trash`) VALUES
+(1, 'admin', 'admin', NULL, NULL, NULL, 'admin@gmail.com', NULL, '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 2, 0, 1, 0),
+(2, 'Nguyễn Văn ', 'A', '2020-12-22', '', '0923909321', 'nguyenvana@gmail.com', 'HCM', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608791208811.jpg', 1, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -299,9 +296,8 @@ ALTER TABLE `stalls`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UQ_username` (`username`),
+  ADD UNIQUE KEY `UQ_email` (`email`),
   ADD UNIQUE KEY `phone` (`phone`),
-  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `fk_users_roles_idx` (`role_id`);
 
 --

@@ -26,6 +26,14 @@ class Customer extends \Controller\Controller
         View("admin/main", $this->data);
     }
 
+    public function add()
+    {
+        is_admin_login();
+
+        $this->data["subview"] = "admin/customer/add";
+        View("admin/main", $this->data);
+    }
+
     public function remove()
     {
         is_admin_login();

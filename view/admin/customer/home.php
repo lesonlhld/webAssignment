@@ -16,7 +16,7 @@
                     <div class="box">
                         <div class="box-header">
                             <div class="box-tools pull-left">
-                                <button type="button" class="btn btn-default btn-sm" onclick="window.location.href='#'"><i class="fa fa-plus"></i> Add customer</button>
+                                <a href="<?= site_url('admin/customer/add') ?>"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Add customer</button></a>
                                 <button type="button" class="btn btn-default btn-sm" id="remove"><i class="fa fa-trash"></i> Remove</button>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                             <?php
                             if (isset($data['page'])) {
                                 $page = $data['page'];
-                                echo (count($data['user_list']) > 0) ? "<i>Showing " . (($data['page'] - 1) * 10 + 1) . " to " . (($data['page'] - 1) * 10 + count($data['user_list'])) . "</i>" : "";
+                                echo (count($data['user_list']) > 0) ? "<i>Showing " . (($page - 1) * 10 + 1) . " to " . (($page - 1) * 10 + count($data['user_list'])) . "</i>" : "";
                                 echo '<ul class="pagination no-margin pull-right">';
 
                                 if ($page > 1) {

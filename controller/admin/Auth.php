@@ -28,16 +28,16 @@ class Auth extends \Controller\Controller
 
     public function check_login()
     {
-        $username = $_POST['username'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
         $USER_Model = Model('USER_Model');
-        $user_login = $USER_Model->login($username, $password, 2);
+        $user_login = $USER_Model->login($email, $password, 2);
         print_r($user_login);
         if ($user_login == null) {
-            View("", ['msg' => 'Sai username hoặc password'], 401);
+            View("", ['msg' => 'Sai email hoặc password'], 401);
         } else {
             $_SESSION['is_logged_in'] = true;
-            $_SESSION['username'] = $user_login->username;
+            $_SESSION['email'] = $user_login->email;
             $_SESSION['lastname'] = $user_login->last_name;
             $_SESSION['role'] = $user_login->role_id;
         }

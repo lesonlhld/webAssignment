@@ -44,11 +44,11 @@ class USER_Model extends \Model\Model
         return $stmt->fetchColumn();
     }
 
-    public function login($username, $password, $role = 1)
+    public function login($email, $password, $role = 1)
     {
         $password = hashpass($password);
-        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username=:username AND password=:password AND role_id=:role_id');
-        $stmt->bindParam(':username', $username);
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE email=:email AND password=:password AND role_id=:role_id');
+        $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':role_id', $role);
         $stmt->execute();
@@ -59,10 +59,9 @@ class USER_Model extends \Model\Model
     public function register($data, $role = 1)
     {
         $password = hashpass($data['password']);
-        $stmt = $this->pdo->prepare('INSERT INTO users(first_name, last_name, username, password, email, birth_date, phone, address, gender, avatar, role_id) VALUES (:first_name, :last_name, :username, :password, :email, :birth_date, :phone, :address, :gender, :avatar, :role_id)');
+        $stmt = $this->pdo->prepare('INSERT INTO users(first_name, last_name, password, email, birth_date, phone, address, gender, avatar, role_id) VALUES (:first_name, :last_name, :password, :email, :birth_date, :phone, :address, :gender, :avatar, :role_id)');
         $stmt->bindParam(':first_name', $data['firstname']);
         $stmt->bindParam(':last_name', $data['lastname']);
-        $stmt->bindParam(':username', $data['username']);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':email', $data['email']);
         $stmt->bindParam(':birth_date', $data['birthday']);
@@ -84,16 +83,6 @@ class USER_Model extends \Model\Model
 
         return count($stmt->fetchAll()) > 0;
     }
-
-    public function check_exist_username($username)
-    {
-        $stmt = $this->pdo->prepare('SELECT id FROM users WHERE username=:username');
-        $stmt->bindParam(':username', $username);
-        $stmt->execute();
-
-        return count($stmt->fetchAll()) > 0;
-    }
-
 
     public function update_published($id)
     {

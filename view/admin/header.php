@@ -69,7 +69,7 @@
                         <li class="dropdown user user-menu">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?= base_url('assets/img/no-avatar.png') ?>" class="user-image" alt="User Image">
-                                <span class="hidden-xs"><?= $_SESSION['last_name'] ?? $_SESSION['username'] ?? "" ?></span>
+                                <span class="hidden-xs"><?= $_SESSION['lastname'] ?? $_SESSION['email'] ?? "" ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -77,7 +77,7 @@
                                     <img src="<?= base_url('assets/img/no-avatar.png') ?>" class="img-circle" alt="User Image">
 
                                     <p>
-                                        <?= $_SESSION['last_name'] ?? $_SESSION['username'] ?? "" ?>
+                                        <?= $_SESSION['lastname'] ?? $_SESSION['email'] ?? "" ?>
                                         <small><?= $_SESSION['role'] ?? "" ?></small>
                                     </p>
                                 </li>

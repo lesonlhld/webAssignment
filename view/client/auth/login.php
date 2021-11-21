@@ -19,8 +19,8 @@
                     <section>
                         <label class="input login-input">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" placeholder="Tên đăng nhập" name="username" class="form-control" required>
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input type="email" placeholder="Email" name="email" class="form-control" required>
                             </div>
                         </label>
                     </section>
