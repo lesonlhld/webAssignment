@@ -119,51 +119,55 @@
 
 
             <div class="filter-results">
-                <div class="list-product-description product-description-brd margin-bottom-30">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <a href="<?= site_url() ?>product/detail?id=">
-                                <img class="img-responsive sm-margin-bottom-20" src="#" alt="">
-                            </a>
-                        </div>
-                        <div class="col-sm-8 product-description">
-                            <div class="overflow-h margin-bottom-5">
-                                <ul class="list-inline overflow-h">
-                                    <li>
-                                        <h4 class="title-price">
-                                            <a href="<?= site_url() ?>product/detail?id=">name</a>
-                                        </h4>
-                                    </li>
-                                    <li><span class="category text-uppercase">category.name</span></li>
-                                    <li class="pull-right">
-                                        <ul class="list-inline product-ratings">
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating fa fa-star"></i></li>
-                                            <li><i class="rating fa fa-star"></i></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <div class="margin-bottom-10">
-                                    <span class="title-price margin-right-10">
-                                        price_discount
-                                    </span>
-                                    <c:if test="${p.discount != '0'}">
-                                        <span class="title-price line-through">
-                                            price
-                                        </span>
-                                    </c:if>
-                                </div>
-                                <p class="margin-bottom-20 stall-name">stall.name</p>
-                                <p class="margin-bottom-20">description</p>
+                <?php foreach ($data['product_list'] as $product) { ?>
+                    <div class="list-product-description product-description-brd margin-bottom-30">
+                        <div class="row">
+                            <div class="col-sm-4">
                                 <a href="<?= site_url() ?>product/detail?id=">
-                                    <button type="button" class="btn-u btn-u-sea-shop">Xem chi tiết</button>
+                                    <img class="img-responsive sm-margin-bottom-20" src="#" alt="">
                                 </a>
+                            </div>
+                            <div class="col-sm-8 product-description">
+                                <div class="overflow-h margin-bottom-5">
+                                    <ul class="list-inline overflow-h">
+                                        <li>
+                                            <h4 class="title-price">
+                                                <a href="<?= site_url() ?>product/detail?id="><?= $product->product_name ?></a>
+                                            </h4>
+                                        </li>
+                                        <li><span class="category text-uppercase">category.name</span></li>
+                                        <li class="pull-right">
+                                            <ul class="list-inline product-ratings">
+                                                <li><i class="rating-selected fa fa-star"></i></li>
+                                                <li><i class="rating-selected fa fa-star"></i></li>
+                                                <li><i class="rating-selected fa fa-star"></i></li>
+                                                <li><i class="rating fa fa-star"></i></li>
+                                                <li><i class="rating fa fa-star"></i></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <div class="margin-bottom-10">
+                                        <span class="title-price margin-right-10">
+                                            price_discount
+                                        </span>
+                                        <c:if test="${p.discount != '0'}">
+                                            <span class="title-price line-through">
+                                                price
+                                            </span>
+                                        </c:if>
+                                    </div>
+                                    <p class="margin-bottom-20 stall-name">stall.name</p>
+                                    <p class="margin-bottom-20">description</p>
+                                    <a href="<?= site_url() ?>product/detail?id=">
+                                        <button type="button" class="btn-u btn-u-sea-shop">Xem chi tiết</button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                <?php
+                    } ?>
             </div>
             <!--end filter results-->
 
