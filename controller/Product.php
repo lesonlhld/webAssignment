@@ -14,7 +14,7 @@ class Product extends \Controller\Controller
     {
         $PRODUCT_model = Model('PRODUCT_model');
 
-        $product_list = $PRODUCT_model->get_product();
+        $product_list = $PRODUCT_model->get_list_active();
 
         $this->data['data']['product_list'] = $product_list;
         $this->data["subview"] = "client/product/list";

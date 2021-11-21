@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 20, 2021 lúc 06:33 PM
+-- Thời gian đã tạo: Th10 21, 2021 lúc 08:59 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -109,28 +109,30 @@ CREATE TABLE `products` (
   `stall_id` int(11) NOT NULL,
   `product_status` enum('Active','Stop','Pause') DEFAULT 'Active',
   `description` varchar(2000) DEFAULT NULL,
-  `image` varchar(50) DEFAULT NULL
+  `image` varchar(50) DEFAULT NULL,
+  `publish` int(11) NOT NULL DEFAULT 0,
+  `trash` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status`, `description`, `image`) VALUES
-(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 2, 'Active', '', '1608782964521.jpg'),
-(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 1, 'Active', '', '1608791315663.jpg'),
-(3, 'Kimbap', 35000, 40, 0, 6, 8, 'Active', '', '1608792165625.jpg'),
-(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 3, 'Active', '', '1608792180363.jpg'),
-(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 7, 'Active', '', '1608792205332.jpg'),
-(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 4, 'Active', '', '1608792222820.png'),
-(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 5, 'Active', '', '1608792268122.jpg'),
-(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 6, 'Active', '', '1608792290140.jpg'),
-(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 9, 'Active', '', '1608792313466.jpg'),
-(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 10, 'Active', '', '1608792334761.png'),
-(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 11, 'Active', '', '1608792847544.jpg'),
-(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 10, 'Active', '', '1608792567395.jpg'),
-(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 3, 'Active', '', '1608792551817.webp'),
-(14, 'Mì bò', 20000, 25, 10, 6, 4, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', '1608793914044.jpg');
+INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status`, `description`, `image`, `publish`, `trash`) VALUES
+(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 2, 'Active', '', '1608782964521.jpg', 1, 0),
+(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 1, 'Active', '', '1608791315663.jpg', 1, 0),
+(3, 'Kimbap', 35000, 40, 0, 6, 8, 'Active', '', '1608792165625.jpg', 1, 0),
+(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 3, 'Active', '', '1608792180363.jpg', 1, 0),
+(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 7, 'Active', '', '1608792205332.jpg', 0, 0),
+(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 4, 'Active', '', '1608792222820.png', 0, 0),
+(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 5, 'Active', '', '1608792268122.jpg', 0, 0),
+(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 6, 'Active', '', '1608792290140.jpg', 0, 0),
+(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 9, 'Active', '', '1608792313466.jpg', 0, 0),
+(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 10, 'Active', '', '1608792334761.png', 0, 0),
+(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 11, 'Active', '', '1608792847544.jpg', 0, 0),
+(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 10, 'Active', '', '1608792567395.jpg', 0, 0),
+(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 3, 'Active', '', '1608792551817.webp', 0, 0),
+(14, 'Mì bò', 20000, 25, 10, 6, 4, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', '1608793914044.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -214,7 +216,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `password`, `avatar`, `role_id`, `balance`, `publish`, `trash`) VALUES
 (1, 'admin', 'admin', NULL, NULL, NULL, 'admin@gmail.com', NULL, '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 2, 0, 1, 0),
-(2, 'Nguyễn Văn ', 'A', '2020-12-22', '', '0923909321', 'nguyenvana@gmail.com', 'HCM', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1608791208811.jpg', 1, 0, 1, 0);
+(2, 'Nguyễn Văn ', 'B', '2020-12-03', 'MALE', '0923909321', 'nguyenvana@gmail.com', 'HCM', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 1, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -350,7 +352,7 @@ ALTER TABLE `stalls`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
