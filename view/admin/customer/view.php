@@ -22,7 +22,6 @@
                         <!-- /.box-header -->
                         <!-- form start -->
                         <div class="box-body">
-                            <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                             <div class="form-group">
                                 <label for="firstname">First Name</label>
                                 <input type="text" class="form-control" id="firstname" name="firstname" value="<?= isset($customer) ?  $customer->first_name : '' ?>" placeholder="Enter first name" disabled>

@@ -149,14 +149,14 @@
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-cutlery"></i> <span>Menu</span>
+                            <i class="fa fa-cutlery"></i> <span>Product</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= site_url('menu/'); ?>"><i class="fa fa-list"></i>Menu List</a></li>
-                            <li><a href="<?= site_url('menu/trash'); ?>"><i class="fa fa-trash-o"></i>Menu Trash</a></li>
+                            <li><a href="<?= site_url('admin/product'); ?>"><i class="fa fa-list"></i>Product List</a></li>
+                            <li><a href="<?= site_url('admin/product/trash'); ?>"><i class="fa fa-trash-o"></i>Product Trash</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
