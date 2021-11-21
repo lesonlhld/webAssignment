@@ -116,12 +116,18 @@
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">CONTENT MODULES</li>
                     <li class="active">
                         <a href="<?= site_url('/'); ?>">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         </a>
                     </li>
+                    <li class="header">SYSTEM SETTINGS</li>
+                    <li>
+                        <a href="<?= site_url('admin/configs'); ?>">
+                            <i class="fa fa-cog"></i> <span>Configs</span>
+                        </a>
+                    </li>
+                    <li class="header">CONTENT MODULES</li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-sitemap"></i> <span>Branches</span>
