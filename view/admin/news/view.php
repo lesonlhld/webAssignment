@@ -33,13 +33,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="content">Content</label>
-                                <input type="text" id="content" name="content" class="form-control" placeholder="Enter short content" value="<?= isset($news) ?  $news->content : '' ?>" disabled>
+                                <?= isset($news) ?  $news->content : '' ?>
                             </div>
                             <div class="form-group">
-                                <label for="publish">Published</label>
-                                <input type="checkbox" name="publish" value="<?= isset($news) ?  $news->publish : "1" ?>" <?= isset($news) ?  ($news->publish == 1 ? "checked" : "") : "" ?> id="publish" disabled>
-                            </div>
-                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="publish" value="1" <?= isset($news) ?  ($news->publish == 1 ? "checked" : "") : "" ?> id="publish" disabled>Published
+                                    </label>
+                                </div>
                             </div>
                             <!-- /.box-body -->
 

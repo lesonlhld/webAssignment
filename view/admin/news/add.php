@@ -35,15 +35,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="content">Content</label>
-                                    <input type="text" id="content" name="content" class="form-control" placeholder="Enter short content" value="<?= isset($news) ?  $news->content : '' ?>">
+                                    <textarea id="content" name="content" rows="10" cols="80"><?= isset($news) ?  $news->content : '' ?>
+                                        </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label>
                                     <input type="file" id="image" name="image" placeholder="Choose image">
                                 </div>
                                 <div class="form-group">
-                                    <label for="publish">Published</label>
-                                    <input type="checkbox" name="publish" value="1" <?= isset($news) ?  ($news->publish == 1 ? "checked" : "") : "" ?> id="publish">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="publish" value="1" <?= isset($news) ?  ($news->publish == 1 ? "checked" : "") : "" ?> id="publish">Published
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->
@@ -66,6 +70,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            CKEDITOR.replace('content')
             $("form").submit(function(e) {
                 $("#msg").addClass('hidden');
                 e.preventDefault();

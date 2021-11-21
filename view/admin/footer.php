@@ -54,6 +54,8 @@
 <script src="<?= base_url('assets/plugins/adminlte/dist/js/adminlte.min.js') ?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url('assets/plugins/adminlte/dist/js/demo.js') ?>"></script>
+<!-- CK Editor -->
+<script src="<?= base_url('assets/plugins/adminlte/bower_components/ckeditor/ckeditor.js') ?>"></script>
 
 <!-- page script -->
 <script>
