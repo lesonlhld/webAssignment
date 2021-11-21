@@ -79,6 +79,89 @@
 
 <!--=== Content Medium ===-->
 <div class="content-md container">
+    <div class="tab-v5">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
+            <li><a href="#reviews" role="tab" data-toggle="tab">Reviews
+                    (1)</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- Description -->
+            <div class="tab-pane fade in active" id="description">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>content</p>
+                        <br>
+
+                        <h3 class="heading-md margin-bottom-20">Attribute</h3>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled specifies-list">
+                                    <li><i class="fa fa-caret-right"></i>Name: <span>value</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Description -->
+
+            <!-- Reviews -->
+            <div class="tab-pane fade" id="reviews">
+                <div class="product-comment margin-bottom-40">
+                    <div class="product-comment-in">
+                        <img class="product-comment-img rounded-x" src="${url}/img/team/01.jpg" alt="">
+                        <div class="product-comment-dtl">
+                            <h4>
+                                Name <small>22 days ago</small>
+                            </h4>
+                            <p>Comment content</p>
+                            <ul class="list-inline product-ratings">
+                                <li class="pull-right">
+                                    <ul class="list-inline">
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating fa fa-star"></i></li>
+                                        <li><i class="rating fa fa-star"></i></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="heading-md margin-bottom-30">Add a review</h3>
+                <form action="#" method="post" class="sky-changes-4">
+                    <fieldset>
+                        <div class="margin-bottom-30">
+                            <label class="label-v2">Review</label> <label class="textarea">
+                                <textarea rows="7" name="message" id="message"></textarea>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <footer class="review-submit">
+                        <label class="label-v2">Review</label>
+                        <div class="stars-ratings">
+                            <input type="radio" name="stars-rating" id="stars-rating-5">
+                            <label for="stars-rating-5"><i class="fa fa-star"></i></label>
+                            <input type="radio" name="stars-rating" id="stars-rating-4">
+                            <label for="stars-rating-4"><i class="fa fa-star"></i></label>
+                            <input type="radio" name="stars-rating" id="stars-rating-3">
+                            <label for="stars-rating-3"><i class="fa fa-star"></i></label>
+                            <input type="radio" name="stars-rating" id="stars-rating-2">
+                            <label for="stars-rating-2"><i class="fa fa-star"></i></label>
+                            <input type="radio" name="stars-rating" id="stars-rating-1">
+                            <label for="stars-rating-1"><i class="fa fa-star"></i></label>
+                        </div>
+                        <button type="button" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
+                    </footer>
+                </form>
+            </div>
+            <!-- End Reviews -->
+        </div>
+    </div>
     <div class="row margin-bottom-60">
         <div class="col-md-6 product-service md-margin-bottom-30">
             <div class="product-service-heading">
