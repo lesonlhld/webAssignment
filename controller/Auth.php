@@ -50,6 +50,7 @@ class Auth extends \Controller\Controller
             $_SESSION['is_logged_in'] = true;
             $_SESSION['lastname'] = $user_login->last_name;
             $_SESSION['role'] = $user_login->role_id;
+            $_SESSION['id'] = $user_login->id;
         }
     }
 
@@ -76,10 +77,12 @@ class Auth extends \Controller\Controller
             if ($USER_Model->check_exist_email($data['email']) > 0) {
                 View("", ['msg' => 'Email đã tồn tại'], 401);
             } else {
-                if ($USER_Model->create($data) > 0) {
+                $id = $USER_Model->create($data);
+                if ($id  > 0) {
                     $_SESSION['is_logged_in'] = true;
                     $_SESSION['lastname'] = $data["lastname"];
                     $_SESSION['role'] = 1;
+                    $_SESSION['id'] = $id;
                 } else {
                     View("", ['msg' => 'Có lỗi xảy ra'], 401);
                 }

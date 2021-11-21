@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 21, 2021 lúc 12:13 PM
+-- Thời gian đã tạo: Th10 21, 2021 lúc 03:56 PM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -65,6 +65,31 @@ CREATE TABLE `configs` (
 
 INSERT INTO `configs` (`id`, `company_name`, `site_name`, `email`, `phone`, `address`) VALUES
 (1, 'Smart Food Court System', 'BK Food Court', 'bkfoodcourt@gmail.com', '0123.456.789', 'Đại học Bách Khoa Tp. Hồ Chí Minh, Quận Thủ Đức, Thành phố Hồ Chí Minh');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(256) NOT NULL,
+  `slug` varchar(256) NOT NULL,
+  `image` text NOT NULL,
+  `short_content` text NOT NULL,
+  `content` text NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `create_by` int(11) NOT NULL,
+  `publish` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `slug`, `image`, `short_content`, `content`, `create_at`, `create_by`, `publish`) VALUES
+(1, 'test title 2', 'test-title-2', '', 'short content', 'full content', '2021-11-21 21:06:53', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -280,6 +305,13 @@ ALTER TABLE `configs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_news_create_by` (`create_by`);
+
+--
 -- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
@@ -354,6 +386,12 @@ ALTER TABLE `configs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT cho bảng `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
@@ -392,6 +430,12 @@ ALTER TABLE `users`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `news`
+--
+ALTER TABLE `news`
+  ADD CONSTRAINT `fk_news_create_by` FOREIGN KEY (`create_by`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `orders`

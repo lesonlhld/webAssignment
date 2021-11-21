@@ -128,20 +128,13 @@
                         </a>
                     </li>
                     <li class="header">CONTENT MODULES</li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-sitemap"></i> <span>Branches</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                    <li>
+                        <a href="<?= site_url("admin/news") ?>">
+                            <i class="fa fa-file-text-o"></i> <span>News</span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li><a href="<?= site_url('branches/'); ?>"><i class="fa fa-list"></i>Branches List</a></li>
-                            <li><a href="<?= site_url('branches/trash'); ?>"><i class="fa fa-trash-o"></i>Branches Trash</a></li>
-                        </ul>
                     </li>
                     <li class="treeview">
-                        <a href="<?= site_url("employees") ?>">
+                        <a href="#">
                             <i class="fa fa-users"></i> <span>User</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>

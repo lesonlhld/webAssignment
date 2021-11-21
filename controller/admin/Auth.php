@@ -40,6 +40,7 @@ class Auth extends \Controller\Controller
             $_SESSION['email'] = $user_login->email;
             $_SESSION['lastname'] = $user_login->last_name;
             $_SESSION['role'] = $user_login->role_id;
+            $_SESSION['id'] = $user_login->id;
         }
     }
 }
