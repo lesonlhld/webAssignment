@@ -24,23 +24,23 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" value="<?= isset($product) ?  $product->product_name : '' ?>" placeholder="Enter name">
+                                <input type="text" class="form-control" id="name" name="name" value="<?= isset($product) ?  $product->product_name : '' ?>" placeholder="Enter name" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="number" class="form-control" id="price" name="price" min="0" value="<?= isset($product) ?  $product->price : '' ?>" placeholder="Enter price">
+                                <input type="number" class="form-control" id="price" name="price" min="0" value="<?= isset($product) ?  $product->price : '' ?>" placeholder="Enter price" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="quantity">Quantity</label>
-                                <input type="number" class="form-control" id="quantity" name="quantity" min="0" value="<?= isset($product) ?  $product->quantity : '' ?>" placeholder="Enter quantity">
+                                <input type="number" class="form-control" id="quantity" name="quantity" min="0" value="<?= isset($product) ?  $product->quantity : '' ?>" placeholder="Enter quantity" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="discount">Discount</label>
-                                <input type="number" class="form-control" id="discount" name="discount" min="0" value="<?= isset($product) ?  $product->discount : '' ?>" placeholder="Enter discount">
+                                <input type="number" class="form-control" id="discount" name="discount" min="0" value="<?= isset($product) ?  $product->discount : '' ?>" placeholder="Enter discount" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="category_id">Category</label>
-                                <select class="form-control" id="category_id" name="category_id">
+                                <select class="form-control" id="category_id" name="category_id" disabled>
                                     <option value="-1" hidden>Select category</option>
                                     <?php foreach ($data['category_list'] as $category) { ?>
                                         <option value="<?= $category->category_id ?>" <?= $category->category_id == $product->category_id ? "selected" : '' ?>><?= $category->category_name ?></option>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <select class="form-control" id="status" name="status">
+                                <select class="form-control" id="status" name="status" disabled>
                                     <option value="-1" hidden>Select status</option>
                                     <option value="1" <?= (isset($news) && $news->publish == 1) ? 'selected' : '' ?>>Active</option>
                                     <option value="0" <?= (!isset($news) || $news->publish == 0) ? 'selected' : '' ?>>Lock</option>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <input type="text" class="form-control" id="description" name="description" placeholder="Enter description" value="<?= isset($product) ?  $product->description : '' ?>">
+                                <input type="text" class="form-control" id="description" name="description" placeholder="Enter description" value="<?= isset($product) ?  $product->description : '' ?>" disabled>
                             </div>
                         </div>
                         <!-- /.box-body -->
