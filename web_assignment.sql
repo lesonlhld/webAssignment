@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 22, 2021 lúc 05:06 PM
+-- Thời gian đã tạo: Th10 22, 2021 lúc 07:11 PM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -161,7 +161,7 @@ CREATE TABLE `products` (
   `product_status` enum('Active','Stop','Pause') DEFAULT 'Active',
   `description` varchar(2000) DEFAULT NULL,
   `attribute` text DEFAULT NULL,
-  `image` varchar(50) DEFAULT NULL,
+  `image` varchar(256) DEFAULT NULL,
   `publish` int(11) NOT NULL DEFAULT 0,
   `trash` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -257,7 +257,7 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `address` varchar(2000) DEFAULT NULL,
   `password` varchar(50) NOT NULL,
-  `avatar` varchar(30) DEFAULT NULL,
+  `avatar` varchar(256) DEFAULT NULL,
   `role_id` int(11) NOT NULL DEFAULT 1,
   `balance` int(11) DEFAULT 0,
   `publish` int(11) NOT NULL DEFAULT 0,

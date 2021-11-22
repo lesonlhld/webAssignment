@@ -26,8 +26,12 @@
                             <ul class="list-unstyled checkbox-list">
                                 <li>
                                     <form action="<?= site_url() ?>product/search" method="get">
-                                        <input type="text" name="name" />
-                                        <input type="submit" value="Tìm Kiếm">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="name" placeholder="Tìm kiếm..." />
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-search"></i>
+                                            </span>
+                                        </div>
                                     </form>
                                 </li>
                             </ul>
@@ -167,7 +171,7 @@
                     </div>
 
                 <?php
-                    } ?>
+                } ?>
             </div>
             <!--end filter results-->
 

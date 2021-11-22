@@ -49,7 +49,7 @@
                                                 <input type="checkbox" id="check_item" class="check-list" value="<?= $news->id ?>">
                                             </td>
                                             <td>
-                                                <img src='<?= base_url($news->image) ?>' alt='News Image' style='width:auto; max-height:100px'>
+                                                <img src='<?= base_url("source/news/" . $news->image) ?>' alt='News Image' style='width:auto; max-height:100px'>
                                             </td>
                                             <td><a href="<?= site_url('admin/news/view?id=' . $news->id); ?>"><?= $news->title ?></a> </td>
                                             <td><?= $news->short_content ?> </td>
