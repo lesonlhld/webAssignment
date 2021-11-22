@@ -76,7 +76,7 @@ class USER_Model extends \Model\Model
         $stmt->bindParam(':phone', $data['phone']);
         $stmt->bindParam(':address', $data['address']);
         $stmt->bindParam(':gender', $data['gender']);
-        $stmt->bindParam(':avatar', $data['avatar']);
+        $stmt->bindParam(':avatar', $data['image']);
         $stmt->bindParam(':role_id', $role);
         $stmt->execute();
 
@@ -93,7 +93,7 @@ class USER_Model extends \Model\Model
         $stmt->bindParam(':phone', $data['phone']);
         $stmt->bindParam(':address', $data['address']);
         $stmt->bindParam(':gender', $data['gender']);
-        $stmt->bindParam(':avatar', $data['avatar']);
+        $stmt->bindParam(':avatar', $data['image']);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 

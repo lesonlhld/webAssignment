@@ -90,11 +90,27 @@
                                 </div>
                                 <div class="form-group" id="attribute">
                                     <label for="description">Attribute</label>
-
                                     <a id="add-attribute" href="javascript:void(0)">
                                         <i class="fa fa-plus-circle"></i> Add new
                                     </a>
-                                    <div class="invalid-feedback"></div>
+                                    <?php if (isset($product)) {
+                                        $attributes = json_decode($product->attribute);
+                                        foreach ($attributes as $attribute) { ?>
+                                            <div class="row">
+                                                <div class="form-group col-xs-3">
+                                                    <input type="text" name="attribute_name[]" class="form-control" placeholder="Name" value="<?= $attribute->name ?>">
+                                                </div>
+                                                <div class="form-group col-xs-8">
+                                                    <input type="text" name="attribute_value[]" class="form-control" placeholder="Value" value="<?= $attribute->value ?>">
+                                                </div>
+                                                <a class="mt-2" href="javascript:void(0)" onclick="$(this).parent().remove()">
+                                                    <i class="fa fa-times-circle"></i>
+                                                </a>
+                                            </div>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </div>
                             </div>
                             <!-- /.box-body -->
@@ -108,19 +124,28 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            CKEDITOR.replace('description', {
+            var $ckfield = CKEDITOR.replace('description', {
                 filebrowserBrowseUrl: '<?= base_url("filemanager/dialog.php?type=2&editor=ckeditor&fldr=") ?>',
                 filebrowserUploadUrl: '<?= base_url("filemanager/dialog.php?type=2&editor=ckeditor&fldr=") ?>',
                 filebrowserImageBrowseUrl: '<?= base_url("filemanager/dialog.php?type=1&editor=ckeditor&fldr=") ?>',
                 filebrowserUploadMethod: "form"
             });
+            $ckfield.on('change', function() {
+                $ckfield.updateElement();
+            });
+
             $("form").submit(function(e) {
                 $("#msg").addClass('hidden');
                 e.preventDefault();
+
+                var formData = new FormData(this);
+
                 $.ajax({
                     url: "<?= site_url("admin/product/save") . (isset($product) ? "?id=" . $product->product_id : "") ?>",
                     type: 'post',
-                    data: $(this).serialize(),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(data) {
                         $("#msg").removeClass('alert-danger');
                         $("#msg").addClass('alert-success');
@@ -145,7 +170,6 @@
             });
         });
     </script>
-
 
     <script id="show-product" type="text/html">
         <div class="row">

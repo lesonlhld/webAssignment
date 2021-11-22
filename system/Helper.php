@@ -185,3 +185,60 @@ function stripUnicode($str)
     }
     return strtolower($str);
 }
+
+function upload_file($folder, $type, $field_name)
+{
+    $success = true;
+    $config['upload_path'] = 'source' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
+    $config['max_size'] = 5000000;
+    if ($type == "image") {
+        $config['max_width'] = 2000;
+        $config['max_height'] = 2000;
+        $config['allowed_types'] = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png');
+        $config['allowed_exts'] = array('gif', 'jpeg', 'jpg', 'png');
+        $config['msg'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    } else if ($type == "excel") {
+        $config['allowed_types'] = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $config['allowed_exts'] = array('xls', 'xlsx', 'csv');
+        $config['msg'] = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    } else {
+    }
+
+    if (isset($_FILES[$field_name]['name']) && $_FILES[$field_name]['name'] != "") {
+        $file_extension = strtolower(pathinfo($_FILES[$field_name]["name"], PATHINFO_EXTENSION));
+        if (in_array($_FILES[$field_name]['type'], $config['allowed_types']) && in_array($file_extension, $config['allowed_exts'])) {
+            $prefix = time() . '_';
+            $target_file = $config['upload_path'] . $prefix . basename($_FILES[$field_name]["name"]);
+
+            // Check if image file is a actual image or fake image
+            $check = getimagesize($_FILES[$field_name]["tmp_name"]);
+            if ($check == false) {
+                echo "File is not an image.";
+                $success = false;
+            }
+
+            // Check if file already exists
+            if (file_exists($target_file)) {
+                echo "Sorry, file already exists.";
+                $success = false;
+            }
+
+            // Check file size
+            if ($_FILES[$field_name]["size"] > $config['max_size']) {
+                echo "Sorry, your file is too large.";
+                $success = false;
+            }
+
+            // Check if $success is set to false by an error
+            if ($success == true) {
+                if (!move_uploaded_file($_FILES[$field_name]["tmp_name"], $target_file)) {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+                return $prefix . $_FILES[$field_name]["name"];
+            }
+        } else {
+            echo $config['msg'];
+        }
+    }
+    return "";
+}

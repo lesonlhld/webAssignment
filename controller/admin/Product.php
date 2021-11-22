@@ -129,6 +129,7 @@ class Product extends \Controller\Controller
             unset($data["attribute_value"]);
             $data['attribute'] = json_encode($attribute);
 
+            $data['image'] = upload_file("products", "image", "image");
             if ($id == -1) {
                 $PRODUCT_Model = Model('PRODUCT_Model');
                 if ($PRODUCT_Model->create($data) > 0) {
