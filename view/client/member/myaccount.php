@@ -9,11 +9,10 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Information ===-->
-<div class="form-input content-md margin-bottom-30">
+<div class="form-input content-sm margin-bottom-30">
     <div class="container bootstrap snippet">
-        <form class="form" action="javascript.void(0)" method="post" id="" enctype="multipart/form-data">
-            <!--left col-->
-            <div class="col-sm-3">
+        <form id="" action="javascript:void(0)" method="post">
+            <div class="col-sm-4">
                 <div class="text-center">
                     <img src="#" class="avatar img-square img-thumbnail" alt="avatar">
                     <h6>Thay đổi hình đại diện</h6>
@@ -21,81 +20,70 @@
                 </div>
                 <br>
             </div>
-            <!--col-3-->
-            <div class="col-sm-9">
-                <div class="tab-content">
-                    <div class="tab-pane active" id="home">
-                        <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
+            <div class="col-sm-8">
+                <div class="form-input-block">
+                    <h2>Thông tin tài khoản</h2>
+                    <div id="msg" class="text-center alert alert-danger hidden" style="border-radius: .5rem;"></div>
 
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="firstname">
-                                    <h4>Họ:</h4>
-                                </label> <input type="text" class="form-control" name="firstname" id="firstname" value="<?= isset($user) ?  $user->first_name : '' ?>" placeholder="Enter your first name.">
+                    <div class="reg-input">
+                        <section>
+                            <label class="input">Địa chỉ email</label>
+                            <input type="email" name="email" placeholder="Địa chỉ email" value="<?= isset($user) ?  $user->email : '' ?>" class="form-control" readonly required>
+                        </section>
+                        <div class="row">
+                            <div class="col-sm-6 sm-margin-bottom-50">
+                                <section>
+                                    <label class="input">Họ</label>
+                                    <input type="text" name="firstname" placeholder="Họ" value="<?= isset($user) ?  $user->first_name : '' ?>" class="form-control" required>
+                                </section>
+                            </div>
+                            <div class="col-sm-6 sm-margin-bottom-50">
+                                <section>
+                                    <label class="input">Tên</label>
+                                    <input type="text" name="lastname" placeholder="Tên" value="<?= isset($user) ?  $user->last_name : '' ?>" class="form-control" required>
+                                </section>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="lastname">
-                                    <h4>Tên:</h4>
-                                </label> <input type="text" class="form-control" name="lastname" id="lastname" value="<?= isset($user) ?  $user->last_name : '' ?>" placeholder="Enter your last name.">
+                        <div class="row">
+                            <div class="col-sm-6 sm-margin-bottom-50">
+                                <section>
+                                    <label class="input">Giới tính</label>
+                                    <select name="gender" placeholder="Giới tính" class="form-control">
+                                        <option value="MALE" <?= isset($user) ? ($user->gender=='MALE' ? 'selected' : '') : '' ?>>Nam</option>
+                                        <option value="FEMALE" <?= isset($user) ? ($user->gender=='FEMALE' ? 'selected' : '') : '' ?>>Nữ</option>
+                                    </select>
+                                </section>
+                            </div>
+                            <div class="col-sm-6 sm-margin-bottom-50">
+                                <section>
+                                    <label class="input">Ngày tháng năm sinh</label>
+                                    <input type="date" name="birthday" max=<?= date('Y-m-d'); ?> value="<?= isset($user) ?  $user->birth_date : '' ?>" class="form-control" required>
+                                </section>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="birthday">
-                                    <h4>Ngày sinh:</h4>
-                                </label> <input type="date" class="form-control" name="birthday" id="birthday" value="<?= isset($user) ?  $user->birth_date : '' ?>">
+                        <div class="row">
+                            <div class="col-sm-6 sm-margin-bottom-50">
+                                <section>
+                                    <label class="input">Số điện thoại</label>
+                                    <input type="text" name="phone" value="<?= isset($user) ?  $user->phone : '' ?>" class="form-control">
+                                </section>
+                            </div>
+                            <div class="col-sm-6 sm-margin-bottom-50">
+                                <section>
+                                    <label class="input">Địa chỉ</label>
+                                    <input type="text" name="address" value="<?= isset($user) ?  $user->address : '' ?>" class="form-control">
+                                </section>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="gender">
-                                    <h4>Giới tính:</h4>
-                                </label>
-                                <select name="gender" id="" class="form-control">
-                                    <option value="MALE">Nam</option>
-                                    <option value="FEMALE">Nữ</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Email:</h4>
-                                </label> <input type="text" class="form-control" name="email" id="email" value="<?= isset($user) ?  $user->email : '' ?>" placeholder="Enter your email.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="phone">
-                                    <h4>Số điện thoại:</h4>
-                                </label> <input type="text" class="form-control" name="phone" id="phone" value="<?= isset($user) ?  $user->phone : '' ?>" placeholder="Enter your phone.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="address">
-                                    <h4>Địa chỉ:</h4>
-                                </label> <input type="text" class="form-control" name="address" id="address" value="<?= isset($user) ?  $user->address : '' ?>" placeholder="Enter your address.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-success" type="submit">
+                        <div class="row">
+                            <br>
+                            <div class=col-sm-6>
+                                <button class="btn btn-block btn-lg btn-success" type="submit">
                                     <i class="glyphicon glyphicon-ok-sign"></i> Lưu lại
                                 </button>
-                                <button class="btn btn-lg" type="reset">
+                            </div>
+                            <div class=col-sm-6>
+                                <button class="btn btn-block btn-lg" type="reset">
                                     <i class="glyphicon glyphicon-repeat"></i> Đặt lại
                                 </button>
                             </div>
