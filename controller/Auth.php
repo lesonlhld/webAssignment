@@ -46,6 +46,10 @@ class Auth extends \Controller\Controller
         $user_login = $USER_Model->login($email, $password);
         if ($user_login == null) {
             View("", ['msg' => 'Sai email hoặc password'], 401);
+        } else if ($user_login->role_id == 2) {
+            View("", ['msg' => 'Bạn không có quyền truy cập'], 401);
+        } else if ($user_login->publish == 0) {
+            View("", ['msg' => 'Tài khoản của bạn hiện đang bị khóa'], 401);
         } else {
             $_SESSION['is_logged_in'] = true;
             $_SESSION['lastname'] = $user_login->last_name;

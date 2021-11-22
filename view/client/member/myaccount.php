@@ -26,12 +26,12 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="home">
                         <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
-                        
+
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="firstname">
                                     <h4>Họ:</h4>
-                                </label> <input type="text" class="form-control" name="firstname" id="firstname" value="<?= isset($user) ?  $user->first_name : '' ?>" placeholder="Enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="firstname" id="firstname" value="<?= isset($user) ?  $user->first_name : '' ?>" placeholder="Enter your first name.">
                             </div>
                         </div>
 
@@ -39,7 +39,7 @@
                             <div class="col-xs-6">
                                 <label for="lastname">
                                     <h4>Tên:</h4>
-                                </label> <input type="text" class="form-control" name="lastname" id="lastname" value="<?= isset($user) ?  $user->last_name : '' ?>" title="enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="lastname" id="lastname" value="<?= isset($user) ?  $user->last_name : '' ?>" placeholder="Enter your last name.">
                             </div>
                         </div>
 
@@ -56,10 +56,10 @@
                                 <label for="gender">
                                     <h4>Giới tính:</h4>
                                 </label>
-                                <div class="checkbox">
-                                    <label> <input type="radio" value="M" name="gender" />Nam </label>
-                                    <label> <input type="radio" value="F" name="gender" checked="checked" />Nữ </label>
-                                </div>
+                                <select name="gender" id="" class="form-control">
+                                    <option value="MALE">Nam</option>
+                                    <option value="FEMALE">Nữ</option>
+                                </select>
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                             <div class="col-xs-6">
                                 <label for="email">
                                     <h4>Email:</h4>
-                                </label> <input type="text" class="form-control" name="email" id="email" value="<?= isset($user) ?  $user->email : '' ?>" title="enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="email" id="email" value="<?= isset($user) ?  $user->email : '' ?>" placeholder="Enter your email.">
                             </div>
                         </div>
 
@@ -76,7 +76,7 @@
                             <div class="col-xs-6">
                                 <label for="phone">
                                     <h4>Số điện thoại:</h4>
-                                </label> <input type="text" class="form-control" name="phone" id="phone" value="<?= isset($user) ?  $user->phone : '' ?>" title="enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="phone" id="phone" value="<?= isset($user) ?  $user->phone : '' ?>" placeholder="Enter your phone.">
                             </div>
                         </div>
 
@@ -85,7 +85,7 @@
                             <div class="col-xs-6">
                                 <label for="address">
                                     <h4>Địa chỉ:</h4>
-                                </label> <input type="text" class="form-control" name="address" id="address" value="<?= isset($user) ?  $user->address : '' ?>" title="enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="address" id="address" value="<?= isset($user) ?  $user->address : '' ?>" placeholder="Enter your address.">
                             </div>
                         </div>
 
@@ -125,7 +125,7 @@
                 },
                 error: function(data) {
                     const obj = JSON.parse(JSON.stringify(data));
-                    
+
                     $("#msg").removeClass('alert-success');
                     $("#msg").addClass('alert-danger');
                     $("#msg").removeClass('hidden');

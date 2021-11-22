@@ -53,13 +53,12 @@ class USER_Model extends \Model\Model
         return $stmt->fetch();
     }
 
-    public function login($email, $password, $role = 1)
+    public function login($email, $password)
     {
         $password = hashpass($password);
-        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE email=:email AND password=:password AND role_id=:role_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE email=:email AND password=:password');
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
-        $stmt->bindParam(':role_id', $role);
         $stmt->execute();
 
         return $stmt->fetch();

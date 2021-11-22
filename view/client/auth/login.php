@@ -14,7 +14,7 @@
             <div>
                 <form id="" class="form-input-block" action="javascript:void(0)" method="post">
                     <h2>ĐĂNG NHẬP</h2>
-                    <h3 id="msg" style="color: red;" class="hidden"></h3>
+                    <div id="msg" class="text-center alert alert-danger hidden" style="border-radius: .5rem;"></div>
 
                     <section>
                         <label class="input login-input">
