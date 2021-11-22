@@ -3,10 +3,10 @@
 namespace Model;
 
 /**
- * NEWS_model
+ * NEWS_Model
  * @author    Le Trung Son    lesonlhld@gmail.com
  */
-class NEWS_model extends \Model\Model
+class NEWS_Model extends \Model\Model
 {
     public function get_list_active($start = null, $limit = null)
     {
