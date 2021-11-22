@@ -127,12 +127,6 @@
                             <i class="fa fa-cog"></i> <span>Configs</span>
                         </a>
                     </li>
-                    <li class="header">CONTENT MODULES</li>
-                    <li>
-                        <a href="<?= site_url("admin/news") ?>">
-                            <i class="fa fa-file-text-o"></i> <span>News</span>
-                        </a>
-                    </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-users"></i> <span>User</span>
@@ -144,6 +138,17 @@
                             <li><a href="<?= site_url('admin/user'); ?>"><i class="fa fa-list"></i> User List</a></li>
                             <li><a href="<?= site_url('admin/user/trash'); ?>"><i class="fa fa-trash-o"></i> User Trash</a></li>
                         </ul>
+                    </li>
+                    <li class="header">CONTENT MODULES</li>
+                    <li>
+                        <a href="<?= site_url('admin/filemanager'); ?>">
+                            <i class="fa fa-folder"></i> <span>File Manager</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= site_url("admin/news") ?>">
+                            <i class="fa fa-file-text-o"></i> <span>News</span>
+                        </a>
                     </li>
                     <li class="treeview">
                         <a href="#">
@@ -180,11 +185,6 @@
                             <li><a href="<?= site_url('admin/customer'); ?>"><i class="fa fa-list"></i> Customer List</a></li>
                             <li><a href="<?= site_url('admin/customer/trash'); ?>"><i class="fa fa-trash-o"></i> Customer Trash</a></li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="<?= site_url('admin/filemanager'); ?>">
-                            <i class="fa fa-folder"></i> <span>File Manager</span>
-                        </a>
                     </li>
                 </ul>
             </section>

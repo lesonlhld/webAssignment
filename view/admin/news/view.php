@@ -25,18 +25,24 @@
                         <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" value="<?= isset($news) ?  $news->title : '' ?>" placeholder="Enter title">
+                            <textarea id="title" name="title" class="form-control" rows="5" placeholder="Enter title" disabled><?= isset($news) ? $news->title : '' ?>
+                            </textarea>
                         </div>
                         <div class="form-group">
                             <label for="short_content">Short content</label>
-                            <input type="text" class="form-control" id="short_content" name="short_content" placeholder="Enter short content" value="<?= isset($news) ?  $news->short_content : '' ?>">
+                            <textarea id="short_content" name="short_content" class="form-control" rows="5" placeholder="Enter short_content" disabled><?= isset($news) ? $news->short_content : '' ?>
+                            </textarea>
                         </div>
                         <div class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="publish" value="1" <?= isset($news) ?  ($news->publish == 1 ? "checked" : "") : "" ?> id="publish">Published
+                                    <input type="checkbox" name="publish" value="1" <?= isset($news) ?  ($news->publish == 1 ? "checked" : "") : "" ?> id="publish" disabled>Published
                                 </label>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <?php if (isset($news) && $news->image != "") { ?><img src='<?= base_url("source/news/" . $news->image) ?>' alt='News Image' style='width:100%;'><?php } ?>
                         </div>
                     </div>
                     <!-- /.box-body -->

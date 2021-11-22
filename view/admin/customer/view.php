@@ -62,6 +62,10 @@
                                 <label for="birthday">Birthday</label>
                                 <input type="date" id="birthday" name="birthday" class="form-control" value="<?= isset($customer) ?  $customer->birth_date : '' ?>" max=<?= date('Y-m-d'); ?> disabled>
                             </div>
+                            <div class="form-group">
+                                <label for="image">Avatar</label>
+                                <?php if (isset($customer) && $customer->avatar != "") { ?><img src='<?= base_url("source/users/" . $customer->avatar) ?>' alt='Avatar' style='width:100%;'><?php } ?>
+                            </div>
                         </div>
                         <!-- /.box-body -->
 

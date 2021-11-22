@@ -27,11 +27,13 @@
                                 <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                                 <div class="form-group">
                                     <label for="title">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" value="<?= isset($news) ?  $news->title : '' ?>" placeholder="Enter title">
+                                    <textarea id="title" name="title" class="form-control" rows="5" placeholder="Enter title"><?= isset($news) ? $news->title : '' ?>
+                                    </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="short_content">Short content</label>
-                                    <input type="text" class="form-control" id="short_content" name="short_content" placeholder="Enter short content" value="<?= isset($news) ?  $news->short_content : '' ?>">
+                                    <textarea id="short_content" name="short_content" class="form-control" rows="5" placeholder="Enter short_content"><?= isset($news) ? $news->short_content : '' ?>
+                                    </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label>
@@ -65,7 +67,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="content">Content</label>
-                                    <textarea id="content" name="content" rows="10" cols="80"><?= isset($news) ?  $news->content : '' ?>
+                                    <textarea id="content" name="content" rows="10" cols="80"><?= isset($news) ? $news->content : '' ?>
                                     </textarea>
                                 </div>
                             </div>

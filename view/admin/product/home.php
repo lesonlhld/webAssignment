@@ -49,7 +49,7 @@
                                                 <input type="checkbox" id="check_item" class="check-list" value="<?= $product->product_id ?>">
                                             </td>
                                             <td>
-                                                <img src='<?= base_url($product->image) ?>' alt='Product Image' style='width:auto; max-height:100px'>
+                                                <img src='<?= base_url("source/products/" . $product->image) ?>' alt='Product Image' style='width:auto; max-height:100px'>
                                             </td>
                                             <td><a href="<?= site_url('admin/product/view?id=' . $product->product_id); ?>"><?= $product->product_name ?></a> </td>
                                             <td><?= $product->price ?> </td>
