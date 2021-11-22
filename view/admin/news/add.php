@@ -82,9 +82,9 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             var $ckfield = CKEDITOR.replace('content', {
-                filebrowserBrowseUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-                filebrowserUploadUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-                filebrowserImageBrowseUrl: 'filemanager/dialog.php?type=1&editor=ckeditor&fldr=',
+                filebrowserBrowseUrl: '<?= base_url("filemanager/dialog.php?type=2&editor=ckeditor&fldr=") ?>',
+                filebrowserUploadUrl: '<?= base_url("filemanager/dialog.php?type=2&editor=ckeditor&fldr=") ?>',
+                filebrowserImageBrowseUrl: '<?= base_url("filemanager/dialog.php?type=1&editor=ckeditor&fldr=") ?>',
                 filebrowserUploadMethod: "form"
             });
             $ckfield.on('change', function() {
@@ -94,10 +94,15 @@
             $("form").submit(function(e) {
                 $("#msg").addClass('hidden');
                 e.preventDefault();
+
+                var formData = new FormData(this);
+
                 $.ajax({
                     url: "<?= site_url("admin/news/save") . (isset($news) ? "?id=" . $news->id : "") ?>",
                     type: 'post',
-                    data: $(this).serialize(),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(data) {
                         $("#msg").removeClass('alert-danger');
                         $("#msg").addClass('alert-success');

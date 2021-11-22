@@ -105,6 +105,7 @@ class Customer extends \Controller\Controller
         } else if ($data["address"] == "") {
             View("", ['msg' => 'Địa chỉ không được để trống'], 401);
         } else {
+            $data['image'] = upload_file("users", "image", "image");
             if ($id == -1) {
                 $USER_Model = Model('USER_Model');
                 if ($USER_Model->check_exist_email($data['email']) > 0) {

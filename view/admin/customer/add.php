@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Avatar</label>
-                                    <input type="file" id="image" name="avatar" placeholder="Choose image">
+                                    <input type="file" id="image" name="image">
                                 </div>
                             </div>
                             <!-- /.box-body -->
@@ -85,10 +85,15 @@
             $("form").submit(function(e) {
                 $("#msg").addClass('hidden');
                 e.preventDefault();
+
+                var formData = new FormData(this);
+
                 $.ajax({
                     url: "<?= site_url("admin/customer/save") . (isset($customer) ? "?id=" . $customer->id : "") ?>",
                     type: 'post',
-                    data: $(this).serialize(),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(data) {
                         $("#msg").removeClass('alert-danger');
                         $("#msg").addClass('alert-success');

@@ -17,7 +17,7 @@
                 <div class="text-center">
                     <img src="#" class="avatar img-square img-thumbnail" alt="avatar">
                     <h6>Thay đổi hình đại diện</h6>
-                    <input type="file" name="avatar" class="text-center center-block file-upload">
+                    <input type="file" name="image" class="text-center center-block file-upload">
                 </div>
                 <br>
             </div>

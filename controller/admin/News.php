@@ -102,6 +102,7 @@ class News extends \Controller\Controller
         } else if ($data["content"] == "") {
             View("", ['msg' => 'Nội dung không được để trống'], 401);
         } else {
+            $data['image'] = upload_file("news", "image", "image");
             if ($id == -1) {
                 $NEWS_Model = Model('NEWS_Model');
                 if ($NEWS_Model->create($data) > 0) {
