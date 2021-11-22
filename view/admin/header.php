@@ -182,11 +182,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-usd"></i> <span>Revenue</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">new</small>
-                            </span>
+                        <a href="<?= site_url('admin/filemanager'); ?>">
+                            <i class="fa fa-folder"></i> <span>File Manager</span>
                         </a>
                     </li>
                 </ul>
