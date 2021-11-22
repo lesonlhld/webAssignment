@@ -81,7 +81,11 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            CKEDITOR.replace('content');
+            CKEDITOR.replace('content', {
+                filebrowserBrowseUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+                filebrowserUploadUrl: 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+                filebrowserImageBrowseUrl: 'filemanager/dialog.php?type=1&editor=ckeditor&fldr='
+            });
             $("form").submit(function(e) {
                 $("#msg").addClass('hidden');
                 e.preventDefault();
