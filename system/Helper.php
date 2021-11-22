@@ -11,7 +11,6 @@
 function Model($model_path_name)
 {
     $model_file = "model/" . $model_path_name . ".php";
-    echo $model_file;
     if (!file_exists($model_file)) return exit('Invalid Model!');
 
     $tmp = explode('/', $model_path_name);
