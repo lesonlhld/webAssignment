@@ -1,3 +1,4 @@
+<?php $user = $data['user'] ?>
 <!-- Breadcrumbs v5 -->
 <div class="container">
     <ul class="breadcrumb-v5">
@@ -10,11 +11,9 @@
 <!--=== Information ===-->
 <div class="form-input content-md margin-bottom-30">
     <div class="container bootstrap snippet">
-        <form class="form" action="${myaccount}" method="post" id="registrationForm" enctype="multipart/form-data">
+        <form class="form" action="javascript.void(0)" method="post" id="" enctype="multipart/form-data">
             <!--left col-->
             <div class="col-sm-3">
-                <input name="role" value="${sessionScope.account.roleId}" hidden="">
-                <input name="id" value="${sessionScope.account.id}" hidden="">
                 <div class="text-center">
                     <img src="#" class="avatar img-square img-thumbnail" alt="avatar">
                     <h6>Thay đổi hình đại diện</h6>
@@ -26,12 +25,13 @@
             <div class="col-sm-9">
                 <div class="tab-content">
                     <div class="tab-pane active" id="home">
+                        <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
+                        
                         <div class="form-group">
-                            <h4 style="color: red;"> ${alertMsg}</h4>
                             <div class="col-xs-6">
                                 <label for="firstname">
                                     <h4>Họ:</h4>
-                                </label> <input type="text" class="form-control" name="firstname" id="firstname" value="" title="enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="firstname" id="firstname" value="<?= isset($user) ?  $user->first_name : '' ?>" placeholder="Enter your first name if any.">
                             </div>
                         </div>
 
@@ -39,7 +39,7 @@
                             <div class="col-xs-6">
                                 <label for="lastname">
                                     <h4>Tên:</h4>
-                                </label> <input type="text" class="form-control" name="lastname" id="lastname" value="" title="enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="lastname" id="lastname" value="<?= isset($user) ?  $user->last_name : '' ?>" title="enter your first name if any.">
                             </div>
                         </div>
 
@@ -47,7 +47,7 @@
                             <div class="col-xs-6">
                                 <label for="birthday">
                                     <h4>Ngày sinh:</h4>
-                                </label> <input type="date" class="form-control" name="birthday" id="birthday" value="">
+                                </label> <input type="date" class="form-control" name="birthday" id="birthday" value="<?= isset($user) ?  $user->birth_date : '' ?>">
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                             <div class="col-xs-6">
                                 <label for="email">
                                     <h4>Email:</h4>
-                                </label> <input type="text" class="form-control" name="email" id="email" value="" title="enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="email" id="email" value="<?= isset($user) ?  $user->email : '' ?>" title="enter your first name if any.">
                             </div>
                         </div>
 
@@ -76,7 +76,7 @@
                             <div class="col-xs-6">
                                 <label for="phone">
                                     <h4>Số điện thoại:</h4>
-                                </label> <input type="text" class="form-control" name="phone" id="phone" value="" title="enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="phone" id="phone" value="<?= isset($user) ?  $user->phone : '' ?>" title="enter your first name if any.">
                             </div>
                         </div>
 
@@ -85,7 +85,7 @@
                             <div class="col-xs-6">
                                 <label for="address">
                                     <h4>Địa chỉ:</h4>
-                                </label> <input type="text" class="form-control" name="address" id="address" value="" title="enter your first name if any.">
+                                </label> <input type="text" class="form-control" name="address" id="address" value="<?= isset($user) ?  $user->address : '' ?>" title="enter your first name if any.">
                             </div>
                         </div>
 
@@ -108,3 +108,30 @@
     <!--end container-->
 </div>
 <!--=== End Information ===-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        $("form").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('member/update_info') ?>",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function(data) {
+                    $("#msg").removeClass('alert-danger');
+                    $("#msg").addClass('alert-success');
+                    $("#msg").removeClass('hidden');
+                    $("#msg").html(data.msg);
+                },
+                error: function(data) {
+                    const obj = JSON.parse(JSON.stringify(data));
+                    
+                    $("#msg").removeClass('alert-success');
+                    $("#msg").addClass('alert-danger');
+                    $("#msg").removeClass('hidden');
+                    $("#msg").html(obj.responseJSON.msg);
+                }
+            });
+        });
+    });
+</script>
