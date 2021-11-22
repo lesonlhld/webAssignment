@@ -14,15 +14,15 @@
         </section>
 
         <section class="content">
-            <div class="row">
-                <div class="col-sm-12 col-lg-6">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Information</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form method="POST" action="javascript:void(0)" enctype="multipart/form-data">
+            <!-- form start -->
+            <form method="POST" action="javascript:void(0)" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Information</h3>
+                            </div>
+                            <!-- /.box-header -->
                             <div class="box-body">
                                 <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                                 <div class="form-group">
@@ -46,7 +46,7 @@
                                     <select class="form-control" id="category_id" name="category_id">
                                         <option value="-1" hidden>Select category</option>
                                         <?php foreach ($data['category_list'] as $category) { ?>
-                                            <option value="<?= $category->category_id ?>" <?= $category->category_id == $product->category_id ? "selected" : '' ?>><?= $category->category_name ?></option>
+                                            <option value="<?= $category->category_id ?>" <?= isset($product) && $category->category_id == $product->category_id ? "selected" : '' ?>><?= $category->category_name ?></option>
                                         <?php
                                         }
                                         ?>
@@ -56,13 +56,9 @@
                                     <label for="status">Status</label>
                                     <select class="form-control" id="status" name="status">
                                         <option value="-1" hidden>Select status</option>
-                                        <option value="1" <?= (isset($news) && $news->publish == 1) ? 'selected' : '' ?>>Active</option>
-                                        <option value="0" <?= (!isset($news) || $news->publish == 0) ? 'selected' : '' ?>>Lock</option>
+                                        <option value="1" <?= (isset($product) && $product->publish == 1) ? 'selected' : '' ?>>Active</option>
+                                        <option value="0" <?= (!isset($product) || $product->publish == 0) ? 'selected' : '' ?>>Lock</option>
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <input type="text" class="form-control" id="description" name="description" placeholder="Enter description" value="<?= isset($product) ?  $product->description : '' ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label>
@@ -76,19 +72,43 @@
                                 <a href="<?= site_url('admin/product'); ?>"><button type="button" class="btn btn-info">Cancel</button></a>
 
                             </div>
-                        </form>
+                        </div>
                     </div>
+                    <!-- /.col -->
 
+                    <div class="col-sm-12 col-lg-8">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Information</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea id="description" name="description" rows="10" cols="80"><?= isset($product) ?  $product->description : '' ?>
+                                    </textarea>
+                                </div>
+                                <div class="form-group" id="attribute">
+                                    <label for="description">Attribute</label>
 
+                                    <a id="add-attribute" href="javascript:void(0)">
+                                        <i class="fa fa-plus-circle"></i> Add new
+                                    </a>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
                 </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
+                <!-- /.row -->
+            </form>
         </section>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            CKEDITOR.replace('description');
             $("form").submit(function(e) {
                 $("#msg").addClass('hidden');
                 e.preventDefault();
@@ -112,5 +132,26 @@
                     }
                 });
             });
+
+            $("#add-attribute").click(function(e) {
+                $("#attribute").append(
+                    document.getElementById("show-product").innerHTML
+                );
+            });
         });
+    </script>
+
+
+    <script id="show-product" type="text/html">
+        <div class="row">
+            <div class="form-group col-xs-3">
+                <input type="text" name="attribute_name[]" class="form-control" placeholder="Name" value="">
+            </div>
+            <div class="form-group col-xs-8">
+                <input type="text" name="attribute_value[]" class="form-control" placeholder="Value" value="">
+            </div>
+            <a class="mt-2" href="javascript:void(0)" onclick="$(this).parent().remove()">
+                <i class="fa fa-times-circle"></i>
+            </a>
+        </div>
     </script>

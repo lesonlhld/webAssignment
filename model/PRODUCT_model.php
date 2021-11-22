@@ -81,13 +81,14 @@ class PRODUCT_Model extends \Model\Model
 
     public function create($data)
     {
-        $stmt = $this->pdo->prepare('INSERT INTO products(product_name, price, quantity, discount, category_id, description, image, publish) VALUES (:product_name, :price, :quantity, :discount, :category_id, :description, :image, :publish)');
+        $stmt = $this->pdo->prepare('INSERT INTO products(product_name, price, quantity, discount, category_id, description, attribute, image, publish) VALUES (:product_name, :price, :quantity, :discount, :category_id, :description, :attribute, :image, :publish)');
         $stmt->bindParam(':product_name', $data['name']);
         $stmt->bindParam(':price', $data['price']);
         $stmt->bindParam(':quantity', $data['quantity']);
         $stmt->bindParam(':discount', $data['discount']);
         $stmt->bindParam(':category_id', $data['category_id']);
         $stmt->bindParam(':description', $data['description']);
+        $stmt->bindParam(':attribute', $data['attribute']);
         $stmt->bindParam(':image', $data['image']);
         $stmt->bindParam(':publish', $data['status']);
         $stmt->execute();
@@ -97,13 +98,14 @@ class PRODUCT_Model extends \Model\Model
 
     public function update($id, $data)
     {
-        $stmt = $this->pdo->prepare('UPDATE products SET product_name=:product_name, price=:price, quantity=:quantity, discount=:discount, category_id= :category_id, description= :description, image= :image, publish=:publish WHERE product_id=:product_id');
+        $stmt = $this->pdo->prepare('UPDATE products SET product_name=:product_name, price=:price, quantity=:quantity, discount=:discount, category_id= :category_id, description= :description, attribute= :attribute, image= :image, publish=:publish WHERE product_id=:product_id');
         $stmt->bindParam(':product_name', $data['name']);
         $stmt->bindParam(':price', $data['price']);
         $stmt->bindParam(':quantity', $data['quantity']);
         $stmt->bindParam(':discount', $data['discount']);
         $stmt->bindParam(':category_id', $data['category_id']);
         $stmt->bindParam(':description', $data['description']);
+        $stmt->bindParam(':attribute', $data['attribute']);
         $stmt->bindParam(':image', $data['image']);
         $stmt->bindParam(':publish', $data['status']);
         $stmt->bindParam(':product_id', $id);

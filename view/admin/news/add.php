@@ -14,15 +14,15 @@
         </section>
 
         <section class="content">
-            <div class="row">
-                <div class="col-sm-12 col-lg-6">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Information</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form method="POST" action="javascript:void(0)" enctype="multipart/form-data">
+            <!-- form start -->
+            <form method="POST" action="javascript:void(0)" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">General Information</h3>
+                            </div>
+                            <!-- /.box-header -->
                             <div class="box-body">
                                 <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                                 <div class="form-group">
@@ -34,16 +34,15 @@
                                     <input type="text" class="form-control" id="short_content" name="short_content" placeholder="Enter short content" value="<?= isset($news) ?  $news->short_content : '' ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="content">Content</label>
-                                    <input type="text" id="content" name="content" class="form-control" placeholder="Enter short content" value="<?= isset($news) ?  $news->content : '' ?>">
-                                </div>
-                                <div class="form-group">
                                     <label for="image">Image</label>
                                     <input type="file" id="image" name="image" placeholder="Choose image">
                                 </div>
                                 <div class="form-group">
-                                    <label for="publish">Published</label>
-                                    <input type="checkbox" name="publish" value="1" <?= isset($news) ?  ($news->publish == 1 ? "checked" : "") : "" ?> id="publish">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="publish" value="1" <?= isset($news) ?  ($news->publish == 1 ? "checked" : "") : "" ?> id="publish">Published
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->
@@ -51,21 +50,38 @@
                             <div class="box-footer">
                                 <button type="submit" value="submit" class="btn btn-primary">Submit</button>
                                 <a href="<?= site_url('admin/news'); ?>"><button type="button" class="btn btn-info">Cancel</button></a>
-
                             </div>
-                        </form>
+                        </div>
                     </div>
+                    <!-- /.col -->
 
 
+                    <div class="col-sm-12 col-lg-8">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Detail</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="content">Content</label>
+                                    <textarea id="content" name="content" rows="10" cols="80"><?= isset($news) ?  $news->content : '' ?>
+                                    </textarea>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                    <!-- /.col -->
                 </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
+                <!-- /.row -->
+            </form>
         </section>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            CKEDITOR.replace('content');
             $("form").submit(function(e) {
                 $("#msg").addClass('hidden');
                 e.preventDefault();

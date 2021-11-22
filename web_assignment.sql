@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 21, 2021 lúc 03:56 PM
+-- Thời gian đã tạo: Th10 22, 2021 lúc 05:54 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -76,7 +76,7 @@ CREATE TABLE `news` (
   `id` int(11) NOT NULL,
   `title` varchar(256) NOT NULL,
   `slug` varchar(256) NOT NULL,
-  `image` text NOT NULL,
+  `image` text DEFAULT NULL,
   `short_content` text NOT NULL,
   `content` text NOT NULL,
   `create_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -89,7 +89,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `title`, `slug`, `image`, `short_content`, `content`, `create_at`, `create_by`, `publish`) VALUES
-(1, 'test title 2', 'test-title-2', '', 'short content', 'full content', '2021-11-21 21:06:53', 1, 0);
+(1, 'test title 2', 'test-title-2', '', 'short content', '<p><img alt=\"test editor\" src=\"https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=1200&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=BWzFqMmUWVFC1OfpPSUqMA\" style=\"height:218px; width:200px\" />&nbsp;t&eacute;t h&igrave;nh ảnh trong editor</p>\r\n', '2021-11-21 21:06:53', 1, 1),
+(2, '12345', '12345', NULL, 'abc', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\">\r\n	<tbody>\r\n		<tr>\r\n			<td>1</td>\r\n			<td>2</td>\r\n		</tr>\r\n		<tr>\r\n			<td>3</td>\r\n			<td>4</td>\r\n		</tr>\r\n		<tr>\r\n			<td>5</td>\r\n			<td>66</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n', '2021-11-22 10:56:23', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -156,6 +157,7 @@ CREATE TABLE `products` (
   `stall_id` int(11) NOT NULL DEFAULT 1,
   `product_status` enum('Active','Stop','Pause') DEFAULT 'Active',
   `description` varchar(2000) DEFAULT NULL,
+  `attribute` text DEFAULT NULL,
   `image` varchar(50) DEFAULT NULL,
   `publish` int(11) NOT NULL DEFAULT 0,
   `trash` int(11) NOT NULL DEFAULT 0
@@ -165,21 +167,22 @@ CREATE TABLE `products` (
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status`, `description`, `image`, `publish`, `trash`) VALUES
-(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 3, 'Active', '', '1608782964521.jpg', 1, 0),
-(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 2, 'Active', '', '1608791315663.jpg', 1, 0),
-(3, 'Kimbap', 35000, 40, 0, 6, 9, 'Active', '', '1608792165625.jpg', 1, 0),
-(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 4, 'Active', '', '1608792180363.jpg', 1, 0),
-(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 8, 'Active', '', '1608792205332.jpg', 0, 0),
-(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 9, 'Active', '', '1608792222820.png', 0, 0),
-(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 6, 'Active', '', '1608792268122.jpg', 0, 0),
-(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 7, 'Active', '', '1608792290140.jpg', 0, 0),
-(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 10, 'Active', '', '1608792313466.jpg', 0, 0),
-(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 11, 'Active', '', '1608792334761.png', 0, 0),
-(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 12, 'Active', '', '1608792847544.jpg', 0, 0),
-(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 11, 'Active', '', '1608792567395.jpg', 0, 0),
-(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 4, 'Active', '', '1608792551817.webp', 0, 0),
-(14, 'Mì bò', 20000, 25, 10, 6, 5, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', '1608793914044.jpg', 0, 0);
+INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status`, `description`, `attribute`, `image`, `publish`, `trash`) VALUES
+(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 3, 'Active', '', NULL, '1608782964521.jpg', 1, 0),
+(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 2, 'Active', '', NULL, '1608791315663.jpg', 1, 0),
+(3, 'Kimbap', 35000, 40, 0, 6, 9, 'Active', '', NULL, '1608792165625.jpg', 1, 0),
+(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 4, 'Active', '', NULL, '1608792180363.jpg', 1, 0),
+(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 8, 'Active', '', NULL, NULL, 1, 0),
+(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 9, 'Active', '', NULL, '1608792222820.png', 0, 0),
+(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 6, 'Active', '', NULL, '1608792268122.jpg', 0, 0),
+(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 7, 'Active', '', NULL, '1608792290140.jpg', 0, 0),
+(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 10, 'Active', '', NULL, '1608792313466.jpg', 0, 0),
+(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 11, 'Active', '', NULL, '1608792334761.png', 0, 0),
+(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 12, 'Active', '', NULL, '1608792847544.jpg', 0, 0),
+(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 11, 'Active', '', NULL, '1608792567395.jpg', 0, 0),
+(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 4, 'Active', '', NULL, '1608792551817.webp', 0, 0),
+(14, 'Mì bò', 20000, 25, 10, 6, 5, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', NULL, '1608793914044.jpg', 0, 0),
+(15, 'san pham 1', 10000, 100, 0, 1, 1, 'Active', '', '[{\"name\":\"size\",\"value\":\"12\"},{\"name\":\"test\",\"value\":\"av\"}]', NULL, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -407,7 +410,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`

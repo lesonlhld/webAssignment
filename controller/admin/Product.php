@@ -116,6 +116,19 @@ class Product extends \Controller\Controller
         } else if ($data["category_id"] < 0) {
             View("", ['msg' => 'Phân loại không được để trống'], 401);
         } else {
+            $attribute = [];
+            if (isset($data["attribute_name"])) {
+                foreach ($data["attribute_name"] as $index => $name) {
+                    if (!empty($name)) {
+                        $attribute[$index]["name"] = $data["attribute_name"][$index];
+                        $attribute[$index]["value"] = $data["attribute_value"][$index];
+                    }
+                }
+            }
+            unset($data["attribute_name"]);
+            unset($data["attribute_value"]);
+            $data['attribute'] = json_encode($attribute);
+
             if ($id == -1) {
                 $PRODUCT_Model = Model('PRODUCT_Model');
                 if ($PRODUCT_Model->create($data) > 0) {
