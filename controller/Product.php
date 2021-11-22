@@ -12,9 +12,9 @@ class Product extends \Controller\Controller
 {
     public function list()
     {
-        $PRODUCT_model = Model('PRODUCT_model');
+        $PRODUCT_Model = Model('PRODUCT_Model');
 
-        $product_list = $PRODUCT_model->get_list_active();
+        $product_list = $PRODUCT_Model->get_list_active();
 
         $this->data['data']['product_list'] = $product_list;
         $this->data["subview"] = "client/product/list";
