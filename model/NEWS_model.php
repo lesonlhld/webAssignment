@@ -83,6 +83,7 @@ class NEWS_model extends \Model\Model
     {
         $slug = linkseo($data['title']);
         $create_by = $_SESSION['id'];
+        $publish = $data['publish'] ?? "0";
 
         $stmt = $this->pdo->prepare('INSERT INTO news(title, slug, image, short_content, content, create_by, publish) VALUES (:title, :slug, :image, :short_content, :content, :create_by, :publish)');
         $stmt->bindParam(':title', $data['title']);
@@ -91,7 +92,7 @@ class NEWS_model extends \Model\Model
         $stmt->bindParam(':short_content', $data['short_content']);
         $stmt->bindParam(':content', $data['content']);
         $stmt->bindParam(':create_by', $create_by);
-        $stmt->bindParam(':publish', $data['publish']);
+        $stmt->bindParam(':publish', $publish);
         $stmt->execute();
 
         return $this->pdo->lastInsertId();
@@ -100,13 +101,15 @@ class NEWS_model extends \Model\Model
     public function update($id, $data)
     {
         $slug = linkseo($data['title']);
+        $publish = $data['publish'] ?? "0";
+
         $stmt = $this->pdo->prepare('UPDATE news SET title=:title, slug=:slug, image=:image, short_content=:short_content, content= :content, publish=:publish WHERE id=:id');
         $stmt->bindParam(':title', $data['title']);
         $stmt->bindParam(':slug', $slug);
         $stmt->bindParam(':image', $data['image']);
         $stmt->bindParam(':short_content', $data['short_content']);
         $stmt->bindParam(':content', $data['content']);
-        $stmt->bindParam(':publish', $data['publish']);
+        $stmt->bindParam(':publish', $publish);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
