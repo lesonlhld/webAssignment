@@ -108,12 +108,16 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            CKEDITOR.replace('description', {
+            var $ckfield = CKEDITOR.replace('description', {
                 filebrowserBrowseUrl: '<?= base_url("filemanager/dialog.php?type=2&editor=ckeditor&fldr=") ?>',
                 filebrowserUploadUrl: '<?= base_url("filemanager/dialog.php?type=2&editor=ckeditor&fldr=") ?>',
                 filebrowserImageBrowseUrl: '<?= base_url("filemanager/dialog.php?type=1&editor=ckeditor&fldr=") ?>',
                 filebrowserUploadMethod: "form"
             });
+            $ckfield.on('change', function() {
+                $ckfield.updateElement();
+            });
+
             $("form").submit(function(e) {
                 $("#msg").addClass('hidden');
                 e.preventDefault();
