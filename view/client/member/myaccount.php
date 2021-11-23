@@ -11,15 +11,30 @@
 <!--=== Information ===-->
 <div class="form-input content-sm margin-bottom-30">
     <div class="container bootstrap snippet">
-        <form id="" action="javascript:void(0)" method="post">
+        <form id="" action="javascript:void(0)" method="post" enctype="multipart/form-data">
             <div class="col-sm-4">
                 <div class="text-center">
-                    <img src="#" class="avatar img-square img-thumbnail" alt="avatar">
+                    <img id="avatar_image" src="<?= isset($user) ?  $user->avatar : '' ?>" class="avatar img-square img-thumbnail" alt="avatar">
                     <h6>Thay đổi hình đại diện</h6>
-                    <input type="file" name="image" class="text-center center-block file-upload">
+                    <input type="file" name="avatar" placeholder="Choose image" onchange="reload_avatar(this);" class="text-center center-block file-upload">
+                    <input type="text" name="old_avatar_file_url" value="<?= isset($user) ?  $user->avatar : '' ?>" placeholder="Old avatar file url" class="hidden">
                 </div>
                 <br>
             </div>
+            <script>
+                function reload_avatar(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#avatar_image')
+                                .attr('src', e.target.result);
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+            </script>
             <div class="col-sm-8">
                 <div class="form-input-block">
                     <h2>Thông tin tài khoản</h2>
@@ -101,10 +116,15 @@
     document.addEventListener("DOMContentLoaded", () => {
         $("form").submit(function(e) {
             e.preventDefault();
+
+            var formData = new FormData(this);
+
             $.ajax({
                 url: "<?= site_url('member/update_info') ?>",
                 type: 'post',
-                data: $(this).serialize(),
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function(data) {
                     $("#msg").removeClass('alert-danger');
                     $("#msg").addClass('alert-success');

@@ -15,6 +15,11 @@ class Member extends \Controller\Controller
         is_login();
         $USER_Model = Model('USER_Model');
         $user = $USER_Model->get($_SESSION['id']);
+        if ($user->avatar == Null or $user->avatar == "") {
+            $user->avatar = "";
+        } else {
+            $user->avatar = site_url("source/users/" . strval($user->avatar));
+        }
         $this->data['data']['user'] = $user;
         $this->data["subview"] = "client/member/myaccount";
         View("client/main", $this->data);
@@ -24,6 +29,7 @@ class Member extends \Controller\Controller
     {
         is_login();
         $data = $_POST;
+        $file = $_FILES;
         if ($data["firstname"] == "") {
             View("", ['msg' => 'Họ không được để trống'], 401);
         } else if ($data["lastname"] == "") {
@@ -33,9 +39,18 @@ class Member extends \Controller\Controller
         } else if ($data["gender"] == "") {
             View("", ['msg' => 'Giới tính không được để trống'], 401);
         } else {
+            if ($file["avatar"]["size"] > 0) {
+                $data["image"] = upload_file("users", "image", "avatar");
+            } else if ($data["old_avatar_file_url"] != "") {
+                $temp = explode("/", $data["old_avatar_file_url"]);
+                $old_avatar_name = end($temp);
+                $data["image"] = $old_avatar_name;
+            } else {
+                $data["image"] = null;
+            }
             $USER_Model = Model('USER_Model');
-            $update_result = $USER_Model->update($_SESSION['id'], $data);
-            View("", ['msg' => "Cập nhật thành công"]);
+            $update_result = $USER_Model->update($_SESSION['id'], $data);  
+            View("", ['msg' => 'Cập nhật thành công']);
         }
     }
 
