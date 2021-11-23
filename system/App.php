@@ -57,7 +57,7 @@ class App
         $path = "";
         for ($i = 0; $i < count($this->uri); $i++) {
             $temp = $this->parseCtrl($this->uri[$i]);
-            if (file_exists(($controller_file . '/' . $temp . '.php'))) {
+            if (empty($controller) && file_exists(($controller_file . '/' . $temp . '.php'))) {
                 // Get controller
                 $controller = $temp;
             } else {

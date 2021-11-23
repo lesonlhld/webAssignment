@@ -91,7 +91,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             var $ckfield = CKEDITOR.replace('content', {
                 filebrowserBrowseUrl: '<?= base_url("filemanager/dialog.php?type=2&editor=ckeditor&fldr=") ?>',
-                filebrowserUploadUrl: '<?= base_url("filemanager/dialog.php?type=2&editor=ckeditor&fldr=") ?>',
+                filebrowserUploadUrl: '<?= site_url('admin/filemanager/upload/news') ?>',
                 filebrowserImageBrowseUrl: '<?= base_url("filemanager/dialog.php?type=1&editor=ckeditor&fldr=") ?>',
                 filebrowserUploadMethod: "form"
             });

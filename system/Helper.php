@@ -190,6 +190,7 @@ function upload_file($folder, $type, $field_name)
 {
     $success = true;
     $config['upload_path'] = 'source' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
+    chmod($config['upload_path'], 0777);
     $config['max_size'] = 5000000;
     if ($type == "image") {
         $config['max_width'] = 2000;
@@ -207,7 +208,9 @@ function upload_file($folder, $type, $field_name)
     if (isset($_FILES[$field_name]['name']) && $_FILES[$field_name]['name'] != "") {
         $file_extension = strtolower(pathinfo($_FILES[$field_name]["name"], PATHINFO_EXTENSION));
         if (in_array($_FILES[$field_name]['type'], $config['allowed_types']) && in_array($file_extension, $config['allowed_exts'])) {
-            $prefix = time() . '_';
+
+            // We want to save the image with timestamp and randomnumber in prefix
+            $prefix = time() . rand() . '_';
             $target_file = $config['upload_path'] . $prefix . basename($_FILES[$field_name]["name"]);
 
             // Check if image file is a actual image or fake image
