@@ -18,9 +18,17 @@ class News extends \Controller\Controller
 
     public function detail()
     {
-        echo $this->param[0];
-        $this->data["subview"] = "client/news/detail";
-        $this->data["data"] = "product";
-        View("client/main", $this->data);
+        $slug = $this->param[0];
+
+        $NEWS_Model = Model('NEWS_Model');
+        $news = $NEWS_Model->get_by_slug($slug);
+
+        if ($news == null) {
+            notFound();
+        } else {
+            $this->data['data']['news'] = $news;
+            $this->data["subview"] = "client/news/detail";
+            View("client/main", $this->data);
+        }
     }
 }

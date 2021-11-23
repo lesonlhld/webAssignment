@@ -3,7 +3,7 @@
     <!-- Breadcrumbs v5 -->
     <div class="container">
         <ul class="breadcrumb-v5">
-            <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+            <li><a href="<?= site_url() ?>"><i class="fa fa-home"></i></a></li>
             <li><a href="#">Món Ăn</a></li>
             <li class="active">Chi tiết</li>
         </ul>

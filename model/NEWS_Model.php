@@ -79,6 +79,15 @@ class NEWS_Model extends \Model\Model
         return $stmt->fetch();
     }
 
+    public function get_by_slug($slug)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM news WHERE slug=:slug');
+        $stmt->bindParam(':slug', $slug);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
     public function create($data)
     {
         $slug = linkseo($data['title']);

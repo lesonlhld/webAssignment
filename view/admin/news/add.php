@@ -66,6 +66,12 @@
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <div class="form-group">
+                                    <label for="content">Media</label><br>
+                                    <a onclick="window.open('<?= site_url('filemanager/dialog.php?type=1&editor=ckeditor&fldr=&CKEditor=content&CKEditorFuncNum=0&langCode=vi') ?>', '_blank', 'location=yes,height=640,width=880,scrollbars=yes,status=yes');">
+                                        <button type="button" class="btn btn-secondary">Upload media</button>
+                                    </a>
+                                </div>
+                                <div class="form-group">
                                     <label for="content">Content</label>
                                     <textarea id="content" name="content" rows="10" cols="80"><?= isset($news) ? $news->content : '' ?>
                                     </textarea>
