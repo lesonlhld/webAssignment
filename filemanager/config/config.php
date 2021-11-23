@@ -104,7 +104,7 @@ $config = array(
     | DO NOT put inside upload folder
     |
     */
-    'thumbs_base_path' => '../thumbs/',
+    'thumbs_base_path' => '../source/',
 
     /*
     |--------------------------------------------------------------------------
@@ -115,7 +115,7 @@ $config = array(
     | DO NOT put inside upload folder
     |
     */
-    'thumbs_upload_dir' => '/thumbs/',
+    'thumbs_upload_dir' => '/source/',
 
 
     /*
@@ -151,7 +151,7 @@ $config = array(
     | path from ftp_base_folder to base of thumbs folder with start and final /
     |---------------------------------------------------------------------------
     */
-    'ftp_thumbs_dir' => '/thumbs/',
+    'ftp_thumbs_dir' => '/source/',
     'ftp_ssl' => false,
     'ftp_port' => 21,
 

@@ -188,9 +188,16 @@ function stripUnicode($str)
 
 function upload_file($folder, $type, $field_name)
 {
+    if (!file_exists('source/')) {
+        mkdir('source/', 0777);
+    }
     $success = true;
     $config['upload_path'] = 'source' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
-    chmod($config['upload_path'], 0777);
+    if (!file_exists($config['upload_path'])) {
+        mkdir($config['upload_path'], 0777);
+    } else {
+        chmod($config['upload_path'], 0777);
+    }
     $config['max_size'] = 5000000;
     if ($type == "image") {
         $config['max_width'] = 2000;
