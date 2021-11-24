@@ -109,7 +109,7 @@ $configs = $CONFIGS_Model->get();
                                                     <a href="<?= site_url() ?>member/cart" class="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block">Xem Giỏ Hàng</a>
                                                 </div>
                                                 <div class="col-xs-6">
-                                                    <a href="<?= site_url() ?>member/order" class="btn-u btn-u-sea-shop btn-block">Thanh Toán</a>
+                                                    <a href="<?= site_url() ?>payment" class="btn-u btn-u-sea-shop btn-block">Thanh Toán</a>
                                                 </div>
                                             </div>
                                         </li>

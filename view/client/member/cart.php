@@ -10,7 +10,7 @@
 <!--=== Content Medium Part ===-->
 <div class="content-md margin-bottom-30">
     <div class="container">
-        <form class="shopping-cart" action="#">
+        <form class="shopping-cart" method="POST" action="<?= site_url("payment") ?>">
             <div>
                 <div class="header-tags">
                     <div class="overflow-h">
@@ -18,7 +18,6 @@
                     </div>
                 </div>
                 <section>
-                    
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -98,13 +97,26 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> <i class="fa fa-money"></i> Thanh toán bằng tiền mặt
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse">
+                                            <div class="content margin-left-10">
+                                                Vui lòng thanh toán và chờ xác nhận đơn hàng!
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- End Accordion -->
                             <div class="coupon-code">
                                 <h3>Mã giảm giá</h3>
                                 <p>Nhập mã giảm giá của bạn:</p>
-                                <input class="form-control margin-bottom-10" name="code" type="text">
+                                <input class="form-control margin-bottom-10" name="voucher" type="text">
                                 <button type="button" class="btn-u btn-u-sea-shop">Áp dụng</button>
                             </div>
                             <ul class="list-inline total-result">
@@ -118,7 +130,7 @@
                                     </div>
                                     <br>
                                     <div>
-                                        <a href="<?= site_url() ?>member/order" class="btn-u btn-u-sea-shop btn-block">Thanh Toán</a>
+                                        <button type="submit" class="btn-u btn-u-sea-shop btn-block">Thanh Toán</button>
                                     </div>
                                 </li>
                             </ul>
