@@ -100,7 +100,7 @@
         <div class="col-md-9">
             <div class="row margin-bottom-5">
                 <div class="col-sm-4 result-category">
-                    <small class="shop-bg-red badge-results"><?= count($data['product_list']) ?> món tìm thấy</small>
+                    <small class="shop-bg-red badge-results">Danh sách hiện có: <?= count($data['product_list']) ?> món ăn</small>
                 </div>
             </div>
             <!--end result category-->

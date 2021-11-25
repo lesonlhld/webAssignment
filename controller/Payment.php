@@ -77,7 +77,6 @@ class Payment extends \Controller\Controller
         );
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true);  // decode json
-        print_r($jsonResult);
         //Just a example, please check more in there
 
         header('Location: ' . $jsonResult['payUrl']);

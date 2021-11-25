@@ -210,7 +210,7 @@ class Auth extends \Controller\Controller
             if ($mail->Send()) {
                 View("", ['msg' => 'Vui lòng kiểm tra email của bạn để khôi phục mật khẩu!']);
             } else {
-                View("", ['msg' => 'Không thể gửi email khôi phục mật khẩu!']);
+                View("", ['msg' => 'Không thể gửi email khôi phục mật khẩu!'], 400);
             }
         } catch (Exception $e) {
             View("", ['msg' => 'Có lỗi xảy ra!']);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 25, 2021 lúc 08:08 AM
+-- Thời gian đã tạo: Th10 25, 2021 lúc 03:47 PM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -43,6 +43,21 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (4, 'Món tráng miệng'),
 (5, 'Thức uống'),
 (6, 'Món Khác');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `rate` int(11) NOT NULL DEFAULT 0,
+  `comment` text DEFAULT NULL,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `create_by` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -171,28 +186,29 @@ CREATE TABLE `products` (
   `attribute` text DEFAULT NULL,
   `image` varchar(256) DEFAULT NULL,
   `publish` int(11) NOT NULL DEFAULT 0,
-  `trash` int(11) NOT NULL DEFAULT 0
+  `trash` int(11) NOT NULL DEFAULT 0,
+  `rate` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status`, `description`, `attribute`, `image`, `publish`, `trash`) VALUES
-(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 3, 'Active', '                                    ', '[]', '1637601661_cate1.jpg', 1, 0),
-(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 2, 'Active', '', NULL, '1608791315663.jpg', 1, 0),
-(3, 'Kimbap', 35000, 40, 0, 6, 9, 'Active', '', NULL, '1608792165625.jpg', 1, 0),
-(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 4, 'Active', '', NULL, '1608792180363.jpg', 1, 0),
-(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 8, 'Active', '', NULL, NULL, 1, 0),
-(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 9, 'Active', '', NULL, '1608792222820.png', 0, 0),
-(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 6, 'Active', '', NULL, '1608792268122.jpg', 0, 0),
-(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 7, 'Active', '', NULL, '1608792290140.jpg', 0, 0),
-(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 10, 'Active', '', NULL, '1608792313466.jpg', 0, 0),
-(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 11, 'Active', '', NULL, '1608792334761.png', 0, 0),
-(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 12, 'Active', '', NULL, '1608792847544.jpg', 0, 0),
-(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 11, 'Active', '', NULL, '1608792567395.jpg', 0, 0),
-(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 4, 'Active', '', NULL, '1608792551817.webp', 0, 0),
-(14, 'Mì bò', 20000, 25, 10, 6, 5, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', NULL, '1608793914044.jpg', 0, 0);
+INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status`, `description`, `attribute`, `image`, `publish`, `trash`, `rate`) VALUES
+(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 3, 'Active', '                                    ', '[]', '1637601661_cate1.jpg', 1, 0, 0),
+(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 2, 'Active', '', NULL, '1608791315663.jpg', 1, 0, 0),
+(3, 'Kimbap', 35000, 40, 0, 6, 9, 'Active', '', NULL, '1608792165625.jpg', 1, 0, 0),
+(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 4, 'Active', '', NULL, '1608792180363.jpg', 1, 0, 0),
+(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 8, 'Active', '', NULL, NULL, 1, 0, 0),
+(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 9, 'Active', '', NULL, '1608792222820.png', 0, 0, 0),
+(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 6, 'Active', '', NULL, '1608792268122.jpg', 0, 0, 0),
+(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 7, 'Active', '', NULL, '1608792290140.jpg', 0, 0, 0),
+(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 10, 'Active', '', NULL, '1608792313466.jpg', 0, 0, 0),
+(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 11, 'Active', '', NULL, '1608792334761.png', 0, 0, 0),
+(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 12, 'Active', '', NULL, '1608792847544.jpg', 0, 0, 0),
+(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 11, 'Active', '', NULL, '1608792567395.jpg', 0, 0, 0),
+(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 4, 'Active', '', NULL, '1608792551817.webp', 0, 0, 0),
+(14, 'Mì bò', 20000, 25, 10, 6, 5, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', NULL, '1608793914044.jpg', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -313,6 +329,14 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Chỉ mục cho bảng `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_comments_create_by` (`create_by`),
+  ADD KEY `fk_comments_products` (`product_id`);
+
+--
 -- Chỉ mục cho bảng `configs`
 --
 ALTER TABLE `configs`
@@ -394,6 +418,12 @@ ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT cho bảng `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `configs`
 --
 ALTER TABLE `configs`
@@ -444,6 +474,13 @@ ALTER TABLE `users`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `fk_comments_create_by` FOREIGN KEY (`create_by`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_comments_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `news`

@@ -1554,11 +1554,10 @@ li:first-child {
 
 .result-category .badge-results {
 	float: left;
-	width: 100px;
 	top: 12px;
 	color: #fff;
 	font-size: 14px;
-	padding: 3px 0px;
+	padding: 8px;
 	position: relative;
 	text-align: center;
 }
