@@ -43,6 +43,13 @@
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" value="<?= isset($configs) ?  $configs->address : '' ?>">
                             </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="maintenance_mode" value="1" <?= isset($configs) ?  ($configs->maintenance_mode == true ? "checked" : "") : "" ?> id="maintenance_mode">Maintenance mode
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.box-body -->
 

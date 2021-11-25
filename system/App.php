@@ -84,6 +84,12 @@ class App
 
         // Initialize controller
         $class = '\\Controller\\' . $path . $controller;
+        if (!strstr($class, "\admin")) {
+            $CONFIGS_Model = Model('CONFIGS_Model');
+            $configs = $CONFIGS_Model->get();
+            if ($configs->maintenance_mode == true)
+                return maintenance();
+        }
         if (class_exists($class)) {
             return new $class($function, $param);
         } else {

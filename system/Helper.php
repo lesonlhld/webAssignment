@@ -88,13 +88,19 @@ function notFound($enable404 = false)
 function adminNotFound($enable404 = false)
 {
     if (!$enable404) {
-        $data["subview"] = "admin/not_found";
-        View("admin/main", $data);
+        View("admin/not_found");
         exit();
     } else {
         $statusCode = 404;
         http_response_code($statusCode);
     }
+}
+
+function maintenance()
+{
+    $data["subview"] = "client/maintenance_mode";
+    View("client/main", $data);
+    exit();
 }
 
 // Redirect to absolute URL
