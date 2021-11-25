@@ -50,14 +50,15 @@
                             </a>
                         </h2>
                     </div>
-
+                    <?php foreach ($data['category_list'] as $category) { ?>  
                     <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul class="list-unstyled checkbox-list">
-                                <li><a href="<?= site_url() ?>product/category?cate_id=">name</a></li>
+                                <li><a href="<?= site_url() ?>product/category?cate_id="><?= $category->category_name ?></a></li>
                             </ul>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
             <!--end panel group-->
@@ -139,7 +140,12 @@
                                                 <a href="<?= site_url() ?>product/detail?id="><?= $product->product_name ?></a>
                                             </h4>
                                         </li>
-                                        <li><span class="category text-uppercase">category.name</span></li>
+                                        <li>
+                                            <span class="category text-uppercase">
+                                                <?= 
+                                                    $product->category_name 
+                                                ?>
+                                            </span></li>
                                         <li class="pull-right">
                                             <ul class="list-inline product-ratings">
                                                 <li><i class="rating-selected fa fa-star"></i></li>
@@ -152,16 +158,16 @@
                                     </ul>
                                     <div class="margin-bottom-10">
                                         <span class="title-price margin-right-10">
-                                            price_discount
+                                        <?= $product->price * (100 - $product->discount) / 100?>
                                         </span>
-                                        <c:if test="${p.discount != '0'}">
+                                        <c:if test="{$product->discount == '0'}">
                                             <span class="title-price line-through">
-                                                price
+                                                <?= $product->price ?>
                                             </span>
                                         </c:if>
                                     </div>
                                     <p class="margin-bottom-20 stall-name">stall.name</p>
-                                    <p class="margin-bottom-20">description</p>
+                                    <p class="margin-bottom-20"><?= $product->description ?></p>
                                     <a href="<?= site_url() ?>product/detail?id=">
                                         <button type="button" class="btn-u btn-u-sea-shop">Xem chi tiết</button>
                                     </a>
