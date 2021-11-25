@@ -54,7 +54,7 @@
                     <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul class="list-unstyled checkbox-list">
-                                <li><a href="<?= site_url() ?>product/category?cate_id="><?= $category->category_name ?></a></li>
+                                <li><a href="<?= site_url() . "product/category?cate_id=" . $category->category_id ?>"><?= $category->category_name ?></a></li>
                             </ul>
                         </div>
                     </div>
@@ -63,24 +63,7 @@
             </div>
             <!--end panel group-->
 
-            <div class="panel-group" id="accordion-v3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion-v3" href="#collapseThree">
-                                Thương Hiệu <i class="fa fa-angle-down"></i>
-                            </a>
-                        </h2>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <ul class="list-unstyled checkbox-list">
-                                <li><a href="<?= site_url() ?>product/stall?stall_id=">name</a><small>(item)</small></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <!--end panel group-->
 
             <div class="panel-group margin-bottom-30" id="accordion-v5">
@@ -128,7 +111,7 @@
                     <div class="list-product-description product-description-brd margin-bottom-30">
                         <div class="row">
                             <div class="col-sm-4">
-                                <a href="<?= site_url() ?>product/detail?id=">
+                                <a href="<?= site_url() ."product/detail?id=" . $product->product_id ?>">
                                     <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/products/". $product->image)?>" alt="Product image">
                                 </a>
                             </div>
@@ -137,7 +120,7 @@
                                     <ul class="list-inline overflow-h">
                                         <li>
                                             <h4 class="title-price">
-                                                <a href="<?= site_url() ?>product/detail?id="><?= $product->product_name ?></a>
+                                                <a href="<?= site_url() . "product/detail?id=" . $product->product_id ?>"><?= $product->product_name ?></a>
                                             </h4>
                                         </li>
                                         <li>
@@ -160,15 +143,14 @@
                                         <span class="title-price margin-right-10">
                                         <?= $product->price * (100 - $product->discount) / 100?>
                                         </span>
-                                        <c:if test="{$product->discount == '0'}">
-                                            <span class="title-price line-through">
-                                                <?= $product->price ?>
-                                            </span>
-                                        </c:if>
+                                        <?php 
+                                            if ($product->discount > '0') {
+                                                echo '<span class="title-price line-through">' . $product->price .'</span>';
+                                            }
+                                        ?>
                                     </div>
-                                    <p class="margin-bottom-20 stall-name">stall.name</p>
                                     <p class="margin-bottom-20"><?= $product->description ?></p>
-                                    <a href="<?= site_url() ?>product/detail?id=">
+                                    <a href="<?= site_url() . "product/detail?id=" . $product->product_id ?>">
                                         <button type="button" class="btn-u btn-u-sea-shop">Xem chi tiết</button>
                                     </a>
                                 </div>
@@ -187,19 +169,19 @@
                     $page = $data['page'];
                     echo '<ul class="pagination pagination-v2">';
                     if ($page > 1) {
-                        echo '<li><a href="' . site_url() . "product/index?page=1" . '"><i class="fa fa-angle-left"></i></a></li>
-                              <li><a href="' . site_url() . "product/index?page=" . ($page - 1) . '"><i class="fa fa-angle-left"></i></a></li>';
+                        echo '<li><a href="' . site_url() . "product/list?page=1" . '"><i class="fa fa-angle-left"></i></a></li>
+                              <li><a href="' . site_url() . "product/list?page=" . ($page - 1) . '"><i class="fa fa-angle-left"></i></a></li>';
                     }
                     if ($page == 1) {
-                        echo '<li class="active"><a href="' . site_url() . "product/index?page=$page" . '">' . $page . '</a></li>';
+                        echo '<li class="active"><a href="' . site_url() . "product/list?page=$page" . '">' . $page . '</a></li>';
                     } else {
-                        echo '<li><a href="' . site_url() . "product/index?page=" . ($page - 1) . '">' . ($page - 1) . '</a></li>
-                              <li class="active"><a href="' . site_url() . "product/index?page=" . $page . '">' . $page . '</a></li>';
+                        echo '<li><a href="' . site_url() . "product/list?page=" . ($page - 1) . '">' . ($page - 1) . '</a></li>
+                              <li class="active"><a href="' . site_url() . "product/list?page=" . $page . '">' . $page . '</a></li>';
                     }
                     if (count($data['product_list']) == LIMIT) {
-                        echo '<li><a href="' . site_url() . "product/index?page=" . ($page + 1) . '">' . ($page + 1) . '</a></li>';
-                        echo '<li><a href="' . site_url() . "product/index?page=" . ($page + 1) . '"><i class="fa fa-angle-right"></i></a></li>
-                              <li><a href="' . site_url() . "product/index?page=" . $data['end_page'] . '"><i class="fa fa-angle-right"></i></a></li>
+                        echo '<li><a href="' . site_url() . "product/list?page=" . ($page + 1) . '">' . ($page + 1) . '</a></li>';
+                        echo '<li><a href="' . site_url() . "product/list?page=" . ($page + 1) . '"><i class="fa fa-angle-right"></i></a></li>
+                              <li><a href="' . site_url() . "product/list?page=" . $data['end_page'] . '"><i class="fa fa-angle-right"></i></a></li>
                               </ul>';
                     }
                 }    
