@@ -50,21 +50,19 @@
                             </a>
                         </h2>
                     </div>
-                    <?php foreach ($data['category_list'] as $category) { ?>  
+                    
                     <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul class="list-unstyled checkbox-list">
+                            <?php foreach ($data['category_list'] as $category) { ?>  
                                 <li><a href="<?= site_url() . "product/category?cate_id=" . $category->category_id ?>"><?= $category->category_name ?></a></li>
+                            <?php } ?>
                             </ul>
                         </div>
                     </div>
-                    <?php } ?>
+                   
                 </div>
             </div>
-            <!--end panel group-->
-
-            
-            <!--end panel group-->
 
             <div class="panel-group margin-bottom-30" id="accordion-v5">
                 <div class="panel panel-default">
@@ -170,7 +168,7 @@
                     $page = $data['page'];
                     echo '<ul class="pagination pagination-v2">';
                     if ($page > 1) {
-                        echo '<li><a href="' . site_url() . "product/list?page=1" . '"><i class="fa fa-angle-left"></i></a></li>
+                        echo '<li><a href="' . site_url() . "product/list?page=1" . '"><i class="fa fa-angle-double-left"></i></a></li>
                               <li><a href="' . site_url() . "product/list?page=" . ($page - 1) . '"><i class="fa fa-angle-left"></i></a></li>';
                     }
                     if ($page == 1) {
@@ -182,7 +180,7 @@
                     if (count($data['product_list']) == LIMIT) {
                         echo '<li><a href="' . site_url() . "product/list?page=" . ($page + 1) . '">' . ($page + 1) . '</a></li>';
                         echo '<li><a href="' . site_url() . "product/list?page=" . ($page + 1) . '"><i class="fa fa-angle-right"></i></a></li>
-                              <li><a href="' . site_url() . "product/list?page=" . $data['end_page'] . '"><i class="fa fa-angle-right"></i></a></li>
+                              <li><a href="' . site_url() . "product/list?page=" . $data['end_page'] . '"><i class="fa fa-angle-double-right"></i></a></li>
                               </ul>';
                     }
                 }    
