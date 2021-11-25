@@ -121,12 +121,7 @@
                                                 <a href="<?= site_url() . "product/detail?id=" . $product->product_id ?>"><?= $product->product_name ?></a>
                                             </h4>
                                         </li>
-                                        <li>
-                                            <span class="category text-uppercase">
-                                                <?= 
-                                                    $product->category_name 
-                                                ?>
-                                            </span></li>
+                                        <li><span class="category text-uppercase"><?=$product->category_name?></span></li>
                                         <li class="pull-right">
                                             <ul class="list-inline product-ratings">
                                                 <li><i class="rating<?php if ($product->rate >= 1) echo '-selected';?> fa fa-star"></i></li>
@@ -140,11 +135,11 @@
                                     </ul>
                                     <div class="margin-bottom-10">
                                         <span class="title-price margin-right-10">
-                                        <?= $product->price * (100 - $product->discount) / 100?>
+                                        <?= number_format($product->price * (100 - $product->discount) / 100) . " VND"?>
                                         </span>
                                         <?php 
                                             if ($product->discount > '0') {
-                                                echo '<span class="title-price line-through">' . $product->price .'</span>';
+                                                echo '<span class="title-price line-through">' . number_format($product->price) . " VND". '</span>';
                                             }
                                         ?>
                                     </div>
