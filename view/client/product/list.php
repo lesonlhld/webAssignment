@@ -50,14 +50,15 @@
                             </a>
                         </h2>
                     </div>
-
+                    <?php foreach ($data['category_list'] as $category) { ?>  
                     <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul class="list-unstyled checkbox-list">
-                                <li><a href="<?= site_url() ?>product/category?cate_id=">name</a></li>
+                                <li><a href="<?= site_url() ?>product/category?cate_id="><?= $category->category_name ?></a></li>
                             </ul>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
             <!--end panel group-->
@@ -116,7 +117,7 @@
         <div class="col-md-9">
             <div class="row margin-bottom-5">
                 <div class="col-sm-4 result-category">
-                    <small class="shop-bg-red badge-results">count Kết Quả</small>
+                    <small class="shop-bg-red badge-results"><?= count($data['product_list']) ?> món tìm thấy</small>
                 </div>
             </div>
             <!--end result category-->
@@ -128,7 +129,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <a href="<?= site_url() ?>product/detail?id=">
-                                    <img class="img-responsive sm-margin-bottom-20" src="#" alt="">
+                                    <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/products/". $product->image)?>" alt="Product image">
                                 </a>
                             </div>
                             <div class="col-sm-8 product-description">
@@ -139,7 +140,12 @@
                                                 <a href="<?= site_url() ?>product/detail?id="><?= $product->product_name ?></a>
                                             </h4>
                                         </li>
-                                        <li><span class="category text-uppercase">category.name</span></li>
+                                        <li>
+                                            <span class="category text-uppercase">
+                                                <?= 
+                                                    $product->category_name 
+                                                ?>
+                                            </span></li>
                                         <li class="pull-right">
                                             <ul class="list-inline product-ratings">
                                                 <li><i class="rating-selected fa fa-star"></i></li>
@@ -152,16 +158,16 @@
                                     </ul>
                                     <div class="margin-bottom-10">
                                         <span class="title-price margin-right-10">
-                                            price_discount
+                                        <?= $product->price * (100 - $product->discount) / 100?>
                                         </span>
-                                        <c:if test="${p.discount != '0'}">
+                                        <c:if test="{$product->discount == '0'}">
                                             <span class="title-price line-through">
-                                                price
+                                                <?= $product->price ?>
                                             </span>
                                         </c:if>
                                     </div>
                                     <p class="margin-bottom-20 stall-name">stall.name</p>
-                                    <p class="margin-bottom-20">description</p>
+                                    <p class="margin-bottom-20"><?= $product->description ?></p>
                                     <a href="<?= site_url() ?>product/detail?id=">
                                         <button type="button" class="btn-u btn-u-sea-shop">Xem chi tiết</button>
                                     </a>
@@ -174,15 +180,30 @@
                 } ?>
             </div>
             <!--end filter results-->
-
+            
             <div class="text-center">
-                <ul class="pagination pagination-v2">
-                    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                </ul>
+            <?php
+                if (isset($data['page'])) {
+                    $page = $data['page'];
+                    echo '<ul class="pagination pagination-v2">';
+                    if ($page > 1) {
+                        echo '<li><a href="' . site_url() . "product/index?page=1" . '"><i class="fa fa-angle-left"></i></a></li>
+                              <li><a href="' . site_url() . "product/index?page=" . ($page - 1) . '"><i class="fa fa-angle-left"></i></a></li>';
+                    }
+                    if ($page == 1) {
+                        echo '<li class="active"><a href="' . site_url() . "product/index?page=$page" . '">' . $page . '</a></li>';
+                    } else {
+                        echo '<li><a href="' . site_url() . "product/index?page=" . ($page - 1) . '">' . ($page - 1) . '</a></li>
+                              <li class="active"><a href="' . site_url() . "product/index?page=" . $page . '">' . $page . '</a></li>';
+                    }
+                    if (count($data['product_list']) == LIMIT) {
+                        echo '<li><a href="' . site_url() . "product/index?page=" . ($page + 1) . '">' . ($page + 1) . '</a></li>';
+                        echo '<li><a href="' . site_url() . "product/index?page=" . ($page + 1) . '"><i class="fa fa-angle-right"></i></a></li>
+                              <li><a href="' . site_url() . "product/index?page=" . $data['end_page'] . '"><i class="fa fa-angle-right"></i></a></li>
+                              </ul>';
+                    }
+                }    
+            ?>
             </div>
             <!--end pagination-->
         </div>
