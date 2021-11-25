@@ -12,31 +12,17 @@
 <div class="form-input content-sm margin-bottom-30">
     <div class="container bootstrap snippet">
         <form id="" action="javascript:void(0)" method="post" enctype="multipart/form-data">
-            <div class="col-sm-4">
-                <div class="text-center">
-                    <img id="avatar_image" src="<?= isset($user) ?  $user->avatar : '' ?>" class="avatar img-square img-thumbnail" alt="avatar">
-                    <h6>Thay đổi hình đại diện</h6>
-                    <input type="file" name="avatar" placeholder="Choose image" onchange="reload_avatar(this);" class="text-center center-block file-upload">
-                    <input type="text" name="old_avatar_file_url" value="<?= isset($user) ?  $user->avatar : '' ?>" placeholder="Old avatar file url" class="hidden">
+            <div class="form-input-block">
+                <div class="col-sm-4">
+                    <div class="text-center margin-top-40">
+                        <img id="avatar_image" src="<?= isset($user) ? site_url("source/users/" . strval($user->avatar)) : '' ?>" class="avatar img-square img-thumbnail" alt="avatar">
+                        <h6>Thay đổi hình đại diện</h6>
+                        <input type="file" name="avatar" placeholder="Choose image" onchange="reload_avatar(this);" class="text-center center-block file-upload">
+                        <input type="text" name="old_avatar_file_name" value="<?= isset($user) ?  $user->avatar : '' ?>" placeholder="Old avatar file url" class="hidden">
+                    </div>
+                    <br>
                 </div>
-                <br>
-            </div>
-            <script>
-                function reload_avatar(input) {
-                    if (input.files && input.files[0]) {
-                        var reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            $('#avatar_image')
-                                .attr('src', e.target.result);
-                        };
-
-                        reader.readAsDataURL(input.files[0]);
-                    }
-                }
-            </script>
-            <div class="col-sm-8">
-                <div class="form-input-block">
+                <div class="col-sm-8">
                     <h2>Thông tin tài khoản</h2>
                     <div id="msg" class="text-center alert alert-danger hidden" style="border-radius: .5rem;"></div>
 
@@ -105,6 +91,7 @@
                         </div>
                     </div>
                 </div>
+                <div style="clear:both"></div>
             </div>
         </form>
     </div>
@@ -113,6 +100,19 @@
 <!--=== End Information ===-->
 
 <script>
+    function reload_avatar(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#avatar_image')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
         $("form").submit(function(e) {
             e.preventDefault();

@@ -18,7 +18,7 @@ class Member extends \Controller\Controller
         if ($user->avatar == Null or $user->avatar == "") {
             $user->avatar = "";
         } else {
-            $user->avatar = site_url("source/users/" . strval($user->avatar));
+            $user->avatar = strval($user->avatar);
         }
         $this->data['data']['user'] = $user;
         $this->data["subview"] = "client/member/myaccount";
@@ -41,10 +41,8 @@ class Member extends \Controller\Controller
         } else {
             if ($file["avatar"]["size"] > 0) {
                 $data["image"] = upload_file("users", "image", "avatar");
-            } else if ($data["old_avatar_file_url"] != "") {
-                $temp = explode("/", $data["old_avatar_file_url"]);
-                $old_avatar_name = end($temp);
-                $data["image"] = $old_avatar_name;
+            } else if ($data["old_avatar_file_name"] != "") {
+                $data["image"] = $data["old_avatar_file_name"];
             } else {
                 $data["image"] = null;
             }
