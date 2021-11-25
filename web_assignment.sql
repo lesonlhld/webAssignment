@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 25, 2021 lúc 04:39 AM
+-- Thời gian đã tạo: Th10 25, 2021 lúc 08:08 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -268,16 +268,17 @@ CREATE TABLE `users` (
   `role_id` int(11) NOT NULL DEFAULT 1,
   `balance` int(11) DEFAULT 0,
   `publish` int(11) NOT NULL DEFAULT 0,
-  `trash` int(11) NOT NULL DEFAULT 0
+  `trash` int(11) NOT NULL DEFAULT 0,
+  `token` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `password`, `avatar`, `role_id`, `balance`, `publish`, `trash`) VALUES
-(1, 'admin', 'admin', '2021-11-22', 'MALE', '', 'admin@gmail.com', '', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1637637504_10.jpg', 2, 0, 1, 0),
-(2, 'Nguyễn Văn ', 'B', '2020-12-03', 'MALE', '0923909321', 'nguyenvana@gmail.com', 'HCM', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', 1, 0, 1, 0);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `password`, `avatar`, `role_id`, `balance`, `publish`, `trash`, `token`) VALUES
+(1, 'admin', 'admin', '2021-11-22', 'MALE', '', 'admin@gmail.com', '', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1637637504_10.jpg', 2, 0, 1, 0, NULL),
+(2, 'Nguyễn Văn ', 'B', '2020-12-03', 'MALE', '0923909321', 'nguyenvana@gmail.com', 'HCM', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', 1, 0, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
