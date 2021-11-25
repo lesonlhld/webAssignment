@@ -117,7 +117,7 @@
         <div class="col-md-9">
             <div class="row margin-bottom-5">
                 <div class="col-sm-4 result-category">
-                    <small class="shop-bg-red badge-results">count Kết Quả</small>
+                    <small class="shop-bg-red badge-results"><?= count($data['product_list']) ?> món tìm thấy</small>
                 </div>
             </div>
             <!--end result category-->
@@ -129,7 +129,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <a href="<?= site_url() ?>product/detail?id=">
-                                    <img class="img-responsive sm-margin-bottom-20" src="#" alt="">
+                                    <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/products/". $product->image)?>" alt="Product image">
                                 </a>
                             </div>
                             <div class="col-sm-8 product-description">
@@ -180,15 +180,30 @@
                 } ?>
             </div>
             <!--end filter results-->
-
+            
             <div class="text-center">
-                <ul class="pagination pagination-v2">
-                    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                </ul>
+            <?php
+                if (isset($data['page'])) {
+                    $page = $data['page'];
+                    echo '<ul class="pagination pagination-v2">';
+                    if ($page > 1) {
+                        echo '<li><a href="' . site_url() . "product/index?page=1" . '"><i class="fa fa-angle-left"></i></a></li>
+                              <li><a href="' . site_url() . "product/index?page=" . ($page - 1) . '"><i class="fa fa-angle-left"></i></a></li>';
+                    }
+                    if ($page == 1) {
+                        echo '<li class="active"><a href="' . site_url() . "product/index?page=$page" . '">' . $page . '</a></li>';
+                    } else {
+                        echo '<li><a href="' . site_url() . "product/index?page=" . ($page - 1) . '">' . ($page - 1) . '</a></li>
+                              <li class="active"><a href="' . site_url() . "product/index?page=" . $page . '">' . $page . '</a></li>';
+                    }
+                    if (count($data['product_list']) == LIMIT) {
+                        echo '<li><a href="' . site_url() . "product/index?page=" . ($page + 1) . '">' . ($page + 1) . '</a></li>';
+                        echo '<li><a href="' . site_url() . "product/index?page=" . ($page + 1) . '"><i class="fa fa-angle-right"></i></a></li>
+                              <li><a href="' . site_url() . "product/index?page=" . $data['end_page'] . '"><i class="fa fa-angle-right"></i></a></li>
+                              </ul>';
+                    }
+                }    
+            ?>
             </div>
             <!--end pagination-->
         </div>
