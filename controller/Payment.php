@@ -52,8 +52,8 @@ class Payment extends \Controller\Controller
         $orderInfo = "Thanh toán đơn hàng " . $code;
         $amount = "{$total}";
         $orderId = $code;
-        $returnUrl = "http://localhost/webAssignment/member/invoice";
-        $notifyurl = "http://localhost/webAssignment/member/invoice";
+        $returnUrl = site_url("member/invoice");
+        $notifyurl = site_url("member/invoice");
         // Lưu ý: link notifyUrl không phải là dạng localhost
         $extraData = "merchantName=Smart Food Court System - Đại học Bách Khoa";
 

@@ -53,6 +53,15 @@ class USER_Model extends \Model\Model
         return $stmt->fetch();
     }
 
+    public function get_by_email($email)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE email=:email');
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
     public function login($email, $password)
     {
         $password = hashpass($password);
@@ -151,6 +160,16 @@ class USER_Model extends \Model\Model
         $stmt = $this->pdo->prepare('UPDATE users SET password=:password WHERE id =:id');
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return true;
+    }
+
+    public function update_token($email, $token = null)
+    {
+        $stmt = $this->pdo->prepare('UPDATE users SET token=:token WHERE email =:email');
+        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
 
         return true;
