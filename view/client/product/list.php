@@ -131,12 +131,13 @@
                                             </span></li>
                                         <li class="pull-right">
                                             <ul class="list-inline product-ratings">
-                                                <li><i class="rating-selected fa fa-star"></i></li>
-                                                <li><i class="rating-selected fa fa-star"></i></li>
-                                                <li><i class="rating-selected fa fa-star"></i></li>
-                                                <li><i class="rating fa fa-star"></i></li>
-                                                <li><i class="rating fa fa-star"></i></li>
+                                                <li><i class="rating<?php if ($product->rate > 1) echo '-selected';?> fa fa-star"></i></li>
+                                                <li><i class="rating<?php if ($product->rate > 2) echo '-selected';?> fa fa-star"></i></li>
+                                                <li><i class="rating<?php if ($product->rate > 3) echo '-selected';?> fa fa-star"></i></li>
+                                                <li><i class="rating<?php if ($product->rate > 4) echo '-selected';?> fa fa-star"></i></li>
+                                                <li><i class="rating<?php if ($product->rate == 5) echo '-selected';?> fa fa-star"></i></li>
                                             </ul>
+                                            <?php if ($product->rate == 0) echo 'Chưa đánh giá';?>
                                         </li>
                                     </ul>
                                     <div class="margin-bottom-10">
