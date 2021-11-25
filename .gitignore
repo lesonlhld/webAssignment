@@ -53,6 +53,6 @@ $RECYCLE.BIN/
 .idea
 application/logs
 vendor/*
-composer.lock
+# composer.lock
 
 source
