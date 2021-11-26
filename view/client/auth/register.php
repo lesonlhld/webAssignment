@@ -50,49 +50,32 @@
                         <div class="row">
                             <div class="col-md-6 md-margin-bottom-50">
                                 <section>
-                                    <label class="input">Họ</label>
+                                    <label class="input">Họ<span style="color: red;"> (*)</span></label>
                                     <input type="text" name="firstname" placeholder="Họ" class="form-control" required>
                                 </section>
                             </div>
                             <div class="col-md-6 md-margin-bottom-50">
                                 <section>
-                                    <label class="input">Tên</label>
+                                    <label class="input">Tên<span style="color: red;"> (*)</span></label>
                                     <input type="text" name="lastname" placeholder="Tên" class="form-control" required>
                                 </section>
                             </div>
                         </div>
                         <section>
-                            <label class="input">Địa chỉ email</label>
+                            <label class="input">Địa chỉ email<span style="color: red;"> (*)</span></label>
                             <input type="email" name="email" placeholder="Địa chỉ email" class="form-control" required>
                         </section>
                         <div class="row">
                             <div class="col-md-6 md-margin-bottom-50">
                                 <section>
-                                    <label class="input">Mật khẩu</label>
-                                    <input type="password" name="password" placeholder="Mật khẩu" id="password" class="form-control" required>
+                                    <label class="input">Mật khẩu<span style="color: red;"> (*)</span></label>
+                                    <input type="password" name="password" placeholder="Mật khẩu" id="password" class="form-control" minlength="6" required>
                                 </section>
                             </div>
                             <div class="col-md-6 md-margin-bottom-50">
                                 <section>
-                                    <label class="input">Nhập lại mật khẩu</label>
-                                    <input type="password" name="passwordConfirm" placeholder="Nhập lại mật khẩu" class="form-control" required>
-                                </section>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 md-margin-bottom-50">
-                                <section>
-                                    <label class="input">Giới tính</label>
-                                    <select name="gender" id="" class="form-control">
-                                        <option value="MALE">Nam</option>
-                                        <option value="FEMALE">Nữ</option>
-                                    </select>
-                                </section>
-                            </div>
-                            <div class="col-md-6 md-margin-bottom-50">
-                                <section>
-                                    <label class="input">Ngày tháng năm sinh</label>
-                                    <input type="date" name="birthday" max=<?= date('Y-m-d'); ?> class="form-control" required>
+                                    <label class="input">Nhập lại mật khẩu<span style="color: red;"> (*)</span></label>
+                                    <input type="password" name="passwordConfirm" placeholder="Nhập lại mật khẩu" class="form-control" minlength="6" required>
                                 </section>
                             </div>
                         </div>

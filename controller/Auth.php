@@ -102,8 +102,6 @@ class Auth extends \Controller\Controller
             View("", ['msg' => 'Mật khẩu bao gồm tối thiểu 6 ký tự'], 400);
         } else if ($data["passwordConfirm"] == "") {
             View("", ['msg' => 'Mật khẩu xác nhận không được để trống'], 401);
-        } else if ($data["birthday"] == "") {
-            View("", ['msg' => 'Ngày sinh không được để trống'], 401);
         } else if ($data["password"] != $data["passwordConfirm"]) {
             View("", ['msg' => 'Mật khẩu xác nhận không trùng khớp'], 401);
         } else {
