@@ -38,11 +38,11 @@
                     <li><i class="rating-selected fa fa-star"></i></li>
                     <li><i class="rating fa fa-star"></i></li>
                     <li><i class="rating fa fa-star"></i></li>
-                    <li class="product-review-list"><span>(1) <a href="#">Đánh Giá</a> | <a href="#"> Thêm Đánh Giá</a></span></li>
+                    <li class="product-review-list"><span>(<?=$data['count_comment']?>) <a href="#">Đánh Giá</a> | <a href="#"> Thêm Đánh Giá</a></span></li>
                 </ul>
                 <!--end shop product ratings-->
 
-                <span class="description"> <?=$product->description?> </span> <br> <br>
+                <span class="description"> <?= $product->description == null ? $product->description : 'Chưa có mô tả' ?> </span> <br> <br>
                 <ul class="list-inline margin-bottom-20">
                     <li class="shop-product-prices shop-red">
                     <?= number_format($product->price * (100 - $product->discount) / 100) . " VND"?>
@@ -85,9 +85,9 @@
 <div class="content-md container">
     <div class="tab-v5">
         <ul class="nav nav-tabs" role="tablist">
-            <li class="active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
-            <li><a href="#reviews" role="tab" data-toggle="tab">Reviews
-                    (1)</a></li>
+            <li class="active"><a href="#description" role="tab" data-toggle="tab">Mô tả</a></li>
+            <li><a href="#reviews" role="tab" data-toggle="tab">Bình luận
+            (<?=$data['count_comment']?>)</a></li>
         </ul>
 
         <div class="tab-content">
@@ -95,14 +95,26 @@
             <div class="tab-pane fade in active" id="description">
                 <div class="row">
                     <div class="col-md-12">
-                        <p>content</p>
+                        <?= $product->description == null ? $product->description : 'Chưa có mô tả' ?>
                         <br>
-
-                        <h3 class="heading-md margin-bottom-20">Attribute</h3>
+                        <h3 class="heading-md margin-bottom-20">Thông tin sản phẩm</h3>
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled specifies-list">
-                                    <li><i class="fa fa-caret-right"></i>Name: <span>value</span></li>
+                                <?php if (isset($product)) {
+                                $attributes = json_decode($product->attribute) ?? [];
+                                if ($attributes == []){
+                                    echo "Chưa có thông tin";
+                                }
+                                else{
+                                    foreach ($attributes as $attribute) { ?>
+                                        <li><i class="fa fa-caret-right"></i><?=$attribute->name?>: <span><?=$attribute->value?></span></li>
+                                <?php
+                                    }
+                                }
+                            }
+                            ?>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -114,39 +126,46 @@
             <!-- Reviews -->
             <div class="tab-pane fade" id="reviews">
                 <div class="product-comment margin-bottom-40">
+                <?php if ($data['comment_list'] == []){
+                    echo "Chưa có đánh giá nào";
+                }
+                else {
+                     foreach ($data['comment_list'] as $comment) { ?>  
                     <div class="product-comment-in">
-                        <img class="product-comment-img rounded-x" src="${url}/img/team/01.jpg" alt="">
+                        <img class="product-comment-img rounded-x" src="<?= base_url("source/users/". $comment->avatar)?>" alt="Avatar image">
                         <div class="product-comment-dtl">
                             <h4>
-                                Name <small>22 days ago</small>
+                                <?=$comment->last_name . ' ' . $comment->first_name ?><small>22 days ago</small>
                             </h4>
-                            <p>Comment content</p>
+                            <?=$comment->comment ?>
                             <ul class="list-inline product-ratings">
                                 <li class="pull-right">
                                     <ul class="list-inline">
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating-selected fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
-                                        <li><i class="rating fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->rate >= 1) echo '-selected';?> fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->rate >= 2) echo '-selected';?> fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->rate >= 3) echo '-selected';?> fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->rate >= 4) echo '-selected';?> fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->rate == 5) echo '-selected';?> fa fa-star"></i></li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
                     </div>
+                    <?php } 
+                    }?>
                 </div>
-                <h3 class="heading-md margin-bottom-30">Add a review</h3>
+                <h3 class="heading-md margin-bottom-30">Thêm đánh giá</h3>
                 <form action="#" method="post" class="sky-changes-4">
                     <fieldset>
                         <div class="margin-bottom-30">
-                            <label class="label-v2">Review</label> <label class="textarea">
+                            <label class="label-v2">Đánh giá</label> <label class="textarea">
                                 <textarea rows="7" name="message" id="message"></textarea>
                             </label>
                         </div>
                     </fieldset>
 
                     <footer class="review-submit">
-                        <label class="label-v2">Review</label>
+                        <label class="label-v2">Đánh giá</label>
                         <div class="stars-ratings">
                             <input type="radio" name="stars-rating" id="stars-rating-5">
                             <label for="stars-rating-5"><i class="fa fa-star"></i></label>
