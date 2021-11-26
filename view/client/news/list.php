@@ -1,4 +1,3 @@
-<?php $news = $data['news'] ?? null ?>
 <!-- Breadcrumbs v5 -->
 <div class="container">
     <ul class="breadcrumb-v5">
@@ -17,7 +16,7 @@
                 <div class="list-product-description product-description-brd margin-bottom-30">
                     <div class="row">
                         <div class="col-sm-4">
-                            <a href="<?= site_url() ."news/detail/?id=". $news->news_id?>">
+                            <a href="<?= site_url() ."news/detail/?id=". $news->id?>">
                             <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/news/". $news->image)?>" alt="News image"> 
                             </a>
                         </div>
@@ -26,20 +25,25 @@
                                 <ul class="list-inline overflow-h">
                                     <li>
                                         <h4 class="title-price">
-                                            <a href="<?= site_url() ."news/detail/?id=".$news->news_id?>"><?= $news->title ?></a>
+                                            <a href="<?= site_url() ."news/detail/?id=".$news->id?>"><?= $news->title ?></a>
                                         </h4>
                                     </li>
                                     <li class="pull-right"><span></span>
-                                    <a href="<?= site_url() ."news/detail/?id=".$news->news_id?>"><?= $news->create_at ?></a>
+                                    <a href="<?= site_url() ."news/detail/?id=".$news->id?>"><?= $news->create_at ?></a>
                                     </li>
                                     <li class="pull-right"><span>created by</span>
-                                    <a href="<?= site_url() ."news/detail/?id=".$news->news_id?>"><?= $news->create_by ?></a>
+                                    <a href="<?= site_url() ."news/detail/?id=".$news->id?>"><?= $news->create_by ?></a>
                                     </li>
                                 </ul>
                                 <p class="margin-bottom-20"></p>
-                                <a href="<?= site_url() ."news/detail/?id=".$news->news_id?>"><?= $news->short_content ?></a>
+                                <a href="<?= site_url() ."news/detail/?id=".$news->id?>"><?= $news->short_content ?></a>
+                            
+                                <a href="<?= site_url() ."news/detail/?id=".$news->id?>"><?= $news->id ?>
                                     <button type="button" class="btn-u btn-u-sea-shop">Xem chi tiết</button>
                                 </a>
+                                </a>
+                                
+                                
                             </div>
                         </div>
                     </div>
