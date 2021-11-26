@@ -6,7 +6,7 @@ class COMMENT_Model extends \Model\Model
 {
     public function get_list_by_product($product_id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM comments c LEFT JOIN products p ON c.product_id=p.product_id LEFT JOIN users u ON c.create_by=u.id WHERE c.product_id=:product_id");
+        $stmt = $this->pdo->prepare("SELECT c.rate AS comment_rate, c.comment, c.create_at, c.create_by, c.product_id, u.avatar, u.first_name, u.last_name FROM comments c LEFT JOIN products p ON c.product_id=p.product_id LEFT JOIN users u ON c.create_by=u.id WHERE c.product_id=:product_id");
         $stmt->bindParam(':product_id', $product_id);
         $stmt->execute();
         return $stmt->fetchAll();

@@ -135,7 +135,7 @@
                         <img class="product-comment-img rounded-x" src="<?= base_url("source/users/". $comment->avatar)?>" alt="Avatar image">
                         <div class="product-comment-dtl">
                             <h4>
-                                <?=$comment->last_name . ' ' . $comment->first_name ?><small>22 days ago</small>
+                                <?=$comment->first_name . ' ' . $comment->last_name ?><small><?=$comment->create_at?></small>
                             </h4>
                             <?=$comment->comment ?>
                             <ul class="list-inline product-ratings">
