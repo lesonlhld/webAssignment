@@ -11,18 +11,18 @@ class CATEGORY_Model extends \Model\Model
     public function get_list($start = null, $limit = null)
     {
         if ($start == null && $limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM categories');
+            $stmt = $this->pdo->prepare('SELECT categories.*, count(*) AS quantity FROM categories JOIN products ON categories.category_id=products.category_id GROUP BY products.category_id');
             $stmt->execute();
 
             return $stmt->fetchAll();
         } elseif ($limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM categories LIMIT :start');
+            $stmt = $this->pdo->prepare('SELECT categories.*, count(*) AS quantity FROM categories JOIN products ON categories.category_id=products.category_id GROUP BY products.category_id LIMIT :start');
             $stmt->bindParam(':start', $start);
             $stmt->execute();
 
             return $stmt->fetch();
         } else {
-            $stmt = $this->pdo->prepare('SELECT * FROM categories LIMIT :start,:limit');
+            $stmt = $this->pdo->prepare('SELECT categories.*, count(*) AS quantity FROM categories JOIN products ON categories.category_id=products.category_id GROUP BY products.category_id LIMIT :start,:limit');
             $stmt->bindParam(':start', $start);
             $stmt->bindParam(':limit', $limit);
             $stmt->execute();
