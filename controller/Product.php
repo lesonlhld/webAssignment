@@ -18,7 +18,7 @@ class Product extends \Controller\Controller
         $start = ((int)$page - 1) * 10;
         $keyword = $_GET['q'] ?? '';
         $end_page = ceil($PRODUCT_model->count() / LIMIT);
-        $product_list = $PRODUCT_model->get_list_active($start, LIMIT, $keyword);
+        $product_list = $PRODUCT_model->get_list_active($keyword, $start, LIMIT);
         $category_list = $CATEGORY_model->get_list();
         $count_product_list_active = $PRODUCT_model->count_active($keyword);
 

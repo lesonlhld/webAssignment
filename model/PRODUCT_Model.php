@@ -8,7 +8,7 @@ namespace Model;
  */
 class PRODUCT_Model extends \Model\Model
 {
-    public function get_list_active($start = null, $limit = null, $keyword = '')
+    public function get_list_active($keyword = '', $start = null, $limit = null)
     {
         
         if ($start == null && $limit == null) {
