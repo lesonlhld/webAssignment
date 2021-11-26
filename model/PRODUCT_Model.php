@@ -8,21 +8,22 @@ namespace Model;
  */
 class PRODUCT_Model extends \Model\Model
 {
-    public function get_list_active($start = null, $limit = null)
+    public function get_list_active($start = null, $limit = null, $keyword = '')
     {
+        
         if ($start == null && $limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 ');
+            $stmt = $this->pdo->prepare("SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 AND product_name LIKE '%{$keyword}%'");
             $stmt->execute();
 
             return $stmt->fetchAll();
         } elseif ($limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 LIMIT :start');
+            $stmt = $this->pdo->prepare("SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 AND product_name LIKE '%{$keyword}%' LIMIT :start");
             $stmt->bindParam(':start', $start);
             $stmt->execute();
 
             return $stmt->fetch();
         } else {
-            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 LIMIT :start,:limit');
+            $stmt = $this->pdo->prepare("SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 AND product_name LIKE '%{$keyword}%' LIMIT :start,:limit");
             $stmt->bindParam(':start', $start);
             $stmt->bindParam(':limit', $limit);
             $stmt->execute();
@@ -31,12 +32,12 @@ class PRODUCT_Model extends \Model\Model
         }
     }
 
-    public function count_active()
+    public function count_active($keyword = '')
     {
-        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0');
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 AND product_name LIKE '%{$keyword}%'");           
         $stmt->execute();
-
         return $stmt->fetchColumn();
+        
     }
 
     public function get_list($start = null, $limit = null)

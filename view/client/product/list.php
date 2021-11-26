@@ -1,15 +1,3 @@
-<?php 
-if (isset($_GET['q']) && !empty($_GET['q'])){
-    $keyword = $_GET['q'];
-    $data['product_list_search'] = [];
-    foreach ($data['product_list'] as $product){
-        if (str_contains($product->product_name, $keyword)){
-            array_push($data['product_list_search'], $product);
-        }
-    }   
-}?>
-
-
 <!-- Breadcrumbs v5 -->
 <div class="container">
     <ul class="breadcrumb-v5">
@@ -39,9 +27,9 @@ if (isset($_GET['q']) && !empty($_GET['q'])){
                                 <li>
                                     <form action="<?= site_url() ?>product/list/search" method="get">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="q" value="<?php if(isset($_GET['q'])) {echo $_GET['q']; }?>" placeholder="Tìm kiếm...">
+                                            <input type="text" class="form-control" name="q" value="<?php if(isset($keyword)) {echo $keyword; }?>" placeholder="Tìm kiếm...">
                                             <span class="input-group-addon">
-                                                <button style="padding:0;border:none;background:none;" btn-block" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                                <button style="padding:0;border:none;background:none;" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                                             </span>
                                         </div>
                                     </form>
@@ -110,27 +98,14 @@ if (isset($_GET['q']) && !empty($_GET['q'])){
         <div class="col-md-9">
             <div class="row margin-bottom-5">
                 <div class="col-sm-4 result-category">
-                    <small class="shop-bg-red badge-results">Danh sách hiện có: 
-                        <?php 
-                        if (isset($keyword)) {
-                            echo count($data['product_list_search']);
-                        } else {
-                            echo count($data['product_list']);
-                        } ?> món ăn</small>
+                    <small class="shop-bg-red badge-results">Danh sách hiện có: <?=$data['count_active']?> món ăn</small>
                 </div>
             </div>
             <!--end result category-->
 
 
             <div class="filter-results">
-                <?php 
-                if (isset($keyword)){
-                    $query_list = $data['product_list_search'];
-                }
-                else{
-                    $query_list = $data['product_list'];
-                }
-                foreach ($query_list as $product) { ?>
+                <?php foreach ($data['product_list'] as $product) { ?>
                     <div class="list-product-description product-description-brd margin-bottom-30">
                         <div class="row">
                             <div class="col-sm-4">
