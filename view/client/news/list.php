@@ -50,13 +50,28 @@
             <!--end filter results-->
 
             <div class="text-center">
-                <ul class="pagination pagination-v2">
-                    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                </ul>
+            <?php
+                if (isset($data['page'])) {
+                    $page = $data['page'];
+                    echo '<ul class="pagination pagination-v2">';
+                    if ($page > 1) {
+                        echo '<li><a href="' . site_url() . "news/list?page=1" . '"><i class="fa fa-angle-double-left"></i></a></li>
+                              <li><a href="' . site_url() . "news/list?page=" . ($page - 1) . '"><i class="fa fa-angle-left"></i></a></li>';
+                    }
+                    if ($page == 1) {
+                        echo '<li class="active"><a href="' . site_url() . "news/list?page=$page" . '">' . $page . '</a></li>';
+                    } else {
+                        echo '<li><a href="' . site_url() . "news/list?page=" . ($page - 1) . '">' . ($page - 1) . '</a></li>
+                              <li class="active"><a href="' . site_url() . "news/list?page=" . $page . '">' . $page . '</a></li>';
+                    }
+                    if (count($data['news_list']) == LIMIT) {
+                        echo '<li><a href="' . site_url() . "news/list?page=" . ($page + 1) . '">' . ($page + 1) . '</a></li>';
+                        echo '<li><a href="' . site_url() . "news/list?page=" . ($page + 1) . '"><i class="fa fa-angle-right"></i></a></li>
+                              <li><a href="' . site_url() . "news/list?page=" . $data['end_page'] . '"><i class="fa fa-angle-double-right"></i></a></li>
+                              </ul>';
+                    }
+                }    
+            ?>
             </div>
             <!--end pagination-->
         </div>
