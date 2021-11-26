@@ -25,7 +25,7 @@
                         <div class="panel-body">
                             <ul class="list-unstyled checkbox-list">
                                 <li>
-                                    <form action="<?= site_url() ?>product/list/search" method="get">
+                                    <form action="<?= site_url() ?>product/list" method="get">
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="q" value="<?php if(isset($keyword)) {echo $keyword; }?>" placeholder="Tìm kiếm...">
                                             <span class="input-group-addon">

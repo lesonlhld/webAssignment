@@ -18,7 +18,7 @@ class Product extends \Controller\Controller
         $start = ((int)$page - 1) * 10;
         $keyword = $_GET['q'] ?? '';
         $end_page = ceil($PRODUCT_model->count() / LIMIT);
-        $product_list = $PRODUCT_model->get_list_active($start, LIMIT, $keyword);
+        $product_list = $PRODUCT_model->get_list_active($keyword, $start, LIMIT);
         $category_list = $CATEGORY_model->get_list();
         $count_product_list_active = $PRODUCT_model->count_active($keyword);
 
@@ -34,8 +34,13 @@ class Product extends \Controller\Controller
     public function detail()
     {
         $id = $_GET['id'];
+        $PRODUCT_Model = Model('PRODUCT_Model');
+        $product = $PRODUCT_Model->get($id);
+        $CATEGORY_Model = Model('CATEGORY_Model');
+        $category_list = $CATEGORY_Model->get_list();
         $this->data["subview"] = "client/product/detail";
-        $this->data["data"] = "product";
+        $this->data['data']['category_list'] = $category_list;
+        $this->data["data"]['product'] =  $product;
         View("client/main", $this->data);
     }
 }
