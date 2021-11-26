@@ -38,9 +38,14 @@ class Product extends \Controller\Controller
         $product = $PRODUCT_Model->get($id);
         $CATEGORY_Model = Model('CATEGORY_Model');
         $category_list = $CATEGORY_Model->get_list();
+        $COMMENT_Model = Model('COMMENT_Model');
+        $comment_list = $COMMENT_Model->get_list_by_product($id);
+        $count_comment = $COMMENT_Model->count_by_product($id);
         $this->data["subview"] = "client/product/detail";
         $this->data['data']['category_list'] = $category_list;
         $this->data["data"]['product'] =  $product;
+        $this->data['data']['comment_list'] = $comment_list;
+        $this->data['data']['count_comment'] = $count_comment;
         View("client/main", $this->data);
     }
 }
