@@ -73,7 +73,7 @@ class PRODUCT_Model extends \Model\Model
 
     public function get($id)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM products WHERE product_id=:product_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE product_id=:product_id');
         $stmt->bindParam(':product_id', $id);
         $stmt->execute();
 

@@ -1,3 +1,4 @@
+<?php $product = $data['product'] ?? null ?>
 <!--=== Shop Product ===-->
 <div class="shop-product">
     <!-- Breadcrumbs v5 -->
@@ -18,7 +19,7 @@
                     <!-- Master Slider -->
                     <div class="master-slider ms-skin-default" id="masterslider">
                         <div class="ms-slide">
-                            <img class="ms-brd" src="<?= site_url() ?>assets/img/blank.gif" data-src="#" alt="${product.name }">
+                            <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/products/". $product->image)?>" alt="Product image">
                         </div>
                     </div>
                     <!-- End Master Slider -->
@@ -27,7 +28,7 @@
 
             <div class="col-md-6">
                 <div class="shop-product-heading">
-                    <h2>${product.name }</h2>
+                    <h2><?=$product->product_name?></h2>
                 </div>
                 <!--end shop product social-->
 
@@ -41,16 +42,19 @@
                 </ul>
                 <!--end shop product ratings-->
 
-                <span class="stall-name"> ${product.stall.name } </span> <br>
-                <span class="deriptoion"> ${product.description } </span> <br> <br>
+                <span class="description"> <?=$product->description?> </span> <br> <br>
                 <ul class="list-inline margin-bottom-20">
                     <li class="shop-product-prices shop-red">
-                        price_discount
+                    <?= number_format($product->price * (100 - $product->discount) / 100) . " VND"?>
                     </li>
                     <li class="line-through">
-                        price
+                    <?php 
+                        if ($product->discount > '0') {
+                            echo '<span class="title-price line-through">' . number_format($product->price) . " VND". '</span>';
+                        }
+                    ?>
                     </li>
-                    <li><small class="shop-bg-red time-day-left"> Bán Chạy Nhất </small></li>
+                    <li><br><small class="shop-bg-red time-day-left"> Bán Chạy Nhất </small></li>
                 </ul>
                 <!--end shop product prices-->
 
@@ -68,7 +72,7 @@
 
                 <br><br>
                 <p class="wishlist-category">
-                    <strong>Phân Loại:</strong> <a href="#">${product.category.name}</a>
+                    <strong>Phân Loại:</strong> <a href="#"><?=$product->category_name?></a>
                 </p>
             </div>
         </div>

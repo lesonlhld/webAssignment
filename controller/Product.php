@@ -34,8 +34,13 @@ class Product extends \Controller\Controller
     public function detail()
     {
         $id = $_GET['id'];
+        $PRODUCT_Model = Model('PRODUCT_Model');
+        $product = $PRODUCT_Model->get($id);
+        $CATEGORY_Model = Model('CATEGORY_Model');
+        $category_list = $CATEGORY_Model->get_list();
         $this->data["subview"] = "client/product/detail";
-        $this->data["data"] = "product";
+        $this->data['data']['category_list'] = $category_list;
+        $this->data["data"]['product'] =  $product;
         View("client/main", $this->data);
     }
 }
