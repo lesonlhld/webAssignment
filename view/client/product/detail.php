@@ -141,11 +141,11 @@
                             <ul class="list-inline product-ratings">
                                 <li class="pull-right">
                                     <ul class="list-inline">
-                                        <li><i class="rating<?php if ($comment->rate >= 1) echo '-selected';?> fa fa-star"></i></li>
-                                        <li><i class="rating<?php if ($comment->rate >= 2) echo '-selected';?> fa fa-star"></i></li>
-                                        <li><i class="rating<?php if ($comment->rate >= 3) echo '-selected';?> fa fa-star"></i></li>
-                                        <li><i class="rating<?php if ($comment->rate >= 4) echo '-selected';?> fa fa-star"></i></li>
-                                        <li><i class="rating<?php if ($comment->rate == 5) echo '-selected';?> fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->comment_rate >= 1) echo '-selected';?> fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->comment_rate >= 2) echo '-selected';?> fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->comment_rate >= 3) echo '-selected';?> fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->comment_rate >= 4) echo '-selected';?> fa fa-star"></i></li>
+                                        <li><i class="rating<?php if ($comment->comment_rate == 5) echo '-selected';?> fa fa-star"></i></li>
                                     </ul>
                                 </li>
                             </ul>
