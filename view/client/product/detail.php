@@ -86,7 +86,7 @@
     <div class="tab-v5">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active"><a href="#description" role="tab" data-toggle="tab">Mô tả</a></li>
-            <li><a href="#reviews" role="tab" data-toggle="tab">Bình luận
+            <li><a href="#reviews" role="tab" data-toggle="tab">Đánh giá
             (<?=$data['count_comment']?>)</a></li>
         </ul>
 
