@@ -10,7 +10,6 @@ class PRODUCT_Model extends \Model\Model
 {
     public function get_list_active($keyword = '', $start = null, $limit = null)
     {
-        
         if ($start == null && $limit == null) {
             $stmt = $this->pdo->prepare("SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 AND product_name LIKE '%{$keyword}%'");
             $stmt->execute();
