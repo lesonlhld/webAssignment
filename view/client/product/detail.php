@@ -33,16 +33,16 @@
                 <!--end shop product social-->
 
                 <ul class="list-inline product-ratings margin-bottom-20">
-                    <li><i class="rating-selected fa fa-star"></i></li>
-                    <li><i class="rating-selected fa fa-star"></i></li>
-                    <li><i class="rating-selected fa fa-star"></i></li>
-                    <li><i class="rating fa fa-star"></i></li>
-                    <li><i class="rating fa fa-star"></i></li>
-                    <li class="product-review-list"><span>(<?=$data['count_comment']?>) <a href="#">Đánh Giá</a> | <a href="#"> Thêm Đánh Giá</a></span></li>
+                    <li><i class="rating<?php if ($product->rate >= 1) echo '-selected';?> fa fa-star"></i></li>
+                    <li><i class="rating<?php if ($product->rate >= 2) echo '-selected';?> fa fa-star"></i></li>
+                    <li><i class="rating<?php if ($product->rate >= 3) echo '-selected';?> fa fa-star"></i></li>
+                    <li><i class="rating<?php if ($product->rate >= 4) echo '-selected';?> fa fa-star"></i></li>
+                    <li><i class="rating<?php if ($product->rate == 5) echo '-selected';?> fa fa-star"></i></li>
+                    <li class="product-review-list"><span><?=$data['count_comment']?> <a href="#">Đánh Giá</a> | <a href="#"> Thêm Đánh Giá</a></span></li>
                 </ul>
                 <!--end shop product ratings-->
 
-                <span class="description"> <?= $product->description == null ? $product->description : 'Chưa có mô tả' ?> </span> <br> <br>
+                <span class="description"> <?= $product->description != null ? $product->description : 'Chưa có mô tả' ?> </span> <br> <br>
                 <ul class="list-inline margin-bottom-20">
                     <li class="shop-product-prices shop-red">
                     <?= number_format($product->price * (100 - $product->discount) / 100) . " VND"?>
@@ -95,7 +95,7 @@
             <div class="tab-pane fade in active" id="description">
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $product->description == null ? $product->description : 'Chưa có mô tả' ?>
+                        <?= $product->description != null ? $product->description : 'Chưa có mô tả' ?>
                         <br>
                         <h3 class="heading-md margin-bottom-20">Thông tin sản phẩm</h3>
                         <div class="row">
