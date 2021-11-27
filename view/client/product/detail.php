@@ -155,15 +155,15 @@
                 </div>
                 <h3 id="review-add" class="heading-md margin-bottom-30">Thêm đánh giá</h3>
                 <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
-                <form id="comment-form" action="#" method="post" class="sky-changes-4">
+                <form id="comment-form" action="javascript:void(0)" method="post" class="sky-changes-4">
                     <fieldset>
                         <div class="margin-bottom-30">
                             <label class="label-v2">Đánh giá</label> <label class="textarea">
-                                <textarea cols="115" rows="7" name="comment" id="comment" value=""></textarea>
+                                <textarea cols="115" rows="7" form="comment-form" name="comment" id="comment"></textarea>
                             </label>
                         </div>
                     </fieldset>
-
+                    <input type="text" name="product_id" value="<?= isset($product) ?  $product->product_id : '' ?>"class="hidden">
                     <footer class="review-submit">
                         <label class="label-v2">Đánh giá</label>
                         <div class="stars-ratings">
@@ -178,7 +178,7 @@
                             <input type="radio" name="stars-rating" id="stars-rating-1" value="1">
                             <label for="stars-rating-1"><i class="fa fa-star"></i></label>
                         </div>
-                        <button type="button" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
+                        <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
                     </footer>
                 </form>
             </div>
@@ -219,26 +219,18 @@
     document.addEventListener("DOMContentLoaded", () => {
         $("#comment-form").submit(function(e) {
             e.preventDefault();
-            var formData = new FormData(this);
             $.ajax({
                 url: "<?= site_url('product/add_comment') ?>",
                 type: 'post',
-                data: formData,
-                processData: false,
-                contentType: false,
+                data: $(this).serialize(),
                 success: function(data) {
-                    $("#msg").removeClass('alert-danger');
-                    $("#msg").addClass('alert-success');
-                    $("#msg").removeClass('hidden');
-                    $("#msg").html(data.msg);
+                    location.reload();
                 },
                 error: function(data) {
+                    console.log(data);
                     const obj = JSON.parse(JSON.stringify(data));
-
-                    $("#msg").removeClass('alert-success');
-                    $("#msg").addClass('alert-danger');
-                    $("#msg").removeClass('hidden');
-                    $("#msg").html(obj.responseJSON.msg);
+                    $("msg").removeClass('hidden');
+                    $("msg").html(obj.responseJSON.msg);
                 }
             });
         });

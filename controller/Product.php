@@ -52,14 +52,14 @@ class Product extends \Controller\Controller
     public function add_comment(){
         is_login();
         $data = $_POST;
-        $product_id = $_GET['id'];
+        $product_id = $data["product_id"];
         if ($data["comment"] == ""){
-            View("", ['msg' => 'Text không được để trống'], 401);
-        }
-        else if(isset($data["stars-rating"])){
-            View("", ['msg' => 'Bạn chưa rate sao'], 401);
+            View("", ['msg' => 'Text không được để trống'], 400);
         }
         else{
+            if (!isset($data["stars-rating"])){
+                $data["stars-rating"] = 5;
+            }
             $COMMENT_Model = Model('COMMENT_Model');
             $COMMENT_Model->create($_SESSION['id'], $product_id, $data);  
             View("", ['msg' => 'Cập nhật thành công']);
