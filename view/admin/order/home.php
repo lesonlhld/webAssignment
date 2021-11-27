@@ -66,14 +66,14 @@
                                                     </ul>
                                                 </div>
                                             </td>
-                                            <td><?= $order->payment_id ?> </td>
+                                            <td><?= $order->payment_method ?> </td>
                                             <td><?= $order->voucher ?> </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Actions
                                                         <span class="fa fa-caret-down"></span></button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="<?= site_url('admin/order/view?id=' . $order->id); ?>"><i class="fa fa-eye"></i>View</a></li>
+                                                        <li><a href="<?= site_url('admin/order/view?id=' . $order->order_id); ?>"><i class="fa fa-eye"></i>View</a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -143,26 +143,4 @@
             });
             return a;
         }
-        document.addEventListener("DOMContentLoaded", function(event) {
-            $('#remove').click(function() {
-                $data = get_checked();
-                if ($data.length == 0) {
-                    alert('Please tick the items you want to remove');
-                } else {
-                    var del = confirm('Are you sure you want to remove?');
-                    if (del == true) {
-                        $.ajax({
-                            type: 'POST',
-                            url: '<?= site_url('admin/order/remove'); ?>',
-                            data: {
-                                ids: $data
-                            },
-                            success: function(response) {
-                                location.reload();
-                            }
-                        });
-                    }
-                }
-            });
-        });
     </script>
