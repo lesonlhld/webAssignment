@@ -38,7 +38,6 @@
                     <li><i class="rating<?php if ($product->rate >= 3) echo '-selected';?> fa fa-star"></i></li>
                     <li><i class="rating<?php if ($product->rate >= 4) echo '-selected';?> fa fa-star"></i></li>
                     <li><i class="rating<?php if ($product->rate == 5) echo '-selected';?> fa fa-star"></i></li>
-                    <li class="product-review-list"><span><?=$data['count_comment']?> <a href="#">Đánh Giá</a> | <a href="#"> Thêm Đánh Giá</a></span></li>
                 </ul>
                 <!--end shop product ratings-->
 
@@ -60,7 +59,7 @@
 
                 <h3 class="shop-product-title">Số Lượng</h3>
                 <div class="margin-bottom-40">
-                    <form name="f1" class="product-quantity sm-margin-bottom-20" method="get" action="#">
+                    <form id="cart-form" name="f1" class="product-quantity sm-margin-bottom-20" method="get" action="#">
                         <input type="text" value="${product.id }" name="pId" hidden="">
                         <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty();' value='-'>-</button>
                         <input type='text' class="quantity-field" name='quantity' value="1" id='qty' />
@@ -85,8 +84,8 @@
 <div class="content-md container">
     <div class="tab-v5">
         <ul class="nav nav-tabs" role="tablist">
-            <li class="active"><a href="#description" role="tab" data-toggle="tab">Mô tả</a></li>
-            <li><a href="#reviews" role="tab" data-toggle="tab">Đánh giá
+            <li id="des" class="active"><a href="#description" role="tab" data-toggle="tab">Mô tả</a></li>
+            <li id="rew"><a href="#reviews" role="tab" data-toggle="tab">Đánh giá
             (<?=$data['count_comment']?>)</a></li>
         </ul>
 
@@ -154,31 +153,32 @@
                     <?php } 
                     }?>
                 </div>
-                <h3 class="heading-md margin-bottom-30">Thêm đánh giá</h3>
-                <form action="#" method="post" class="sky-changes-4">
+                <h3 id="review-add" class="heading-md margin-bottom-30">Thêm đánh giá</h3>
+                <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
+                <form id="comment-form" action="javascript:void(0)" method="post" class="sky-changes-4">
                     <fieldset>
                         <div class="margin-bottom-30">
                             <label class="label-v2">Đánh giá</label> <label class="textarea">
-                                <textarea rows="7" name="message" id="message"></textarea>
+                                <textarea cols="115" rows="7" form="comment-form" name="comment" id="comment"></textarea>
                             </label>
                         </div>
                     </fieldset>
-
+                    <input type="text" name="product_id" value="<?= isset($product) ?  $product->product_id : '' ?>"class="hidden">
                     <footer class="review-submit">
                         <label class="label-v2">Đánh giá</label>
                         <div class="stars-ratings">
-                            <input type="radio" name="stars-rating" id="stars-rating-5">
+                            <input type="radio" name="stars-rating" id="stars-rating-5" value="5">
                             <label for="stars-rating-5"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-4">
+                            <input type="radio" name="stars-rating" id="stars-rating-4" value="4">
                             <label for="stars-rating-4"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-3">
+                            <input type="radio" name="stars-rating" id="stars-rating-3" value="3">
                             <label for="stars-rating-3"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-2">
+                            <input type="radio" name="stars-rating" id="stars-rating-2" value="2">
                             <label for="stars-rating-2"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-1">
+                            <input type="radio" name="stars-rating" id="stars-rating-1" value="1">
                             <label for="stars-rating-1"><i class="fa fa-star"></i></label>
                         </div>
-                        <button type="button" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
+                        <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
                     </footer>
                 </form>
             </div>
@@ -216,10 +216,32 @@
 <!--=== End Content Medium ===-->
 
 <script>
-    function subtractQty() {
-        if (document.getElementById("qty").value - 1 < 0)
-            return;
-        else
-            document.getElementById("qty").value--;
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+        $("#comment-form").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('product/add_comment') ?>",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function(data) {
+                    location.reload();
+                },
+                error: function(data) {
+                    console.log(data);
+                    const obj = JSON.parse(JSON.stringify(data));
+                    $("#msg").removeClass('hidden');
+                    $("#msg").html(obj.responseJSON.msg);
+                }
+            });
+        });
+        
+        function subtractQty() {
+            if (document.getElementById("qty").value - 1 < 0)
+                return;
+            else
+                document.getElementById("qty").value--;
+        };
+    });
+
 </script>
+<script src="<?= site_url() ?>assets/plugins/adminlte/bower_components/jquery/dist/jquery.min.js"></script>

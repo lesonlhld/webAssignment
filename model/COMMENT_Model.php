@@ -30,4 +30,15 @@ class COMMENT_Model extends \Model\Model
 
         return $stmt->fetch();
     }
+
+    public function create($member_id, $product_id, $data)
+    {
+        $stmt = $this->pdo->prepare('INSERT INTO comments(rate, comment, create_by, product_id) VALUES (:rate, :comment, :create_by, :product_id)');
+        $stmt->bindParam(':rate', $data['stars-rating']);
+        $stmt->bindParam(':comment', $data['comment']);
+        $stmt->bindParam(':create_by', $member_id);
+        $stmt->bindParam(':product_id', $product_id);
+        $stmt->execute();
+        return true;
+    }
 }
