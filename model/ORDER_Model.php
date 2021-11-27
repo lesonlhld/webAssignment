@@ -8,24 +8,36 @@ namespace Model;
  */
 class ORDER_Model extends \Model\Model
 {
-    public function get_list($user_id, $start = null, $limit = null)
+    public function get_list($user_id = null, $start = null, $limit = null)
     {
         if ($start == null && $limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id WHERE user_id=:user_id');
-            $stmt->bindParam(':user_id', $user_id);
+            if ($user_id != null) {
+                $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id WHERE user_id=:user_id');
+                $stmt->bindParam(':user_id', $user_id);
+            } else {
+                $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id');
+            }
             $stmt->execute();
 
             return $stmt->fetchAll();
         } elseif ($limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id WHERE user_id=:user_id LIMIT :start');
-            $stmt->bindParam(':user_id', $user_id);
+            if ($user_id != null) {
+                $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id WHERE user_id=:user_id LIMIT :start');
+                $stmt->bindParam(':user_id', $user_id);
+            } else {
+                $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id LIMIT :start');
+            }
             $stmt->bindParam(':start', $start);
             $stmt->execute();
 
             return $stmt->fetch();
         } else {
-            $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id WHERE user_id=:user_id LIMIT :start,:limit');
-            $stmt->bindParam(':user_id', $user_id);
+            if ($user_id != null) {
+                $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id WHERE user_id=:user_id LIMIT :start,:limit');
+                $stmt->bindParam(':user_id', $user_id);
+            } else {
+                $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id LIMIT :start,:limit');
+            }
             $stmt->bindParam(':start', $start);
             $stmt->bindParam(':limit', $limit);
             $stmt->execute();
@@ -34,10 +46,16 @@ class ORDER_Model extends \Model\Model
         }
     }
 
-    public function count($user_id)
+    public function count($user_id = null)
     {
-        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM orders WHERE user_id=:user_id');
-        $stmt->bindParam(':user_id', $user_id);
+        if ($user_id != null) {
+            $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM orders WHERE user_id=:user_id');
+            $stmt->bindParam(':user_id', $user_id);
+        }
+        else {
+            $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM orders');
+        }
+        
         $stmt->execute();
 
         return $stmt->fetchColumn();
