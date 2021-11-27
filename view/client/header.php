@@ -2,10 +2,10 @@
 $CONFIGS_Model = Model('CONFIGS_Model');
 $configs = $CONFIGS_Model->get();
 
-$PRODUCT_model = Model('PRODUCT_model');
-$CATEGORY_model = Model('CATEGORY_model');
-$product_list = $PRODUCT_model->get_list_active();
-$category_list = $CATEGORY_model->get_list();
+$PRODUCT_Model = Model('PRODUCT_Model');
+$CATEGORY_Model = Model('CATEGORY_Model');
+$product_list = $PRODUCT_Model->get_list_active();
+$category_list = $CATEGORY_Model->get_list();
 ?>
 
 <!DOCTYPE html>
