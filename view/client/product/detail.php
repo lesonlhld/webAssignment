@@ -216,6 +216,13 @@
 <!--=== End Content Medium ===-->
 
 <script>
+    function subtractQty() {
+            if (document.getElementById("qty").value - 1 < 1)
+                return;
+            else
+                document.getElementById("qty").value--;
+    };
+    
     document.addEventListener("DOMContentLoaded", () => {
         $("#comment-form").submit(function(e) {
             e.preventDefault();
@@ -248,11 +255,6 @@
         
         
     });
-    function subtractQty() {
-            if (document.getElementById("qty").value - 1 < 1)
-                return;
-            else
-                document.getElementById("qty").value--;
-        };
+    
 
 </script>
