@@ -48,4 +48,21 @@ class Product extends \Controller\Controller
         $this->data['data']['count_comment'] = $count_comment;
         View("client/main", $this->data);
     }
+
+    public function add_comment(){
+        is_login();
+        $data = $_POST;
+        $product_id = $_GET['id'];
+        if ($data["comment"] == ""){
+            View("", ['msg' => 'Text không được để trống'], 401);
+        }
+        else if(isset($data["stars-rating"])){
+            View("", ['msg' => 'Bạn chưa rate sao'], 401);
+        }
+        else{
+            $COMMENT_Model = Model('COMMENT_Model');
+            $COMMENT_Model->create($_SESSION['id'], $product_id, $data);  
+            View("", ['msg' => 'Cập nhật thành công']);
+        }
+    }
 }
