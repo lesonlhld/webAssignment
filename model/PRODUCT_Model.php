@@ -145,6 +145,15 @@ class PRODUCT_Model extends \Model\Model
         return true;
     }
 
+    public function update_rate($id)
+    {
+        $stmt = $this->pdo->prepare("UPDATE products SET products.rate=(SELECT AVG(comments.rate) FROM comments WHERE comments.product_id = products.product_id) WHERE products.product_id=:product_id");
+        $stmt->bindParam(':product_id', $id);
+        $stmt->execute();
+
+        return true;
+    }
+    
     public function delete($id)
     {
         $id_list = implode(",", $id);
