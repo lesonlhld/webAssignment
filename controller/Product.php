@@ -61,7 +61,10 @@ class Product extends \Controller\Controller
                 $data["stars-rating"] = 5;
             }
             $COMMENT_Model = Model('COMMENT_Model');
-            $COMMENT_Model->create($_SESSION['id'], $product_id, $data);  
+            if ($COMMENT_Model->create($_SESSION['id'], $product_id, $data)){
+                $PRODUCT_Model = Model('PRODUCT_Model');
+                $PRODUCT_Model->update_rate($product_id);
+            }  
             View("", ['msg' => 'Cập nhật thành công']);
         }
     }
