@@ -15,43 +15,39 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 md-margin-bottom-50">
-                <div class="ms-showcase2-template">
-                    <!-- Master Slider -->
-                    <div class="master-slider ms-skin-default" id="masterslider">
-                        <div class="ms-slide">
-                            <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/products/". $product->image)?>" alt="Product image">
-                        </div>
+                <div class="master-slider ms-skin-default" id="masterslider">
+                    <div class="ms-slide">
+                        <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/products/" . $product->image) ?>" alt="Product image">
                     </div>
-                    <!-- End Master Slider -->
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="shop-product-heading">
-                    <h2><?=$product->product_name?></h2>
+                    <h2><?= $product->product_name ?></h2>
                 </div>
                 <!--end shop product social-->
 
                 <ul class="list-inline product-ratings margin-bottom-20">
-                    <li><i class="rating<?php if ($product->rate >= 1) echo '-selected';?> fa fa-star"></i></li>
-                    <li><i class="rating<?php if ($product->rate >= 2) echo '-selected';?> fa fa-star"></i></li>
-                    <li><i class="rating<?php if ($product->rate >= 3) echo '-selected';?> fa fa-star"></i></li>
-                    <li><i class="rating<?php if ($product->rate >= 4) echo '-selected';?> fa fa-star"></i></li>
-                    <li><i class="rating<?php if ($product->rate == 5) echo '-selected';?> fa fa-star"></i></li>
+                    <li><i class="rating<?php if ($product->rate >= 1) echo '-selected'; ?> fa fa-star"></i></li>
+                    <li><i class="rating<?php if ($product->rate >= 2) echo '-selected'; ?> fa fa-star"></i></li>
+                    <li><i class="rating<?php if ($product->rate >= 3) echo '-selected'; ?> fa fa-star"></i></li>
+                    <li><i class="rating<?php if ($product->rate >= 4) echo '-selected'; ?> fa fa-star"></i></li>
+                    <li><i class="rating<?php if ($product->rate == 5) echo '-selected'; ?> fa fa-star"></i></li>
                 </ul>
                 <!--end shop product ratings-->
 
                 <span class="description"> <?= $product->description != null ? $product->description : 'Chưa có mô tả' ?> </span> <br> <br>
                 <ul class="list-inline margin-bottom-20">
                     <li class="shop-product-prices shop-red">
-                    <?= number_format($product->price * (100 - $product->discount) / 100) . " VND"?>
+                        <?= number_format($product->price * (100 - $product->discount) / 100) . " VND" ?>
                     </li>
                     <li class="line-through">
-                    <?php 
+                        <?php
                         if ($product->discount > '0') {
-                            echo '<span class="title-price line-through">' . number_format($product->price) . " VND". '</span>';
+                            echo '<span class="title-price line-through">' . number_format($product->price) . " VND" . '</span>';
                         }
-                    ?>
+                        ?>
                     </li>
                     <li><br><small class="shop-bg-red time-day-left"> Bán Chạy Nhất </small></li>
                 </ul>
@@ -71,7 +67,7 @@
 
                 <br><br>
                 <p class="wishlist-category">
-                    <strong>Phân Loại:</strong> <a href="#"><?=$product->category_name?></a>
+                    <strong>Phân Loại:</strong> <a href="#"><?= $product->category_name ?></a>
                 </p>
             </div>
         </div>
@@ -86,7 +82,7 @@
         <ul class="nav nav-tabs" role="tablist">
             <li id="des" class="active"><a href="#description" role="tab" data-toggle="tab">Mô tả</a></li>
             <li id="rew"><a href="#reviews" role="tab" data-toggle="tab">Đánh giá
-            (<?=$data['count_comment']?>)</a></li>
+                    (<?= $data['count_comment'] ?>)</a></li>
         </ul>
 
         <div class="tab-content">
@@ -100,20 +96,19 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled specifies-list">
-                                <?php if (isset($product)) {
-                                $attributes = json_decode($product->attribute) ?? [];
-                                if ($attributes == []){
-                                    echo "Chưa có thông tin";
-                                }
-                                else{
-                                    foreach ($attributes as $attribute) { ?>
-                                        <li><i class="fa fa-caret-right"></i><?=$attribute->name?>: <span><?=$attribute->value?></span></li>
-                                <?php
+                                    <?php if (isset($product)) {
+                                        $attributes = json_decode($product->attribute) ?? [];
+                                        if ($attributes == []) {
+                                            echo "Chưa có thông tin";
+                                        } else {
+                                            foreach ($attributes as $attribute) { ?>
+                                                <li><i class="fa fa-caret-right"></i><?= $attribute->name ?>: <span><?= $attribute->value ?></span></li>
+                                    <?php
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                            ?>
-                                    
+                                    ?>
+
                                 </ul>
                             </div>
                         </div>
@@ -125,61 +120,59 @@
             <!-- Reviews -->
             <div class="tab-pane fade" id="reviews">
                 <div class="product-comment margin-bottom-40">
-                <?php if ($data['comment_list'] == []){
-                    echo "Chưa có đánh giá nào";
-                }
-                else {
-                     foreach ($data['comment_list'] as $comment) { ?>  
-                    <div class="product-comment-in">
-                        <img class="product-comment-img rounded-x" src="<?= base_url("source/users/". $comment->avatar)?>" alt="Avatar image">
-                        <div class="product-comment-dtl">
-                            <h4>
-                                <?=$comment->first_name . ' ' . $comment->last_name ?><small><?=$comment->create_at?></small>
-                            </h4>
-                            <?=$comment->comment ?>
-                            <ul class="list-inline product-ratings">
-                                <li class="pull-right">
-                                    <ul class="list-inline">
-                                        <li><i class="rating<?php if ($comment->comment_rate >= 1) echo '-selected';?> fa fa-star"></i></li>
-                                        <li><i class="rating<?php if ($comment->comment_rate >= 2) echo '-selected';?> fa fa-star"></i></li>
-                                        <li><i class="rating<?php if ($comment->comment_rate >= 3) echo '-selected';?> fa fa-star"></i></li>
-                                        <li><i class="rating<?php if ($comment->comment_rate >= 4) echo '-selected';?> fa fa-star"></i></li>
-                                        <li><i class="rating<?php if ($comment->comment_rate == 5) echo '-selected';?> fa fa-star"></i></li>
+                    <?php if ($data['comment_list'] == []) {
+                        echo "Chưa có đánh giá nào";
+                    } else {
+                        foreach ($data['comment_list'] as $comment) { ?>
+                            <div class="product-comment-in">
+                                <img class="product-comment-img rounded-x" src="<?= base_url("source/users/" . $comment->avatar) ?>" alt="Avatar image">
+                                <div class="product-comment-dtl">
+                                    <h4>
+                                        <?= $comment->first_name . ' ' . $comment->last_name ?><small><?= $comment->create_at ?></small>
+                                    </h4>
+                                    <?= $comment->comment ?>
+                                    <ul class="list-inline product-ratings">
+                                        <li class="pull-right">
+                                            <ul class="list-inline">
+                                                <li><i class="rating<?php if ($comment->comment_rate >= 1) echo '-selected'; ?> fa fa-star"></i></li>
+                                                <li><i class="rating<?php if ($comment->comment_rate >= 2) echo '-selected'; ?> fa fa-star"></i></li>
+                                                <li><i class="rating<?php if ($comment->comment_rate >= 3) echo '-selected'; ?> fa fa-star"></i></li>
+                                                <li><i class="rating<?php if ($comment->comment_rate >= 4) echo '-selected'; ?> fa fa-star"></i></li>
+                                                <li><i class="rating<?php if ($comment->comment_rate == 5) echo '-selected'; ?> fa fa-star"></i></li>
+                                            </ul>
+                                        </li>
                                     </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <?php } 
-                    }?>
+                                </div>
+                            </div>
+                    <?php }
+                    } ?>
                 </div>
                 <h3 id="review-add" class="heading-md margin-bottom-30">Thêm đánh giá</h3>
                 <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
-                <form id="comment-form" action="javascript:void(0)" method="post" class="sky-changes-4">
+                <form id="comment-form" action="javascript:void(0)" method="post">
                     <fieldset>
                         <div class="margin-bottom-30">
-                            <label class="label-v2">Bình luận cho sản phẩm</label> <label class="textarea">
-                                <textarea cols="115" rows="7" form="comment-form" name="comment" id="comment"></textarea>
-                            </label>
+                            <label class="input">Bình luận cho sản phẩm</label>
+                            <textarea cols="115" rows="4" name="comment" id="comment" class="form-control" placeholder="Nhập bình luận..." required></textarea>
                         </div>
                     </fieldset>
-                    <input type="text" name="product_id" value="<?= isset($product) ?  $product->product_id : '' ?>"class="hidden">
-                    <footer class="review-submit">
-                        <label class="label-v2">Đánh giá sản phẩm</label>
-                        <div class="stars-ratings stars-ratings-label" >  
-                            <input type="radio" name="stars-rating" id="stars-rating-5" value="5" checked="checked">
+                    <input type="text" name="product_id" value="<?= isset($product) ?  $product->product_id : '' ?>" class="hidden">
+                    <label class="input">Đánh giá sản phẩm</label>
+                    <section>
+                        <div class="stars-ratings stars-ratings-label">
+                            <input type="radio" name="stars-rating" id="stars-rating-5" value="5" class="form-control" checked="checked">
                             <label for="stars-rating-5"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-4" value="4">
+                            <input type="radio" name="stars-rating" id="stars-rating-4" value="4" class="form-control">
                             <label for="stars-rating-4"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-3" value="3">
+                            <input type="radio" name="stars-rating" id="stars-rating-3" value="3" class="form-control">
                             <label for="stars-rating-3"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-2" value="2">
+                            <input type="radio" name="stars-rating" id="stars-rating-2" value="2" class="form-control">
                             <label for="stars-rating-2"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-1" value="1">
-                            <label for="stars-rating-1"><i class="fa fa-star"></i></label>   
+                            <input type="radio" name="stars-rating" id="stars-rating-1" value="1" class="form-control">
+                            <label for="stars-rating-1"><i class="fa fa-star"></i></label>
                         </div>
-                        <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
-                    </footer>
+                    </section>
+                    <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm margin-left-10">Gửi</button>
                 </form>
             </div>
             <!-- End Reviews -->
@@ -255,6 +248,5 @@
         
         
     });
-    
 
 </script>

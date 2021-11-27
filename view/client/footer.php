@@ -64,7 +64,6 @@ $configs = $CONFIGS_Model->get();
 <script src="<?= site_url() ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- JS Implementing Plugins -->
 <script src="<?= site_url() ?>assets/plugins/back-to-top.js"></script>
-<script src="<?= site_url() ?>assets/plugins/jquery.parallax.js"></script>
 <script src="<?= site_url() ?>assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 <script src="<?= site_url() ?>assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?= site_url() ?>assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
@@ -79,7 +78,6 @@ $configs = $CONFIGS_Model->get();
     jQuery(document).ready(function() {
         App.init();
         App.initScrollBar();
-        App.initParallaxBg();
         OwlCarousel.initOwlCarousel();
         RevolutionSlider.initRSfullWidth();
     });

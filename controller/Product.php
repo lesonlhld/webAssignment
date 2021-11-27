@@ -12,15 +12,15 @@ class Product extends \Controller\Controller
 {
     public function list()
     {
-        $PRODUCT_model = Model('PRODUCT_model');
-        $CATEGORY_model = Model('CATEGORY_model');
+        $PRODUCT_Model = Model('PRODUCT_Model');
+        $CATEGORY_Model = Model('CATEGORY_Model');
         $page = $_GET['page'] ?? 1;
         $start = ((int)$page - 1) * 10;
         $keyword = $_GET['q'] ?? '';
-        $end_page = ceil($PRODUCT_model->count() / LIMIT);
-        $product_list = $PRODUCT_model->get_list_active($keyword, $start, LIMIT);
-        $category_list = $CATEGORY_model->get_list();
-        $count_product_list_active = $PRODUCT_model->count_active($keyword);
+        $end_page = ceil($PRODUCT_Model->count() / LIMIT);
+        $product_list = $PRODUCT_Model->get_list_active($keyword, $start, LIMIT);
+        $category_list = $CATEGORY_Model->get_list();
+        $count_product_list_active = $PRODUCT_Model->count_active($keyword);
 
         $this->data['data']['page'] = $page;
         $this->data['data']['end_page'] = $end_page;
@@ -54,18 +54,15 @@ class Product extends \Controller\Controller
         $data = $_POST;
         $product_id = $data["product_id"];
         if ($data["comment"] == ""){
-            View("", ['msg' => 'Text không được để trống'], 400);
+            View("", ['msg' => 'Vui lòng nhập nhận xét!'], 400);
         }
         else{
-            if (!isset($data["stars-rating"])){
-                $data["stars-rating"] = 5;
-            }
             $COMMENT_Model = Model('COMMENT_Model');
             if ($COMMENT_Model->create($_SESSION['id'], $product_id, $data)){
                 $PRODUCT_Model = Model('PRODUCT_Model');
                 $PRODUCT_Model->update_rate($product_id);
             }  
-            View("", ['msg' => 'Cập nhật thành công']);
+            View("", ['msg' => 'Nhận xét sản phẩm thành công']);
         }
     }
 

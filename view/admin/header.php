@@ -162,17 +162,10 @@
                             <li><a href="<?= site_url('admin/product/trash'); ?>"><i class="fa fa-trash-o"></i>Product Trash</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-file-text-o"></i> <span>Orders</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                    <li>
+                        <a href="<?= site_url("admin/order") ?>">
+                            <i class="fa fa-file-text-o"></i> <span>Order</span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li><a href="<?= site_url('Orders/home'); ?>"><i class="fa fa-list"></i>Orders List</a></li>
-                            <li><a href="<?= site_url('Orders/trash'); ?>"><i class="fa fa-trash-o"></i>Orders Trash</a></li>
-                        </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
