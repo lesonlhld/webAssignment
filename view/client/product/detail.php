@@ -38,7 +38,7 @@
                     <li><i class="rating<?php if ($product->rate >= 3) echo '-selected';?> fa fa-star"></i></li>
                     <li><i class="rating<?php if ($product->rate >= 4) echo '-selected';?> fa fa-star"></i></li>
                     <li><i class="rating<?php if ($product->rate == 5) echo '-selected';?> fa fa-star"></i></li>
-                    <li class="product-review-list"><span><?=$data['count_comment']?> <a href="#">Đánh Giá</a> | <a href="#"> Thêm Đánh Giá</a></span></li>
+                    <li class="product-review-list"><span><?=$data['count_comment']?> <a id="review-tab" href="#reviews">Đánh Giá</a> | <a id="review-tab" href="#review-add"> Thêm Đánh Giá</a></span></li>
                 </ul>
                 <!--end shop product ratings-->
 
@@ -154,12 +154,12 @@
                     <?php } 
                     }?>
                 </div>
-                <h3 class="heading-md margin-bottom-30">Thêm đánh giá</h3>
+                <h3 id="review-add" class="heading-md margin-bottom-30">Thêm đánh giá</h3>
                 <form action="#" method="post" class="sky-changes-4">
                     <fieldset>
                         <div class="margin-bottom-30">
                             <label class="label-v2">Đánh giá</label> <label class="textarea">
-                                <textarea rows="7" name="message" id="message"></textarea>
+                                <textarea rows="7" name="comment" id="comment" value=""></textarea>
                             </label>
                         </div>
                     </fieldset>
@@ -214,12 +214,17 @@
 </div>
 <!--end container-->
 <!--=== End Content Medium ===-->
-
+<script src="<?= site_url() ?>assets/plugins/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
     function subtractQty() {
         if (document.getElementById("qty").value - 1 < 0)
             return;
         else
             document.getElementById("qty").value--;
-    }
+    };
+    
+    $(document).on("click", "#review-tab", function(){
+        $('ul li .active').removeClass("active").siblings().addClass("active");
+    });
+
 </script>
