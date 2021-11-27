@@ -167,16 +167,18 @@
                     <footer class="review-submit">
                         <label class="label-v2">Đánh giá</label>
                         <div class="stars-ratings">
-                            <input type="radio" name="stars-rating" id="stars-rating-5" value="5">
-                            <label for="stars-rating-5"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-4" value="4">
-                            <label for="stars-rating-4"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-3" value="3">
-                            <label for="stars-rating-3"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-2" value="2">
-                            <label for="stars-rating-2"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-1" value="1">
-                            <label for="stars-rating-1"><i class="fa fa-star"></i></label>
+                            <ul class="list-inline">
+                                <li><input type="radio" name="stars-rating" id="stars-rating-5" value="5" checked="checked">
+                                <label for="stars-rating-5"><i class="fa fa-star"></i></label></li>
+                                <li><input type="radio" name="stars-rating" id="stars-rating-4" value="4">
+                                <label for="stars-rating-4"><i class="fa fa-star"></i></label></li>
+                                <li><input type="radio" name="stars-rating" id="stars-rating-3" value="3">
+                                <label for="stars-rating-3"><i class="fa fa-star"></i></label></li>
+                                <li><input type="radio" name="stars-rating" id="stars-rating-2" value="2">
+                                <label for="stars-rating-2"><i class="fa fa-star"></i></label></li>
+                                <li><input type="radio" name="stars-rating" id="stars-rating-1" value="1">
+                                <label for="stars-rating-1"><i class="fa fa-star"></i></label></li>
+                            </ul>
                         </div>
                         <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm pull-right">Submit</button>
                     </footer>
@@ -244,4 +246,3 @@
     });
 
 </script>
-<script src="<?= site_url() ?>assets/plugins/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
