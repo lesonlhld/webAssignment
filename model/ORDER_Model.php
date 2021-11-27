@@ -8,7 +8,7 @@ namespace Model;
  */
 class ORDER_Model extends \Model\Model
 {
-    public function get_list($user_id = null, $start = null, $limit = null)
+    public function get_list($start = null, $limit = null, $user_id = null)
     {
         if ($start == null && $limit == null) {
             if ($user_id != null) {

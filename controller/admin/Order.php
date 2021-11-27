@@ -17,7 +17,7 @@ class Order extends \Controller\Controller
         $page = $_GET['page'] ?? 1;
         $start = ((int)$page - 1) * 10;
         $end_page = ceil($ORDER_Model->count() / LIMIT);
-        $order_list = $ORDER_Model->get_list(null, $start, LIMIT);
+        $order_list = $ORDER_Model->get_list($start, LIMIT, null);
 
         $this->data['data']['page'] = $page;
         $this->data['data']['end_page'] = $end_page;
