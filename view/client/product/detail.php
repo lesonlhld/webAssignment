@@ -229,8 +229,8 @@
                 error: function(data) {
                     console.log(data);
                     const obj = JSON.parse(JSON.stringify(data));
-                    $("msg").removeClass('hidden');
-                    $("msg").html(obj.responseJSON.msg);
+                    $("#msg").removeClass('hidden');
+                    $("#msg").html(obj.responseJSON.msg);
                 }
             });
         });
