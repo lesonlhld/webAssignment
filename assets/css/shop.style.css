@@ -1220,22 +1220,7 @@ li:first-child {
 	margin-top: 6px;
 }
 
-.sky-changes-4 label.label-v2 {
-	color: #999;
-	display: block;
-	font-size: 14px;
-	font-weight: 400;
-}
-
-.sky-changes-4 h3 {
-	color: #555;
-}
-
 /*Review Submit*/
-.review-submit {
-	overflow: hidden;
-}
-
 .stars-ratings {
 	float: left;
 }
@@ -1273,10 +1258,6 @@ li:first-child {
 
 .stars-ratings input:checked ~ label {
 	color: #ffc400;
-}
-
-.review-submit button.btn-u.pull-right {
-	margin-top: -17px;
 }
 
 /*Stars Ratings Label*/
