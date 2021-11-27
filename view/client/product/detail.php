@@ -59,8 +59,8 @@
 
                 <h3 class="shop-product-title">Số Lượng</h3>
                 <div class="margin-bottom-40">
-                    <form id="cart-form" name="f1" class="product-quantity sm-margin-bottom-20" method="get" action="#">
-                        <input type="text" value="${product.id }" name="pId" hidden="">
+                    <form id="cart-form" name="f1" class="product-quantity sm-margin-bottom-20" method="post" action="#">
+                        <input type="text" name="product_id" value="<?= isset($product) ?  $product->product_id : '' ?>"class="hidden">
                         <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty();' value='-'>-</button>
                         <input type='text' class="quantity-field" name='quantity' value="1" id='qty' />
                         <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty").value++;' value='+'>+</button>
@@ -234,12 +234,25 @@
             });
         });
         
-        function subtractQty() {
-            if (document.getElementById("qty").value - 1 < 0)
+        $("#cart-form").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('product/add_to_cart') ?>",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function(data) {
+                    location.reload();
+                },
+            });
+        });
+        
+        
+    });
+    function subtractQty() {
+            if (document.getElementById("qty").value - 1 < 1)
                 return;
             else
                 document.getElementById("qty").value--;
         };
-    });
 
 </script>
