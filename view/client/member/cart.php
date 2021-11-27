@@ -28,20 +28,27 @@
                                     <th>Thành Tiền</th>
                                 </tr>
                             </thead>
+                            <?php if (!isset($_SESSION["cart"])){ ?>
+                            <tbody>Giỏ hàng trống</tbody>
+                            <?php 
+                            }
+                            else{
+                                foreach ($_SESSION["cart"] as $item){ ?>
+
                             <tbody>
                                 <tr>
-                                    <td class="product-in-table"><img class="img-responsive" src="#" alt="">
+                                    <td class="product-in-table"><img class="img-responsive" src="<?= base_url("source/products/". $item["image"])?>" alt="Product image">
                                         <div class="product-it-in">
-                                            <h3>product.name</h3>
-                                            <span>product.description</span>
+                                            <h3><?= $item["name"]?></h3>
+                                            <span><?= $item["description"]?></span>
                                         </div>
                                     </td>
                                     <td>
-                                        price_discount
+                                    <?= number_format($item["unit_price"]) . " VND" ?>
                                     </td>
-                                    <td>quantity</td>
+                                    <td><?= $item["quantity"]?></td>
                                     <td class="shop-red">
-                                        total
+                                    <?= number_format($item["quantity"] * $item["unit_price"]) . " VND"?>
                                     </td>
                                     <td><a href="<?= site_url() ?>/member/cart/remove?pId=">
                                             <button type="button" class="close">
@@ -50,12 +57,22 @@
                                         </a></td>
                                 </tr>
                             </tbody>
+                            <?php    }
+                            }
+                            ?>
                             <tbody>
                                 <td></td>
                                 <td><strong>TỔNG TIỀN</strong></td>
                                 <td></td>
                                 <td class="shop-red">
-                                    total
+                                <?php if (!isset($_SESSION['cart_total'])){ 
+                                    echo 0;
+                                }else{
+                                    echo number_format($_SESSION['cart_total']) . " VND";
+                                }
+                                    ?>
+                                
+                                
                                 </td>
                                 <td></td>
                             </tbody>
