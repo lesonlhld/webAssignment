@@ -8,25 +8,27 @@ namespace Model;
  */
 class USER_Model extends \Model\Model
 {
-    public function get_list($role = 1, $start = null, $limit = null)
+    public function get_list($role = 1, $trash = 0, $start = null, $limit = null)
     {
         if ($start == null && $limit == null) {
-
-            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id AND trash=0');
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id AND trash=:trash');
             $stmt->bindParam(':role_id', $role);
+            $stmt->bindParam(':trash', $trash);
             $stmt->execute();
 
             return $stmt->fetchAll();
         } elseif ($limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id AND trash=0 LIMIT :start');
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id AND trash=:trash LIMIT :start');
             $stmt->bindParam(':role_id', $role);
+            $stmt->bindParam(':trash', $trash);
             $stmt->bindParam(':start', $start);
             $stmt->execute();
 
             return $stmt->fetch();
         } else {
-            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id AND trash=0 LIMIT :start,:limit');
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE role_id=:role_id AND trash=:trash LIMIT :start,:limit');
             $stmt->bindParam(':role_id', $role);
+            $stmt->bindParam(':trash', $trash);
             $stmt->bindParam(':start', $start);
             $stmt->bindParam(':limit', $limit);
             $stmt->execute();
@@ -35,10 +37,11 @@ class USER_Model extends \Model\Model
         }
     }
 
-    public function count($role = 1)
+    public function count($role = 1, $trash = 0)
     {
-        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE role_id=:role_id AND trash=0');
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM users WHERE role_id=:role_id AND trash=:trash');
         $stmt->bindParam(':role_id', $role);
+        $stmt->bindParam(':trash', $trash);
         $stmt->execute();
 
         return $stmt->fetchColumn();
@@ -149,6 +152,15 @@ class USER_Model extends \Model\Model
         $id_list = implode(",", $id);
         $stmt = $this->pdo->prepare("UPDATE users SET trash=:trash WHERE id IN ($id_list)");
         $stmt->bindParam(':trash', $trash);
+        $stmt->execute();
+
+        return true;
+    }
+
+    public function delete($id)
+    {
+        $id_list = implode(",", $id);
+        $stmt = $this->pdo->prepare("DELETE FROM users WHERE id IN ($id_list)");
         $stmt->execute();
 
         return true;

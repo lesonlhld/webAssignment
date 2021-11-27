@@ -1,6 +1,11 @@
 <?php
 $CONFIGS_Model = Model('CONFIGS_Model');
 $configs = $CONFIGS_Model->get();
+
+$PRODUCT_model = Model('PRODUCT_model');
+$CATEGORY_model = Model('CATEGORY_model');
+$product_list = $PRODUCT_model->get_list_active();
+$category_list = $CATEGORY_model->get_list();
 ?>
 
 <!DOCTYPE html>
@@ -139,53 +144,27 @@ $configs = $CONFIGS_Model->get();
                                         <div class="mega-menu-content">
                                             <div class="container">
                                                 <div class="row">
-                                                    <div class="col-md-2 col-sm-6">
-                                                        <h3 class="mega-menu-heading">Ẩm thực Việt</h3>
-                                                        <ul class="list-unstyled style-list">
-                                                            <li><a href="<?= site_url() ?>product/detail?id=2">Cơm Gà Xối Mỡ</a><span class="label label-danger-shop">Mới</span></li>
-                                                            <li><a href="<?= site_url() ?>product/detail?id=1">Phở Bò Tái Chín</a></li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="col-md-2 col-sm-6">
-                                                        <h3 class="mega-menu-heading">Thức ăn nhanh</h3>
-                                                        <ul class="list-unstyled style-list">
-                                                            <li><a href="<?= site_url() ?>product/detail?id=6">Combo Gà Giòn Cay</a><span class="label label-danger-shop">Mới</span></li>
-                                                            <li><a href="<?= site_url() ?>product/detail?id=7">Pizza Hải Sản</a></li>
-                                                            <li><a href="<?= site_url() ?>product/detail?id=8">Burger Bò Phô Mai</a></li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="col-md-2 col-sm-6">
-                                                        <h3 class="mega-menu-heading">Lẩu & Nướng</h3>
-                                                        <ul class="list-unstyled style-list">
-                                                            <li><a href="<?= site_url() ?>product/detail?id=4">Lẩu Cua Cà Ri</a></li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="col-md-2 col-sm-6">
-                                                        <h3 class="mega-menu-heading">Thức uống</h3>
-                                                        <ul class="list-unstyled style-list">
-                                                            <li><a href="<?= site_url() ?>product/detail?id=10">Trà Đào Cam Sả</a><span class="label label-danger-shop">Mới</span></li>
-                                                            <li><a href="<?= site_url() ?>product/detail?id=11">Trà Sữa Phúc Long (Lạnh)</a></li>
-                                                            <li><a href="<?= site_url() ?>product/detail?id=12">Sữa Tươi Trân Châu Đường Hổ</a></li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="col-md-2 col-sm-6">
-                                                        <h3 class="mega-menu-heading">Tráng miệng</h3>
-                                                        <ul class="list-unstyled style-list">
-                                                            <li><a href="<?= site_url() ?>product/detail?id=9">Bánh Crepe Chuối</a></li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="col-md-2 col-sm-6">
-                                                        <h3 class="mega-menu-heading">Các món khác</h3>
-                                                        <ul class="list-unstyled style-list">
-                                                            <li><a href="<?= site_url() ?>product/detail?id=3">Kimbap</a><span class="label label-danger-shop">Mới</span></li>
-                                                            <li><a href="<?= site_url() ?>product/detail?id=5">Bò Ba Chỉ Với Trứng</a></li>
-                                                        </ul>
-                                                    </div>
+                                                    <?php for ($i = 0; $i < (count($category_list) <= 6 ? count($category_list) : 6); $i++) {
+                                                        if ($category_list[$i]->quantity > 0)?>
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <h3 class="mega-menu-heading"><?= $category_list[$i]->category_name ?></h3>
+                                                            <ul class="list-unstyled style-list">
+                                                                <?php
+                                                                $count = 1;
+                                                                for ($j = 0; $j < count($product_list); $j++) {
+                                                                    if ($product_list[$j]->category_id == $category_list[$i]->category_id && $count < 6) {
+                                                                        $count++;
+                                                                ?>
+                                                                        <li><a href="<?= site_url() . "product/detail?id=" . $product_list[$j]->product_id ?>"><?= $product_list[$j]->product_name ?></a></li>
+                                                                <?php
+                                                                    } else if ($count > 5) {
+                                                                        break;
+                                                                    }
+                                                                } ?>
+                                                            </ul>
+                                                        </div>
+                                                    <?php
+                                                    } ?>
                                                 </div>
                                                 <!--end row-->
                                             </div>

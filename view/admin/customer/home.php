@@ -40,7 +40,7 @@
                                     <?php
                                     //-- Content Rows
                                     if (count($data['user_list']) == 0) {
-                                        echo "<tr><td colspan='10' style='text-align:center'>No data available in table<td><tr>";
+                                        echo "<tr><td colspan='10' style='text-align:center'>No data available in table</td><tr>";
                                     }
                                     foreach ($data['user_list'] as $user) {
                                     ?>

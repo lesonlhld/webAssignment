@@ -17,12 +17,29 @@ class Product extends \Controller\Controller
         $page = $_GET['page'] ?? 1;
         $start = ((int)$page - 1) * 10;
         $end_page = ceil($PRODUCT_Model->count() / LIMIT);
-        $product_list = $PRODUCT_Model->get_list($start, LIMIT);
+        $product_list = $PRODUCT_Model->get_list(0, $start, LIMIT);
 
         $this->data['data']['page'] = $page;
         $this->data['data']['end_page'] = $end_page;
         $this->data['data']['product_list'] = $product_list;
         $this->data["subview"] = "admin/product/home";
+        View("admin/main", $this->data);
+    }
+
+    public function trash()
+    {
+        is_admin_login();
+
+        $PRODUCT_Model = Model('PRODUCT_Model');
+        $page = $_GET['page'] ?? 1;
+        $start = ((int)$page - 1) * 10;
+        $end_page = ceil($PRODUCT_Model->count() / LIMIT);
+        $product_list = $PRODUCT_Model->get_list(1, $start, LIMIT);
+
+        $this->data['data']['page'] = $page;
+        $this->data['data']['end_page'] = $end_page;
+        $this->data['data']['product_list'] = $product_list;
+        $this->data["subview"] = "admin/product/trash";
         View("admin/main", $this->data);
     }
 
@@ -86,6 +103,30 @@ class Product extends \Controller\Controller
         $PRODUCT_Model->update_trash($ids, 1);
         if (isset($_GET['id'])) {
             redirect(site_url("admin/product"));
+        }
+    }
+
+    public function restore()
+    {
+        is_admin_login();
+        $ids = $_POST['ids'] ?? [$_GET['id']] ?? [];
+
+        $PRODUCT_Model = Model('PRODUCT_Model');
+        $PRODUCT_Model->update_trash($ids, 0);
+        if (isset($_GET['id'])) {
+            redirect(site_url("admin/product/trash"));
+        }
+    }
+
+    public function delete_permanently()
+    {
+        is_admin_login();
+        $ids = $_POST['ids'] ?? [$_GET['id']] ?? [];
+
+        $PRODUCT_Model = Model('PRODUCT_Model');
+        $PRODUCT_Model->delete($ids);
+        if (isset($_GET['id'])) {
+            redirect(site_url("admin/product/trash"));
         }
     }
 

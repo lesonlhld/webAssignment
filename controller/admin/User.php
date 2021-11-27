@@ -17,12 +17,29 @@ class User extends \Controller\Controller
         $page = $_GET['page'] ?? 1;
         $start = ((int)$page - 1) * 10;
         $end_page = ceil($USER_Model->count(2) / LIMIT);
-        $user_list = $USER_Model->get_list(2, $start, LIMIT);
+        $user_list = $USER_Model->get_list(2, 0, $start, LIMIT);
 
         $this->data['data']['page'] = $page;
         $this->data['data']['end_page'] = $end_page;
         $this->data['data']['user_list'] = $user_list;
         $this->data["subview"] = "admin/user/home";
+        View("admin/main", $this->data);
+    }
+
+    public function trash()
+    {
+        is_admin_login();
+
+        $USER_Model = Model('USER_Model');
+        $page = $_GET['page'] ?? 1;
+        $start = ((int)$page - 1) * 10;
+        $end_page = ceil($USER_Model->count(2) / LIMIT);
+        $user_list = $USER_Model->get_list(2, 1, $start, LIMIT);
+
+        $this->data['data']['page'] = $page;
+        $this->data['data']['end_page'] = $end_page;
+        $this->data['data']['user_list'] = $user_list;
+        $this->data["subview"] = "admin/user/trash";
         View("admin/main", $this->data);
     }
 
@@ -73,6 +90,31 @@ class User extends \Controller\Controller
         $USER_Model->update_trash($ids, 1);
         if (isset($_GET['id'])) {
             redirect(site_url("admin/user"));
+        }
+    }
+
+    public function restore()
+    {
+        is_admin_login();
+        $ids = $_POST['ids'] ?? [$_GET['id']] ?? [];
+
+        print_r($ids);
+        $USER_Model = Model('USER_Model');
+        $USER_Model->update_trash($ids, 0);
+        if (isset($_GET['id'])) {
+            redirect(site_url("admin/user/trash"));
+        }
+    }
+
+    public function delete_permanently()
+    {
+        is_admin_login();
+        $ids = $_POST['ids'] ?? [$_GET['id']] ?? [];
+
+        $USER_Model = Model('USER_Model');
+        $USER_Model->delete($ids);
+        if (isset($_GET['id'])) {
+            redirect(site_url("admin/user/trash"));
         }
     }
 

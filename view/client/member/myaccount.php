@@ -15,7 +15,7 @@
             <div class="form-input-block">
                 <div class="col-sm-4">
                     <div class="text-center margin-top-40">
-                        <img id="avatar_image" src="<?= isset($user) ? site_url("source/users/" . strval($user->avatar)) : '' ?>" class="avatar img-square img-thumbnail" alt="avatar">
+                        <img id="avatar_image" src="<?= (isset($user) && $user->avatar != "") ? base_url("source/users/" . strval($user->avatar)) : base_url('assets/img/no-avatar.png') ?>" class="avatar img-square img-thumbnail" alt="avatar">
                         <h6>Thay đổi hình đại diện</h6>
                         <input type="file" name="avatar" placeholder="Choose image" onchange="reload_avatar(this);" class="text-center center-block file-upload">
                         <input type="text" name="old_avatar_file_name" value="<?= isset($user) ?  $user->avatar : '' ?>" placeholder="Old avatar file url" class="hidden">
@@ -34,13 +34,13 @@
                         <div class="row">
                             <div class="col-sm-6 sm-margin-bottom-50">
                                 <section>
-                                    <label class="input">Họ</label>
+                                    <label class="input">Họ<span style="color: red;"> (*)</span></label>
                                     <input type="text" name="firstname" placeholder="Họ" value="<?= isset($user) ?  $user->first_name : '' ?>" class="form-control" required>
                                 </section>
                             </div>
                             <div class="col-sm-6 sm-margin-bottom-50">
                                 <section>
-                                    <label class="input">Tên</label>
+                                    <label class="input">Tên<span style="color: red;"> (*)</span></label>
                                     <input type="text" name="lastname" placeholder="Tên" value="<?= isset($user) ?  $user->last_name : '' ?>" class="form-control" required>
                                 </section>
                             </div>
@@ -48,7 +48,7 @@
                         <div class="row">
                             <div class="col-sm-6 sm-margin-bottom-50">
                                 <section>
-                                    <label class="input">Giới tính</label>
+                                    <label class="input">Giới tính<span style="color: red;"> (*)</span></label>
                                     <select name="gender" placeholder="Giới tính" class="form-control">
                                         <option value="MALE" <?= isset($user) ? ($user->gender=='MALE' ? 'selected' : '') : '' ?>>Nam</option>
                                         <option value="FEMALE" <?= isset($user) ? ($user->gender=='FEMALE' ? 'selected' : '') : '' ?>>Nữ</option>
@@ -57,21 +57,21 @@
                             </div>
                             <div class="col-sm-6 sm-margin-bottom-50">
                                 <section>
-                                    <label class="input">Ngày tháng năm sinh</label>
-                                    <input type="date" name="birthday" max=<?= date('Y-m-d'); ?> value="<?= isset($user) ?  $user->birth_date : '' ?>" class="form-control" required>
+                                    <label class="input">Ngày sinh</label>
+                                    <input type="date" name="birthday" max=<?= date('Y-m-d'); ?> value="<?= isset($user) ?  $user->birth_date : '' ?>" class="form-control">
                                 </section>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6 sm-margin-bottom-50">
                                 <section>
-                                    <label class="input">Số điện thoại</label>
+                                    <label class="input">Số điện thoại<span style="color: red;"> (*)</span></label>
                                     <input type="text" name="phone" value="<?= isset($user) ?  $user->phone : '' ?>" class="form-control">
                                 </section>
                             </div>
                             <div class="col-sm-6 sm-margin-bottom-50">
                                 <section>
-                                    <label class="input">Địa chỉ</label>
+                                    <label class="input">Địa chỉ<span style="color: red;"> (*)</span></label>
                                     <input type="text" name="address" value="<?= isset($user) ?  $user->address : '' ?>" class="form-control">
                                 </section>
                             </div>

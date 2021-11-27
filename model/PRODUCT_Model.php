@@ -10,7 +10,7 @@ class PRODUCT_Model extends \Model\Model
 {
     public function get_list_active($keyword = '', $start = null, $limit = null)
     {
-        
+
         if ($start == null && $limit == null) {
             $stmt = $this->pdo->prepare("SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 AND product_name LIKE '%{$keyword}%'");
             $stmt->execute();
@@ -34,27 +34,29 @@ class PRODUCT_Model extends \Model\Model
 
     public function count_active($keyword = '')
     {
-        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 AND product_name LIKE '%{$keyword}%'");           
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE publish=1 AND trash=0 AND product_name LIKE '%{$keyword}%'");
         $stmt->execute();
         return $stmt->fetchColumn();
-        
     }
 
-    public function get_list($start = null, $limit = null)
+    public function get_list($trash = 0, $start = null, $limit = null)
     {
         if ($start == null && $limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE trash=0');
+            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE trash=:trash');
+            $stmt->bindParam(':trash', $trash);
             $stmt->execute();
 
             return $stmt->fetchAll();
         } elseif ($limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN  categories ON products.category_id=categories.category_id WHERE trash=0 LIMIT :start');
+            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN  categories ON products.category_id=categories.category_id WHERE trash=:trash LIMIT :start');
+            $stmt->bindParam(':trash', $trash);
             $stmt->bindParam(':start', $start);
             $stmt->execute();
 
             return $stmt->fetch();
         } else {
-            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE trash=0 LIMIT :start,:limit');
+            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE trash=:trash LIMIT :start,:limit');
+            $stmt->bindParam(':trash', $trash);
             $stmt->bindParam(':start', $start);
             $stmt->bindParam(':limit', $limit);
             $stmt->execute();
@@ -63,9 +65,10 @@ class PRODUCT_Model extends \Model\Model
         }
     }
 
-    public function count()
+    public function count($trash = 0)
     {
-        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM products WHERE trash=0');
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM products WHERE trash=:trash');
+        $stmt->bindParam(':trash', $trash);
         $stmt->execute();
 
         return $stmt->fetchColumn();
@@ -146,6 +149,15 @@ class PRODUCT_Model extends \Model\Model
     {
         $stmt = $this->pdo->prepare("UPDATE products SET products.rate=(SELECT AVG(comments.rate) FROM comments WHERE comments.product_id = products.product_id) WHERE products.product_id=:product_id");
         $stmt->bindParam(':product_id', $id);
+        $stmt->execute();
+
+        return true;
+    }
+    
+    public function delete($id)
+    {
+        $id_list = implode(",", $id);
+        $stmt = $this->pdo->prepare("DELETE FROM products WHERE product_id IN ($id_list)");
         $stmt->execute();
 
         return true;
