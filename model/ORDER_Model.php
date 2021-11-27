@@ -8,7 +8,7 @@ namespace Model;
  */
 class ORDER_Model extends \Model\Model
 {
-    public function get_list($user_id = null, $start = null, $limit = null)
+    public function get_list($start = null, $limit = null, $user_id = null)
     {
         if ($start == null && $limit == null) {
             if ($user_id != null) {
@@ -63,7 +63,7 @@ class ORDER_Model extends \Model\Model
 
     public function get($id)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM orders WHERE order_id=:order_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id LEFT JOIN payments ON orders.payment_id=payments.payment_id WHERE order_id=:order_id');
         $stmt->bindParam(':order_id', $id);
         $stmt->execute();
 
