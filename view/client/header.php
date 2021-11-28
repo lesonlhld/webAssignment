@@ -87,26 +87,45 @@ $category_list = $CATEGORY_Model->get_list();
 
                             <ul class="list-inline shop-badge badge-lists badge-icons pull-right">
                                 <li><a href="<?= site_url() ?>member/cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <span class="badge badge-sea rounded-x">0</span>
+                                    <span class="badge badge-sea rounded-x">
+                                        <?php
+                                            if (!isset($_SESSION['cart'])){
+                                                echo 0;
+                                            }else{
+                                                echo count($_SESSION['cart']);
+                                            }
+                                        ?>
+                                    </span>
 
                                     <ul class="list-unstyled badge-open mCustomScrollbar" data-mcs-theme="minimal-dark">
+                                    <?php if (!isset($_SESSION["cart"])){ ?>
+                                        <li>Giỏ hàng trống</li>
+                                    <?php 
+                                    }
+                                    else{
+                                        foreach ($_SESSION["cart"] as $product_id => $item){ ?>
                                         <li>
-                                            <img src="#" alt="" width="10" height="20">
+                                            <img src="<?= base_url("source/products/". $item["image"])?>" alt="Product image" width="10" height="20">
                                             <a href="<?= site_url() ?>member/cart/remove?pId= ">
                                                 <button type="button" class="close">×</button></a>
                                             <div class="overflow-h">
-                                                <span>product.name</span>
-                                                <small>quantity *
-                                                    price_discount
+                                                <span><?= $item["name"]?></span>
+                                                <small><?= number_format($item["quantity"] * $item["unit_price"]) . " VND"?>
                                                 </small>
                                             </div>
                                         </li>
+                                        <?php }}?>
 
                                         <li class="subtotal">
                                             <div class="overflow-h margin-bottom-10">
                                                 <span>Tổng tiền</span>
                                                 <span class="pull-right subtotal-cost">
-                                                    total
+                                                <?php if (!isset($_SESSION['cart_total'])){ 
+                                                    echo 0;
+                                                }else{
+                                                    echo number_format($_SESSION['cart_total']) . " VND";
+                                                }
+                                                ?>
                                                 </span>
                                             </div>
                                             <div class="row">
