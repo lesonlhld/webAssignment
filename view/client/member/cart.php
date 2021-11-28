@@ -28,14 +28,15 @@
                                     <th>Thành Tiền</th>
                                 </tr>
                             </thead>
+                            
                             <?php if (!isset($_SESSION["cart"])){ ?>
                             <tbody>Giỏ hàng trống</tbody>
                             <?php 
                             }
                             else{
-                                foreach ($_SESSION["cart"] as $item){ ?>
+                                foreach ($_SESSION["cart"] as $product_id => $item){ ?>
 
-                            <tbody>
+                            <tbody id="cart-item-<?=$product_id?>">
                                 <tr>
                                     <td class="product-in-table"><img class="img-responsive" src="<?= base_url("source/products/". $item["image"])?>" alt="Product image">
                                         <div class="product-it-in">
@@ -50,11 +51,11 @@
                                     <td class="shop-red">
                                     <?= number_format($item["quantity"] * $item["unit_price"]) . " VND"?>
                                     </td>
-                                    <td><a href="<?= site_url() ?>cart/remove?id=">
-                                            <button type="button" class="close">
-                                                <span>&times;</span><span class="sr-only">Đóng</span>
-                                            </button>
-                                        </a></td>
+                                    <td>
+                                        <button type="button" class="close" onclick="delete_item(<?=$product_id?>)">
+                                            <span>&times;</span><span class="sr-only">Đóng</span>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                             <?php    }
@@ -64,7 +65,7 @@
                                 <td></td>
                                 <td><strong>TỔNG TIỀN</strong></td>
                                 <td></td>
-                                <td class="shop-red">
+                                <td class="shop-red" id="cart-total-update">
                                 <?php if (!isset($_SESSION['cart_total'])){ 
                                     echo 0;
                                 }else{
@@ -141,8 +142,13 @@
                                     <br>
                                     <h4>Tổng Tiền:</h4>
                                     <div class="total-result-in">
-                                        <span>
-                                            total
+                                        <span id="cart-total-pay">
+                                        <?php if (!isset($_SESSION['cart_total'])){ 
+                                            echo 0;
+                                        }else{
+                                            echo number_format($_SESSION['cart_total']) . " VND";
+                                        }
+                                        ?>
                                         </span>
                                     </div>
                                     <br>
@@ -230,3 +236,19 @@
     <!--end container-->
 </div>
 <!--=== End Content Medium Part ===-->
+<script>
+    
+    function delete_item(product_id){
+        $.ajax({
+            url: "<?= site_url('cart/delete_item') ?>",
+            type: "get",
+            data: "product_id=" + product_id,
+            success: function(data){
+                $("#cart-item-" + product_id).remove();
+                $("#cart-total-update").html(data.total);
+                $("#cart-total-pay").html(data.total);
+            }
+        })
+    };
+    
+</script>
