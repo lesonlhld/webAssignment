@@ -246,7 +246,7 @@
             success: function(data){
                 $("#cart-item-" + product_id).remove();
                 $("#cart-total-update").html(data.total);
-                $("#cart-total-day").html(data.total);
+                $("#cart-total-pay").html(data.total);
             }
         })
     };
