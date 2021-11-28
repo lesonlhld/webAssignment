@@ -86,9 +86,8 @@ $category_list = $CATEGORY_Model->get_list();
                             </script>
 
                             <ul class="list-inline shop-badge badge-lists badge-icons pull-right">
-<<<<<<< HEAD
                                 <li><a href="<?= site_url() ?>member/cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <span class="badge badge-sea rounded-x">
+                                    <span class="badge badge-sea rounded-x num-product-cart">
                                         <?php
                                             if (!isset($_SESSION['cart'])){
                                                 echo 0;
@@ -97,10 +96,6 @@ $category_list = $CATEGORY_Model->get_list();
                                             }
                                         ?>
                                     </span>
-=======
-                                <li><a href="<?= site_url() ?>cart"><i class="fa fa-shopping-cart"></i></a>
-                                    <span class="badge badge-sea rounded-x">0</span>
->>>>>>> origin
 
                                     <ul class="list-unstyled badge-open mCustomScrollbar" data-mcs-theme="minimal-dark">
                                     <?php if (!isset($_SESSION["cart"])){ ?>
@@ -109,7 +104,7 @@ $category_list = $CATEGORY_Model->get_list();
                                     }
                                     else{
                                         foreach ($_SESSION["cart"] as $product_id => $item){ ?>
-                                        <li>
+                                        <li class="cart-item-<?=$product_id?>">
                                             <img src="<?= base_url("source/products/". $item["image"])?>" alt="Product image" width="10" height="20">
                                             <a href="<?= site_url() ?>member/cart/remove?pId= ">
                                                 <button type="button" class="close">×</button></a>
@@ -124,7 +119,7 @@ $category_list = $CATEGORY_Model->get_list();
                                         <li class="subtotal">
                                             <div class="overflow-h margin-bottom-10">
                                                 <span>Tổng tiền</span>
-                                                <span class="pull-right subtotal-cost">
+                                                <span class="pull-right subtotal-cost cart-total-pay">
                                                 <?php if (!isset($_SESSION['cart_total'])){ 
                                                     echo 0;
                                                 }else{

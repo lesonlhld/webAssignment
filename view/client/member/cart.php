@@ -28,16 +28,14 @@
                                     <th>Thành Tiền</th>
                                 </tr>
                             </thead>
-                            
+                            <tbody>
                             <?php if (!isset($_SESSION["cart"])){ ?>
-                            <tbody>Giỏ hàng trống</tbody>
+                                <tr>Giỏ hàng trống</tr>
                             <?php 
                             }
                             else{
                                 foreach ($_SESSION["cart"] as $product_id => $item){ ?>
-
-                            <tbody id="cart-item-<?=$product_id?>">
-                                <tr>
+                                <tr class="cart-item-<?=$product_id?>">
                                     <td class="product-in-table"><img class="img-responsive" src="<?= base_url("source/products/". $item["image"])?>" alt="Product image">
                                         <div class="product-it-in">
                                             <h3><?= $item["name"]?></h3>
@@ -57,15 +55,15 @@
                                         </button>
                                     </td>
                                 </tr>
-                            </tbody>
-                            <?php    }
+                                <?php    }
                             }
                             ?>
+                            </tbody>
                             <tbody>
                                 <td></td>
                                 <td><strong>TỔNG TIỀN</strong></td>
                                 <td></td>
-                                <td class="shop-red" id="cart-total-update">
+                                <td class="shop-red cart-total-pay">
                                 <?php if (!isset($_SESSION['cart_total'])){ 
                                     echo 0;
                                 }else{
@@ -142,7 +140,7 @@
                                     <br>
                                     <h4>Tổng Tiền:</h4>
                                     <div class="total-result-in">
-                                        <span id="cart-total-pay">
+                                        <span class="cart-total-pay">
                                         <?php if (!isset($_SESSION['cart_total'])){ 
                                             echo 0;
                                         }else{
@@ -244,9 +242,10 @@
             type: "get",
             data: "product_id=" + product_id,
             success: function(data){
-                $("#cart-item-" + product_id).remove();
+                $(".cart-item-" + product_id).remove();
                 $("#cart-total-update").html(data.total);
-                $("#cart-total-pay").html(data.total);
+                $(".cart-total-pay").html(data.total);
+                $(".num-product-cart").html(data.num_product);
             }
         })
     };
