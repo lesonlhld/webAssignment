@@ -106,8 +106,7 @@ $category_list = $CATEGORY_Model->get_list();
                                         foreach ($_SESSION["cart"] as $product_id => $item){ ?>
                                         <li class="cart-item-<?=$product_id?>">
                                             <img src="<?= base_url("source/products/". $item["image"])?>" alt="Product image" width="10" height="20">
-                                            <a href="<?= site_url() ?>member/cart/remove?pId= ">
-                                                <button type="button" class="close">×</button></a>
+                                            <button type="button" class="close" onclick="delete_item(<?=$product_id?>)">×</button>
                                             <div class="overflow-h">
                                                 <span><?= $item["name"]?></span>
                                                 <small><?= number_format($item["quantity"] * $item["unit_price"]) . " VND"?>
