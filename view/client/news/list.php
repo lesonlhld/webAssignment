@@ -23,20 +23,22 @@
                         <div class="col-sm-8 product-description">
                             <div class="overflow-h margin-bottom-5">
                                 <ul class="list-inline overflow-h">
+                                    <li class="pull-right">
+                                        <span><?= $news->first_name ?></span>
+                                        <span><?= $news->last_name ?></span>
+                                    </li>
+                                
+                                    <li class="pull-right" >
+                                        <span>
+                                        <?= $news->create_at ?>
+                                        </span>
+                                    </li>
                                     <li>
                                         <h4 class="title-price">
                                             <a href="<?= site_url() ."news/detail/".$news->slug?>"><?= $news->title ?></a>
                                         </h4>
                                     </li>
-                                    <li class="pull-right">
-                                        <span><?= $news->create_at ?></span>
-                                    </li>
-                                
-                                    <li class="pull-right" >
-                                        <span>
-                                        <?= $news->email ?>
-                                        </span>
-                                    </li>
+                                    
                                 </ul>
                                 <p class="margin-bottom-20"><?= $news->short_content ?></p>
                                 </br>
