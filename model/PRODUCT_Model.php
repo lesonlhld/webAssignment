@@ -126,7 +126,8 @@ class PRODUCT_Model extends \Model\Model
 
     public function create($data)
     {
-        $stmt = $this->pdo->prepare('INSERT INTO products(product_name, price, quantity, discount, category_id, description, attribute, image, publish) VALUES (:product_name, :price, :quantity, :discount, :category_id, :description, :attribute, :image, :publish)');
+        $hot = $data['hot'] ?? "0";
+        $stmt = $this->pdo->prepare('INSERT INTO products(product_name, price, quantity, discount, category_id, description, attribute, image, publish, hot) VALUES (:product_name, :price, :quantity, :discount, :category_id, :description, :attribute, :image, :publish, :hot)');
         $stmt->bindParam(':product_name', $data['name']);
         $stmt->bindParam(':price', $data['price']);
         $stmt->bindParam(':quantity', $data['quantity']);
@@ -136,6 +137,7 @@ class PRODUCT_Model extends \Model\Model
         $stmt->bindParam(':attribute', $data['attribute']);
         $stmt->bindParam(':image', $data['image']);
         $stmt->bindParam(':publish', $data['status']);
+        $stmt->bindParam(':hot', $hot);
         $stmt->execute();
 
         return $this->pdo->lastInsertId();
@@ -143,7 +145,8 @@ class PRODUCT_Model extends \Model\Model
 
     public function update($id, $data)
     {
-        $stmt = $this->pdo->prepare('UPDATE products SET product_name=:product_name, price=:price, quantity=:quantity, discount=:discount, category_id= :category_id, description= :description, attribute= :attribute, image= :image, publish=:publish WHERE product_id=:product_id');
+        $hot = $data['hot'] ?? "0";
+        $stmt = $this->pdo->prepare('UPDATE products SET product_name=:product_name, price=:price, quantity=:quantity, discount=:discount, category_id= :category_id, description= :description, attribute= :attribute, image= :image, publish=:publish, hot=:hot WHERE product_id=:product_id');
         $stmt->bindParam(':product_name', $data['name']);
         $stmt->bindParam(':price', $data['price']);
         $stmt->bindParam(':quantity', $data['quantity']);
@@ -153,6 +156,7 @@ class PRODUCT_Model extends \Model\Model
         $stmt->bindParam(':attribute', $data['attribute']);
         $stmt->bindParam(':image', $data['image']);
         $stmt->bindParam(':publish', $data['status']);
+        $stmt->bindParam(':hot', $hot);
         $stmt->bindParam(':product_id', $id);
         $stmt->execute();
 

@@ -56,7 +56,7 @@ class Customer extends \Controller\Controller
         is_admin_login();
 
         if (!isset($_GET['id'])) {
-            adminNotFound();
+            notFound();
         } else {
             $USER_Model = Model('USER_Model');
             $customer = $USER_Model->get($_GET['id']);
@@ -71,7 +71,7 @@ class Customer extends \Controller\Controller
         is_admin_login();
 
         if (!isset($_GET['id'])) {
-            adminNotFound();
+            notFound();
         } else {
             $USER_Model = Model('USER_Model');
             $customer = $USER_Model->get($_GET['id']);
@@ -147,6 +147,7 @@ class Customer extends \Controller\Controller
             View("", ['msg' => 'Địa chỉ không được để trống'], 401);
         } else {
             $data['image'] = upload_file("users", "image", "image");
+            $data['image'] = $data['image'] != "" ? $data['image'] : $data['old_image'];
             if ($id == -1) {
                 $USER_Model = Model('USER_Model');
                 if ($USER_Model->check_exist_email($data['email']) > 0) {

@@ -84,18 +84,6 @@ function notFound($enable404 = false)
     }
 }
 
-// Show 404 page or response 404 code
-function adminNotFound($enable404 = false)
-{
-    if (!$enable404) {
-        View("admin/not_found");
-        exit();
-    } else {
-        $statusCode = 404;
-        http_response_code($statusCode);
-    }
-}
-
 function maintenance()
 {
     $data["subview"] = "client/maintenance_mode";
@@ -223,8 +211,8 @@ function upload_file($folder, $type, $field_name)
         if (in_array($_FILES[$field_name]['type'], $config['allowed_types']) && in_array($file_extension, $config['allowed_exts'])) {
 
             // We want to save the image with timestamp and randomnumber in prefix
-            $prefix = time() . rand() . '_';
-            $target_file = $config['upload_path'] . $prefix . basename($_FILES[$field_name]["name"]);
+            $prefix = time() . rand();
+            $target_file = $config['upload_path'] . $prefix . '.' . $file_extension;
 
             // Check if image file is a actual image or fake image
             $check = getimagesize($_FILES[$field_name]["tmp_name"]);
@@ -233,11 +221,11 @@ function upload_file($folder, $type, $field_name)
                 $success = false;
             }
 
-            // Check if file already exists
-            if (file_exists($target_file)) {
-                echo "Sorry, file already exists.";
-                $success = false;
-            }
+            // // Check if file already exists
+            // if (file_exists($target_file)) {
+            //     echo "Sorry, file already exists.";
+            //     $success = false;
+            // }
 
             // Check file size
             if ($_FILES[$field_name]["size"] > $config['max_size']) {
@@ -250,7 +238,7 @@ function upload_file($folder, $type, $field_name)
                 if (!move_uploaded_file($_FILES[$field_name]["tmp_name"], $target_file)) {
                     echo "Sorry, there was an error uploading your file.";
                 }
-                return $prefix . $_FILES[$field_name]["name"];
+                return $prefix . '.' . $file_extension;
             }
         } else {
             echo $config['msg'];

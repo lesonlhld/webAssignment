@@ -35,6 +35,7 @@
                                     <textarea id="short_content" name="short_content" class="form-control" rows="5" placeholder="Enter short_content"><?= isset($news) ? $news->short_content : '' ?>
                                     </textarea>
                                 </div>
+                                <input type="text" name="old_image" class="hidden" value="<?= $news->image ?>">
                                 <div class="form-group">
                                     <label for="image">Image</label>
                                     <input type="file" id="image" name="image" placeholder="Choose image">

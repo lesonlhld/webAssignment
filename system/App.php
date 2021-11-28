@@ -93,11 +93,7 @@ class App
         if (class_exists($class)) {
             return new $class($function, $param);
         } else {
-            if (strstr($class, "\admin")) {
-                adminNotFound();
-            } else {
-                return new \Controller\Error($function, $param);
-            }
+            return new \Controller\Error($function, $param);
         }
     }
 

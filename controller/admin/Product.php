@@ -59,7 +59,7 @@ class Product extends \Controller\Controller
         is_admin_login();
 
         if (!isset($_GET['id'])) {
-            adminNotFound();
+            notFound();
         } else {
             $PRODUCT_Model = Model('PRODUCT_Model');
             $product = $PRODUCT_Model->get($_GET['id']);
@@ -79,7 +79,7 @@ class Product extends \Controller\Controller
         is_admin_login();
 
         if (!isset($_GET['id'])) {
-            adminNotFound();
+            notFound();
         } else {
             $PRODUCT_Model = Model('PRODUCT_Model');
             $product = $PRODUCT_Model->get($_GET['id']);
@@ -171,6 +171,7 @@ class Product extends \Controller\Controller
             $data['attribute'] = json_encode($attribute);
 
             $data['image'] = upload_file("products", "image", "image");
+            $data['image'] = $data['image'] != "" ? $data['image'] : $data['old_image'];
             if ($id == -1) {
                 $PRODUCT_Model = Model('PRODUCT_Model');
                 if ($PRODUCT_Model->create($data) > 0) {

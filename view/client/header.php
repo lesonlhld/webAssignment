@@ -86,13 +86,13 @@ $category_list = $CATEGORY_Model->get_list();
                             </script>
 
                             <ul class="list-inline shop-badge badge-lists badge-icons pull-right">
-                                <li><a href="<?= site_url() ?>member/cart"><i class="fa fa-shopping-cart"></i></a>
+                                <li><a href="<?= site_url() ?>cart"><i class="fa fa-shopping-cart"></i></a>
                                     <span class="badge badge-sea rounded-x">0</span>
 
                                     <ul class="list-unstyled badge-open mCustomScrollbar" data-mcs-theme="minimal-dark">
                                         <li>
                                             <img src="#" alt="" width="10" height="20">
-                                            <a href="<?= site_url() ?>member/cart/remove?pId= ">
+                                            <a href="<?= site_url() ?>cart/remove?id= ">
                                                 <button type="button" class="close">×</button></a>
                                             <div class="overflow-h">
                                                 <span>product.name</span>
@@ -111,7 +111,7 @@ $category_list = $CATEGORY_Model->get_list();
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-6">
-                                                    <a href="<?= site_url() ?>member/cart" class="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block">Xem Giỏ Hàng</a>
+                                                    <a href="<?= site_url() ?>cart" class="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block">Xem Giỏ Hàng</a>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <a href="<?= site_url() ?>payment" class="btn-u btn-u-sea-shop btn-block">Thanh Toán</a>

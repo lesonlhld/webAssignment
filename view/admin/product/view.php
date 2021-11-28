@@ -57,6 +57,13 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="hot" value="1" <?= isset($product) ?  ($product->hot == 1 ? "checked" : "") : "" ?> id="hot" disabled>Hot
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="image">Image</label>
                             <?php if (isset($product) && $product->image != "") { ?><img src='<?= base_url("source/products/" . $product->image) ?>' alt='Product Image' style='width:100%;'><?php } ?>
                         </div>

@@ -50,7 +50,7 @@
                                     <td class="shop-red">
                                     <?= number_format($item["quantity"] * $item["unit_price"]) . " VND"?>
                                     </td>
-                                    <td><a href="<?= site_url() ?>/member/cart/remove?pId=">
+                                    <td><a href="<?= site_url() ?>cart/remove?id=">
                                             <button type="button" class="close">
                                                 <span>&times;</span><span class="sr-only">Đóng</span>
                                             </button>

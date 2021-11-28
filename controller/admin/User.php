@@ -56,7 +56,7 @@ class User extends \Controller\Controller
         is_admin_login();
 
         if (!isset($_GET['id'])) {
-            adminNotFound();
+            notFound();
         } else {
             $USER_Model = Model('USER_Model');
             $user = $USER_Model->get($_GET['id']);
@@ -71,7 +71,7 @@ class User extends \Controller\Controller
         is_admin_login();
 
         if (!isset($_GET['id'])) {
-            adminNotFound();
+            notFound();
         } else {
             $USER_Model = Model('USER_Model');
             $user = $USER_Model->get($_GET['id']);
@@ -98,7 +98,6 @@ class User extends \Controller\Controller
         is_admin_login();
         $ids = $_POST['ids'] ?? [$_GET['id']] ?? [];
 
-        print_r($ids);
         $USER_Model = Model('USER_Model');
         $USER_Model->update_trash($ids, 0);
         if (isset($_GET['id'])) {

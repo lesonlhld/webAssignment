@@ -17,7 +17,7 @@
             <div class="col-md-6 md-margin-bottom-50">
                 <div class="master-slider ms-skin-default" id="masterslider">
                     <div class="ms-slide">
-                        <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/products/" . $product->image) ?>" alt="Product image">
+                        <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/products/" . $product->image) ?>" alt="Product image" style="width: 100%;">
                     </div>
                 </div>
             </div>
@@ -42,21 +42,25 @@
                     <li class="shop-product-prices shop-red">
                         <?= number_format($product->price * (100 - $product->discount) / 100) . " VND" ?>
                     </li>
-                    <li class="line-through">
-                        <?php
-                        if ($product->discount > '0') {
-                            echo '<span class="title-price line-through">' . number_format($product->price) . " VND" . '</span>';
-                        }
-                        ?>
-                    </li>
-                    <li><br><small class="shop-bg-red time-day-left"> Bán Chạy Nhất </small></li>
+                    <?php
+                    if ($product->discount > '0') { ?>
+                        <li class="line-through">
+                            <span class="title-price line-through"><?= number_format($product->price) ?> VND</span>
+                        </li>
+                    <?php }
+                    ?>
+                    <?php
+                    if ($product->hot == 1) { ?>
+                        <li><br><small class="shop-bg-red time-day-left"> Bán Chạy Nhất </small></li>
+                    <?php }
+                    ?>
                 </ul>
                 <!--end shop product prices-->
 
                 <h3 class="shop-product-title">Số Lượng</h3>
                 <div class="margin-bottom-40">
                     <form id="cart-form" name="f1" class="product-quantity sm-margin-bottom-20" method="post" action="#">
-                        <input type="text" name="product_id" value="<?= isset($product) ?  $product->product_id : '' ?>"class="hidden">
+                        <input type="text" name="product_id" value="<?= isset($product) ?  $product->product_id : '' ?>" class="hidden">
                         <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty();' value='-'>-</button>
                         <input type='text' class="quantity-field" name='quantity' value="1" id='qty' />
                         <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty").value++;' value='+'>+</button>
@@ -210,12 +214,12 @@
 
 <script>
     function subtractQty() {
-            if (document.getElementById("qty").value - 1 < 1)
-                return;
-            else
-                document.getElementById("qty").value--;
+        if (document.getElementById("qty").value - 1 < 1)
+            return;
+        else
+            document.getElementById("qty").value--;
     };
-    
+
     document.addEventListener("DOMContentLoaded", () => {
         $("#comment-form").submit(function(e) {
             e.preventDefault();
@@ -233,7 +237,7 @@
                 }
             });
         });
-        
+
         $("#cart-form").submit(function(e) {
             e.preventDefault();
             $.ajax({
@@ -245,8 +249,7 @@
                 },
             });
         });
-        
-        
-    });
 
+
+    });
 </script>

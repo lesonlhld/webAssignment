@@ -38,7 +38,7 @@ class News extends \Controller\Controller
         is_admin_login();
 
         if (!isset($_GET['id'])) {
-            adminNotFound();
+            notFound();
         } else {
             $NEWS_Model = Model('NEWS_Model');
             $news = $NEWS_Model->get($_GET['id']);
@@ -54,7 +54,7 @@ class News extends \Controller\Controller
         is_admin_login();
 
         if (!isset($_GET['id'])) {
-            adminNotFound();
+            notFound();
         } else {
             $NEWS_Model = Model('NEWS_Model');
             $news = $NEWS_Model->get($_GET['id']);
@@ -103,6 +103,7 @@ class News extends \Controller\Controller
             View("", ['msg' => 'Nội dung không được để trống'], 401);
         } else {
             $data['image'] = upload_file("news", "image", "image");
+            $data['image'] = $data['image'] != "" ? $data['image'] : $data['old_image'];
             if ($id == -1) {
                 $NEWS_Model = Model('NEWS_Model');
                 if ($NEWS_Model->create($data) > 0) {
