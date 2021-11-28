@@ -81,6 +81,20 @@ $configs = $CONFIGS_Model->get();
         OwlCarousel.initOwlCarousel();
         RevolutionSlider.initRSfullWidth();
     });
+    
+    function delete_item(product_id){
+        $.ajax({
+            url: "<?= site_url('cart/delete_item') ?>",
+            type: "get",
+            data: "product_id=" + product_id,
+            success: function(data){
+                $(".cart-item-" + product_id).remove();
+                $("#cart-total-update").html(data.total);
+                $(".cart-total-pay").html(data.total);
+                $(".num-product-cart").html(data.num_product);
+            }
+        })
+    };
 </script>
 </body>
 
