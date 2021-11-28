@@ -58,8 +58,7 @@ class Cart extends \Controller\Controller
             $product_id = $_GET['product_id'];
             $_SESSION['cart_total'] -= $_SESSION['cart'][$product_id]["unit_price"] * $_SESSION['cart'][$product_id]["quantity"];
             unset($_SESSION['cart'][$product_id]);
-            View("", ['total' => number_format($_SESSION['cart_total']) . " VND"]);
-            View("", ['num_product' => count($_SESSION['cart'])]);
+            View("", ['total' => number_format($_SESSION['cart_total']) . " VND", 'num_product' => count($_SESSION['cart'])]);
         }
         return;
     }
