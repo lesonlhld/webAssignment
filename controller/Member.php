@@ -58,11 +58,4 @@ class Member extends \Controller\Controller
         $this->data["subview"] = "client/member/invoice";
         View("client/main", $this->data);
     }
-
-    public function cart()
-    {
-        is_login();
-        $this->data["subview"] = "client/member/cart";
-        View("client/main", $this->data);
-    }
 }

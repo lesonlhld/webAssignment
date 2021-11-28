@@ -86,6 +86,7 @@ $category_list = $CATEGORY_Model->get_list();
                             </script>
 
                             <ul class="list-inline shop-badge badge-lists badge-icons pull-right">
+<<<<<<< HEAD
                                 <li><a href="<?= site_url() ?>member/cart"><i class="fa fa-shopping-cart"></i></a>
                                     <span class="badge badge-sea rounded-x">
                                         <?php
@@ -96,6 +97,10 @@ $category_list = $CATEGORY_Model->get_list();
                                             }
                                         ?>
                                     </span>
+=======
+                                <li><a href="<?= site_url() ?>cart"><i class="fa fa-shopping-cart"></i></a>
+                                    <span class="badge badge-sea rounded-x">0</span>
+>>>>>>> origin
 
                                     <ul class="list-unstyled badge-open mCustomScrollbar" data-mcs-theme="minimal-dark">
                                     <?php if (!isset($_SESSION["cart"])){ ?>
@@ -130,7 +135,7 @@ $category_list = $CATEGORY_Model->get_list();
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-6">
-                                                    <a href="<?= site_url() ?>member/cart" class="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block">Xem Giỏ Hàng</a>
+                                                    <a href="<?= site_url() ?>cart" class="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block">Xem Giỏ Hàng</a>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <a href="<?= site_url() ?>payment" class="btn-u btn-u-sea-shop btn-block">Thanh Toán</a>

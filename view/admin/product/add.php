@@ -60,9 +60,17 @@
                                         <option value="0" <?= (!isset($product) || $product->publish == 0) ? 'selected' : '' ?>>Lock</option>
                                     </select>
                                 </div>
+                                <input type="text" name="old_image" class="hidden" value="<?= $product->image ?>">
                                 <div class="form-group">
                                     <label for="image">Image</label>
                                     <input type="file" id="image" name="image" placeholder="Choose image">
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="hot" value="1" <?= isset($product) ?  ($product->hot == 1 ? "checked" : "") : "" ?> id="hot">Hot
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->

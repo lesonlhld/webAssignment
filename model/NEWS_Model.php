@@ -11,18 +11,21 @@ class NEWS_Model extends \Model\Model
     public function get_list_active($start = null, $limit = null)
     {
         if ($start == null && $limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM news WHERE publish=1');
+            $stmt = $this->pdo->prepare('SELECT news.*, users.first_name, users.last_name FROM news LEFT JOIN users ON news.create_by=users.id WHERE news.publish= 1');
+            //$stmt = $this->pdo->prepare('SELECT * FROM news WHERE publish=1');
             $stmt->execute();
 
             return $stmt->fetchAll();
         } elseif ($limit == null) {
-            $stmt = $this->pdo->prepare('SELECT * FROM news WHERE publish=1 LIMIT :start');
+            $stmt = $this->pdo->prepare('SELECT news.*, users.first_name, users.last_name FROM news LEFT JOIN users ON news.create_by=users.id WHERE news.publish =1 LIMIT :start');
+            //$stmt = $this->pdo->prepare('SELECT * FROM news WHERE publish=1 LIMIT :start');
             $stmt->bindParam(':start', $start);
             $stmt->execute();
 
             return $stmt->fetch();
         } else {
-            $stmt = $this->pdo->prepare('SELECT * FROM news WHERE publish=1 LIMIT :start,:limit');
+            $stmt = $this->pdo->prepare('SELECT news.*, users.first_name, users.last_name FROM news LEFT JOIN users ON news.create_by=users.id WHERE news.publish=1 LIMIT :start,:limit');
+            //$stmt = $this->pdo->prepare('SELECT * FROM news WHERE publish=1 LIMIT :start,:limit');
             $stmt->bindParam(':start', $start);
             $stmt->bindParam(':limit', $limit);
             $stmt->execute();
@@ -81,7 +84,7 @@ class NEWS_Model extends \Model\Model
 
     public function get_by_slug($slug)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM news WHERE slug=:slug');
+        $stmt = $this->pdo->prepare('SELECT news.*,users.first_name,users.last_name FROM news LEFT JOIN users ON news.create_by=users.id WHERE news.slug=:slug');
         $stmt->bindParam(':slug', $slug);
         $stmt->execute();
 
