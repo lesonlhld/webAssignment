@@ -58,4 +58,36 @@ class Member extends \Controller\Controller
         $this->data["subview"] = "client/member/invoice";
         View("client/main", $this->data);
     }
+
+    public function changepass()
+    {
+        is_login();
+        $USER_Model = Model('USER_Model');
+        $user = $USER_Model -> get($_SESSION['id']);
+        $this->data['data']['user'] = $user;
+        $this->data["subview"] = "client/member/changepass";
+        View("client/main",$this->data);
+    }
+
+    public function update_pass()
+    {
+        is_login();
+        $data = $_POST;
+        $file = $_FILES;
+        $USER_Model = Model('USER_Model');
+        $info_pass = $USER_Model->get_password($_SESSION['id']);
+        if (hashpass($data["oldpassword"]) != $info_pass)
+            {
+                View("",['msg'=>'Nhập sai mật khẩu cũ'],401);
+            }
+        else
+            if ($data["newpassword"] != $data["passwordConfirm"]) {
+                    View("",['msg' => 'Mật khẩu mới xác nhận không giống nhau'],401);
+            }
+                else 
+                { 
+                    $newpass= $USER_Model->update_password($_SESSION['id'],$data['newpassword']);
+                    View("",['msg'=>'Đổi mật khẩu thành công']);
+                }
+    }
 }
