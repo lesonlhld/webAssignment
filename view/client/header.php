@@ -86,7 +86,7 @@ $category_list = $CATEGORY_Model->get_list();
                             </script>
 
                             <ul class="list-inline shop-badge badge-lists badge-icons pull-right">
-                                <li><a href="<?= site_url() ?>member/cart"><i class="fa fa-shopping-cart"></i></a>
+                                <li><a href="<?= site_url() ?>cart"><i class="fa fa-shopping-cart"></i></a>
                                     <span class="badge badge-sea rounded-x num-product-cart">
                                         <?php
                                             if (!isset($_SESSION['cart'])){

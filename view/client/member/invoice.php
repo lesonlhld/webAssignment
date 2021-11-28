@@ -8,7 +8,7 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Information ===-->
-<div class="content-md margin-bottom-30">
+<div class="content margin-bottom-30">
     <div class="container">
         <form class="shopping-cart" action="#">
             <div>

@@ -8,7 +8,7 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Content Medium Part ===-->
-<div class="content-md margin-bottom-30">
+<div class="content margin-bottom-30">
     <div class="container">
         <form class="shopping-cart" method="POST" action="<?= site_url("payment") ?>">
             <div>
