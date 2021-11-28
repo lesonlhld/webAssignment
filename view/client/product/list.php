@@ -1,5 +1,3 @@
-<?php unset($_SESSION["cart"]);
-unset($_SESSION["cart_total"]);?>
 <!-- Breadcrumbs v5 -->
 <div class="container">
     <ul class="breadcrumb-v5">

@@ -69,14 +69,13 @@ class Product extends \Controller\Controller
     public function add_to_cart(){
         is_login();
         $data = $_POST;
-        echo $data["product_id"];
         $product_id = $data["product_id"];
-        $PRODUCT_Model = Model('PRODUCT_Model');
-        $product = $PRODUCT_Model->get($product_id);
-        $quantity = (int)$data["quantity"];
         if ($product_id == ""){
             return;
         }
+        $PRODUCT_Model = Model('PRODUCT_Model');
+        $product = $PRODUCT_Model->get($product_id);
+        $quantity = (int)$data["quantity"];
         if (!isset($_SESSION['cart'])){
             $_SESSION['cart'] = array();
             $_SESSION['cart_total'] = 0;

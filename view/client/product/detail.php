@@ -237,7 +237,7 @@
         $("#cart-form").submit(function(e) {
             e.preventDefault();
             $.ajax({
-                url: "<?= site_url('product/add_to_cart') ?>",
+                url: "<?= site_url('cart/add') ?>",
                 type: 'post',
                 data: $(this).serialize(),
                 success: function(data) {
