@@ -37,7 +37,6 @@ class News extends \Controller\Controller
         if ($news == null) {
             notFound();
         } else {
-            $news = $NEWS_Model->get($_GET['id']);
             $this->data['data']['news'] = $news;
             $this->data["subview"] = "client/news/detail";
             View("client/main", $this->data);
