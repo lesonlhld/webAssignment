@@ -32,8 +32,9 @@
                         </div>
                         <div class = "form-group">
                             <ul class="list-inline overflow-h">
+                                <li class ="pull-right"><span><?= isset($news) ? $news->first_name : ''?></span></li>
+                                <li class ="pull-right"><span><?= isset($news) ? $news->last_name : ''?></span></li>
                                 <li class ="pull-right"><span><?= isset($news) ? $news->create_at : ''?></span></li>
-                                <li class ="pull-right"><span><?= isset($news) ? $news->email : ''?></span></li>
                             </ul>
                         </div>
                     </div>
