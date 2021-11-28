@@ -157,6 +157,14 @@ class USER_Model extends \Model\Model
         return true;
     }
 
+    public function get_password($id)
+    {
+        $stmt = $this->pdo->prepare("SELECT password FROM users WHERE id=$id ");
+        $stmt->execute();
+        $pass = $stmt->fetchColumn();
+        return $pass;
+    }
+
     public function delete($id)
     {
         $id_list = implode(",", $id);
