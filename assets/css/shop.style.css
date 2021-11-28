@@ -160,7 +160,7 @@ li:first-child {
 	-webkit-transition: all 0.3s ease-in-out;
 }
 
-.illustration-v1.illustration-img1:hover {
+.illustration-v1.illustration-img3:hover {
 	-transform: scale(1.05);
 	-o-transform: scale(1.05);
 	-moz-transform: scale(1.05);
@@ -229,7 +229,7 @@ li:first-child {
 	-webkit-transition: all 0.3s ease-in-out;
 }
 
-.illustration-v1.illustration-img2:hover {
+.illustration-v1.illustration-img4:hover {
 	-transform: scale(1.05);
 	-o-transform: scale(1.05);
 	-moz-transform: scale(1.05);
