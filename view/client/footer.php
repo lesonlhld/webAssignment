@@ -47,7 +47,7 @@ $configs = $CONFIGS_Model->get();
         <div class="container">
             <div class="col-md-6">
                 <p>
-                    All Rights Reserved. © 2020 BK Food Court
+                    BK Food Court
                 </p>
             </div>
         </div>
