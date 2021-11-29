@@ -31,20 +31,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php 
+                                <?php
                                 $index = 1;
-                                foreach($data['order_list'] as $order) {?>
-                                <tr class="odd gradeX">
-                                    <td><?=$index?></td>
-                                    <td><?=$order->order_id?></td>
-                                    <td><?=$order->order_time?></td>
-                                    <td><?=$order->voucher != null ? $order->voucher : "Không có"?></td>
-                                    <td><?=number_format($order->total) . " VND"?></td>
-                                    <td><?=$order->payment_method?></td>
-                                </tr>
-                            <?php 
+                                foreach ($data['order_list'] as $order) { ?>
+                                    <tr class="odd gradeX">
+                                        <td><?= $index ?></td>
+                                        <td><a href="<?= site_url('member/order_item?code=' . $order->id) ?>"><?= $order->order_id ?></a></td>
+                                        <td><?= $order->order_time ?></td>
+                                        <td><?= $order->voucher != null ? $order->voucher : "Không có" ?></td>
+                                        <td><?= number_format($order->total) . " VND" ?></td>
+                                        <td><?= $order->payment_method ?></td>
+                                    </tr>
+                                <?php
                                     $index += 1;
-                                }?>
+                                } ?>
                             </tbody>
                         </table>
                     </div>

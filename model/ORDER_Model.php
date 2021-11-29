@@ -71,12 +71,12 @@ class ORDER_Model extends \Model\Model
 
     public function get_by_user($user_id, $order_id)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id WHERE order_id=:order_id AND user_id=:user_id');
+        $stmt = $this->pdo->prepare('SELECT orders.* FROM orders LEFT JOIN users ON orders.user_id=users.id WHERE orders.id=:order_id AND user_id=:user_id');
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':order_id', $order_id);
         $stmt->execute();
 
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     public function get_all($user_id)

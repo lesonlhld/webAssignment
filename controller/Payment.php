@@ -35,13 +35,13 @@ class Payment extends \Controller\Controller
         unset($_SESSION["cart_total"]);
 
         if ($data['payment_method'] == 2) {
-            $this->processMomo($result['code'], $total);
+            $this->processMomo($result, $total);
         } else {
             View("", ['msg' => $result['code']]);
         }
     }
 
-    private function processMomo($code, $total)
+    private function processMomo($data, $total)
     {
         header('Content-type: text/html; charset=utf-8');
 
@@ -56,11 +56,11 @@ class Payment extends \Controller\Controller
         $partnerCode = $array["partnerCode"];
         $accessKey = $array["accessKey"];
         $secretKey = $array["secretKey"];
-        $orderInfo = "Thanh toán đơn hàng " . $code;
+        $orderInfo = "Thanh toán đơn hàng " . $data['code'];
         $amount = "{$total}";
-        $orderId = $code;
-        $returnUrl = site_url("member/order_item?code=$code");
-        $notifyurl = site_url("member/order_item?code=$code");
+        $orderId =  $data['code'];
+        $returnUrl = site_url("member/order_item?code=" . $data['id']);
+        $notifyurl = site_url("member/order_item?code=" . $data['id']);
         // Lưu ý: link notifyUrl không phải là dạng localhost
         $extraData = "merchantName=Smart Food Court System - Đại học Bách Khoa";
 
