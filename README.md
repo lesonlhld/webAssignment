@@ -1,10 +1,10 @@
 # Web Assignment Project
 ## Hướng dẫn cài đặt:
 1. Thay đổi thư mục web root của XAMPP (hoặc clone git project vào thư mục htdocs của XAMPP).
-2. Trong phpmyadmin, tạo user `web_database`, password `web_database_password`.
-3. Đăng nhập phpmyadmin bằng tài khoản `web_database` vừa tạo. Tạo db `web_assignment` và import file `web_assignment.sql` tương ứng lên.
-4. Mở terminal hoặc command line, chạy lệnh `composer install` để tạo file autoload.php
-5. Thay đổi môi trường deploy bằng biến hằng ENVIRONMENT trong file ./index.php với 2 giá trị: `development` hoặc `production`
+2. Trong phpmyadmin, tạo user `web_database`, password `web_database_password`. Đăng nhập phpmyadmin bằng tài khoản `web_database` vừa tạo. Tạo db `web_assignment` và import file `web_assignment.sql` tương ứng lên. Hoặc mở file cấu hình database theo đường dẫn system\Database.php và cấu hình lại username, password,...
+
+3. Mở terminal hoặc command line, chạy lệnh `composer install` để tạo file autoload.php
+4. Thay đổi môi trường deploy bằng biến hằng ENVIRONMENT trong file ./index.php với 2 giá trị: `development` hoặc `production`
 
 **Lưu ý**: 
 - Nếu import thấy lỗi `Unknown collation: 'utf8mb4_0900_ai_ci'` thì mở file db bằng text editor, replace `utf8mb4_0900_ai_ci` thành `utf8mb4_general_ci`.
@@ -60,10 +60,12 @@ EXAMPLE_Model extends \Model\Model {...}
 
 ## Hyperlinks FE
 * http://localhost/webAssignment/
-* http://localhost/webAssignment/home/get_city
-* http://localhost/webAssignment/home/get_district
+* http://localhost/webAssignment/auth/login
+* http://localhost/webAssignment/product/list
+* http://localhost/webAssignment/admin/auth
 * http://localhost/webAssignment/admin/dashboard
+* ...
 
-## Web demo
+## Web demo (Có thể bị lỗi)
 * https://letrungson.000webhostapp.com/ or http://letrungson.cf/ (Located in the same hosting)
 * http://web-assignment-211.herokuapp.com/

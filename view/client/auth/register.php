@@ -8,7 +8,7 @@
 <!-- End Breadcrumbs v5 -->
 
 <!--=== Register ===-->
-<div class="form-input content-md margin-bottom-30">
+<div class="form-input content margin-bottom-30">
     <div class="container">
         <div class="row">
             <div class="col-md-7 md-margin-bottom-50">
@@ -19,7 +19,7 @@
                 <div class="row margin-bottom-50">
                     <div class="col-sm-4 md-margin-bottom-20">
                         <div class="site-statistics">
-                            <span>10+</span> <small>Thương hiệu</small>
+                            <span>50+</span> <small>Món ăn</small>
                         </div>
                     </div>
                     <div class="col-sm-4 md-margin-bottom-20">

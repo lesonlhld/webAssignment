@@ -267,88 +267,6 @@
 	</div>
 	<!--end row-->
 	<!--=== End Product Service ===-->
-
-	<!--=== Illustration v3 ===-->
-
-	<div class="heading heading-v1 margin-bottom-20">
-		<h2>Thương hiệu nổi bật</h2>
-	</div>
-	<div class="row illustration-v4 margin-bottom-40">
-		<div class="col-md-4">
-			<div class="thumb-product">
-				<a href="<?= site_url() ?>product/stall?stall_id=6">
-					<img class="thumb-product-img" src="<?= site_url() ?>assets/img/thumb/mcdonald.png" alt="">
-					<div class="thumb-product-in">
-						<h4>McDonald's</h4>
-						<span class="thumb-product-type">Một trong những cửa hàng được giới trẻ yêu thích nhất hiện nay</span>
-					</div>
-				</a>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="thumb-product">
-				<a href="<?= site_url() ?>product/stall?stall_id=4">
-					<img class="thumb-product-img" src="<?= site_url() ?>assets/img/thumb/kfc.png" alt="">
-					<div class="thumb-product-in">
-						<h4>KFC</h4>
-						<span class="thumb-product-type">Vị ngon trên từng ngón tay</span>
-					</div>
-				</a>
-			</div>
-		</div>
-
-		<div class="col-md-4 padding">
-			<div class="thumb-product">
-				<a href="<?= site_url() ?>product/stall?stall_id=12">
-					<img class="thumb-product-img" src="<?= site_url() ?>assets/img/thumb/toco.png" alt="">
-					<div class="thumb-product-in">
-						<h4>Trà sữa Toco Toco</h4>
-						<span class="thumb-product-type">Nhấp nhô từng nhịp</span>
-					</div>
-				</a>
-			</div>
-		</div>
-	</div>
-
-	<!--end row-->
-	<div class="row illustration-v4 margin-bottom-40">
-		<div class="col-md-4">
-			<div class="thumb-product">
-				<a href="<?= site_url() ?>product/stall?stall_id=11">
-					<img class="thumb-product-img" src="<?= site_url() ?>assets/img/thumb/phuclong.png" alt="">
-					<div class="thumb-product-in">
-						<h4>Phúc Long Coffee & Tea</h4>
-						<span class="thumb-product-type">Điểm 10 chất lượng cho các loại đồ uống</span>
-					</div>
-				</a>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="thumb-product">
-				<a href="<?= site_url() ?>product/stall?stall_id=10">
-					<img class="thumb-product-img" src="<?= site_url() ?>assets/img/thumb/royaltea.png" alt="">
-					<div class="thumb-product-in">
-						<h4>The Royal Tea</h4>
-						<span class="thumb-product-type">Trà Quý's Tộc Hoàng Gia</span>
-					</div>
-				</a>
-			</div>
-		</div>
-
-		<div class="col-md-4 padding">
-			<div class="thumb-product">
-				<a href="<?= site_url() ?>product/stall?stall_id=5">
-					<img class="thumb-product-img" src="<?= site_url() ?>assets/img/thumb/pizzahut.png" alt="">
-					<div class="thumb-product-in">
-						<h4>Pizza Hut</h4>
-						<span class="thumb-product-type">Thương hiệu Pizza ngon nhất Việt Nam</span>
-					</div>
-				</a>
-			</div>
-		</div>
-	</div>
-	<!--end row-->
-	<!--=== End Illustration v3 ===-->
 </div>
 <!--end cotnainer-->
 
@@ -373,7 +291,7 @@
 					<span class="discount-percent">%</span>
 					<span class="discount-off">ưu đãi</span>
 				</div>
-				<div class="new-offers shop-bg-green rounded-x">
+				<div class="new-offers shop-bg-red rounded-x">
 					<p>món</p>
 					<span>MỚI</span>
 				</div>
