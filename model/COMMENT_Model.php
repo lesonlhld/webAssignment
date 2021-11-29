@@ -20,7 +20,7 @@ class COMMENT_Model extends \Model\Model
         return $stmt->fetchAll();
     }
 
-    public function get_list_by_product($start = null, $limit = null, $product_id)
+    public function get_list_by_product($product_id, $start = null, $limit = null)
     {
         if ($start == null && $limit == null) {
             $stmt = $this->pdo->prepare("SELECT c.rate AS comment_rate, c.id AS comment_id, c.comment, c.create_at, c.create_by, c.product_id, p.product_name AS product_name, u.avatar, u.first_name, u.last_name FROM comments c LEFT JOIN products p ON c.product_id=p.product_id LEFT JOIN users u ON c.create_by=u.id WHERE c.product_id=:product_id");
