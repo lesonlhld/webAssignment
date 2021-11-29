@@ -31,7 +31,7 @@ $configs = $CONFIGS_Model->get();
                 <div class="col-md-4 md-margin-bottom-40">
                     <h2 class="thumb-headline">Thời gian mở cửa</h2>
                     <ul class="list-unstyled address-list margin-bottom-20">
-                        <li><i class="fa fa-angle-right"></i>Thứ 2 - Chủ Nhật: 9AM - 8PM</li>
+                        <li><i class="fa fa-angle-right"></i>Thứ 2 - Chủ Nhật: 6h30 - 21h00</li>
                     </ul>
                 </div>
                 <!-- End About -->
