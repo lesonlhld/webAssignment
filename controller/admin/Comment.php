@@ -21,7 +21,7 @@ class Comment extends \Controller\Controller
             $comment_list = $COMMENT_Model->get_list($start, LIMIT);
             $end_page = ceil($COMMENT_Model->count() / LIMIT);
         } else {
-            $comment_list = $COMMENT_Model->get_list_by_product($start, LIMIT, $_GET['product_id']);
+            $comment_list = $COMMENT_Model->get_list_by_product($_GET['product_id'], $start, LIMIT);
             $end_page = ceil($COMMENT_Model->count_by_product($_GET['product_id']) / LIMIT);
         }
 

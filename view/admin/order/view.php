@@ -50,20 +50,15 @@
                             </div>
                         </div>
                         <!-- /.box-body -->
+                        <div class="box-footer">
+                            <a href="<?= site_url('admin/order'); ?>"><button type="button" class="btn btn-info">Cancel</button></a>
+                        </div>
                     </div>
                 </div>
                 <!-- /.col -->
 
                 <div class="col-xs-8">
                     <div class="box">
-                        <div class="box-header">
-                            <div class="box-tools pull-left">
-                                <!-- <a href=""><button type="button" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Add order</button></a> -->
-                                <!-- <button type="button" class="btn btn-default btn-sm" id="remove"><i class="fa fa-trash"></i> Remove</button> -->
-                            </div>
-                        </div>
-                        <!-- /.box-header -->
-
                         <div class="box-body">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Order Products</h3>
@@ -71,14 +66,12 @@
                             <table id="home_table" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th width="30px"><input type="checkbox" id="check-all"></th>
+                                        <th>STT</th>
                                         <th>Image</th>
                                         <th>Name</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
-                                        <th>Category</th>
-                                        <th>Status</th>
-                                        <th width="80px">Action</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody id="details">
@@ -87,33 +80,18 @@
                                     if (count($data['product_list']) == 0) {
                                         echo "<tr><td colspan='10' style='text-align:center'>No data available in table</td><tr>";
                                     }
+                                    $count = 1;
                                     foreach ($data['product_list'] as $product) {
                                     ?>
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" id="check_item" class="check-list" value="<?= $product->product_id ?>">
-                                            </td>
+                                            <td><?= $count++ ?> </td>
                                             <td>
                                                 <img src='<?= base_url("source/products/" . $product->image) ?>' alt='Product Image' style='width:auto; max-height:100px'>
                                             </td>
                                             <td><a href="<?= site_url('admin/product/view?id=' . $product->product_id); ?>"><?= $product->product_name ?></a> </td>
                                             <td><?= $product->price ?> </td>
                                             <td><?= $product->quantity ?> </td>
-                                            <td><?= $product->category_name ?> </td>
-                                            <td>
-                                                <?= $product->publish == 1 ?
-                                                    '<label class="label label-success">Active </label>' : '<label class="label label-warning">Locked </label>'
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Actions
-                                                        <span class="fa fa-caret-down"></span></button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="<?= site_url('admin/product/view?id=' . $product->product_id); ?>"><i class="fa fa-eye"></i>View</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
+                                            <td><?= $product->price * $product->quantity ?> </td>
                                         </tr>
                                     <?php
                                     }
@@ -138,17 +116,3 @@
             <!-- /.row -->
         </section>
     </div>
-
-    <script>
-        function get_checked() {
-            var rows = $('#details tr');
-            var a = [];
-            rows.each(function() {
-                if ($(this).find('#check_item').is(':checked')) {
-                    var id = $(this).find('#check_item').val();
-                    a.push(id);
-                }
-            });
-            return a;
-        }
-    </script>
