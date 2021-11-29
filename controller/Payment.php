@@ -12,20 +12,32 @@ class Payment extends \Controller\Controller
     public function index()
     {
         is_login();
-
+        
         $data = $_POST;
-        $total = $this->processCart();
+        if (!isset($_SESSION['cart_total']) || $_SESSION['cart_total'] == 0){
+            View("", ['msg' => "Giỏ hàng của bạn hiện đang trống. Vui lòng chọn món trước khi thanh toán!"], 400);
+            return;
+        }
+        $total = $_SESSION['cart_total'];
         $data["user_id"] = $_SESSION['id'];
         $data["total"] = $total;
-        $data["payment_id"] = 2;
+        $data['payment_method'] = (int)$data['payment_method'];
         $data["voucher"] = $data['voucher'] != "" ? $data['voucher'] : null;
 
         $ORDER_Model = Model('ORDER_Model');
+        $_SESSION["tan"] = $data;
         $code = $ORDER_Model->create($data);
-
-        if ($data['payment_id'] == 2) {
+        
+        if ($data['payment_method'] == 2) {
             $this->processMomo($code, $total);
         }
+        $ORDER_ITEM_Model = Model('ORDER_ITEM_Model');
+        foreach ($_SESSION["cart"] as $product_id => $item){
+            $ORDER_ITEM_Model->create($code, $product_id, $item);
+        }
+        unset($_SESSION["cart"]);
+        unset($_SESSION["cart_total"]);
+        View("", ['msg' => $code]);
     }
 
     private function processCart()

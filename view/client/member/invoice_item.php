@@ -10,11 +10,11 @@
 <!--=== Content Medium Part ===-->
 <div class="content margin-bottom-30">
     <div class="container">
-        <form action="javascript:void(0)" method="post" class="shopping-cart">
+        <form action="<?= site_url('member/invoice') ?>" class="shopping-cart">
             <div>
                 <div class="header-tags">
                     <div class="overflow-h">
-                        <h2>Giỏ Hàng</h2>
+                        <h2>Hóa đơn của bạn</h2>
                     </div>
                 </div>
                 <section>
@@ -29,34 +29,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php if (!isset($_SESSION["cart"])){ ?>
-                                <tr>Giỏ hàng trống</tr>
                             <?php 
-                            }
-                            else{
-                                foreach ($_SESSION["cart"] as $product_id => $item){ ?>
-                                <tr class="cart-item-<?=$product_id?>">
-                                    <td class="product-in-table"><img class="img-responsive" src="<?= base_url("source/products/". $item["image"])?>" alt="Product image">
+                                foreach ($data["order_items"] as $item){ ?>
+                                <tr class="cart-item-<?=$item->product_id?>">
+                                    <td class="product-in-table"><img class="img-responsive" src="<?= base_url("source/products/". $item->image)?>" alt="Product image">
                                         <div class="product-it-in">
-                                            <h3><?= $item["name"]?></h3>
-                                            <span><?= $item["description"]?></span>
+                                            <h3><?= $item->name?></h3>
+                                            <span><?= $item->description?></span>
                                         </div>
                                     </td>
                                     <td>
-                                    <?= number_format($item["unit_price"]) . " VND" ?>
+                                    <?= number_format($item->unit_price) . " VND" ?>
                                     </td>
-                                    <td><?= $item["quantity"]?></td>
+                                    <td><?= $item->quantity?></td>
                                     <td class="shop-red">
-                                    <?= number_format($item["quantity"] * $item["unit_price"]) . " VND"?>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="close" onclick="delete_item(<?=$product_id?>)">
-                                            <span>&times;</span><span class="sr-only">Đóng</span>
-                                        </button>
+                                    <?= number_format($item->quantity * $item->unit_price) . " VND"?>
                                     </td>
                                 </tr>
                                 <?php    }
-                            }
+                            
                             ?>
                             </tbody>
                             <tbody>
@@ -64,14 +55,7 @@
                                 <td><strong>TỔNG TIỀN</strong></td>
                                 <td></td>
                                 <td class="shop-red cart-total-pay">
-                                <?php if (!isset($_SESSION['cart_total'])){ 
-                                    echo 0;
-                                }else{
-                                    echo number_format($_SESSION['cart_total']) . " VND";
-                                }
-                                    ?>
-                                
-                                
+                                <?= number_format($data['order']->total) . " VND"?> 
                                 </td>
                                 <td></td>
                             </tbody>
@@ -81,68 +65,26 @@
                 </section>
                 <div class="header-tags">
                     <div class="overflow-h">
-                        <h2>Thanh Toán</h2>
+                        <h2>Phương thức thanh toán</h2>
                     </div>
                 </div>
                 <section>
                     <div class="row">
                         <div class="col-md-6 md-margin-bottom-50">
-                            <h2 class="title-type">Chọn phương thức thanh toán </h2>
                             <!-- Accordion -->
                             <span style="padding-left:15px;padding-right:50px;">
-                            <input type="radio" id="sfcs" name="payment_method" value="1">
+                            <input type="radio" id="sfcs" name="payment_method" value="1" disabled>
                             <label for="sfcs">Tài khoản SFCS</label>
                             </span>
                             <span style="padding-right:50px;">
-                            <input type="radio" id="momo" name="payment_method" value="2" checked>
+                            <input type="radio" id="momo" name="payment_method" value="2" checked disabled>
                             <label for="momo">Ví Momo</label>
                             </span>
-                            <input type="radio" id="cash" name="payment_method" value="3">
+                            <input type="radio" id="cash" name="payment_method" value="3" disabled>
                             <label for="cash">Tiền mặt</label>
-                            <div class="accordion-v2">
-                                <div class="panel-group" id="accordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> <i class="fa fa-credit-card"></i>
-                                                    Thanh toán bằng MoMo
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse in">
-                                            <div class="panel-body cus-form-horizontal">
-                                                <div class="content1 margin-left-10">
-                                                    <a href="#">
-                                                        <img src="<?= site_url() ?>assets/img/LogoMomo.png" alt="MoMo">
-                                                    </a>
-                                                </div>
-                                                <div class="content2 margin-left-10">
-                                                    <div>Mã nhà cung cấp: MOMO0NLV20200803</div>
-                                                    <div>Nhà cung cấp: Smart Food Court System - Đại học Bách Khoa</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> <i class="fa fa-money"></i> Thanh toán bằng tiền mặt
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTwo" class="panel-collapse collapse">
-                                            <div class="content margin-left-10">
-                                                Vui lòng thanh toán và chờ xác nhận đơn hàng!
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Accordion -->
                             <div class="coupon-code">
                                 <h3>Mã giảm giá</h3>
-                                <p>Nhập mã giảm giá của bạn: (nếu có)</p>
-                                <input class="form-control margin-bottom-10" name="voucher" type="text">
+                                <input class="form-control margin-bottom-10" name="voucher" type="text" value="<?= $data['order']->voucher != null ? $data['order']->voucher : ''?>" disabled>
                             </div>
                             <ul class="list-inline total-result">
                                 <li class="total-price">
@@ -150,18 +92,13 @@
                                     <h4>Tổng Tiền:</h4>
                                     <div class="total-result-in">
                                         <span class="cart-total-pay">
-                                        <?php if (!isset($_SESSION['cart_total'])){ 
-                                            echo 0;
-                                        }else{
-                                            echo number_format($_SESSION['cart_total']) . " VND";
-                                        }
-                                        ?>
+                                        <?= number_format($data['order']->total) . " VND"?> 
                                         </span>
                                     </div>
                                     <br>
                                     <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                                     <div>
-                                        <button type="submit" class="btn-u btn-u-sea-shop btn-block">Thanh Toán</button>
+                                        <button type="submit" class="btn-u btn-u-sea-shop btn-block">Xem lịch sử hóa đơn</button>
                                     </div>
                                 </li>
                             </ul>
@@ -243,38 +180,3 @@
     <!--end container-->
 </div>
 <!--=== End Content Medium Part ===-->
-<script>
-    
-    function delete_item(product_id){
-        $.ajax({
-            url: "<?= site_url('cart/delete_item') ?>",
-            type: "get",
-            data: "product_id=" + product_id,
-            success: function(data){
-                $(".cart-item-" + product_id).remove();
-                $("#cart-total-update").html(data.total);
-                $(".cart-total-pay").html(data.total);
-                $(".num-product-cart").html(data.num_product);
-            }
-        })
-    };
-    document.addEventListener("DOMContentLoaded", () => {
-        $(".shopping-cart").submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: "<?= site_url('payment/index') ?>",
-                type: 'post',
-                data: $(this).serialize(),
-                success: function(data) {
-                    window.location.replace("<?= site_url('member/invoice_item?code=') ?>" + data.msg);
-                },
-                error: function(data) {
-                    const obj = JSON.parse(JSON.stringify(data));
-                    $("#msg").removeClass('hidden');
-                    $("#msg").html(obj.responseJSON.msg);
-                }
-            });
-        });
-    });
-    
-</script>
