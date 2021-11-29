@@ -179,6 +179,11 @@
                             <li><a href="<?= site_url('admin/customer/trash'); ?>"><i class="fa fa-trash-o"></i> Customer Trash</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="<?= site_url("admin/comment") ?>">
+                            <i class="fa fa-file-text-o"></i> <span>Comment</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->
