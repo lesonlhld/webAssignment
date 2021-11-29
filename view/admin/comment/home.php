@@ -3,11 +3,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                News Data Table
+                Comment Data Table
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('admin/dashboard') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">News</li>
+                <li class="active">Comment</li>
             </ol>
         </section>
         <section class="content">
@@ -16,9 +16,12 @@
                     <div class="box">
                         <div class="box-header">
                             <div class="box-tools pull-left">
-                                <a href="<?= site_url('admin/news/add') ?>"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Add news</button></a>
-                                <!-- <button type="button" class="btn btn-default btn-sm" id="remove"><i class="fa fa-trash"></i> Remove</button> -->
+                                <button type="button" class="btn btn-default btn-sm" id="remove"><i class="fa fa-trash"></i> Remove</button>
                             </div>
+                            
+                            <button id="find_btn" type="button" value="submit" class="btn btn-primary pull-right">Find</button>
+                            <input type="text" class="form-control pull-right" style="width: 200px; margin-right: 5px" id="product_id_input" value="" placeholder="Enter product id">
+                                  
                         </div>
                         <!-- /.box-header -->
 
@@ -27,58 +30,44 @@
                                 <thead>
                                     <tr>
                                         <th width="30px"><input type="checkbox" id="check-all"></th>
-                                        <th>Image</th>
-                                        <th>Title</th>
-                                        <th>Short content</th>
-                                        <th>Create by</th>
-                                        <th>Create at</th>
-                                        <th>Status</th>
+                                        <th>Comment ID</th>
+                                        <th>Rate</th>
+                                        <th>Content</th>
+                                        <th>Created at</th>
+                                        <th>Created by</th>
+                                        <th>Product</th>
                                         <th width="80px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="details">
                                     <?php
                                     //-- Content Rows
-                                    if (count($data['news_list']) == 0) {
+                                    if (count($data['comment_list']) == 0) {
                                         echo "<tr><td colspan='10' style='text-align:center'>No data available in table</td><tr>";
                                     }
-                                    foreach ($data['news_list'] as $news) {
+                                    foreach ($data['comment_list'] as $comment) {
                                     ?>
                                         <tr>
                                             <td>
-                                                <input type="checkbox" id="check_item" class="check-list" value="<?= $news->id ?>">
+                                                <input type="checkbox" id="check_item" class="check-list" value="<?= $comment->comment_id ?>">
                                             </td>
-                                            <td>
-                                                <?php if ($news->image != null) { ?>
-                                                    <img src='<?= base_url("source/news/" . $news->image) ?>' alt='News Image' style='width:auto; max-height:100px'>
-                                                <?php } ?>
-                                            </td>
-                                            <td><a href="<?= site_url('admin/news/view?id=' . $news->id); ?>"><?= $news->title ?></a> </td>
-                                            <td><?= $news->short_content ?> </td>
-                                            <td><?= $news->email ?> </td>
-                                            <td><?= $news->create_at ?> </td>
-                                            <td>
-                                                <?= $news->publish == 1 ?
-                                                    '<label class="label label-success">Active </label>' : '<label class="label label-warning">Locked </label>'
-                                                ?>
-                                            </td>
+                                            <td><a href="<?= site_url('admin/comment/view?id=' . $comment->comment_id); ?>"><?= $comment->comment_id ?></a> </td>
+                                            <td><?= $comment->comment_rate ?> </td>
+                                            <td><?= $comment->comment ?> </td>
+                                            <td><?= $comment->create_at ?> </td>
+                                            <td><?= $comment->first_name . $comment->last_name ?> </td>
+                                            <td><?= $comment->product_name ?> </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Actions
                                                         <span class="fa fa-caret-down"></span></button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="<?= site_url('admin/news/view?id=' . $news->id); ?>"><i class="fa fa-eye"></i>View</a></li>
+                                                        <li><a href="<?= site_url('admin/comment/view?id=' . $comment->comment_id); ?>"><i class="fa fa-eye"></i>View</a></li>
+                                                        <li><a href="<?= site_url('admin/comment/edit?id=' . $comment->comment_id); ?>"><i class="fa fa-eye"></i>Edit</a></li>
                                                         <li>
-                                                            <a href="<?= site_url('admin/news/change_status?id=' . $news->id); ?>"><i class="fa fa-refresh"></i>
-                                                                <?= $news->publish == 1 ?
-                                                                    'Lock' : 'Unlock'
-                                                                ?></a>
-                                                        </li>
-                                                        <li><a href="<?= site_url('admin/news/edit?id=' . $news->id); ?>"><i class="fa fa-pencil"></i>Edit</a></li>
-                                                        <!-- <li>
-                                                            <a href="<?= site_url('admin/news/remove?id=' . $news->id); ?>" onclick="return confirm('Are you sure you want to remove?');">
+                                                            <a href="<?= site_url('admin/comment/remove?id=' . $comment->comment_id); ?>" onclick="return confirm('Are you sure you want to remove?');">
                                                                 <i class="fa fa-trash"></i>Remove</a>
-                                                        </li> -->
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -95,25 +84,25 @@
                             <?php
                             if (isset($data['page'])) {
                                 $page = $data['page'];
-                                echo (count($data['news_list']) > 0) ? "<i>Showing " . (($page - 1) * 10 + 1) . " to " . (($page - 1) * 10 + count($data['news_list'])) . "</i>" : "";
+                                echo (count($data['comment_list']) > 0) ? "<i>Showing " . (($page - 1) * 10 + 1) . " to " . (($page - 1) * 10 + count($data['comment_list'])) . "</i>" : "";
                                 echo '<ul class="pagination no-margin pull-right">';
 
                                 if ($page > 1) {
                                     echo '
-                      <li><a href="' . site_url("admin/news/index?page=1") . '">&laquo;</a></li>
-                      <li><a href="' . site_url("admin/news/index?page=" . ($page - 1)) . '">&lsaquo;</a></li>';
+                      <li><a href="' . site_url("admin/comment/index?page=1") . '">&laquo;</a></li>
+                      <li><a href="' . site_url("admin/comment/index?page=" . ($page - 1)) . '">&lsaquo;</a></li>';
                                 }
                                 if ($page == 1) {
-                                    echo '<li class="active"><a href="' . site_url("admin/news/index?page=$page") . '">' . $page . '</a></li>';
+                                    echo '<li class="active"><a href="' . site_url("admin/comment/index?page=$page") . '">' . $page . '</a></li>';
                                 } else {
-                                    echo '<li><a href="' . site_url("admin/news/index?page=" . ($page - 1)) . '">' . ($page - 1) . '</a></li>
-                      <li class="active"><a href="' . site_url("admin/news/index?page=" . $page) . '">' . $page . '</a></li>';
+                                    echo '<li><a href="' . site_url("admin/comment/index?page=" . ($page - 1)) . '">' . ($page - 1) . '</a></li>
+                      <li class="active"><a href="' . site_url("admin/comment/index?page=" . $page) . '">' . $page . '</a></li>';
                                 }
-                                if (count($data['news_list']) == LIMIT) {
-                                    echo '<li><a href="' . site_url("admin/news/index?page=" . ($page + 1)) . '">' . ($page + 1) . '</a></li>';
+                                if (count($data['comment_list']) == LIMIT) {
+                                    echo '<li><a href="' . site_url("admin/comment/index?page=" . ($page + 1)) . '">' . ($page + 1) . '</a></li>';
                                     echo '
-                      <li><a href="' . site_url("admin/news/index?page=" . ($page + 1)) . '">&rsaquo;</a></li>
-                      <li><a href="' . site_url("admin/news/index?page=" . $data['end_page']) . '">&raquo;</a></li>
+                      <li><a href="' . site_url("admin/comment/index?page=" . ($page + 1)) . '">&rsaquo;</a></li>
+                      <li><a href="' . site_url("admin/comment/index?page=" . $data['end_page']) . '">&raquo;</a></li>
                       </ul>';
                                 }
                             }
@@ -148,6 +137,7 @@
             });
             return a;
         }
+
         document.addEventListener("DOMContentLoaded", function(event) {
             $('#remove').click(function() {
                 $data = get_checked();
@@ -158,7 +148,7 @@
                     if (del == true) {
                         $.ajax({
                             type: 'POST',
-                            url: '<?= site_url('admin/news/remove'); ?>',
+                            url: '<?= site_url('admin/comment/remove'); ?>',
                             data: {
                                 ids: $data
                             },
@@ -168,6 +158,14 @@
                         });
                     }
                 }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            $("#find_btn").click(function(e) {
+                e.preventDefault();
+                var product_id = document.getElementById("product_id_input").value;
+                window.location.href = "<?= site_url('admin/comment') . "?product_id="?>" + product_id;
             });
         });
     </script>

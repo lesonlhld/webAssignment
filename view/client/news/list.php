@@ -17,7 +17,9 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="<?= site_url() . "news/detail/" . $news->slug ?>">
-                                <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/news/" . $news->image) ?>" alt="News image" style="width:100%;">
+                                <?php if ($news->image != null) { ?>
+                                    <img class="img-responsive sm-margin-bottom-20" src="<?= base_url("source/news/" . $news->image) ?>" alt="News image" style="width:100%;">
+                                <?php } ?>
                             </a>
                         </div>
                         <div class="col-sm-8 product-description">

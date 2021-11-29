@@ -10,7 +10,7 @@
 <!--=== Content Medium Part ===-->
 <div class="content margin-bottom-30">
     <div class="container">
-        <form class="shopping-cart" method="POST" action="<?= site_url("payment") ?>">
+        <form action="<?= site_url('payment/index') ?>" method="post" class="shopping-cart">
             <div>
                 <div class="header-tags">
                     <div class="overflow-h">
@@ -29,49 +29,48 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php if (!isset($_SESSION["cart"])){ ?>
-                                <tr>Giỏ hàng trống</tr>
-                            <?php 
-                            }
-                            else{
-                                foreach ($_SESSION["cart"] as $product_id => $item){ ?>
-                                <tr class="cart-item-<?=$product_id?>">
-                                    <td class="product-in-table"><img class="img-responsive" src="<?= base_url("source/products/". $item["image"])?>" alt="Product image">
-                                        <div class="product-it-in">
-                                            <h3><?= $item["name"]?></h3>
-                                            <span><?= $item["description"]?></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                    <?= number_format($item["unit_price"]) . " VND" ?>
-                                    </td>
-                                    <td><?= $item["quantity"]?></td>
-                                    <td class="shop-red">
-                                    <?= number_format($item["quantity"] * $item["unit_price"]) . " VND"?>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="close" onclick="delete_item(<?=$product_id?>)">
-                                            <span>&times;</span><span class="sr-only">Đóng</span>
-                                        </button>
-                                    </td>
-                                </tr>
+                                <?php if (!isset($_SESSION["cart"])) { ?>
+                                    <tr>Giỏ hàng trống</tr>
+                                    <?php
+                                } else {
+                                    foreach ($_SESSION["cart"] as $product_id => $item) { ?>
+                                        <tr class="cart-item-<?= $product_id ?>">
+                                            <td class="product-in-table"><img class="img-responsive" src="<?= base_url("source/products/" . $item["image"]) ?>" alt="Product image">
+                                                <div class="product-it-in">
+                                                    <h3><?= $item["name"] ?></h3>
+                                                    <span><?= $item["description"] ?></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <?= number_format($item["unit_price"]) . " VND" ?>
+                                            </td>
+                                            <td><?= $item["quantity"] ?></td>
+                                            <td class="shop-red">
+                                                <?= number_format($item["quantity"] * $item["unit_price"]) . " VND" ?>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="close" onclick="delete_item(<?= $product_id ?>)">
+                                                    <span>&times;</span><span class="sr-only">Đóng</span>
+                                                </button>
+                                            </td>
+                                        </tr>
                                 <?php    }
-                            }
-                            ?>
+                                }
+                                ?>
                             </tbody>
                             <tbody>
                                 <td></td>
                                 <td><strong>TỔNG TIỀN</strong></td>
                                 <td></td>
                                 <td class="shop-red cart-total-pay">
-                                <?php if (!isset($_SESSION['cart_total'])){ 
-                                    echo 0;
-                                }else{
-                                    echo number_format($_SESSION['cart_total']) . " VND";
-                                }
+                                    <?php if (!isset($_SESSION['cart_total'])) {
+                                        echo 0;
+                                    } else {
+                                        echo number_format($_SESSION['cart_total']) . " VND";
+                                    }
                                     ?>
-                                
-                                
+
+
                                 </td>
                                 <td></td>
                             </tbody>
@@ -89,6 +88,16 @@
                         <div class="col-md-6 md-margin-bottom-50">
                             <h2 class="title-type">Chọn phương thức thanh toán </h2>
                             <!-- Accordion -->
+                            <span style="padding-left:15px;padding-right:50px;">
+                                <input type="radio" id="sfcs" name="payment_method" value="1">
+                                <label for="sfcs">Tài khoản SFCS</label>
+                            </span>
+                            <span style="padding-right:50px;">
+                                <input type="radio" id="momo" name="payment_method" value="2" checked>
+                                <label for="momo">Ví Momo</label>
+                            </span>
+                            <input type="radio" id="cash" name="payment_method" value="3">
+                            <label for="cash">Tiền mặt</label>
                             <div class="accordion-v2">
                                 <div class="panel-group" id="accordion">
                                     <div class="panel panel-default">
@@ -102,7 +111,7 @@
                                         <div id="collapseOne" class="panel-collapse collapse in">
                                             <div class="panel-body cus-form-horizontal">
                                                 <div class="content1 margin-left-10">
-                                                    <a href="<?= site_url() ?>/member/order">
+                                                    <a href="#">
                                                         <img src="<?= site_url() ?>assets/img/LogoMomo.png" alt="MoMo">
                                                     </a>
                                                 </div>
@@ -131,9 +140,8 @@
                             <!-- End Accordion -->
                             <div class="coupon-code">
                                 <h3>Mã giảm giá</h3>
-                                <p>Nhập mã giảm giá của bạn:</p>
+                                <p>Nhập mã giảm giá của bạn: (nếu có)</p>
                                 <input class="form-control margin-bottom-10" name="voucher" type="text">
-                                <button type="button" class="btn-u btn-u-sea-shop">Áp dụng</button>
                             </div>
                             <ul class="list-inline total-result">
                                 <li class="total-price">
@@ -141,22 +149,22 @@
                                     <h4>Tổng Tiền:</h4>
                                     <div class="total-result-in">
                                         <span class="cart-total-pay">
-                                        <?php if (!isset($_SESSION['cart_total'])){ 
-                                            echo 0;
-                                        }else{
-                                            echo number_format($_SESSION['cart_total']) . " VND";
-                                        }
-                                        ?>
+                                            <?php if (!isset($_SESSION['cart_total'])) {
+                                                echo 0;
+                                            } else {
+                                                echo number_format($_SESSION['cart_total']) . " VND";
+                                            }
+                                            ?>
                                         </span>
                                     </div>
                                     <br>
+                                    <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
                                     <div>
                                         <button type="submit" class="btn-u btn-u-sea-shop btn-block">Thanh Toán</button>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-
                         <div class="col-md-6">
                             <h2 class="title-type">Những câu hỏi thường gặp</h2>
                             <!-- Accordion -->
@@ -235,13 +243,12 @@
 </div>
 <!--=== End Content Medium Part ===-->
 <script>
-    
-    function delete_item(product_id){
+    function delete_item(product_id) {
         $.ajax({
             url: "<?= site_url('cart/delete_item') ?>",
             type: "get",
             data: "product_id=" + product_id,
-            success: function(data){
+            success: function(data) {
                 $(".cart-item-" + product_id).remove();
                 $("#cart-total-update").html(data.total);
                 $(".cart-total-pay").html(data.total);
@@ -249,5 +256,31 @@
             }
         })
     };
-    
+    document.addEventListener("DOMContentLoaded", () => {
+        $(".shopping-cart").submit(function(e) {
+            let payment_id = $(`input[name="payment_method"]:checked`).val();
+            if (parseInt($(".num-product-cart").html()) == 0) {
+                $("#msg").removeClass('hidden');
+                $("#msg").html('Giỏ hàng của bạn hiện đang trống. Vui lòng chọn món trước khi thanh toán!');
+                e.preventDefault();
+            } else {
+                if (payment_id != 2) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "<?= site_url('payment/index') ?>",
+                        type: 'post',
+                        data: $(this).serialize(),
+                        success: function(data) {
+                            window.location.replace("<?= site_url('member/order_item?code=') ?>" + data.msg);
+                        },
+                        error: function(data) {
+                            const obj = JSON.parse(JSON.stringify(data));
+                            $("#msg").removeClass('hidden');
+                            $("#msg").html(obj.responseJSON.msg);
+                        }
+                    });
+                }
+            }
+        });
+    });
 </script>

@@ -72,7 +72,7 @@ $category_list = $CATEGORY_Model->get_list();
                                 <li><a href="<?= site_url() ?>member/myaccount"><i class="fa fa-user"></i>Hi, <?= $_SESSION['lastname'] ?></a>
                                     <ul class="list-unstyled badge-open2 mCustomScrollbar2" data-mcs-theme="minimal-dark">
                                         <li><a href="<?= site_url() ?>member/myaccount">Tài khoản của tôi</a></li>
-                                        <li><a href="<?= site_url() ?>member/invoice">Lich sử mua hàng</a></li>
+                                        <li><a href="<?= site_url() ?>member/order">Lich sử mua hàng</a></li>
                                         <li><a href="<?= site_url() ?>member/changepass">Đổi mật khẩu</a></li>
                                         <li><a href="<?= site_url() ?>auth/logout">Đăng xuất</a></li>
                                     </ul>
@@ -89,42 +89,42 @@ $category_list = $CATEGORY_Model->get_list();
                                 <li><a href="<?= site_url() ?>cart"><i class="fa fa-shopping-cart"></i></a>
                                     <span class="badge badge-sea rounded-x num-product-cart">
                                         <?php
-                                            if (!isset($_SESSION['cart'])){
-                                                echo 0;
-                                            }else{
-                                                echo count($_SESSION['cart']);
-                                            }
+                                        if (!isset($_SESSION['cart'])) {
+                                            echo 0;
+                                        } else {
+                                            echo count($_SESSION['cart']);
+                                        }
                                         ?>
                                     </span>
 
                                     <ul class="list-unstyled badge-open mCustomScrollbar" data-mcs-theme="minimal-dark">
-                                    <?php if (!isset($_SESSION["cart"])){ ?>
-                                        <li>Giỏ hàng trống</li>
-                                    <?php 
-                                    }
-                                    else{
-                                        foreach ($_SESSION["cart"] as $product_id => $item){ ?>
-                                        <li class="cart-item-<?=$product_id?>">
-                                            <img src="<?= base_url("source/products/". $item["image"])?>" alt="Product image" width="10" height="20">
-                                            <button type="button" class="close" onclick="delete_item(<?=$product_id?>)">×</button>
-                                            <div class="overflow-h">
-                                                <span><?= $item["name"]?></span>
-                                                <small><?= number_format($item["quantity"] * $item["unit_price"]) . " VND"?>
-                                                </small>
-                                            </div>
-                                        </li>
-                                        <?php }}?>
+                                        <?php if (!isset($_SESSION["cart"])) { ?>
+                                            <li>Giỏ hàng trống</li>
+                                            <?php
+                                        } else {
+                                            foreach ($_SESSION["cart"] as $product_id => $item) { ?>
+                                                <li class="cart-item-<?= $product_id ?>">
+                                                    <img src="<?= base_url("source/products/" . $item["image"]) ?>" alt="Product image" width="10" height="20">
+                                                    <button type="button" class="close" onclick="delete_item(<?= $product_id ?>)">×</button>
+                                                    <div class="overflow-h">
+                                                        <span><?= $item["name"] ?></span>
+                                                        <small><?= number_format($item["quantity"] * $item["unit_price"]) . " VND" ?>
+                                                        </small>
+                                                    </div>
+                                                </li>
+                                        <?php }
+                                        } ?>
 
                                         <li class="subtotal">
                                             <div class="overflow-h margin-bottom-10">
                                                 <span>Tổng tiền</span>
                                                 <span class="pull-right subtotal-cost cart-total-pay">
-                                                <?php if (!isset($_SESSION['cart_total'])){ 
-                                                    echo 0;
-                                                }else{
-                                                    echo number_format($_SESSION['cart_total']) . " VND";
-                                                }
-                                                ?>
+                                                    <?php if (!isset($_SESSION['cart_total'])) {
+                                                        echo 0;
+                                                    } else {
+                                                        echo number_format($_SESSION['cart_total']) . " VND";
+                                                    }
+                                                    ?>
                                                 </span>
                                             </div>
                                             <div class="row">
@@ -132,7 +132,9 @@ $category_list = $CATEGORY_Model->get_list();
                                                     <a href="<?= site_url() ?>cart" class="btn-u btn-brd btn-brd-hover btn-u-sea-shop btn-block">Xem Giỏ Hàng</a>
                                                 </div>
                                                 <div class="col-xs-6">
-                                                    <a href="<?= site_url() ?>payment" class="btn-u btn-u-sea-shop btn-block">Thanh Toán</a>
+                                                    <a href="<?= site_url() ?>payment" <?php if (!isset($_SESSION['cart_total']) || $_SESSION['cart_total'] == 0) {
+                                                                                            echo 'onclick="return false;"';
+                                                                                        } ?> class="btn-u btn-u-sea-shop btn-block">Thanh Toán</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -163,7 +165,7 @@ $category_list = $CATEGORY_Model->get_list();
                                             <div class="container">
                                                 <div class="row">
                                                     <?php for ($i = 0; $i < (count($category_list) <= 6 ? count($category_list) : 6); $i++) {
-                                                        if ($category_list[$i]->quantity > 0)?>
+                                                        if ($category_list[$i]->quantity > 0) ?>
                                                         <div class="col-md-2 col-sm-6">
                                                             <h3 class="mega-menu-heading"><?= $category_list[$i]->category_name ?></h3>
                                                             <ul class="list-unstyled style-list">

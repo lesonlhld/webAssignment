@@ -52,13 +52,30 @@ class Member extends \Controller\Controller
         }
     }
 
-    public function invoice()
+    public function order()
     {
         is_login();
-        $this->data["subview"] = "client/member/invoice";
+        $ORDER_Model = Model('ORDER_Model');
+        $order_list = $ORDER_Model->get_all($_SESSION['id']);
+        $this->data['data']['order_list'] = $order_list;
+        $this->data["subview"] = "client/member/order";
         View("client/main", $this->data);
     }
 
+    public function order_item()
+    {
+        is_login();
+        $code = $_GET['code'];
+        $ORDER_ITEM_Model = Model('ORDER_ITEM_Model');
+        $ORDER_Model = Model('ORDER_Model');
+        $order_items = $ORDER_ITEM_Model->get_by_order_id($code);
+        $order = $ORDER_Model->get_by_user($_SESSION['id'], $code);
+        $this->data['data']['order_items'] = $order_items;
+        $this->data['data']['order'] = $order;
+        $this->data["subview"] = "client/member/order_item";
+        View("client/main", $this->data);
+    }
+    
     public function changepass()
     {
         is_login();
@@ -73,7 +90,6 @@ class Member extends \Controller\Controller
     {
         is_login();
         $data = $_POST;
-        $file = $_FILES;
         $USER_Model = Model('USER_Model');
         $info_pass = $USER_Model->get_password($_SESSION['id']);
         if (hashpass($data["oldpassword"]) != $info_pass)
