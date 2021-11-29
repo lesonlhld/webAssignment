@@ -116,7 +116,7 @@ class ORDER_Model extends \Model\Model
     {
         $code = sprintf("%02d", $_SESSION["id"]);
         $code .= time();
-        $code .= sprintf("%043", rand(0, 9999));
+        $code .= sprintf("%04d", rand(0, 9999));
 
         return $code;
     }

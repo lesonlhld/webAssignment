@@ -262,6 +262,7 @@
             if (parseInt($(".num-product-cart").html()) == 0) {
                 $("#msg").removeClass('hidden');
                 $("#msg").html('Giỏ hàng của bạn hiện đang trống. Vui lòng chọn món trước khi thanh toán!');
+                e.preventDefault();
             } else {
                 if (payment_id != 2) {
                     e.preventDefault();
