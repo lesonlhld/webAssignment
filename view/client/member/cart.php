@@ -10,7 +10,7 @@
 <!--=== Content Medium Part ===-->
 <div class="content margin-bottom-30">
     <div class="container">
-        <form class="shopping-cart" method="POST" action="<?= site_url("payment") ?>">
+        <form action="javascript:void(0)" method="post" class="shopping-cart">
             <div>
                 <div class="header-tags">
                     <div class="overflow-h">
@@ -89,6 +89,16 @@
                         <div class="col-md-6 md-margin-bottom-50">
                             <h2 class="title-type">Chọn phương thức thanh toán </h2>
                             <!-- Accordion -->
+                            <span style="padding-left:15px;padding-right:50px;">
+                            <input type="radio" id="sfcs" name="payment_method" value="1" checked>
+                            <label for="sfcs">Tài khoản SFCS</label>
+                            </span>
+                            <span style="padding-right:50px;">
+                            <input type="radio" id="momo" name="payment_method" value="2">
+                            <label for="momo">Ví Momo</label>
+                            </span>
+                            <input type="radio" id="cash" name="payment_method" value="3">
+                            <label for="cash">Tiền mặt</label>
                             <div class="accordion-v2">
                                 <div class="panel-group" id="accordion">
                                     <div class="panel panel-default">
@@ -102,7 +112,7 @@
                                         <div id="collapseOne" class="panel-collapse collapse in">
                                             <div class="panel-body cus-form-horizontal">
                                                 <div class="content1 margin-left-10">
-                                                    <a href="<?= site_url() ?>/member/order">
+                                                    <a href="#">
                                                         <img src="<?= site_url() ?>assets/img/LogoMomo.png" alt="MoMo">
                                                     </a>
                                                 </div>
@@ -131,9 +141,8 @@
                             <!-- End Accordion -->
                             <div class="coupon-code">
                                 <h3>Mã giảm giá</h3>
-                                <p>Nhập mã giảm giá của bạn:</p>
+                                <p>Nhập mã giảm giá của bạn: (nếu có)</p>
                                 <input class="form-control margin-bottom-10" name="voucher" type="text">
-                                <button type="button" class="btn-u btn-u-sea-shop">Áp dụng</button>
                             </div>
                             <ul class="list-inline total-result">
                                 <li class="total-price">
@@ -156,7 +165,6 @@
                                 </li>
                             </ul>
                         </div>
-
                         <div class="col-md-6">
                             <h2 class="title-type">Những câu hỏi thường gặp</h2>
                             <!-- Accordion -->
@@ -249,5 +257,23 @@
             }
         })
     };
+    document.addEventListener("DOMContentLoaded", () => {
+        $(".shopping-cart").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('order/add') ?>",
+                type: 'post',
+                data: $(this).serialize(),
+                success: function(data) {
+                    location.reload();
+                },
+                error: function(data) {
+                    const obj = JSON.parse(JSON.stringify(data));
+                    $("#msg").removeClass('hidden');
+                    $("#msg").html(obj.responseJSON.msg);
+                }
+            });
+        });
+    });
     
 </script>
