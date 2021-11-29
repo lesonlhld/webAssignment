@@ -12,9 +12,9 @@ class Payment extends \Controller\Controller
     public function index()
     {
         is_login();
-        
+
         $data = $_POST;
-        if (!isset($_SESSION['cart_total']) || $_SESSION['cart_total'] == 0){
+        if (!isset($_SESSION['cart_total']) || $_SESSION['cart_total'] == 0) {
             View("", ['msg' => "Giỏ hàng của bạn hiện đang trống. Vui lòng chọn món trước khi thanh toán!"], 400);
             return;
         }
@@ -25,25 +25,20 @@ class Payment extends \Controller\Controller
         $data["voucher"] = $data['voucher'] != "" ? $data['voucher'] : null;
 
         $ORDER_Model = Model('ORDER_Model');
-        $_SESSION["tan"] = $data;
-        $code = $ORDER_Model->create($data);
-        
-        if ($data['payment_method'] == 2) {
-            $this->processMomo($code, $total);
-        }
+        $result = $ORDER_Model->create($data);
+
         $ORDER_ITEM_Model = Model('ORDER_ITEM_Model');
-        foreach ($_SESSION["cart"] as $product_id => $item){
-            $ORDER_ITEM_Model->create($code, $product_id, $item);
+        foreach ($_SESSION["cart"] as $product_id => $item) {
+            $ORDER_ITEM_Model->create($result['id'], $product_id, $item);
         }
         unset($_SESSION["cart"]);
         unset($_SESSION["cart_total"]);
-        View("", ['msg' => $code]);
-    }
 
-    private function processCart()
-    {
-        $total = 1000;
-        return $total;
+        if ($data['payment_method'] == 2) {
+            $this->processMomo($result['code'], $total);
+        } else {
+            View("", ['msg' => $result['code']]);
+        }
     }
 
     private function processMomo($code, $total)
@@ -64,8 +59,8 @@ class Payment extends \Controller\Controller
         $orderInfo = "Thanh toán đơn hàng " . $code;
         $amount = "{$total}";
         $orderId = $code;
-        $returnUrl = site_url("member/invoice");
-        $notifyurl = site_url("member/invoice");
+        $returnUrl = site_url("member/order_item?code=$code");
+        $notifyurl = site_url("member/order_item?code=$code");
         // Lưu ý: link notifyUrl không phải là dạng localhost
         $extraData = "merchantName=Smart Food Court System - Đại học Bách Khoa";
 

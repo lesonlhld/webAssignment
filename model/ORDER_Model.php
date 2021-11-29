@@ -51,11 +51,10 @@ class ORDER_Model extends \Model\Model
         if ($user_id != null) {
             $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM orders WHERE user_id=:user_id');
             $stmt->bindParam(':user_id', $user_id);
-        }
-        else {
+        } else {
             $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM orders');
         }
-        
+
         $stmt->execute();
 
         return $stmt->fetchColumn();
@@ -70,21 +69,23 @@ class ORDER_Model extends \Model\Model
         return $stmt->fetch();
     }
 
-    public function get_by_user($user_id, $order_id){
+    public function get_by_user($user_id, $order_id)
+    {
         $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id WHERE order_id=:order_id AND user_id=:user_id');
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':order_id', $order_id);
         $stmt->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
-    public function get_all($user_id){
+    public function get_all($user_id)
+    {
         $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN payments ON orders.payment_id=payments.payment_id WHERE user_id=:user_id');
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
     public function create($data)
@@ -97,8 +98,8 @@ class ORDER_Model extends \Model\Model
         $stmt->bindParam(':payment_id', $data['payment_method']);
         $stmt->bindParam(':voucher', $data['voucher']);
         $stmt->execute();
-        
-        return $code;
+
+        return ["code" => $code, "id" => $this->pdo->lastInsertId()];
     }
 
     public function update_status($id, $data)

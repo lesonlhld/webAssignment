@@ -72,7 +72,7 @@ $category_list = $CATEGORY_Model->get_list();
                                 <li><a href="<?= site_url() ?>member/myaccount"><i class="fa fa-user"></i>Hi, <?= $_SESSION['lastname'] ?></a>
                                     <ul class="list-unstyled badge-open2 mCustomScrollbar2" data-mcs-theme="minimal-dark">
                                         <li><a href="<?= site_url() ?>member/myaccount">Tài khoản của tôi</a></li>
-                                        <li><a href="<?= site_url() ?>member/invoice">Lich sử mua hàng</a></li>
+                                        <li><a href="<?= site_url() ?>member/order">Lich sử mua hàng</a></li>
                                         <li><a href="<?= site_url() ?>member/changepass">Đổi mật khẩu</a></li>
                                         <li><a href="<?= site_url() ?>auth/logout">Đăng xuất</a></li>
                                     </ul>

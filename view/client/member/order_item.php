@@ -10,7 +10,7 @@
 <!--=== Content Medium Part ===-->
 <div class="content margin-bottom-30">
     <div class="container">
-        <form action="<?= site_url('member/invoice') ?>" class="shopping-cart">
+        <form action="<?= site_url('member/order') ?>" class="shopping-cart">
             <div>
                 <div class="header-tags">
                     <div class="overflow-h">

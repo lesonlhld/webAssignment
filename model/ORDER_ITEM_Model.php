@@ -19,11 +19,12 @@ class ORDER_ITEM_Model extends \Model\Model
         return True;
     }
 
-    public function get_by_order_id($order_id){
-        $stmt = $this->pdo->prepare('SELECT * FROM order_items LEFT JOIN products ON order_items.product_id=products.product_id LEFT JOIN orders ON order_items.order_id=orders.order_id WHERE order_id=:order_id');
+    public function get_by_order_id($order_id)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM order_items LEFT JOIN products ON order_items.product_id=products.product_id LEFT JOIN orders ON order_items.order_id=orders.order_id WHERE order_items.order_id=:order_id');
         $stmt->bindParam(':order_id', $order_id);
         $stmt->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 }
