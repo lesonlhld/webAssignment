@@ -12,7 +12,7 @@
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-sm-12 col-lg-6">
+                <div class="col-sm-4">
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">Order Information</h3>
@@ -53,11 +53,8 @@
                     </div>
                 </div>
                 <!-- /.col -->
-            </div>
-            <!-- /.row -->
 
-            <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-8">
                     <div class="box">
                         <div class="box-header">
                             <div class="box-tools pull-left">
@@ -125,35 +122,6 @@
                             </table>
                         </div>
                         <!-- /.box-body -->
-
-                        <div class="box-footer clearfix">
-                            <?php
-                            if (isset($data['page'])) {
-                                $page = $data['page'];
-                                echo (count($data['product_list']) > 0) ? "<i>Showing " . (($page - 1) * 10 + 1) . " to " . (($page - 1) * 10 + count($data['product_list'])) . "</i>" : "";
-                                echo '<ul class="pagination no-margin pull-right">';
-
-                                if ($page > 1) {
-                                    echo '
-                      <li><a href="' . site_url("admin/order/view?id=" . $data['order']->order_id . "&page=1") . '">&laquo;</a></li>
-                      <li><a href="' . site_url("admin/order/view?id=" . $data['order']->order_id . "&page=" . ($page - 1)) . '">&lsaquo;</a></li>';
-                                }
-                                if ($page == 1) {
-                                    echo '<li class="active"><a href="' . site_url("admin/order/view?id=" . $data['order']->order_id . "&page=$page") . '">' . $page . '</a></li>';
-                                } else {
-                                    echo '<li><a href="' . site_url("admin/order/view?id=" . $data['order']->order_id . "&page=" . ($page - 1)) . '">' . ($page - 1) . '</a></li>
-                      <li class="active"><a href="' . site_url("admin/order/view?id=" . $data['order']->order_id . "&page=" . $page) . '">' . $page . '</a></li>';
-                                }
-                                if (count($data['product_list']) == LIMIT) {
-                                    echo '<li><a href="' . site_url("admin/order/view?id=" . $data['order']->order_id . "&page=" . ($page + 1)) . '">' . ($page + 1) . '</a></li>';
-                                    echo '
-                      <li><a href="' . site_url("admin/order/view?id=" . $data['order']->order_id . "&page=" . ($page + 1)) . '">&rsaquo;</a></li>
-                      <li><a href="' . site_url("admin/order/view?id=" . $data['order']->order_id . "&page=" . $data['end_page']) . '">&raquo;</a></li>
-                      </ul>';
-                                }
-                            }
-                            ?>
-                        </div>
 
                         <script>
                             document.addEventListener("DOMContentLoaded", function(event) {
