@@ -20,14 +20,14 @@
                         <!-- small box -->
                         <div class="small-box bg-aqua">
                             <div class="inner">
-                                <h3>150</h3>
+                                <h3><?= $data['news_number'] ?></h3>
 
-                                <p>New Orders</p>
+                                <p>Total News</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="ion ion-ios-paper"></i>
                             </div>
-                            <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="<?= site_url("admin/news") ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -35,12 +35,12 @@
                         <!-- small box -->
                         <div class="small-box bg-green">
                             <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                                <h3><?= $data['products_number'] ?></h3>
 
-                                <p>Bounce Rate</p>
+                                <p>Total Products</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i class="ion ion-ios-box"></i>
                             </div>
                             <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
@@ -50,12 +50,12 @@
                         <!-- small box -->
                         <div class="small-box bg-yellow">
                             <div class="inner">
-                                <h3>44</h3>
+                                <h3><?= $data['customers_number'] ?></h3>
 
-                                <p>User Registrations</p>
+                                <p>Total Customers</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="ion ion-android-people"></i>
                             </div>
                             <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
@@ -65,12 +65,12 @@
                         <!-- small box -->
                         <div class="small-box bg-red">
                             <div class="inner">
-                                <h3>65</h3>
+                                <h3><?= $data['orders_number'] ?></h3>
 
-                                <p>Unique Visitors</p>
+                                <p>Total Orders</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i class="ion ion-ios-albums"></i>
                             </div>
                             <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
