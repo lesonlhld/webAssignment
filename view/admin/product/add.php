@@ -101,7 +101,7 @@
                                     <a id="add-attribute" href="javascript:void(0)">
                                         <i class="fa fa-plus-circle"></i> Add new
                                     </a>
-                                    <?php if (isset($product)) {
+                                    <?php if (isset($product) && $product->attribute != null) {
                                         $attributes = json_decode($product->attribute);
                                         foreach ($attributes as $attribute) { ?>
                                             <div class="row">

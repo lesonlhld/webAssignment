@@ -14,8 +14,9 @@
         <div class="box box-primary">
             <div class="box-body pad">
                 <div class="form-group">
-                    <img src='<?= base_url("source/news/" . $news->image) ?>' alt='News Image' style='width:100%;'>
-                    </br>
+                    <?php if ($news->image != null) { ?>
+                        <img src='<?= base_url("source/news/" . $news->image) ?>' alt='News Image' style='width:100%;'>
+                    <?php } ?>
                 </div>
                 <h1>
                     <?= isset($news) ? $news->title : '' ?>
