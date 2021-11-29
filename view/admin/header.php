@@ -167,6 +167,11 @@
                             <i class="fa fa-file-text-o"></i> <span>Order</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= site_url("admin/category") ?>">
+                            <i class ="fa fa-book"></i><span>Category</span>
+                        </a>
+                    </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-id-card-o"></i> <span>Customer</span>
@@ -178,7 +183,7 @@
                             <li><a href="<?= site_url('admin/customer'); ?>"><i class="fa fa-list"></i> Customer List</a></li>
                             <li><a href="<?= site_url('admin/customer/trash'); ?>"><i class="fa fa-trash-o"></i> Customer Trash</a></li>
                         </ul>
-                    </li>
+                    </li> 
                 </ul>
             </section>
             <!-- /.sidebar -->
