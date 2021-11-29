@@ -30,7 +30,29 @@ class CATEGORY_Model extends \Model\Model
             return $stmt->fetchAll();
         }
     }
+    public function get_list_admin($start = null, $limit = null )
+    {
+        if ($start == null && $limit == null) {
+            $stmt = $this->pdo->prepare('SELECT * FROM categories ');
+            $stmt->execute();
 
+            return $stmt->fetchAll();
+        } elseif ($limit == null) {
+            $stmt = $this->pdo->prepare('SELECT * FROM categories LIMIT :start');
+            $stmt->bindParam(':start', $start);
+            $stmt->execute();
+
+            return $stmt->fetch();
+        } else {
+            $stmt = $this->pdo->prepare('SELECT * FROM categories LIMIT :start,:limit');
+            $stmt->bindParam(':start', $start);
+            $stmt->bindParam(':limit', $limit);
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        }
+
+    }
     public function count()
     {
         $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM categories');
@@ -65,4 +87,63 @@ class CATEGORY_Model extends \Model\Model
 
         return true;
     }
+
+    public function delete_category($id)
+    {   
+        $id_list = implode(",",$id);
+        $stmt = $this->pdo->prepare("DELETE FROM categories WHERE category_id IN ($id_list)");
+        $stmt->execute();
+
+        return true;
+    }
+
+    public function create($data)
+    {
+        $stmt = $this->pdo->prepare('INSERT INTO categories(category_id,category_name) VALUES (:category_id,:category_name)');  
+        $stmt->bindparam(':category_id',$data['category_id']);
+        $stmt->bindparam(':category_name',$data['category_name']);
+        $stmt->execute();
+
+        return $this->pdo->lastInsertId();
+    }
+
+    public function update($id,$data)
+    {
+        $stmt = $this->pdo->prepare('UPDATE categories SET category_name=:category_name WHERE category_id=:id');  
+    
+        $stmt->bindparam(':category_name',$data['category_name']);
+        $stmt->bindparam(':id',$id);
+        $stmt->execute();
+
+        return true;
+    }
+
+
+    public function check_exist_id($category_id)
+    {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM categories WHERE category_id=:category_id');
+        $stmt->bindParam(':category_id',$category_id);
+        $stmt->execute();
+
+        return $stmt->fetchColumn();
+    }
+
+    public function check_exist_name($category_name)
+    {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM categories WHERE category_name=:category_name');
+        $stmt->bindParam(':category_name',$category_name);
+        $stmt->execute();
+
+        return $stmt->fetchColumn();
+    }
+
+    public function get($id)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM categories WHERE category_id=:id');
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
 }
