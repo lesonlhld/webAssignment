@@ -16,9 +16,12 @@
                     <div class="box">
                         <div class="box-header">
                             <div class="box-tools pull-left">
-                                <!-- <a href=""><button type="button" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Add comment</button></a> -->
-                                <!-- <button type="button" class="btn btn-default btn-sm" id="remove"><i class="fa fa-trash"></i> Remove</button> -->
+                                <button type="button" class="btn btn-default btn-sm" id="remove"><i class="fa fa-trash"></i> Remove</button>
                             </div>
+                            
+                            <button id="find_btn" type="button" value="submit" class="btn btn-primary pull-right">Find</button>
+                            <input type="text" class="form-control pull-right" style="width: 200px; margin-right: 5px" id="product_id_input" value="" placeholder="Enter product id">
+                                  
                         </div>
                         <!-- /.box-header -->
 
@@ -46,7 +49,7 @@
                                     ?>
                                         <tr>
                                             <td>
-                                                <input type="checkbox" id="check_item" class="check-list" value="<?= $comment->id ?>">
+                                                <input type="checkbox" id="check_item" class="check-list" value="<?= $comment->comment_id ?>">
                                             </td>
                                             <td><a href="<?= site_url('admin/comment/view?id=' . $comment->comment_id); ?>"><?= $comment->comment_id ?></a> </td>
                                             <td><?= $comment->comment_rate ?> </td>
@@ -61,7 +64,10 @@
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li><a href="<?= site_url('admin/comment/view?id=' . $comment->comment_id); ?>"><i class="fa fa-eye"></i>View</a></li>
                                                         <li><a href="<?= site_url('admin/comment/edit?id=' . $comment->comment_id); ?>"><i class="fa fa-eye"></i>Edit</a></li>
-                                                        <li><a href="<?= site_url('admin/comment/delete?id=' . $comment->comment_id); ?>"><i class="fa fa-eye"></i>Delete</a></li>
+                                                        <li>
+                                                            <a href="<?= site_url('admin/comment/remove?id=' . $comment->comment_id); ?>" onclick="return confirm('Are you sure you want to remove?');">
+                                                                <i class="fa fa-trash"></i>Remove</a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -131,4 +137,35 @@
             });
             return a;
         }
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            $('#remove').click(function() {
+                $data = get_checked();
+                if ($data.length == 0) {
+                    alert('Please tick the items you want to remove');
+                } else {
+                    var del = confirm('Are you sure you want to remove?');
+                    if (del == true) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?= site_url('admin/comment/remove'); ?>',
+                            data: {
+                                ids: $data
+                            },
+                            success: function(response) {
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            $("#find_btn").click(function(e) {
+                e.preventDefault();
+                var product_id = document.getElementById("product_id_input").value;
+                window.location.href = "<?= site_url('admin/comment') . "?product_id="?>" + product_id;
+            });
+        });
     </script>

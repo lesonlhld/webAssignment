@@ -16,8 +16,14 @@ class Comment extends \Controller\Controller
         $COMMENT_Model = Model('COMMENT_Model');
         $page = $_GET['page'] ?? 1;
         $start = ((int)$page - 1) * 10;
-        $end_page = ceil($COMMENT_Model->count() / LIMIT);
-        $comment_list = $COMMENT_Model->get_list();
+        
+        if (!isset($_GET['product_id']) || $_GET['product_id'] == "") {
+            $comment_list = $COMMENT_Model->get_list($start, LIMIT);
+            $end_page = ceil($COMMENT_Model->count() / LIMIT);
+        } else {
+            $comment_list = $COMMENT_Model->get_list_by_product($start, LIMIT, $_GET['product_id']);
+            $end_page = ceil($COMMENT_Model->count_by_product($_GET['product_id']) / LIMIT);
+        }
 
         $this->data['data']['page'] = $page;
         $this->data['data']['end_page'] = $end_page;
@@ -77,6 +83,18 @@ class Comment extends \Controller\Controller
                     View("", ['msg' => 'Có lỗi xảy ra'], 401);
                 }
             }
+        }
+    }
+
+    public function remove()
+    {
+        is_admin_login();
+        $ids = $_POST['ids'] ?? [$_GET['id']] ?? [];
+
+        $COMMENT_Model = Model('COMMENT_Model');
+        $COMMENT_Model->delete($ids);
+        if (isset($_GET['id'])) {
+            redirect(site_url("admin/comment"));
         }
     }
 }

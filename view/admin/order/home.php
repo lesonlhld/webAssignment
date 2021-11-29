@@ -63,6 +63,9 @@
                                                         <li><a href="<?= site_url('admin/order/change_status?id=' . $order->order_id . '&order_status=Processing'); ?>"><i class="fa fa-refresh"></i>Processing</a></li>
                                                         <li><a href="<?= site_url('admin/order/change_status?id=' . $order->order_id . '&order_status=Ready'); ?>"><i class="fa fa-refresh"></i>Ready</a></li>
                                                         <li><a href="<?= site_url('admin/order/change_status?id=' . $order->order_id . '&order_status=Transporting'); ?>"><i class="fa fa-refresh"></i>Transporting</a></li>
+                                                        <li><a href="<?= site_url('admin/order/change_status?id=' . $order->order_id . '&order_status=Canceled'); ?>"><i class="fa fa-refresh"></i>Canceled</a></li>
+                                                        <li><a href="<?= site_url('admin/order/change_status?id=' . $order->order_id . '&order_status=Refused'); ?>"><i class="fa fa-refresh"></i>Refused</a></li>
+                                                        <li><a href="<?= site_url('admin/order/change_status?id=' . $order->order_id . '&order_status=Completed'); ?>"><i class="fa fa-refresh"></i>Completed</a></li>
                                                     </ul>
                                                 </div>
                                             </td>
