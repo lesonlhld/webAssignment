@@ -70,18 +70,34 @@ class ORDER_Model extends \Model\Model
         return $stmt->fetch();
     }
 
+    public function get_by_user($user_id, $order_id){
+        $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN users ON orders.user_id=users.id WHERE order_id=:order_id AND user_id=:user_id');
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':order_id', $order_id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public function get_all($user_id){
+        $stmt = $this->pdo->prepare('SELECT * FROM orders LEFT JOIN payments ON orders.payment_id=payments.payment_id WHERE user_id=:user_id');
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
     public function create($data)
     {
         $code = $this->generate_code();
-
         $stmt = $this->pdo->prepare('INSERT INTO orders(order_id, user_id, total, payment_id, voucher) VALUES (:order_id, :user_id, :total, :payment_id, :voucher)');
         $stmt->bindParam(':order_id', $code);
         $stmt->bindParam(':user_id', $data['user_id']);
         $stmt->bindParam(':total', $data['total']);
-        $stmt->bindParam(':payment_id', $data['payment_id']);
+        $stmt->bindParam(':payment_id', $data['payment_method']);
         $stmt->bindParam(':voucher', $data['voucher']);
         $stmt->execute();
-
+        
         return $code;
     }
 

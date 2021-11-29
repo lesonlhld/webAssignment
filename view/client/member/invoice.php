@@ -24,23 +24,27 @@
                                 <tr>
                                     <th>Số thứ tự</th>
                                     <th>Mã hóa đơn</th>
-                                    <th>Ngày tạo hóa đơn</th>
-                                    <th>Thơi gian tạo hóa đơn</th>
+                                    <th>Thời gian tạo</th>
                                     <th>Mã giảm giá</th>
                                     <th>Tổng tiền</th>
                                     <th>Phương thức thanh toán</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php 
+                                $index = 1;
+                                foreach($data['order_list'] as $order) {?>
                                 <tr class="odd gradeX">
-                                    <td>${index }</td>
-                                    <td>${list.id }</td>
-                                    <td>${list.invoiceDate }</td>
-                                    <td>${list.invoiceTime }</td>
-                                    <td>${list.voucher }</td>
-                                    <td>${list.totalMoney }</td>
-                                    <td>${list.paymentMethod.name }</td>
+                                    <td><?=$index?></td>
+                                    <td><?=$order->order_id?></td>
+                                    <td><?=$order->order_time?></td>
+                                    <td><?=$order->voucher != null ? $order->voucher : "Không có"?></td>
+                                    <td><?=number_format($order->total) . " VND"?></td>
+                                    <td><?=$order->payment_method?></td>
                                 </tr>
+                            <?php 
+                                    $index += 1;
+                                }?>
                             </tbody>
                         </table>
                     </div>
