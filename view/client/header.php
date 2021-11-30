@@ -21,7 +21,7 @@ $category_list = $CATEGORY_Model->get_list();
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="<?= site_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= site_url() ?>assets/css/shop.style.css">
+    <link rel="stylesheet" href="<?= site_url() ?>assets/css/style.css">
 
     <!-- CSS Header and Footer -->
     <link rel="stylesheet" href="<?= site_url() ?>assets/css/headers/header-v5.css">
