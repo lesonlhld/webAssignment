@@ -24,12 +24,8 @@
 <script src="<?= base_url('assets/plugins/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') ?>"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?= base_url('assets/plugins/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') ?>"></script>
-<!-- Slimscroll -->
-<script src="<?= base_url('assets/plugins/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets/plugins/adminlte/dist/js/adminlte.min.js') ?>"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="<?= base_url('assets/plugins/adminlte/dist/js/demo.js') ?>"></script> -->
 <!-- CK Editor -->
 <script src="<?= base_url('assets/plugins/adminlte/bower_components/ckeditor/ckeditor.js') ?>"></script>
 
