@@ -26,8 +26,6 @@
 <script src="<?= base_url('assets/plugins/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') ?>"></script>
 <!-- Slimscroll -->
 <script src="<?= base_url('assets/plugins/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
-<!-- FastClick -->
-<script src="<?= base_url('assets/plugins/adminlte/bower_components/fastclick/lib/fastclick.js') ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets/plugins/adminlte/dist/js/adminlte.min.js') ?>"></script>
 <!-- AdminLTE for demo purposes -->
