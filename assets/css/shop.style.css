@@ -733,60 +733,6 @@ li:first-child {
 	text-decoration: none;
 }
 
-/*Owl Carousel v2
-------------------------------------*/
-.owl-slider-v2 .owl-wrapper-outer {
-  	margin-bottom: 20px;
-}
-
-.owl-slider-v2 .item {
-  	margin: 0 10px;
-  	text-align: center;
-	padding: 7px 0;
-	position: relative;
-  	border: 1px solid #e4e2e2;
-}
-
-.owl-slider-v2 .item img {
-  	width: 180px;
-  	height: auto;
-}
-
-/*Owl Pagination*/
-.owl-slider-v2 .owl-pagination {
-  	text-align: center !important;
-}
-
-.owl-slider-v2 .owl-controls .owl-page.active span,
-.owl-slider-v2 .owl-controls.clickable .owl-page:hover span {
-	opacity: 1;
-	background: #888;
-	filter: Alpha(Opacity=100);
-}
-
-.owl-slider-v2 .owl-controls .owl-page span {
-	border: 1px solid #999 !important;
-}
-
-.owl-slider-v2 .owl-controls .owl-page {
-	zoom: 1;
-	display: inline-block;
-	*display: inline;/*IE7 life-saver */
-}
-
-.owl-slider-v2 .owl-controls .owl-page span {
-	width: 12px;
-	height: 12px;
-	opacity: 0.3;
-	display: block;
-	margin: 5px 3px;
-	background: transparent;
-	filter: Alpha(Opacity=50);/*IE7 fix*/
-	-webkit-border-radius: 50% !important;
-	-moz-border-radius: 50% !important;
-	border-radius: 50% !important;
-}
-
 /*Shop-subscribe
 ------------------------------------*/
 .shop-subscribe {
@@ -1264,46 +1210,6 @@ li:first-child {
 .stars-ratings-label label {
 	font-size: 24px;
 	margin: 0 4px 5px;
-}
-
-/*Owl Slider v3
-------------------------------------*/
-.owl-slider-v3 .owl-pagination {
-  	text-align: center !important;
-}
-
-.owl-slider-v3 .owl-wrapper-outer {
-  	margin-bottom: 20px;
-}
-
-.owl-slider-v3.owl-theme .owl-controls .owl-page.active span,
-.owl-slider-v3.owl-theme .owl-controls.clickable .owl-page:hover span {
-	opacity: 1;
-	background: #d10000;
-	filter: Alpha(Opacity=100);/*IE7 fix*/
-}
-
-.owl-slider-v3.owl-theme .owl-controls .owl-page {
-	zoom: 1;
-	display: inline-block;
-	*display: inline;/*IE7 life-saver */
-}
-
-.owl-slider-v3.owl-theme .owl-controls .owl-page span {
-	width: 12px;
-	height: 12px;
-	opacity: 0.3;
-	display: block;
-	margin: 5px 3px;
-	background: #bbb;
-	filter: Alpha(Opacity=50);/*IE7 fix*/
-	-webkit-border-radius: 50% !important;
-	-moz-border-radius: 50% !important;
-	border-radius: 50% !important;
-}
-
-.owl-slider-v3 .item {
-  	margin: 0 1px;
 }
 
 /*Filter By Block

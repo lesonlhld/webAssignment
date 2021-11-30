@@ -78,7 +78,6 @@ $configs = $CONFIGS_Model->get();
     jQuery(document).ready(function() {
         App.init();
         App.initScrollBar();
-        OwlCarousel.initOwlCarousel();
         RevolutionSlider.initRSfullWidth();
     });
     
