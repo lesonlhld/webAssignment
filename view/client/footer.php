@@ -64,15 +64,13 @@ $configs = $CONFIGS_Model->get();
 <script src="<?= site_url() ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- JS Implementing Plugins -->
 <script src="<?= site_url() ?>assets/plugins/back-to-top.js"></script>
-<script src="<?= site_url() ?>assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 <script src="<?= site_url() ?>assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?= site_url() ?>assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
 <script src="<?= site_url() ?>assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <!-- JS Customization -->
 <script src="<?= site_url() ?>assets/js/custom.js"></script>
 <!-- JS Page Level -->
-<script src="<?= site_url() ?>assets/js/shop.app.js"></script>
-<script src="<?= site_url() ?>assets/js/plugins/owl-carousel.js"></script>
+<script src="<?= site_url() ?>assets/js/app.js"></script>
 <script src="<?= site_url() ?>assets/js/plugins/revolution-slider.js"></script>
 <script>
     jQuery(document).ready(function() {

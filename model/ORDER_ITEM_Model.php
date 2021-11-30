@@ -27,4 +27,31 @@ class ORDER_ITEM_Model extends \Model\Model
 
         return $stmt->fetchAll();
     }
+
+
+    public function get_list_by_order_id($order_id, $start = null, $limit = null)
+    {
+        if ($start == null && $limit == null) {
+            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id LEFT JOIN order_items ON products.product_id=order_items.product_id LEFT JOIN orders ON order_items.order_id=orders.order_id WHERE orders.order_id=:order_id');
+            $stmt->bindParam(':order_id', $order_id);
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } elseif ($limit == null) {
+            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id LEFT JOIN order_items ON products.product_id=order_items.product_id LEFT JOIN orders ON order_items.order_id=orders.order_id WHERE orders.order_id=:order_id LIMIT :start');
+            $stmt->bindParam(':order_id', $order_id);
+            $stmt->bindParam(':start', $start);
+            $stmt->execute();
+
+            return $stmt->fetch();
+        } else {
+            $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id LEFT JOIN order_items ON products.product_id=order_items.product_id LEFT JOIN orders ON order_items.order_id=orders.order_id WHERE orders.order_id=:order_id LIMIT :start,:limit');
+            $stmt->bindParam(':order_id', $order_id);
+            $stmt->bindParam(':start', $start);
+            $stmt->bindParam(':limit', $limit);
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        }
+    }
 }

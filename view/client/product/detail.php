@@ -151,33 +151,38 @@
                     <?php }
                     } ?>
                 </div>
-                <h3 id="review-add" class="heading-md margin-bottom-30">Thêm đánh giá</h3>
-                <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
-                <form id="comment-form" action="javascript:void(0)" method="post">
-                    <fieldset>
-                        <div class="margin-bottom-30">
-                            <label class="input">Bình luận cho sản phẩm</label>
-                            <textarea cols="115" rows="4" name="comment" id="comment" class="form-control" placeholder="Nhập bình luận..." required></textarea>
-                        </div>
-                    </fieldset>
-                    <input type="text" name="product_id" value="<?= isset($product) ?  $product->product_id : '' ?>" class="hidden">
-                    <label class="input">Đánh giá sản phẩm</label>
-                    <section>
-                        <div class="stars-ratings stars-ratings-label">
-                            <input type="radio" name="stars-rating" id="stars-rating-5" value="5" class="form-control" checked="checked">
-                            <label for="stars-rating-5"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-4" value="4" class="form-control">
-                            <label for="stars-rating-4"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-3" value="3" class="form-control">
-                            <label for="stars-rating-3"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-2" value="2" class="form-control">
-                            <label for="stars-rating-2"><i class="fa fa-star"></i></label>
-                            <input type="radio" name="stars-rating" id="stars-rating-1" value="1" class="form-control">
-                            <label for="stars-rating-1"><i class="fa fa-star"></i></label>
-                        </div>
-                    </section>
-                    <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm margin-left-10">Gửi</button>
-                </form>
+                <?php if (!isset($_SESSION['is_logged_in'])) { ?>
+                    <h3 id="review-add" class="heading-md margin-bottom-30">Vui lòng đăng nhập để đánh giá</h3>
+                <?php } else {
+                ?>
+                    <h3 id="review-add" class="heading-md margin-bottom-30">Thêm đánh giá</h3>
+                    <div id="msg" class="alert alert-danger hidden" style="border-radius: .5rem;"></div>
+                    <form id="comment-form" action="javascript:void(0)" method="post">
+                        <fieldset>
+                            <div class="margin-bottom-30">
+                                <label class="input">Bình luận cho sản phẩm</label>
+                                <textarea cols="115" rows="4" name="comment" id="comment" class="form-control" placeholder="Nhập bình luận..." required></textarea>
+                            </div>
+                        </fieldset>
+                        <input type="text" name="product_id" value="<?= isset($product) ?  $product->product_id : '' ?>" class="hidden">
+                        <label class="input">Đánh giá sản phẩm</label>
+                        <section>
+                            <div class="stars-ratings stars-ratings-label">
+                                <input type="radio" name="stars-rating" id="stars-rating-5" value="5" class="form-control" checked="checked">
+                                <label for="stars-rating-5"><i class="fa fa-star"></i></label>
+                                <input type="radio" name="stars-rating" id="stars-rating-4" value="4" class="form-control">
+                                <label for="stars-rating-4"><i class="fa fa-star"></i></label>
+                                <input type="radio" name="stars-rating" id="stars-rating-3" value="3" class="form-control">
+                                <label for="stars-rating-3"><i class="fa fa-star"></i></label>
+                                <input type="radio" name="stars-rating" id="stars-rating-2" value="2" class="form-control">
+                                <label for="stars-rating-2"><i class="fa fa-star"></i></label>
+                                <input type="radio" name="stars-rating" id="stars-rating-1" value="1" class="form-control">
+                                <label for="stars-rating-1"><i class="fa fa-star"></i></label>
+                            </div>
+                        </section>
+                        <button type="submit" class="btn-u btn-u-sea-shop btn-u-sm margin-left-10">Gửi</button>
+                    <?php } ?>
+                    </form>
             </div>
             <!-- End Reviews -->
         </div>

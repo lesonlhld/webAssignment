@@ -76,6 +76,17 @@ class USER_Model extends \Model\Model
         return $stmt->fetch();
     }
 
+    public function check_pass($id, $password)
+    {
+        $password = hashpass($password);
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE id=:id AND password=:password');
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
     public function create($data, $role = 1)
     {
         $password = hashpass($data['password']);
@@ -155,14 +166,6 @@ class USER_Model extends \Model\Model
         $stmt->execute();
 
         return true;
-    }
-
-    public function get_password($id)
-    {
-        $stmt = $this->pdo->prepare("SELECT password FROM users WHERE id=$id ");
-        $stmt->execute();
-        $pass = $stmt->fetchColumn();
-        return $pass;
     }
 
     public function delete($id)

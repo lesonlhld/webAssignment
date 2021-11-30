@@ -32,7 +32,6 @@ $category_list = $CATEGORY_Model->get_list();
     <link rel="stylesheet" href="<?= site_url() ?>assets/plugins/line-icons/line-icons.css">
     <link rel="stylesheet" href="<?= site_url() ?>assets/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?= site_url() ?>assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="<?= site_url() ?>assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="<?= site_url() ?>assets/plugins/revolution-slider/rs-plugin/css/settings.css">
 
     <!-- CSS Customization -->

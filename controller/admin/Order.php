@@ -17,7 +17,7 @@ class Order extends \Controller\Controller
         $page = $_GET['page'] ?? 1;
         $start = ((int)$page - 1) * 10;
         $end_page = ceil($ORDER_Model->count() / LIMIT);
-        $order_list = $ORDER_Model->get_list($start, LIMIT, null);
+        $order_list = $ORDER_Model->get_list($start, LIMIT);
 
         $this->data['data']['page'] = $page;
         $this->data['data']['end_page'] = $end_page;
@@ -31,11 +31,11 @@ class Order extends \Controller\Controller
         is_admin_login();
 
         $ORDER_Model = Model('ORDER_Model');
-        $PRODUCT_Model = Model('PRODUCT_Model');
+        $ORDER_ITEM_Model = Model('ORDER_ITEM_Model');
         $page = $_GET['page'] ?? 1;
         $start = ((int)$page - 1) * 10;
         $end_page = ceil($ORDER_Model->count() / LIMIT);
-        $product_list = $PRODUCT_Model->get_list_by_order_id(0, $start, LIMIT, $_GET['id']);
+        $product_list = $ORDER_ITEM_Model->get_list_by_order_id($_GET['id'], $start, LIMIT);
         $order = $ORDER_Model->get($_GET['id']);
 
         $this->data['data']['page'] = $page;
@@ -55,7 +55,7 @@ class Order extends \Controller\Controller
         $data = $_GET;
 
         $ORDER_Model->update_status($data["id"], $data);
-        
+
         redirect(site_url("admin/order"));
     }
 }

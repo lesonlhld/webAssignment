@@ -47,7 +47,7 @@ class Member extends \Controller\Controller
                 $data["image"] = null;
             }
             $USER_Model = Model('USER_Model');
-            $update_result = $USER_Model->update($_SESSION['id'], $data);  
+            $update_result = $USER_Model->update($_SESSION['id'], $data);
             View("", ['msg' => 'Cập nhật thành công']);
         }
     }
@@ -75,35 +75,43 @@ class Member extends \Controller\Controller
         $this->data["subview"] = "client/member/order_item";
         View("client/main", $this->data);
     }
-    
+
     public function changepass()
     {
         is_login();
         $USER_Model = Model('USER_Model');
-        $user = $USER_Model -> get($_SESSION['id']);
+        $user = $USER_Model->get($_SESSION['id']);
         $this->data['data']['user'] = $user;
         $this->data["subview"] = "client/member/changepass";
-        View("client/main",$this->data);
+        View("client/main", $this->data);
     }
 
     public function update_pass()
     {
         is_login();
         $data = $_POST;
-        $USER_Model = Model('USER_Model');
-        $info_pass = $USER_Model->get_password($_SESSION['id']);
-        if (hashpass($data["oldpassword"]) != $info_pass)
-            {
-                View("",['msg'=>'Nhập sai mật khẩu cũ'],401);
-            }
-        else
+        if ($data["oldpassword"] == "") {
+            View("", ['msg' => 'Mật khẩu cũ không được để trống'], 400);
+        } else if ($data["newpassword"] == "") {
+            View("", ['msg' => 'Mật khẩu mới không được để trống'], 400);
+        } else if (strlen($data["newpassword"]) < 6) {
+            View("", ['msg' => 'Mật khẩu mới bao gồm tối thiểu 6 ký tự'], 400);
+        } else if ($data["passwordConfirm"] == "") {
+            View("", ['msg' => 'Mật khẩu xác nhận không được để trống'], 400);
+        } else if ($data["newpassword"] != $data["passwordConfirm"]) {
+            View("", ['msg' => 'Mật khẩu xác nhận không trùng khớp'], 400);
+        } else {
+            $USER_Model = Model('USER_Model');
+            $user_login = $USER_Model->check_pass($_SESSION['id'], $data["oldpassword"]);
+            if ($user_login == null) {
+                View("", ['msg' => 'Nhập sai mật khẩu cũ'], 401);
+            } else
             if ($data["newpassword"] != $data["passwordConfirm"]) {
-                    View("",['msg' => 'Mật khẩu mới xác nhận không giống nhau'],401);
+                View("", ['msg' => 'Mật khẩu mới xác nhận không giống nhau'], 401);
+            } else {
+                $newpass = $USER_Model->update_password($_SESSION['id'], $data['newpassword']);
+                View("", ['msg' => 'Đổi mật khẩu thành công']);
             }
-                else 
-                { 
-                    $newpass= $USER_Model->update_password($_SESSION['id'],$data['newpassword']);
-                    View("",['msg'=>'Đổi mật khẩu thành công']);
-                }
+        }
     }
 }

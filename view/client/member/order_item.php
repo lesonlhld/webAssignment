@@ -72,14 +72,14 @@
                     <div class="col-md-6 md-margin-bottom-50">
                         <!-- Accordion -->
                         <span style="padding-left:15px;padding-right:50px;">
-                            <input type="radio" id="sfcs" name="payment_method" value="1" disabled>
+                            <input type="radio" id="sfcs" name="payment_method" value="1" <?= $data['order']->payment_id == 1 ? "checked" : "" ?> disabled>
                             <label for="sfcs">Tài khoản SFCS</label>
                         </span>
                         <span style="padding-right:50px;">
-                            <input type="radio" id="momo" name="payment_method" value="2" checked disabled>
+                            <input type="radio" id="momo" name="payment_method" value="2" <?= $data['order']->payment_id == 2 ? "checked" : "" ?> disabled>
                             <label for="momo">Ví Momo</label>
                         </span>
-                        <input type="radio" id="cash" name="payment_method" value="3" disabled>
+                        <input type="radio" id="cash" name="payment_method" value="3" <?= $data['order']->payment_id == 3 ? "checked" : "" ?> disabled>
                         <label for="cash">Tiền mặt</label>
                         <div class="coupon-code">
                             <h3>Mã giảm giá</h3>
