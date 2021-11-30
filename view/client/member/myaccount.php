@@ -79,12 +79,10 @@
                         <div class="row">
                             <br>
                             <div class=col-sm-6>
-                                <button class="btn btn-block btn-lg btn-success" type="submit">
+                                <button class="btn-u btn-u-sea-shop" type="submit">
                                     <i class="glyphicon glyphicon-ok-sign"></i> Lưu lại
                                 </button>
-                            </div>
-                            <div class=col-sm-6>
-                                <button class="btn btn-block btn-lg" type="reset">
+                                <button class="btn-u btn-brd btn-brd-hover btn-u-sea-shop" type="reset">
                                     <i class="glyphicon glyphicon-repeat"></i> Đặt lại
                                 </button>
                             </div>
