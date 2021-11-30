@@ -57,7 +57,7 @@
                                     <label for="birthday">Birthday</label>
                                     <input type="date" id="birthday" name="birthday" class="form-control" value="<?= isset($customer) ?  $customer->birth_date : '' ?>" max=<?= date('Y-m-d'); ?>>
                                 </div>
-                                <input type="text" name="old_image" class="hidden" value="<?= $customer->avatar ?>">
+                                <input type="text" name="old_image" class="hidden" value="<?= isset($customer->avatar) && $customer->avatar != null && $customer->avatar != "" ? $customer->avatar : '' ?>">
                                 <div class="form-group">
                                     <label for="image">Avatar</label>
                                     <input type="file" id="image" name="image">

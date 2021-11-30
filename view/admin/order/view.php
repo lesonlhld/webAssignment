@@ -26,7 +26,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="customer_name">Customer Name</label>
-                                <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?= $data['order']->first_name . $data['order']->last_name ?>" placeholder="" disabled>
+                                <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?= $data['order']->first_name . ' ' . $data['order']->last_name ?>" placeholder="" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="order_time">Order time</label>

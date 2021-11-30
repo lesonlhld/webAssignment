@@ -64,7 +64,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="image">Avatar</label>
-                                <?php if (isset($customer) && $customer->avatar != "") { ?><img src='<?= base_url("source/users/" . $customer->avatar) ?>' alt='Avatar' style='width:100%;'><?php } ?>
+                                <?php if (isset($customer->avatar) && $customer->avatar != null && $customer->avatar != "") { ?>
+                                    <img src='<?= base_url("source/users/" . $customer->avatar) ?>' alt="Avatar" style="width:100%;">
+                                <?php } ?>
                             </div>
                         </div>
                         <!-- /.box-body -->
