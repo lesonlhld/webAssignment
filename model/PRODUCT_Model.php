@@ -65,47 +65,6 @@ class PRODUCT_Model extends \Model\Model
         }
     }
 
-    public function get_list_by_order_id($trash = 0, $start = null, $limit = null, $order_id = null)
-    {
-        if ($start == null && $limit == null) {
-            if ($order_id != null) {
-                $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id LEFT JOIN order_items ON products.product_id=order_items.product_id LEFT JOIN orders ON order_items.order_id=orders.id WHERE trash=:trash AND orders.order_id=:order_id');
-                $stmt->bindParam(':order_id', $order_id);
-            } else {
-                $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE trash=:trash');
-            }
-            $stmt->bindParam(':trash', $trash);
-            $stmt->execute();
-
-            return $stmt->fetchAll();
-        } elseif ($limit == null) {
-            if ($order_id != null) {
-                $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id LEFT JOIN order_items ON products.product_id=order_items.product_id LEFT JOIN orders ON order_items.order_id=orders.id WHERE trash=:trash AND orders.order_id=:order_id LIMIT :start');
-                $stmt->bindParam(':order_id', $order_id);
-            } else {
-                $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE trash=:trash LIMIT :start');
-            }
-            $stmt->bindParam(':trash', $trash);
-            $stmt->bindParam(':start', $start);
-            $stmt->execute();
-
-            return $stmt->fetch();
-        } else {
-            if ($order_id != null) {
-                $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id LEFT JOIN order_items ON products.product_id=order_items.product_id LEFT JOIN orders ON order_items.order_id=orders.id WHERE trash=:trash AND orders.order_id=:order_id LIMIT :start,:limit');
-                $stmt->bindParam(':order_id', $order_id);
-            } else {
-                $stmt = $this->pdo->prepare('SELECT * FROM products LEFT JOIN categories ON products.category_id=categories.category_id WHERE trash=:trash LIMIT :start,:limit');
-            }
-            $stmt->bindParam(':trash', $trash);
-            $stmt->bindParam(':start', $start);
-            $stmt->bindParam(':limit', $limit);
-            $stmt->execute();
-
-            return $stmt->fetchAll();
-        }
-    }
-
     public function count($trash = 0)
     {
         $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM products WHERE trash=:trash');

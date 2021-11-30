@@ -71,7 +71,7 @@ class ORDER_Model extends \Model\Model
 
     public function get_by_user($user_id, $order_id)
     {
-        $stmt = $this->pdo->prepare('SELECT orders.* FROM orders LEFT JOIN users ON orders.user_id=users.id WHERE orders.id=:order_id AND user_id=:user_id');
+        $stmt = $this->pdo->prepare('SELECT orders.* FROM orders LEFT JOIN users ON orders.user_id=users.id WHERE orders.order_id=:order_id AND user_id=:user_id');
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':order_id', $order_id);
         $stmt->execute();
@@ -99,7 +99,7 @@ class ORDER_Model extends \Model\Model
         $stmt->bindParam(':voucher', $data['voucher']);
         $stmt->execute();
 
-        return ["code" => $code, "id" => $this->pdo->lastInsertId()];
+        return $code;
     }
 
     public function update_status($id, $data)
