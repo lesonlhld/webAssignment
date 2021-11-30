@@ -129,7 +129,7 @@
                     } else {
                         foreach ($data['comment_list'] as $comment) { ?>
                             <div class="product-comment-in">
-                                <img class="product-comment-img rounded-x" src="<?= base_url("source/users/" . $comment->avatar) ?>" alt="Avatar image">
+                                <img class="product-comment-img rounded-x" src="<?= (isset($user) && $user->avatar != "") ? base_url("source/users/" . $comment->avatar) : base_url('assets/img/no-avatar.png') ?>" alt="Avatar image">
                                 <div class="product-comment-dtl">
                                     <h4>
                                         <?= $comment->first_name . ' ' . $comment->last_name ?><small><?= $comment->create_at ?></small>

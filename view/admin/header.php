@@ -176,7 +176,7 @@
                     </li>
                     <li>
                         <a href="<?= site_url("admin/comment") ?>">
-                            <i class="fa fa-file-text-o"></i> <span>Comment</span>
+                            <i class="fa fa-comment"></i> <span>Comment</span>
                         </a>
                     </li>
                 </ul>

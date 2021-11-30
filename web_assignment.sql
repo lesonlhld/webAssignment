@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 28, 2021 lúc 05:17 AM
+-- Thời gian đã tạo: Th10 30, 2021 lúc 05:02 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -42,7 +42,8 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (3, 'Lẩu & Nướng'),
 (4, 'Món tráng miệng'),
 (5, 'Thức uống'),
-(6, 'Món Khác');
+(6, 'Món Khác'),
+(7, 'Test category');
 
 -- --------------------------------------------------------
 
@@ -64,17 +65,10 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `rate`, `comment`, `create_at`, `create_by`, `product_id`) VALUES
-(1, 1, 'test comment', '2021-11-21 21:06:53', 2, 1),
-(2, 5, 'qádfg', '2021-11-27 18:40:45', 1, 4),
-(3, 5, 'qádfg', '2021-11-27 18:40:46', 1, 4),
-(4, 5, 'ắer', '2021-11-27 18:41:17', 1, 4),
-(5, 5, 'dừed', '2021-11-27 18:42:16', 1, 4),
-(6, 5, 'sccs', '2021-11-27 18:43:50', 1, 4),
-(7, 5, 'dừed', '2021-11-27 18:44:09', 1, 4),
-(8, 5, 'dừed', '2021-11-27 18:44:12', 1, 4),
-(9, 5, 'qdwsd', '2021-11-27 19:33:08', 1, 4),
-(10, 5, '12345', '2021-11-27 19:33:30', 2, 6),
-(11, 1, 'mwksd', '2021-11-27 23:11:02', 2, 5);
+(1, 5, 'Hương vị rất ngon, sợi phở mềm, nước dùng dậm đà.', '2021-11-21 21:06:53', 2, 1),
+(2, 4, 'Phở tái nhưng thịt bò hơi chín, sẽ quay lại lần sau', '2021-11-29 17:29:35', 3, 1),
+(3, 3, 'Test comment', '2021-11-30 10:52:09', 1, 2),
+(4, 5, 'Test rate 5 *', '2021-11-30 10:52:36', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -122,10 +116,9 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `title`, `slug`, `image`, `short_content`, `content`, `create_at`, `create_by`, `publish`) VALUES
-(1, 'test title 2', 'test-title-2', '1637597677_testimonial1.jpg', 'short content', '<p><img alt=\"test editor\" src=\"https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=1200&amp;h=0&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=BWzFqMmUWVFC1OfpPSUqMA\" style=\"height:218px; width:200px\" />&nbsp;t&eacute;t h&igrave;nh ảnh trong editor</p>\r\n', '2021-11-21 21:06:53', 1, 1),
-(2, '12345', '12345', NULL, 'abc', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\">\r\n	<tbody>\r\n		<tr>\r\n			<td>1</td>\r\n			<td>2</td>\r\n		</tr>\r\n		<tr>\r\n			<td>3</td>\r\n			<td>4</td>\r\n		</tr>\r\n		<tr>\r\n			<td>5</td>\r\n			<td>66</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n', '2021-11-22 10:56:23', 1, 0),
-(3, 'McDonald’s chào đón lực lượng tuyến đầu & tình nguyện viện', 'mcdonalds-chao-don-luc-luong-tuyen-dau-tinh-nguyen-vien', NULL, 'Chương trình thực hiện bởi McDonald’s Việt Nam và Trung tâm Công tác Xã Hội Công đoàn Tp.HCM', '<p>H&ocirc;m nay, McDonald&rsquo;s Việt Nam h&acirc;n hoan đ&oacute;n ch&agrave;o c&aacute;c anh chị y b&aacute;c sĩ, c&aacute;n bộ nh&acirc;n vi&ecirc;n, chiến sĩ, c&aacute;c t&igrave;nh nguyện vi&ecirc;n thuộc tuyến đầu chống dịch c&ugrave;ng qu&yacute; b&aacute;o ch&iacute; tại cửa h&agrave;ng McDonald&rsquo;s Dakao số 2 Điện Bi&ecirc;n Phủ, P. Dakao, Quận 1, Tp.HCM. Đ&acirc;y l&agrave; sự kiện nằm trong khu&ocirc;n khổ chương tr&igrave;nh đồng h&agrave;nh chống dịch Covid-19 của McDonald&rsquo;s c&ugrave;ng với c&aacute;c tổ chức x&atilde; hội từ năm 2020.&nbsp;</p>\n\n<p><img alt=\"\" src=\"https://mcdonalds.vn/uploads/2018/news/1(1).jpg\" /><br />\n&nbsp;</p>\n\n<p>McDonald&#39;s rất tự h&agrave;o khi được ban l&atilde;nh đạo Trung t&acirc;m c&ocirc;ng t&aacute;c x&atilde; hội C&ocirc;ng Đo&agrave;n Li&ecirc;n Đo&agrave;n lao động Tp. Hồ Ch&iacute; Minh tin y&ecirc;u v&agrave; giao ph&oacute; nhiệm vụ đồng h&agrave;nh trong những giai đoạn chống dịch cao điểm của th&agrave;nh phố Hồ Ch&iacute; Minh. Khởi động với chương tr&igrave;nh Tiếp Sức Chống Dịch 50.000 bữa ăn hỗ trợ đ&atilde; được McDonald&rsquo;s gửi tặng đến đội ngũ c&aacute;n bộ tuyến đầu c&aacute;c y b&aacute;c sĩ, đội hậu cần v&agrave; c&aacute;c t&igrave;nh nguyện viện...trong giai đoạn từ th&aacute;ng 7 đến th&aacute;ng 10/2021. Chương tr&igrave;nh Tiếp sức chống dịch đ&atilde; diễn ra th&agrave;nh c&ocirc;ng tốt đẹp với sự hỗ trợ từ Li&ecirc;n Đo&agrave;n Lao Động v&agrave; Hiệp Hội Thanh Ni&ecirc;n Việt Nam.&nbsp;</p>\n\n<p>Từ th&aacute;ng 11/2021, tr&ecirc;n tinh thần ch&agrave;o đ&oacute;n b&igrave;nh thường mới, McDonald&rsquo;s tiếp tục triển khai c&aacute;c dự &aacute;n hỗ trợ cộng đồng trong giai đoạn 2 với 5000 phần ăn b&aacute;nh Burger 2 lớp G&agrave; kẹp thịt x&ocirc;ng kh&oacute;i sốt Ph&ocirc; Mai vị Cordon Blue kiểu Ph&aacute;p trị gi&aacute; 430 triệu đồng. Cụ thể phần ăn nằm trong thực đơn Ch&acirc;u &Acirc;u trị gi&aacute; từ 86.000 đồng kh&ocirc;ng k&egrave;m nước trong đ&oacute; c&oacute; 3000 phần được gửi đến TTCTXH C&ocirc;ng Đo&agrave;n&nbsp; trị gi&aacute; 258 triệu v&agrave; 2000 phần gửi đến Hiệp Hội Thanh Ni&ecirc;n Việt Nam&nbsp; trị gi&aacute; 172 triệu đồng.</p>\n\n<p><img alt=\"\" src=\"https://mcdonalds.vn/uploads/2018/news/2.jpg\" /><br />\n&nbsp;<br />\nC&aacute;c phần ăn miễn ph&iacute; được tặng th&ocirc;ng qua ứng dụng Săn Ưu Đ&atilde;i McDonald&rsquo;s từ ng&agrave;y 8/11 đến ng&agrave;y 30/11/2021 tr&ecirc;n to&agrave;n hệ thống c&aacute;c cửa h&agrave;ng. Kh&aacute;ch h&agrave;ng chỉ cần nhập m&atilde; qu&agrave; tặng v&agrave;o ứng dụng v&agrave; sử dụng chức năng qu&eacute;t m&atilde; tr&ecirc;n m&aacute;y đặt h&agrave;ng tự động để lấy phần ăn. Tất cả c&aacute;c thao t&aacute;c đều th&ocirc;ng qua ứng dụng kỹ thuật số, đảm bảo tu&acirc;n thủ 5K hạn chế tối đa tiếp x&uacute;c trong quy tắc ph&ograve;ng chống dịch.</p>\n\n<p><img alt=\"\" src=\"https://mcdonalds.vn/uploads/2018/news/3.png\" />&nbsp;<br />\n<em>H&igrave;nh: Hướng dẫn sử dụng m&atilde; qu&agrave; tặng tr&ecirc;n ứng dụng McDonald&rsquo;s</em></p>\n\n<p>Đại diện McDonald&rsquo;s Anh Tạ Th&aacute;i Thi&ecirc;n Đan &ndash; Trưởng ph&ograve;ng vận h&agrave;nh McDonald&rsquo;s Việt Nam chia sẻ &ldquo;Trong giai đoạn b&igrave;nh thường mới, McDonald&#39;s vẫn lu&ocirc;n tu&acirc;n thủ nghi&ecirc;m t&uacute;c c&aacute;c biện ph&aacute;p 5K chống dịch tại cửa h&agrave;ng v&agrave; mang tới một kh&ocirc;ng gian an to&agrave;n cho kh&aacute;ch h&agrave;ng. McDonald&rsquo;s cũng lu&ocirc;n theo d&otilde;i s&aacute;t sao t&igrave;nh h&igrave;nh dịch bệnh để c&oacute; thể g&oacute;p phần hỗ trợ cộng đồng trong c&ocirc;ng cuộc ph&ograve;ng dịch v&agrave; tăng cường sức khoẻ cộng đồng Tuỳ v&agrave;o từng thời điểm m&agrave; McDonald&rsquo;s sẽ c&oacute; những kế hoạch hay dự &aacute;n hỗ trợ ph&ugrave; hợp. Ch&uacute;ng t&ocirc;i sẽ chia sẻ c&aacute;c chương tr&igrave;nh h&agrave;nh động v&igrave; cộng đồng ngay khi c&oacute; th&ocirc;ng tin ch&iacute;nh thức.&rdquo;</p>\n\n<p>Đội ngũ c&aacute;n bộ nh&acirc;n vi&ecirc;n McDonalds xin được gửi gắm thật nhiều y&ecirc;u thương cũng như lời c&aacute;m ơn ch&acirc;n th&agrave;nh nhất đến lực lượng tuyến đầu, đặc biệt l&agrave; c&aacute;c y b&aacute;c sĩ đ&atilde; chung tay g&oacute;p sức v&igrave; một Việt Nam khỏe mạnh.</p>\n\n<p>Đồng c&aacute;m ơn đến Trung t&acirc;m c&ocirc;ng t&aacute;c x&atilde; hội C&ocirc;ng Đo&agrave;n Li&ecirc;n Đo&agrave;n lao động Tp. Hồ Ch&iacute; Minh, Hiệp Hội Thanh Ni&ecirc;n Việt Nam đ&atilde; tạo điều kiện cũng như hỗ trợ McDonald&#39;s thực hiện c&aacute;c suất ăn gửi đến lực lượng tuyến đầu chống dịch.&nbsp;</p>\n\n<p>Xin gửi lời c&aacute;m ơn ch&acirc;n th&agrave;nh đến qu&yacute; anh chị b&aacute;o ch&iacute; đ&atilde; hỗ trợ lan tỏa y&ecirc;u thương.</p>\n\n<p>&nbsp;</p>\n\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\">\n	<tbody>\n		<tr>\n			<td>Th&ocirc;ng tin th&ecirc;m về doanh nghiệp<br />\n			Kể từ năm 2014, sứ mệnh của McDonald&rsquo;s Việt Nam l&agrave; trở th&agrave;nh điểm đến y&ecirc;u th&iacute;ch của thực kh&aacute;ch. Doanh nghiệp li&ecirc;n tục n&acirc;ng cao chất lượng dịch vụ để mang đến những trải nghiệm th&uacute; vị bằng thực đơn với c&aacute;c m&oacute;n ăn lừng danh thế giới như Khoai t&acirc;y chi&ecirc;n, Big Mac, G&agrave; McNuggets, v&agrave; rất nhiều m&oacute;n ăn kh&aacute;c chỉ c&oacute; tại McDonald&rsquo;s. Hiện nay, McDonald&rsquo;s c&oacute; mặt tại Hồ Ch&iacute; Minh, H&agrave; Nội v&agrave; B&igrave;nh Dương với 22 cửa h&agrave;ng v&agrave; c&aacute;c dịch vụ tiện &iacute;ch như dịch vụ mua h&agrave;ng kh&ocirc;ng cần đậu xe Drive-thru lần đầu ti&ecirc;n tại Việt Nam, Dịch vụ giao h&agrave;ng McDelivery, dịch vụ 24/7 v&agrave; thương hiệu McCafe phụ vụ b&aacute;nh ngọt v&agrave; cafe. Đặc biệt ứng dụng Săn ưu đ&atilde;i McDonald&rsquo;s mang đến rất nhiều khuyến m&atilde;i v&agrave; qu&agrave; tặng cho kh&aacute;ch h&agrave;ng.</td>\n		</tr>\n	</tbody>\n</table>\n\n<p>&nbsp;</p>\n\n<p>Để li&ecirc;n hệ truyền th&ocirc;ng, anh chị vui l&ograve;ng gửi th&ocirc;ng tin đến<br />\n<strong>Hồng Nhung(Ms.)</strong>&nbsp;&ndash; Đại diện truyền th&ocirc;ng McDonald&rsquo;s Việt Nam<br />\nHP: 0972789780<br />\nEmail: nhung.vu@vn.mcd.com</p>\n', '2021-11-22 17:17:42', 1, 1),
-(5, 'Trẻ nhỏ có thể đọc được cảm xúc của bạn ngay cả khi bạn đeo khẩu trang', 'tre-nho-co-the-doc-duoc-cam-xuc-cua-ban-ngay-ca-khi-ban-deo-khau-trang', NULL, 'Những đứa trẻ nhỏ thường có thể biết mọi người đang cảm thấy thế nào, ngay cả khi người đó đang đeo khẩu trang, một nghiên cứu mới được công bố cho thấy.', '<h2>Những đứa trẻ nhỏ thường c&oacute; thể biết mọi người đang cảm thấy thế n&agrave;o, ngay cả khi người đ&oacute; đang đeo khẩu trang, một nghi&ecirc;n cứu mới được c&ocirc;ng bố cho thấy.</h2>\r\n\r\n<p>C&oacute; một số lo ngại rằng khẩu trang được sử dụng ở trường học trong đại dịch c&oacute; thể g&acirc;y tổn hại đến sự ph&aacute;t triển của trẻ nhỏ, nhưng t&agrave;i liệu nghi&ecirc;n cứu được c&ocirc;ng bố tr&ecirc;n JAMA Pediatrics cho thấy rằng trẻ em c&oacute; thể nhận ra cảm x&uacute;c tốt như khi ch&uacute;ng kh&ocirc;ng đeo khẩu trang.</p>\r\n\r\n<p>Đối với nghi&ecirc;n cứu n&agrave;y, c&aacute;c nh&agrave; nghi&ecirc;n cứu từ Bệnh viện Đại học Lausanne ở Thụy Sĩ đ&atilde; hiển thị 90 bức ảnh ngẫu nhi&ecirc;n cho gần 300 trẻ em từ 3 đến 6 tuổi. Nhũng bức ảnh cho thấy c&aacute;c diễn vi&ecirc;n thể hiện niềm vui, tức giận hoặc buồn b&atilde;. Trong một nửa số h&igrave;nh ảnh, c&aacute;c diễn vi&ecirc;n đeo khẩu trang.</p>\r\n\r\n<p>C&aacute;c b&eacute; được y&ecirc;u cầu đặt t&ecirc;n cho cảm x&uacute;c, chỉ v&agrave;o một thẻ hiển thị c&aacute;c biểu tượng cảm x&uacute;c ph&ugrave; hợp những cảm x&uacute;c tr&ecirc;n tranh, n&oacute;i với nh&agrave; nghi&ecirc;n cứu rằng b&eacute; kh&ocirc;ng biết c&acirc;u trả lời hoặc n&oacute;i rằng muốn bỏ thử nghiệm. C&aacute;c bạn nhỏ trả lời đ&uacute;ng hầu hết c&aacute;c c&acirc;u trả lời v&agrave; c&oacute; thể gh&eacute;p c&aacute;c thẻ cảm x&uacute;c với h&igrave;nh ảnh tỷ lệ chuẩn x&aacute;c gần bằng nhau, cho d&ugrave; h&igrave;nh diễn vi&ecirc;n đ&oacute; c&oacute; đeo khẩu trang hay kh&ocirc;ng.</p>\r\n\r\n<p>Trẻ em m&ocirc; tả cảm x&uacute;c ch&iacute;nh x&aacute;c hơn 70% khi diễn vi&ecirc;n kh&ocirc;ng đeo khẩu trang v&agrave; đ&uacute;ng hơn 67% khi diễn vi&ecirc;n đeo khẩu trang. Những đứa trẻ c&agrave;ng lớn, ch&uacute;ng c&agrave;ng c&oacute; nhiều c&acirc;u trả lời đ&uacute;ng hơn. Khoảng một phần tư trẻ mẫu gi&aacute;o gặp kh&oacute; khăn hơn trong việc ph&acirc;n biệt nỗi buồn với sự tức giận v&agrave; khoảng 21% đ&ocirc;i khi nhầm lẫn niềm vui với sự tức giận hoặc buồn b&atilde;.</p>\r\n\r\n<p><a href=\"https://afamilycdn.com/150157425591193600/2021/11/21/khautrang-16374840565361773687610.jpeg\" target=\"_blank\"><img alt=\"Trẻ nhỏ có thể đọc được cảm xúc của bạn ngay cả khi bạn đeo khẩu trang - Ảnh 1.\" src=\"https://afamilycdn.com/thumb_w/650/150157425591193600/2021/11/21/khautrang-16374840565361773687610.jpeg\" /></a></p>\r\n\r\n<p>Nhiều lo lắng rằng việc đeo khẩu trang sẽ ảnh hưởng đến ph&aacute;t triển kỹ năng cảm x&uacute;c x&atilde; hội của trẻ.</p>\r\n\r\n<p>&nbsp;Ashley Ruba, một chuy&ecirc;n gia t&acirc;m l&yacute; học ph&aacute;t triển của Ph&ograve;ng th&iacute; nghiệm Cảm x&uacute;c Trẻ em tại Đại học Wisconsin-Madison, kh&ocirc;ng li&ecirc;n quan đến nghi&ecirc;n cứu n&agrave;y, nhưng đ&atilde; thực hiện c&ocirc;ng việc tương tự trong đại dịch. C&ocirc; ấy n&oacute;i rằng c&ocirc; ấy đ&atilde; nh&igrave;n thấy kết quả tương tự với c&ocirc;ng việc của m&igrave;nh.</p>\r\n\r\n<p>&quot;Ngay cả khi đeo khẩu trang, những đứa trẻ nhỏ vẫn c&oacute; thể suy luận hợp l&yacute; về cảm x&uacute;c của người kh&aacute;c&quot;, Ruba n&oacute;i. &quot;T&ocirc;i muốn chỉ ra rằng khu&ocirc;n mặt kh&ocirc;ng phải l&agrave; c&aacute;ch quan trọng nhất để ch&uacute;ng ta truyền đạt cảm x&uacute;c, đ&oacute; chỉ l&agrave; một c&aacute;ch duy nhất. Ch&uacute;ng ta cũng sử dụng giọng n&oacute;i, ch&uacute;ng ta c&oacute; cử chỉ cơ thể, ch&uacute;ng ta c&oacute; c&aacute;c loại manh mối ngữ cảnh kh&aacute;c m&agrave; trẻ em v&agrave; người lớn c&oacute; thể sử dụng để t&igrave;m hiểu xem mọi người đang cảm thấy như thế n&agrave;o&quot;.</p>\r\n\r\n<p><a href=\"https://afamilycdn.com/150157425591193600/2021/11/21/khautrang4-1637484584326279873908.jpeg\" target=\"_blank\"><img alt=\"Trẻ nhỏ có thể đọc được cảm xúc của bạn ngay cả khi bạn đeo khẩu trang - Ảnh 2.\" src=\"https://afamilycdn.com/thumb_w/650/150157425591193600/2021/11/21/khautrang4-1637484584326279873908.jpeg\" /></a></p>\r\n\r\n<p>Rủi ro gặp phải khi nhiễm Covid c&oacute; thể sẽ lớn hơn bất cứ vấn đề nhỏ n&agrave;o về giao tiếp.</p>\r\n\r\n<p>Đối với qu&aacute; tr&igrave;nh xử l&yacute; ng&ocirc;n ngữ, điều quan trọng l&agrave; trẻ em phải học c&aacute;ch đọc nh&eacute;p, nhưng r&otilde; r&agrave;ng từ nghi&ecirc;n cứu, c&ocirc; n&oacute;i rằng việc đeo khẩu trang sẽ kh&ocirc;ng l&agrave;m tổn hại đến sự ph&aacute;t triển cảm x&uacute;c x&atilde; hội của trẻ.</p>\r\n\r\n<p>&quot;Rủi ro gặp phải khi nhiễm Covid do kh&ocirc;ng đeo khẩu trang c&oacute; thể sẽ lớn hơn bất kỳ vấn đề nhỏ n&agrave;o về giao tiếp m&agrave; trẻ em c&oacute; thể mắc phải&quot;, c&ocirc; n&oacute;i.</p>\r\n\r\n<p>L&agrave; một nh&agrave; t&acirc;m l&yacute; học, c&ocirc; ấy nghĩ rằng c&oacute; nhiều kh&iacute;a cạnh kh&aacute;c của đại dịch c&oacute; thể ảnh hưởng đến sự ph&aacute;t triển của một đứa trẻ, chẳng hạn như từ sự c&ocirc; lập x&atilde; hội m&agrave; ch&uacute;ng đ&atilde; c&oacute; với bạn b&egrave; đồng trang lứa khi phải nghỉ học ở nh&agrave; hoặc nếu cha mẹ mất việc l&agrave;m chẳng hạn.</p>\r\n\r\n<p>C&ocirc; n&oacute;i: &quot;Khẩu trang c&oacute; lẽ nằm ở cuối danh s&aacute;ch những thứ cần quan t&acirc;m&quot;.</p>\r\n\r\n<p>Nguồn:&nbsp;<em>CNN</em></p>\r\n', '2021-11-22 17:22:30', 1, 0);
+(1, 'Test title', 'test-title', '16381822671179871102.jpg', 'Test short content                                                                        ', '<p>Test full content</p>\r\n', '2021-11-21 21:06:53', 1, 1),
+(3, 'McDonald’s chào đón lực lượng tuyến đầu & tình nguyện viện', 'mcdonalds-chao-don-luc-luong-tuyen-dau-tinh-nguyen-vien', '1638182151701845031.jpg', 'Chương trình thực hiện bởi McDonald’s Việt Nam và Trung tâm Công tác Xã Hội Công đoàn Tp.HCM                                                                        ', '<p>Hôm nay, McDonald’s Việt Nam hân hoan đón chào các anh chị y bác sĩ, cán bộ nhân viên, chiến sĩ, các tình nguyện viên thuộc tuyến đầu chống dịch cùng quý báo chí tại cửa hàng McDonald’s Dakao số 2 Điện Biên Phủ, P. Dakao, Quận 1, Tp.HCM. Đây là sự kiện nằm trong khuôn khổ chương trình đồng hành chống dịch Covid-19 của McDonald’s cùng với các tổ chức xã hội từ năm 2020. </p>\r\n\r\n<p><img alt=\"\" src=\"https://mcdonalds.vn/uploads/2018/news/1(1).jpg\" /><br />\r\n </p>\r\n\r\n<p>McDonald\'s rất tự hào khi được ban lãnh đạo Trung tâm công tác xã hội Công Đoàn Liên Đoàn lao động Tp. Hồ Chí Minh tin yêu và giao phó nhiệm vụ đồng hành trong những giai đoạn chống dịch cao điểm của thành phố Hồ Chí Minh. Khởi động với chương trình Tiếp Sức Chống Dịch 50.000 bữa ăn hỗ trợ đã được McDonald’s gửi tặng đến đội ngũ cán bộ tuyến đầu các y bác sĩ, đội hậu cần và các tình nguyện viện...trong giai đoạn từ tháng 7 đến tháng 10/2021. Chương trình Tiếp sức chống dịch đã diễn ra thành công tốt đẹp với sự hỗ trợ từ Liên Đoàn Lao Động và Hiệp Hội Thanh Niên Việt Nam. </p>\r\n\r\n<p>Từ tháng 11/2021, trên tinh thần chào đón bình thường mới, McDonald’s tiếp tục triển khai các dự án hỗ trợ cộng đồng trong giai đoạn 2 với 5000 phần ăn bánh Burger 2 lớp Gà kẹp thịt xông khói sốt Phô Mai vị Cordon Blue kiểu Pháp trị giá 430 triệu đồng. Cụ thể phần ăn nằm trong thực đơn Châu Âu trị giá từ 86.000 đồng không kèm nước trong đó có 3000 phần được gửi đến TTCTXH Công Đoàn  trị giá 258 triệu và 2000 phần gửi đến Hiệp Hội Thanh Niên Việt Nam  trị giá 172 triệu đồng.</p>\r\n\r\n<p><img alt=\"\" src=\"https://mcdonalds.vn/uploads/2018/news/2.jpg\" /><br />\r\n <br />\r\nCác phần ăn miễn phí được tặng thông qua ứng dụng Săn Ưu Đãi McDonald’s từ ngày 8/11 đến ngày 30/11/2021 trên toàn hệ thống các cửa hàng. Khách hàng chỉ cần nhập mã quà tặng vào ứng dụng và sử dụng chức năng quét mã trên máy đặt hàng tự động để lấy phần ăn. Tất cả các thao tác đều thông qua ứng dụng kỹ thuật số, đảm bảo tuân thủ 5K hạn chế tối đa tiếp xúc trong quy tắc phòng chống dịch.</p>\r\n\r\n<p><img alt=\"\" src=\"https://mcdonalds.vn/uploads/2018/news/3.png\" /> <br />\r\n<em>Hình: Hướng dẫn sử dụng mã quà tặng trên ứng dụng McDonald’s</em></p>\r\n\r\n<p>Đại diện McDonald’s Anh Tạ Thái Thiên Đan – Trưởng phòng vận hành McDonald’s Việt Nam chia sẻ “Trong giai đoạn bình thường mới, McDonald\'s vẫn luôn tuân thủ nghiêm túc các biện pháp 5K chống dịch tại cửa hàng và mang tới một không gian an toàn cho khách hàng. McDonald’s cũng luôn theo dõi sát sao tình hình dịch bệnh để có thể góp phần hỗ trợ cộng đồng trong công cuộc phòng dịch và tăng cường sức khoẻ cộng đồng Tuỳ vào từng thời điểm mà McDonald’s sẽ có những kế hoạch hay dự án hỗ trợ phù hợp. Chúng tôi sẽ chia sẻ các chương trình hành động vì cộng đồng ngay khi có thông tin chính thức.”</p>\r\n\r\n<p>Đội ngũ cán bộ nhân viên McDonalds xin được gửi gắm thật nhiều yêu thương cũng như lời cám ơn chân thành nhất đến lực lượng tuyến đầu, đặc biệt là các y bác sĩ đã chung tay góp sức vì một Việt Nam khỏe mạnh.</p>\r\n\r\n<p>Đồng cám ơn đến Trung tâm công tác xã hội Công Đoàn Liên Đoàn lao động Tp. Hồ Chí Minh, Hiệp Hội Thanh Niên Việt Nam đã tạo điều kiện cũng như hỗ trợ McDonald\'s thực hiện các suất ăn gửi đến lực lượng tuyến đầu chống dịch. </p>\r\n\r\n<p>Xin gửi lời cám ơn chân thành đến quý anh chị báo chí đã hỗ trợ lan tỏa yêu thương.</p>\r\n\r\n<p> </p>\r\n\r\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\">\r\n	<tbody>\r\n		<tr>\r\n			<td>Thông tin thêm về doanh nghiệp<br />\r\n			Kể từ năm 2014, sứ mệnh của McDonald’s Việt Nam là trở thành điểm đến yêu thích của thực khách. Doanh nghiệp liên tục nâng cao chất lượng dịch vụ để mang đến những trải nghiệm thú vị bằng thực đơn với các món ăn lừng danh thế giới như Khoai tây chiên, Big Mac, Gà McNuggets, và rất nhiều món ăn khác chỉ có tại McDonald’s. Hiện nay, McDonald’s có mặt tại Hồ Chí Minh, Hà Nội và Bình Dương với 22 cửa hàng và các dịch vụ tiện ích như dịch vụ mua hàng không cần đậu xe Drive-thru lần đầu tiên tại Việt Nam, Dịch vụ giao hàng McDelivery, dịch vụ 24/7 và thương hiệu McCafe phụ vụ bánh ngọt và cafe. Đặc biệt ứng dụng Săn ưu đãi McDonald’s mang đến rất nhiều khuyến mãi và quà tặng cho khách hàng.</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p> </p>\r\n\r\n<p>Để liên hệ truyền thông, anh chị vui lòng gửi thông tin đến<br />\r\n<strong>Hồng Nhung(Ms.)</strong> – Đại diện truyền thông McDonald’s Việt Nam<br />\r\nHP: 0972789780<br />\r\nEmail: nhung.vu@vn.mcd.com</p>\r\n                                                                        ', '2021-11-22 17:17:42', 1, 1),
+(5, 'Trẻ nhỏ có thể đọc được cảm xúc của bạn ngay cả khi bạn đeo khẩu trang', 'tre-nho-co-the-doc-duoc-cam-xuc-cua-ban-ngay-ca-khi-ban-deo-khau-trang', '', 'Những đứa trẻ nhỏ thường có thể biết mọi người đang cảm thấy thế nào, ngay cả khi người đó đang đeo khẩu trang, một nghiên cứu mới được công bố cho thấy.                                    ', '<p>C&oacute; một số lo ngại rằng khẩu trang được sử dụng ở trường học trong đại dịch c&oacute; thể g&acirc;y tổn hại đến sự ph&aacute;t triển của trẻ nhỏ, nhưng t&agrave;i liệu nghi&ecirc;n cứu được c&ocirc;ng bố tr&ecirc;n JAMA Pediatrics cho thấy rằng trẻ em c&oacute; thể nhận ra cảm x&uacute;c tốt như khi ch&uacute;ng kh&ocirc;ng đeo khẩu trang.</p>\r\n\r\n<p>Đối với nghi&ecirc;n cứu n&agrave;y, c&aacute;c nh&agrave; nghi&ecirc;n cứu từ Bệnh viện Đại học Lausanne ở Thụy Sĩ đ&atilde; hiển thị 90 bức ảnh ngẫu nhi&ecirc;n cho gần 300 trẻ em từ 3 đến 6 tuổi. Nhũng bức ảnh cho thấy c&aacute;c diễn vi&ecirc;n thể hiện niềm vui, tức giận hoặc buồn b&atilde;. Trong một nửa số h&igrave;nh ảnh, c&aacute;c diễn vi&ecirc;n đeo khẩu trang.</p>\r\n\r\n<p>C&aacute;c b&eacute; được y&ecirc;u cầu đặt t&ecirc;n cho cảm x&uacute;c, chỉ v&agrave;o một thẻ hiển thị c&aacute;c biểu tượng cảm x&uacute;c ph&ugrave; hợp những cảm x&uacute;c tr&ecirc;n tranh, n&oacute;i với nh&agrave; nghi&ecirc;n cứu rằng b&eacute; kh&ocirc;ng biết c&acirc;u trả lời hoặc n&oacute;i rằng muốn bỏ thử nghiệm. C&aacute;c bạn nhỏ trả lời đ&uacute;ng hầu hết c&aacute;c c&acirc;u trả lời v&agrave; c&oacute; thể gh&eacute;p c&aacute;c thẻ cảm x&uacute;c với h&igrave;nh ảnh tỷ lệ chuẩn x&aacute;c gần bằng nhau, cho d&ugrave; h&igrave;nh diễn vi&ecirc;n đ&oacute; c&oacute; đeo khẩu trang hay kh&ocirc;ng.</p>\r\n\r\n<p>Trẻ em m&ocirc; tả cảm x&uacute;c ch&iacute;nh x&aacute;c hơn 70% khi diễn vi&ecirc;n kh&ocirc;ng đeo khẩu trang v&agrave; đ&uacute;ng hơn 67% khi diễn vi&ecirc;n đeo khẩu trang. Những đứa trẻ c&agrave;ng lớn, ch&uacute;ng c&agrave;ng c&oacute; nhiều c&acirc;u trả lời đ&uacute;ng hơn. Khoảng một phần tư trẻ mẫu gi&aacute;o gặp kh&oacute; khăn hơn trong việc ph&acirc;n biệt nỗi buồn với sự tức giận v&agrave; khoảng 21% đ&ocirc;i khi nhầm lẫn niềm vui với sự tức giận hoặc buồn b&atilde;.</p>\r\n\r\n<p><a href=\"https://afamilycdn.com/150157425591193600/2021/11/21/khautrang-16374840565361773687610.jpeg\" target=\"_blank\"><img alt=\"Trẻ nhỏ có thể đọc được cảm xúc của bạn ngay cả khi bạn đeo khẩu trang - Ảnh 1.\" src=\"https://afamilycdn.com/thumb_w/650/150157425591193600/2021/11/21/khautrang-16374840565361773687610.jpeg\" /></a></p>\r\n\r\n<p>Nhiều lo lắng rằng việc đeo khẩu trang sẽ ảnh hưởng đến ph&aacute;t triển kỹ năng cảm x&uacute;c x&atilde; hội của trẻ.</p>\r\n\r\n<p>&nbsp;Ashley Ruba, một chuy&ecirc;n gia t&acirc;m l&yacute; học ph&aacute;t triển của Ph&ograve;ng th&iacute; nghiệm Cảm x&uacute;c Trẻ em tại Đại học Wisconsin-Madison, kh&ocirc;ng li&ecirc;n quan đến nghi&ecirc;n cứu n&agrave;y, nhưng đ&atilde; thực hiện c&ocirc;ng việc tương tự trong đại dịch. C&ocirc; ấy n&oacute;i rằng c&ocirc; ấy đ&atilde; nh&igrave;n thấy kết quả tương tự với c&ocirc;ng việc của m&igrave;nh.</p>\r\n\r\n<p>&quot;Ngay cả khi đeo khẩu trang, những đứa trẻ nhỏ vẫn c&oacute; thể suy luận hợp l&yacute; về cảm x&uacute;c của người kh&aacute;c&quot;, Ruba n&oacute;i. &quot;T&ocirc;i muốn chỉ ra rằng khu&ocirc;n mặt kh&ocirc;ng phải l&agrave; c&aacute;ch quan trọng nhất để ch&uacute;ng ta truyền đạt cảm x&uacute;c, đ&oacute; chỉ l&agrave; một c&aacute;ch duy nhất. Ch&uacute;ng ta cũng sử dụng giọng n&oacute;i, ch&uacute;ng ta c&oacute; cử chỉ cơ thể, ch&uacute;ng ta c&oacute; c&aacute;c loại manh mối ngữ cảnh kh&aacute;c m&agrave; trẻ em v&agrave; người lớn c&oacute; thể sử dụng để t&igrave;m hiểu xem mọi người đang cảm thấy như thế n&agrave;o&quot;.</p>\r\n\r\n<p><a href=\"https://afamilycdn.com/150157425591193600/2021/11/21/khautrang4-1637484584326279873908.jpeg\" target=\"_blank\"><img alt=\"Trẻ nhỏ có thể đọc được cảm xúc của bạn ngay cả khi bạn đeo khẩu trang - Ảnh 2.\" src=\"https://afamilycdn.com/thumb_w/650/150157425591193600/2021/11/21/khautrang4-1637484584326279873908.jpeg\" /></a></p>\r\n\r\n<p>Rủi ro gặp phải khi nhiễm Covid c&oacute; thể sẽ lớn hơn bất cứ vấn đề nhỏ n&agrave;o về giao tiếp.</p>\r\n\r\n<p>Đối với qu&aacute; tr&igrave;nh xử l&yacute; ng&ocirc;n ngữ, điều quan trọng l&agrave; trẻ em phải học c&aacute;ch đọc nh&eacute;p, nhưng r&otilde; r&agrave;ng từ nghi&ecirc;n cứu, c&ocirc; n&oacute;i rằng việc đeo khẩu trang sẽ kh&ocirc;ng l&agrave;m tổn hại đến sự ph&aacute;t triển cảm x&uacute;c x&atilde; hội của trẻ.</p>\r\n\r\n<p>&quot;Rủi ro gặp phải khi nhiễm Covid do kh&ocirc;ng đeo khẩu trang c&oacute; thể sẽ lớn hơn bất kỳ vấn đề nhỏ n&agrave;o về giao tiếp m&agrave; trẻ em c&oacute; thể mắc phải&quot;, c&ocirc; n&oacute;i.</p>\r\n\r\n<p>L&agrave; một nh&agrave; t&acirc;m l&yacute; học, c&ocirc; ấy nghĩ rằng c&oacute; nhiều kh&iacute;a cạnh kh&aacute;c của đại dịch c&oacute; thể ảnh hưởng đến sự ph&aacute;t triển của một đứa trẻ, chẳng hạn như từ sự c&ocirc; lập x&atilde; hội m&agrave; ch&uacute;ng đ&atilde; c&oacute; với bạn b&egrave; đồng trang lứa khi phải nghỉ học ở nh&agrave; hoặc nếu cha mẹ mất việc l&agrave;m chẳng hạn.</p>\r\n\r\n<p>C&ocirc; n&oacute;i: &quot;Khẩu trang c&oacute; lẽ nằm ở cuối danh s&aacute;ch những thứ cần quan t&acirc;m&quot;.</p>\r\n\r\n<p>Nguồn:&nbsp;<em>CNN</em></p>\r\n', '2021-11-22 17:22:30', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -149,7 +142,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_id`, `user_id`, `order_time`, `order_status`, `total`, `payment_id`, `voucher`) VALUES
-(11, '021637778601', 2, '2021-11-25 01:30:01', 'Initialized', 1000, 2, NULL);
+(1, '141638202028', 3, '2021-11-29 23:07:08', 'Initialized', 48000, 2, NULL),
+(2, '141638202181', 3, '2021-11-29 23:09:41', 'Initialized', 25000, 2, NULL),
+(3, '011638203204', 1, '2021-11-29 23:26:44', 'Initialized', 24000, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -163,6 +158,15 @@ CREATE TABLE `order_items` (
   `quantity` int(11) NOT NULL DEFAULT 0,
   `unit_price` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_items`
+--
+
+INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`, `unit_price`) VALUES
+(1, 1, 2, 24000),
+(2, 2, 1, 25000),
+(3, 1, 1, 24000);
 
 -- --------------------------------------------------------
 
@@ -213,20 +217,20 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `price`, `quantity`, `discount`, `category_id`, `stall_id`, `product_status`, `description`, `attribute`, `image`, `publish`, `trash`, `rate`, `hot`) VALUES
-(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 3, 'Active', '<p>Mì bò siêu ngon</p>\r\n                                                                                                                                                ', '[{\"name\":\"size\",\"value\":\"s\"},{\"name\":\"kh\\u1ed1i l\\u01b0\\u1ee3ng\",\"value\":\"1kg\"}]', '16380730231250792450.jpg', 1, 0, 3, 1),
-(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 2, 'Active', '', NULL, '1608791315663.jpg', 1, 0, 0, 0),
+(1, 'Phở Bò Tái Chín', 30000, 0, 20, 1, 3, 'Active', '<p>Phở b&ograve; si&ecirc;u ngon, hấp dẫn</p>\r\n', '[]', '16381815064573684.png', 1, 0, 5, 1),
+(2, 'Cơm Gà Xối Mỡ', 25000, 40, 0, 1, 2, 'Active', '', NULL, '1608791315663.jpg', 1, 0, 4, 0),
 (3, 'Kimbap', 35000, 40, 0, 6, 9, 'Active', '', NULL, '1608792165625.jpg', 1, 0, 0, 0),
-(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 4, 'Active', '', NULL, '1608792180363.jpg', 1, 0, 5, 0),
-(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 8, 'Active', '', NULL, NULL, 1, 0, 1, 0),
-(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 9, 'Active', '', NULL, '1608792222820.png', 1, 0, 5, 0),
-(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 6, 'Active', '', NULL, '1608792268122.jpg', 1, 0, 0, 0),
-(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 7, 'Active', '', NULL, '1608792290140.jpg', 1, 0, 0, 0),
-(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 10, 'Active', '', NULL, '1608792313466.jpg', 1, 0, 0, 0),
-(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 11, 'Active', '', NULL, '1608792334761.png', 0, 0, 0, 0),
-(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 12, 'Active', '', NULL, '1608792847544.jpg', 0, 0, 0, 0),
-(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 11, 'Active', '', NULL, '1608792567395.jpg', 1, 0, 0, 0),
-(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 4, 'Active', '', NULL, '1608792551817.webp', 1, 0, 0, 0),
-(14, 'Mì bò', 20000, 25, 10, 6, 5, 'Active', '<p>M&igrave; b&ograve; si&ecirc;u ngon</p>\r\n', NULL, '1608793914044.jpg', 1, 0, 0, 0);
+(4, 'Lẩu Cua Cà Ri', 73000, 20, 10, 3, 4, 'Active', '', '[]', '16382440871531324042.jpg', 1, 0, 0, 0),
+(5, 'Bò Ba Chỉ Với Trứng', 99000, 30, 25, 6, 8, 'Active', '', '[]', '1638183544626038492.jpg', 0, 0, 0, 0),
+(6, 'Combo Gà Giòn Cay', 81000, 27, 10, 2, 9, 'Active', '', '[]', '16382448021002220985.jpg', 1, 0, 0, 0),
+(7, 'Pizza Hải Sản', 53000, 35, 15, 2, 6, 'Active', '', '[]', '1638243757880982232.jpg', 0, 0, 0, 0),
+(8, 'Burger Bò Phô Mai', 40000, 60, 0, 2, 7, 'Active', '', '[]', '1638183745854196962.jpg', 0, 1, 0, 0),
+(9, 'Bánh Crepe Chuối', 39000, 35, 0, 4, 10, 'Active', '', '[]', '16382431611674802117.jpg', 0, 0, 0, 0),
+(10, 'Trà Đào Cam Sả', 45000, 40, 0, 5, 11, 'Active', '', '[]', '16382432151840108360.jpg', 0, 0, 0, 0),
+(11, 'Trà Sữa Phúc Long (Lạnh)', 45000, 60, 0, 5, 12, 'Active', '', '[]', '1638243228982786477.jpg', 0, 0, 0, 0),
+(12, 'Sữa Tươi Trân Châu Đường Hổ', 49000, 45, 28, 5, 11, 'Active', '', '[]', '16382433592076493951.jpg', 1, 0, 0, 0),
+(13, 'Mì Spaghetti Chay', 25000, 100, 10, 6, 4, 'Active', '', '[]', '16382434041860258625.jpg', 1, 0, 0, 0),
+(14, 'Mì bò', 20000, 25, 10, 6, 5, 'Active', '<p>Mì bò siêu ngon</p>\r\n', '[]', '1638243433559926919.jpeg', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -312,7 +316,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `gender`, `phone`, `email`, `address`, `password`, `avatar`, `role_id`, `balance`, `publish`, `trash`, `token`) VALUES
 (1, 'admin', 'admin', '2021-11-22', 'MALE', '', 'admin@gmail.com', '', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1637637504_10.jpg', 2, 0, 1, 0, NULL),
-(2, 'Nguyễn Văn ', 'B', '2020-12-03', 'MALE', '0923909321', 'nguyenvana@gmail.com', 'HCM', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', 1, 0, 1, 0, NULL);
+(2, 'Nguyễn Văn ', 'B', '2020-12-03', 'MALE', '0923909321', 'nguyenvana@gmail.com', 'HCM', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1638181586975162336.jpg', 1, 0, 1, 0, NULL),
+(3, 'Lê Trung', 'Sơn', '2000-05-20', 'MALE', '0925919727', 'lesonlhld@gmail.com', 'KTX khu A, Đông Hào, Dĩ An, Bình Dương', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1638181966891990187.png', 1, 0, 1, 0, '1638180970442c4cb7e064f2a6c8b17b750af2d76f');
 
 -- --------------------------------------------------------
 
@@ -372,6 +377,7 @@ ALTER TABLE `news`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `fk_orders_id` (`order_id`),
   ADD KEY `fk_orders_users_idx` (`user_id`),
   ADD KEY `fk_orders_payments_idx` (`payment_id`),
   ADD KEY `fk_orders_vouchers_codex` (`voucher`);
@@ -433,13 +439,13 @@ ALTER TABLE `vouchers`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `configs`
@@ -457,7 +463,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT cho bảng `payments`
@@ -487,7 +493,7 @@ ALTER TABLE `stalls`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -518,7 +524,7 @@ ALTER TABLE `orders`
 -- Các ràng buộc cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  ADD CONSTRAINT `fk_order_items_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_order_items_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_order_items_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON UPDATE CASCADE;
 
 --
