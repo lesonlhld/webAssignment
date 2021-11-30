@@ -50,7 +50,7 @@
                                                 <input type="checkbox" id="check_item" class="check-list" value="<?= $order->order_id ?>">
                                             </td>
                                             <td><a href="<?= site_url('admin/order/view?id=' . $order->order_id); ?>"><?= $order->order_id ?></a> </td>
-                                            <td><?= $order->first_name . $order->last_name ?> </td>
+                                            <td><?= $order->first_name . ' ' . $order->last_name ?> </td>
                                             <td><?= $order->order_time ?> </td>
                                             <td><?= $order->total ?> </td>
                                             <td>
