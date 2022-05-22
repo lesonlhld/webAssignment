@@ -67,5 +67,7 @@ EXAMPLE_Model extends \Model\Model {...}
 * ...
 
 ## Web demo (Có thể bị lỗi)
-* https://letrungson.000webhostapp.com/ or http://letrungson.cf/ (Located in the same hosting)
-* http://web-assignment-211.herokuapp.com/
+
+## Lưu ý
+* Frontend: Nhóm có tham khảo và chỉnh sửa mã nguồn cho phần giao diện từ https://www.youtube.com/watch?v=_uWHezOxq0U
+* Backend: Nhóm tự xây dựng hoàn toàn mã nguồn từ PHP thuần sử dụng mô hình MVC đơn giản dựa trên cấu trúc của CodeIgniter Framework
